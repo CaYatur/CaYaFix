@@ -4,10 +4,13 @@
 
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Shell;
 using System.Windows.Threading;
 using CaYaFix.App.Properties;
 using CaYaFix.App.ViewModels;
@@ -16,6 +19,9 @@ namespace CaYaFix.App;
 
 public partial class MainWindow : Window
 {
+    private const int WmGetMinMaxInfo = 0x0024;
+    private const uint MonitorDefaultToNearest = 2;
+
     private bool _allowClose;
     private bool _closeAfterCancellation;
     private MainViewModel? _boundViewModel;
@@ -27,7 +33,117 @@ public partial class MainWindow : Window
         InitializeComponent();
         Closing += OnClosing;
         DataContextChanged += OnDataContextChanged;
+        StateChanged += OnWindowStateChanged;
+        SourceInitialized += OnSourceInitialized;
         Loaded += (_, _) => HookViewModel(DataContext as MainViewModel);
+    }
+
+    /// <summary>
+    /// Borderless windows fill the entire monitor when maximized, which hides content under the
+    /// Windows taskbar. Constrain max size to the monitor work area via WM_GETMINMAXINFO.
+    /// </summary>
+    private void OnSourceInitialized(object? sender, EventArgs e)
+    {
+        var handle = new WindowInteropHelper(this).Handle;
+        if (handle == IntPtr.Zero) return;
+        if (HwndSource.FromHwnd(handle) is { } source)
+        {
+            source.AddHook(WndProc);
+        }
+    }
+
+    private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg == WmGetMinMaxInfo)
+        {
+            ApplyWorkAreaMaxInfo(hwnd, lParam);
+            handled = true;
+        }
+
+        return IntPtr.Zero;
+    }
+
+    private static void ApplyWorkAreaMaxInfo(IntPtr hwnd, IntPtr lParam)
+    {
+        var info = Marshal.PtrToStructure<MinMaxInfo>(lParam);
+        var monitor = MonitorFromWindow(hwnd, MonitorDefaultToNearest);
+        if (monitor == IntPtr.Zero)
+        {
+            return;
+        }
+
+        var monitorInfo = new MonitorInfo { Size = (uint)Marshal.SizeOf<MonitorInfo>() };
+        if (!GetMonitorInfo(monitor, ref monitorInfo))
+        {
+            return;
+        }
+
+        var work = monitorInfo.Work;
+        var monitorRect = monitorInfo.Monitor;
+        info.MaxPosition.X = Math.Abs(work.Left - monitorRect.Left);
+        info.MaxPosition.Y = Math.Abs(work.Top - monitorRect.Top);
+        info.MaxSize.X = Math.Abs(work.Right - work.Left);
+        info.MaxSize.Y = Math.Abs(work.Bottom - work.Top);
+        // Keep a usable minimum even when the work area is unusually small.
+        info.MinTrackSize.X = Math.Max(info.MinTrackSize.X, 640);
+        info.MinTrackSize.Y = Math.Max(info.MinTrackSize.Y, 480);
+        Marshal.StructureToPtr(info, lParam, fDeleteOld: true);
+    }
+
+    private void OnWindowStateChanged(object? sender, EventArgs e)
+    {
+        // Drop resize borders while maximized so WindowChrome does not add phantom insets.
+        if (WindowChrome.GetWindowChrome(this) is { } chrome)
+        {
+            chrome.ResizeBorderThickness = WindowState == WindowState.Maximized
+                ? new Thickness(0)
+                : new Thickness(6);
+            chrome.CornerRadius = WindowState == WindowState.Maximized
+                ? new CornerRadius(0)
+                : new CornerRadius(12);
+        }
+    }
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfo lpmi);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct Point
+    {
+        public int X;
+        public int Y;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct MinMaxInfo
+    {
+        public Point Reserved;
+        public Point MaxSize;
+        public Point MaxPosition;
+        public Point MinTrackSize;
+        public Point MaxTrackSize;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct Rect
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
+    }
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    private struct MonitorInfo
+    {
+        public uint Size;
+        public Rect Monitor;
+        public Rect Work;
+        public uint Flags;
     }
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) =>
