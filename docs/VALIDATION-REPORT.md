@@ -2,7 +2,7 @@
 
 # Validation Report
 
-Validation date: 2026-07-17
+Validation date: 2026-07-17 (catalog figures refreshed with current tree)
 
 ## Source review recorded in this workspace
 
@@ -10,11 +10,12 @@ Validation date: 2026-07-17
 - XML and XAML: project, manifest, resource, SVG, and WPF markup files parsed successfully.
 - XAML resources: every `StaticResource` reference resolves to a declared key.
 - Localization: the English and Turkish resource sets have identical, non-empty keys and matching format placeholders.
-- Catalog: 14 unique modules, 56 unique diagnostics, 43 unique transactional repairs, and 8 unique live tests.
-- Assets: 30 local SVG icons; no emoji, active SVG content, or remote icon dependency.
-- Security policy: no embedded secret signature, direct unreviewed process start, dynamic script execution primitive, broad `netcfg -d` reset, component-store repair action, or Store package re-registration action.
+- Catalog: **15** unique modules, **68** unique diagnostics, **63** unique repair actions, and **8** unique live tests.
+- Assets: local SVG icons only; no emoji, active SVG content, or remote icon dependency.
+- Security policy: no embedded secret signature, direct unreviewed process start, dynamic script execution primitive, broad `netcfg -d` reset, or Store package re-registration action. Offline-only `bootrec` rebuilds are not automated online.
 - Recovery durability: backup files and signed manifest envelopes are explicitly flushed; interrupted actions activate a persistent scan/repair gate until rollback.
 - Ownership: MIT notices consistently identify CaYaDev, cayadev.com, and GitHub account CaYatur.
+- Progress UX: long operations expose percent complete and remaining-time estimates; DISM/SFC-style console percentages are parsed when present.
 
 ## Windows release gates
 

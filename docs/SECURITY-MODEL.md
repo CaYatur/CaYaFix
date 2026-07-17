@@ -29,7 +29,8 @@
 | Broad route deletion | Only diagnosed invalid/conflicting persistent IPv4 route tuples are accepted; active and unrelated routes are left unchanged |
 | Partial repair | Backup content flushed to disk first, signed write-ahead recovery intent, apply once, action verifier, exact diagnostic recheck, automatic rollback |
 | Irreversible system mutation | No automated action unless the pre-change state has a complete, verified recovery path |
-| High-risk change | Aggressive tier requires explicit consent and restore point |
+| High-risk change | Aggressive tier requires explicit consent and restore point (or explicit skip-with-warning) |
+| Offline-only boot mutation | `bootrec` rebuilds are not launched from a live desktop session; online helpers use `reagentc` / `bcdedit` / `bcdboot` with export-first where practical |
 | Sensitive support archive | Local consent, deterministic redaction, narrow file allowlist, no rollback data |
 | Cross-user local data disclosure | Protected ACL restricted to current user, SYSTEM, and local Administrators; startup verifies the effective allow-list |
 | Privileged screenshot write | Capture mode writes only to the ACL-protected fixed LocalAppData capture directory; it accepts no output path |

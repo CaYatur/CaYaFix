@@ -13,6 +13,8 @@
 
 CaYaFix is a modern WPF desktop application for diagnosing and repairing common Windows problems. It starts with read-only evidence gathering, maps findings to targeted actions, creates a recoverable backup, applies one change, verifies the action and the originating diagnostic, and records the full session. It does not use one-click scripts that reset unrelated settings, download drivers, collect credentials, or send telemetry.
 
+Repository: [github.com/CaYatur/CaYaFix](https://github.com/CaYatur/CaYaFix)
+
 ## Screenshots
 
 These images are captured from the running English WPF application by `tools/capture-readme-screenshots.ps1`. The capture mode loads deterministic in-app demonstration states so the dashboard, findings, and active ping/microphone animations are reproducible; the PNG files are not mockups or generated artwork.
@@ -30,54 +32,65 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Highlights
 
-- 15 troubleshooting modules with 68 diagnostic checks, 63 repair actions with transactional recovery, 8 interactive live tests, and symptom-focused playbooks.
-- Deep network diagnostics: adapter/IP/APIPA/gateway state, DNS comparison, captive portal, proxy, VPN residue, target-bound persistent-route repair, firewall, hosts, Winsock, MTU, services, Wi-Fi/TCP health, latency, jitter, loss, DNS race, animated path-MTU binary search, a 64 KiB-bounded HTTP/NCSI probe, and bounded throughput.
-- Deep audio diagnostics: output/input/default endpoints, virtual devices, services, levels, formats, enhancements, privacy, Bluetooth/HDMI routing, speaker channels, bounded in-memory microphone capture/playback, and stream stability.
-- Additional coverage for Windows Update, blocked print jobs, offline/default printers, Bluetooth, disk health/dirty volumes/free space, component integrity, Microsoft Store package/cache health, time sync, startup performance, camera/privacy, USB devices, Windows Search, and graphics adapters.
-- Three risk tiers: Safe, Moderate, and Aggressive. Reboot actions are queued last; aggressive actions require explicit consent and an available restore point.
-- A completed-repair handoff state stops repeat or broader mutation, preserves unresolved evidence, and offers the HTML report, practical hardware/vendor next checks, and a privacy-redacted support package.
-- Transactional repair flow: `backup + disk flush -> signed write-ahead recovery intent -> apply -> action verify -> exact diagnostic recheck`, with automatic rollback after apply/verification failure, a startup recovery lock for interrupted repairs, per-action undo, and reverse-order full-session recovery.
-- Each targeted repair receives an isolated parameter set, so two device findings cannot overwrite one another's target.
-- Atomic signed manifest envelopes and SHA-256 backup verification. Tampered, oversized, reparse-point, path-traversing, or out-of-root recovery data is rejected.
-- Machine-wide data directories use a verified protected Windows ACL limited to the current user, SYSTEM, and local Administrators.
-- Trusted System32 executable allowlist and argument-array process launch; no shell string concatenation for discovered device targets.
-- Privacy-redacted, size-bounded support packages that exclude credentials, browser data, documents, Wi-Fi keys, rollback backups, and microphone recordings.
-- Responsive dark UI with SVG-only icons, compact navigation, card transitions, ping pulses, audio waveform animation, a structured severity-aware measurements table, progress, cancellation, and a bounded, batched live console that cannot flood the UI dispatcher.
-- Expert mode lists all 47 repairs and can run a single repair with backup and consent gates; target-required repairs still need a prior scan that captured the device target.
-- English and Turkish resources. The Windows UI language is detected automatically; English is the fallback for every unsupported language.
+- **15 troubleshooting modules** with **68 diagnostic checks**, **63 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
+- **Guided symptom repair** when a scan finds nothing: pick a problem area, read risk and side-effect warnings (audio glitches, network drops, display flicker, and similar), then apply related Safe/Moderate repairs.
+- **Manual Windows repair tools** (Settings): run Microsoft-oriented tools without waiting for a finding — ipconfig suite, network soft-heal, DISM/SFC steps, Win+Ctrl+Shift+B graphics soft-reset, BCD/WinRE helpers, and more. Aggressive tools still require Force risk acceptance.
+- **Live progress for long tools**: themed progress bar with **percent complete**, **estimated remaining minutes**, stage labels, and parsing of DISM/SFC-style console percentages when available.
+- Deep network diagnostics: adapter/IP/APIPA/gateway, DNS, captive portal, proxy, VPN residue, target-bound routes, firewall, hosts, Winsock, MTU, services, event-log correlation, IPv4/IPv6 bindings, Wi-Fi/TCP health, live ping/DNS/HTTP/MTU/speed tests, and repairs from soft-heal through stack/full reset.
+- Deep audio diagnostics: endpoints, services, levels, formats, enhancements, privacy, Bluetooth/HDMI, event log, disabled PnP devices, live speaker/mic/stability tests, plus enable-all-disabled and rescan repairs.
+- **Display/GPU**: adapter and driver health, Display/TDR event correlation, device rescan, restart-all adapters, targeted restart, and **Win+Ctrl+Shift+B** graphics driver soft-reset.
+- **System integrity (Microsoft DISM/SFC path)**: CheckHealth, ScanHealth, AnalyzeComponentStore, SFC `/scannow`, DISM RestoreHealth, StartComponentCleanup, and full DISM→SFC chain.
+- **Boot & recovery (online-safe)**: WinRE status (`reagentc`), BCD health (`bcdedit`), BCD export backup, recovery flags, enable WinRE, and `bcdboot` rebuild. Offline-only tools such as `bootrec` stay in Windows Recovery Environment and are not automated from the desktop session.
+- Disk online `chkdsk /scan` and `/spotfix`, plus scheduled offline repair when needed.
+- Additional coverage: Windows Update, printers, Bluetooth, Microsoft Store cache, time sync, startup performance, camera/privacy, USB, Windows Search.
+- Three risk tiers: Safe, Moderate, and Aggressive. Reboot actions are queued last; aggressive actions require explicit consent and a restore point (or an explicit skip-with-warning).
+- Transactional repair flow: `backup + disk flush → signed write-ahead recovery intent → apply → action verify → diagnostic recheck`, with automatic rollback, startup recovery lock, per-action undo, and reverse-order session recovery.
+- Isolated repair parameters, signed session manifests, SHA-256 backup verification, ProgramData ACL lockdown, trusted System32 allowlist, and privacy-redacted support packages.
+- Responsive dark UI (EN/TR), SVG icons, expandable module panels (full-screen detail), operation overlay with feed auto-scroll, toasts, and a bounded live console.
 - Self-contained single-file Windows x64 publishing.
 
 ## Module catalog
 
 | Module | Diagnostics | Repairs | Live tests |
 |---|---:|---:|---:|
-| Network | 16 | 16 | 5 |
-| Audio | 12 | 11 | 3 |
+| Network | 18 | 19 | 5 |
+| Audio | 14 | 13 | 3 |
 | Windows Update | 3 | 2 | 0 |
 | Printers | 4 | 4 | 0 |
 | Bluetooth | 2 | 2 | 0 |
-| Disk and storage | 4 | 2 | 0 |
-| System integrity | 1 | 1 | 0 |
+| Disk and storage | 5 | 3 | 0 |
+| System integrity | 3 | 4 | 0 |
 | Microsoft Store | 2 | 1 | 0 |
 | Time sync | 2 | 1 | 0 |
 | Startup performance | 2 | 1 | 0 |
 | Camera and privacy | 2 | 2 | 0 |
 | USB devices | 2 | 2 | 0 |
 | Windows Search | 2 | 1 | 0 |
-| Display and graphics | 2 | 1 | 0 |
-| **Total** | **56** | **47** | **8** |
+| Display and graphics | 4 | 4 | 0 |
+| Boot and recovery | 3 | 4 | 0 |
+| **Total** | **68** | **63** | **8** |
+
+### Representative Microsoft-oriented tools (selection)
+
+| Area | Examples |
+|---|---|
+| Network | `ipconfig /flushdns`, `/release`, `/renew`, `/registerdns`; ARP clear; service restart; Winsock/IP stack reset; soft-heal pack |
+| Integrity | `DISM /Cleanup-Image /CheckHealth\|ScanHealth\|RestoreHealth\|StartComponentCleanup\|AnalyzeComponentStore`; `SFC /scannow` |
+| Graphics | PnP rescan/restart; **Win+Ctrl+Shift+B** soft-reset |
+| Boot (online) | `reagentc /info\|/enable`; `bcdedit /export\|/enum\|/set`; `bcdboot %SystemRoot% /f ALL` |
+| Disk | `chkdsk /scan`, `/spotfix`; scheduled offline `chkdsk` |
 
 ## Safety model
 
 | Tier | Typical action | Backup required | Extra gate |
 |---|---|---:|---|
-| Safe | Flush cache, restart a service, resync time | Yes | None |
-| Moderate | Reset a targeted stack, change a specific permission, restart a device | Yes | User selection |
-| Aggressive | Targeted driver removal, conservative network-stack reset, scheduled disk repair, DISM/SFC | Yes (backup-less only with explicit Force consent) | Explicit consent and restore point |
+| Safe | Flush DNS, restart a service, soft-heal, rescan devices, export BCD | Yes | None |
+| Moderate | Stack/device restart, permission change, online chkdsk spotfix, GPU soft-reset, enable WinRE | Yes | User selection / risk text |
+| Aggressive | Driver reinstall, full network reset, DISM RestoreHealth, bcdboot rebuild, scheduled disk repair | Yes (backup-less only with explicit Force consent) | Explicit consent and restore point (or skip-with-warning) |
 
-Every action is individually logged. A failed backup blocks the change. Before applying a change, CaYaFix explicitly flushes backup files and durably writes a signed recovery intent that links the action to its verified backup; an unexpected process or power interruption is therefore surfaced in Recovery Center at the next launch. A persistent banner blocks new scans and repairs until the interrupted action is recovered. A successful command is not treated as a successful repair until its verifier and, when appropriate, the exact originating diagnostic both pass. An apply, cancellation, or verification failure triggers automatic rollback. Actions that require a reboot remain pending and are rechecked after Windows has restarted; if the originating diagnostic still fails, verified backups are restored automatically in reverse order. A failed rollback remains visible and recoverable. Historical event-log findings use a current-state verifier instead of waiting for old events to age out.
+Every action is individually logged. A failed backup blocks the change unless Force backup-less consent is given for Aggressive only. Before applying a change, CaYaFix flushes backups and writes a signed recovery intent. Interrupted repairs block new work until Recovery Center is cleared. Long operations show percent and ETA; cancellation is available where the pipeline allows it.
 
-Automated repair is offered only when CaYaFix can capture and verify an exact recovery path. Component-store repair and Microsoft Store package re-registration remain diagnostic-only because Windows cannot provide a complete transactional undo for those operations. CaYaFix reports their evidence without presenting a misleading rollback promise.
+Offline-only boot repair (`bootrec /fixmbr`, `/fixboot`, `/rebuildbcd`) is intentionally **not** run from a live desktop session — use Windows Recovery Environment when the OS will not start.
 
 For the detailed threat model, see [docs/SECURITY-MODEL.md](docs/SECURITY-MODEL.md).
 
@@ -145,8 +158,8 @@ See [docs/TEST-PLAN.md](docs/TEST-PLAN.md) for the full test matrix and release 
 
 CaYaFix supports exactly two UI languages:
 
-- Turkish when the Windows UI language starts with `tr`.
-- English for English and every other system language.
+- Turkish when the Windows UI language starts with `tr` (or when Turkish is selected in Settings).
+- English for English and every other system language (default when the preference is English or unknown).
 
 The screenshot mode forces English so the project documentation stays consistent. Resource parity is checked in CI; a missing, duplicate, or empty key fails validation. The application deliberately supports only these two resource sets.
 

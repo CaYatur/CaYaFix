@@ -42,13 +42,13 @@ Non-reboot actions are ordered by tier. Reboot actions are moved to the end. An 
 
 ## Module contract
 
-Each module exposes metadata, diagnostic checks, repair actions, optional live tests, and symptom playbooks. The current catalog contains 14 modules, 56 diagnostics, 43 transactional repairs, and 8 live tests. Checks return structured findings rather than UI text. Resource keys are resolved by the app so English and Turkish stay synchronized.
+Each module exposes metadata, diagnostic checks, repair actions, optional live tests, and symptom playbooks. The current catalog contains **15 modules, 68 diagnostics, 63 repairs, and 8 live tests** (Network, Audio, Update, Printers, Bluetooth, Disk, Integrity, Store, Time, Startup, Camera, USB, Search, Display, Boot & recovery). Checks return structured findings rather than UI text. Resource keys are resolved by the app so English and Turkish stay synchronized.
 
-The catalog deliberately permits diagnostics-only modules. A change is eligible for automation only when its complete pre-change state can be captured, validated, and restored. Component-store repair and Store package re-registration therefore remain findings without automated actions; a broad command that cannot provide exact rollback is not treated as a transaction.
+A change is eligible for automation only when CaYaFix can capture a pre-change recovery path appropriate to the action (registry/file/service/driver/command-state/bundle or a documented transient marker). Microsoft Store package re-registration remains banned. Offline-only boot tools such as `bootrec` are not launched from a live desktop session; online boot helpers use `reagentc`, `bcdedit`, and `bcdboot` with BCD export first where practical. DISM/SFC repairs are long-running and surface percent/ETA in the operation overlay; they may still require a reboot for full verification.
 
-System processes are launched only through `CommandRunner`. It resolves a fixed allowlist to absolute System32 paths, uses `ProcessStartInfo.ArgumentList`, disables shell execution, enforces timeouts and output bounds, and streams a bounded console view.
+System processes are launched only through `CommandRunner`. It resolves a fixed allowlist to absolute System32 paths (including `dism`, `sfc`, `ipconfig`, `bcdedit`, `bcdboot`, `reagentc`, and related tools), uses `ProcessStartInfo.ArgumentList`, disables shell execution, enforces timeouts and output bounds, and streams a bounded console view used for live progress parsing.
 
-The UI is WPF with CommunityToolkit MVVM. Responsive width converters collapse navigation labels at compact widths, while card content uses wrapping panels and scroll viewers. SVG assets supply every UI icon. Live-test state triggers ping-pulse and audio-wave storyboards; result severity changes card borders without replacing the underlying evidence.
+The UI is WPF with CommunityToolkit MVVM. Responsive width converters collapse navigation labels at compact widths. Full-screen module detail panels, guided symptom repair, Settings manual-tools catalog, operation overlay with themed progress percent/ETA, and a batched live console keep long Microsoft tools usable. SVG assets supply every UI icon. Live-test state triggers ping-pulse and audio-wave storyboards.
 
 ## Persistence
 

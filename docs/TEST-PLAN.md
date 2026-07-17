@@ -15,7 +15,7 @@
 
 - Backup returns null or throws: apply is never called.
 - Dry run: backup, apply, and verifier are never called; every catalog repair emits its bounded command/operation plan.
-- Aggressive action without consent or restore point: blocked.
+- Aggressive action without consent or restore point (and without explicit skip-with-warning): blocked.
 - Aggressive action with consent but a failed backup: blocked without exception.
 - Manifest bytes or signature changed: session rejected.
 - Backup bytes changed: restore command never called.
@@ -40,7 +40,7 @@
 - Command output, diagnostic findings, live-test detail, coalesced UI-console queue, threshold file, manifest, session-directory history, support-package input, and backup directory bounds.
 - Recovery Center renders at most 100 action-bearing sessions, prioritizes interrupted/reboot-pending work, and disables undo for sessions with nothing recoverable.
 - Duplicate modules, checks, fixes, or broken playbook references.
-- A repair without a complete rollback path, including component-store mutation or Store package re-registration.
+- Store package re-registration remains forbidden; DISM/SFC/boot tools must keep dry-run previews, allowlisted executables, and documented reboot/consent gates.
 - Exhausted repair tiers enter the handoff state; the repair button is hidden and report/support next steps remain available.
 
 ## Manual Windows matrix
