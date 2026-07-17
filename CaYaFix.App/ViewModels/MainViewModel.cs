@@ -203,6 +203,10 @@ public sealed partial class MainViewModel : ObservableObject
             "time" or "time-sync" => "GuidedRepair_Effects_Time",
             "startup" or "startup-performance" or "performance" => "GuidedRepair_Effects_Performance",
             "boot" => "GuidedRepair_Effects_Boot",
+            "defender" => "GuidedRepair_Effects_Defender",
+            "shell" => "GuidedRepair_Effects_Shell",
+            "policy" => "GuidedRepair_Effects_Policy",
+            "wmi" => "GuidedRepair_Effects_Wmi",
             _ => "GuidedRepair_Effects_Generic"
         });
 
@@ -2570,6 +2574,10 @@ public sealed partial class MainViewModel : ObservableObject
         "search" or "windows-search" => "search-index.svg",
         "display" or "display-graphics" => "display.svg",
         "boot" => "recovery.svg",
+        "defender" or "windows-security" => "defender.svg",
+        "shell" or "explorer" => "shell.svg",
+        "policy" or "system-policy" => "policy.svg",
+        "wmi" or "system-core" => "wmi.svg",
         _ => "search.svg"
     };
 

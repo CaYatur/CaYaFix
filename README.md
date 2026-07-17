@@ -30,8 +30,8 @@ This project is **tested on GitHub** via Actions on `master` (and `main`). Live 
 
 **Local + CI gates that must stay green:**
 
-- Catalog: **15 modules · 71 diagnostics · 133 repairs · 8 live tests**
-- xUnit suite (currently **67** tests) with hang detection
+- Catalog: **19 modules · 90 diagnostics · 163 repairs · 8 live tests**
+- xUnit suite (currently **91** tests) with hang detection
 - Localization parity (EN/TR), SVG/icon policy, MIT headers, trusted executable allowlist
 - Dependabot NuGet and GitHub Actions updates are validated on the same CI path
 
@@ -59,7 +59,7 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Highlights
 
-- **15 troubleshooting modules** with **71 diagnostic checks**, **133 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
+- **19 troubleshooting modules** with **90 diagnostic checks**, **163 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
 - **Guided symptom repair** when a scan finds nothing: pick a problem area, read risk and side-effect warnings (audio glitches, network drops, display flicker, and similar), then apply related Safe/Moderate repairs.
 - **Manual Windows repair tools** (Settings): run Microsoft-oriented tools without waiting for a finding — ipconfig suite, network soft-heal, DISM/SFC steps, Win+Ctrl+Shift+B graphics soft-reset, BCD/WinRE helpers, and more. Aggressive tools still require Force risk acceptance.
 - **Live progress for long tools**: themed progress bar with **percent complete**, **estimated remaining minutes**, stage labels, and parsing of DISM/SFC-style console percentages when available.
@@ -68,8 +68,12 @@ These images are captured from the running English WPF application by `tools/cap
 - **Display/GPU**: adapter and driver health, **resolution/mode lock detection** (Basic Display Adapter, sparse modes, sub-native resolution, monitor errors), stuck-resolution repair pack, apply highest supported mode, Display/TDR events, rescan, restart adapters, and **Win+Ctrl+Shift+B** soft-reset.
 - **System integrity (Microsoft DISM/SFC path)**: CheckHealth, ScanHealth, AnalyzeComponentStore, SFC `/scannow`, DISM RestoreHealth, StartComponentCleanup, and full DISM→SFC chain.
 - **Boot & recovery (online-safe)**: WinRE status (`reagentc`), BCD health (`bcdedit`), BCD export backup, recovery flags, enable WinRE, and `bcdboot` rebuild. Offline-only tools such as `bootrec` stay in Windows Recovery Environment and are not automated from the desktop session.
-- Disk online `chkdsk /scan` and `/spotfix`, plus scheduled offline repair when needed.
-- Additional coverage: Windows Update, printers, Bluetooth, Microsoft Store cache, time sync, startup performance, camera/privacy, USB, Windows Search.
+- Disk online `chkdsk /scan` and `/spotfix`, `Optimize-Volume` (TRIM/defrag), plus scheduled offline repair when needed.
+- **Windows Security**: Defender service health, real-time protection, signature age, firewall profiles, and policy locks that silently disable Defender — with quiet handling when a third-party antivirus legitimately owns protection.
+- **Explorer and desktop**: shell crash detection, icon/thumbnail/font cache rebuild, missing user-folder repair, jump-list reset, and folder-view reset.
+- **System access and policy**: detects and removes restriction policies that block Task Manager, Registry Editor, Command Prompt, Control Panel, or Windows Update; refreshes Group Policy (`gpupdate /force`) and can reset local Group Policy (`Registry.pol`) with backup.
+- **System core (WMI and Event Log)**: WMI repository verify/salvage (`winmgmt`), Event Log service and full-log detection, performance counter rebuild (`lodctr /R`) and resync — with locale-safe parsing of `verifyrepository` output.
+- Additional coverage: Windows Update (including Delivery Optimization cache reset), printers, Bluetooth, Microsoft Store cache, time sync, startup performance, camera/privacy, USB, Windows Search.
 - Three risk tiers: Safe, Moderate, and Aggressive. Reboot actions are queued last; aggressive actions require explicit consent and a restore point (or an explicit skip-with-warning).
 - Transactional repair flow: `backup + disk flush → signed write-ahead recovery intent → apply → action verify → diagnostic recheck`, with automatic rollback, startup recovery lock, per-action undo, and reverse-order session recovery.
 - Isolated repair parameters, signed session manifests, SHA-256 backup verification, ProgramData ACL lockdown, trusted System32 allowlist, and privacy-redacted support packages.
@@ -80,22 +84,26 @@ These images are captured from the running English WPF application by `tools/cap
 
 | Module | Diagnostics | Repairs | Live tests |
 |---|---:|---:|---:|
-| Network | 18 | 19 | 5 |
-| Audio | 14 | 13 | 3 |
-| Windows Update | 3 | 2 | 0 |
-| Printers | 4 | 4 | 0 |
-| Bluetooth | 2 | 2 | 0 |
-| Disk and storage | 5 | 3 | 0 |
-| System integrity | 3 | 4 | 0 |
-| Microsoft Store | 2 | 1 | 0 |
-| Time sync | 2 | 1 | 0 |
-| Startup performance | 2 | 1 | 0 |
-| Camera and privacy | 2 | 2 | 0 |
-| USB devices | 2 | 2 | 0 |
-| Windows Search | 2 | 1 | 0 |
-| Display and graphics | 4 | 4 | 0 |
-| Boot and recovery | 3 | 4 | 0 |
-| **Total** | **68** | **63** | **8** |
+| Network | 18 | 22 | 5 |
+| Audio | 14 | 16 | 3 |
+| Windows Update | 3 | 8 | 0 |
+| Printers | 4 | 9 | 0 |
+| Bluetooth | 2 | 7 | 0 |
+| Disk and storage | 5 | 9 | 0 |
+| System integrity | 3 | 9 | 0 |
+| Microsoft Store | 2 | 6 | 0 |
+| Time sync | 2 | 6 | 0 |
+| Startup performance | 3 | 9 | 0 |
+| Camera and privacy | 2 | 7 | 0 |
+| USB devices | 2 | 7 | 0 |
+| Windows Search | 2 | 5 | 0 |
+| Display and graphics | 6 | 6 | 0 |
+| Boot and recovery | 3 | 9 | 0 |
+| Windows Security | 5 | 7 | 0 |
+| Explorer and desktop | 5 | 8 | 0 |
+| System access and policy | 5 | 7 | 0 |
+| System core (WMI and Event Log) | 4 | 6 | 0 |
+| **Total** | **90** | **163** | **8** |
 
 ### Representative Microsoft-oriented tools (selection)
 
@@ -105,7 +113,10 @@ These images are captured from the running English WPF application by `tools/cap
 | Integrity | `DISM /Cleanup-Image /CheckHealth\|ScanHealth\|RestoreHealth\|StartComponentCleanup\|AnalyzeComponentStore`; `SFC /scannow` |
 | Graphics | PnP rescan/restart; **Win+Ctrl+Shift+B** soft-reset |
 | Boot (online) | `reagentc /info\|/enable`; `bcdedit /export\|/enum\|/set`; `bcdboot %SystemRoot% /f ALL` |
-| Disk | `chkdsk /scan`, `/spotfix`; scheduled offline `chkdsk` |
+| Disk | `chkdsk /scan`, `/spotfix`; `Optimize-Volume`; scheduled offline `chkdsk` |
+| Security | Defender cmdlets (`Set-MpPreference`, `Update-MpSignature`, `Start-MpScan`); `netsh advfirewall`; Defender policy-lock removal |
+| Policy | Restriction-value removal (`DisableTaskMgr`, `DisableRegistryTools`, `DisableCMD`, `NoControlPanel`, WU locks); `gpupdate /force`; local `Registry.pol` reset |
+| WMI / plumbing | `winmgmt /verifyrepository\|/salvagerepository\|/resyncperf`; `lodctr /R`; Event Log service repair |
 
 ## Safety model
 
@@ -206,7 +217,7 @@ CaYaFix does not send telemetry. Network live tests contact only the explicitly 
 ```mermaid
 flowchart TD
     UI[WPF + MVVM] --> Engine[Diagnostic and fix engines]
-    Engine --> Modules[15 module definitions]
+    Engine --> Modules[19 module definitions]
     Engine --> Runner[Trusted command runner]
     Engine --> Recovery[Atomic signed sessions and verified backups]
     Modules --> Windows[Windows APIs and system tools]

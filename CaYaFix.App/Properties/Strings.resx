@@ -760,5 +760,98 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Symptom_Search_SlowIndex" xml:space="preserve"><value>Search index is slow or never finishes</value></data>
   <data name="Symptom_Store_InstallFail" xml:space="preserve"><value>Microsoft Store apps fail to install or update</value></data>
   <data name="Symptom_Time_NoSource" xml:space="preserve"><value>No valid time source / NTP peer</value></data>
+
+  <data name="Module_Defender_Name" xml:space="preserve"><value>Windows Security</value></data>
+  <data name="Module_Defender_Description" xml:space="preserve"><value>Defender antivirus, real-time protection, signature updates, firewall profiles, and Security Center health.</value></data>
+  <data name="Module_Shell_Name" xml:space="preserve"><value>Explorer and desktop</value></data>
+  <data name="Module_Shell_Description" xml:space="preserve"><value>File Explorer stability, icon and thumbnail caches, font cache, user folders, jump lists, and folder views.</value></data>
+  <data name="Module_Policy_Name" xml:space="preserve"><value>System access and policy</value></data>
+  <data name="Module_Policy_Description" xml:space="preserve"><value>Unblocks Task Manager, Registry Editor, Command Prompt, Control Panel, and Windows Update policy locks; refreshes or resets local Group Policy.</value></data>
+  <data name="Module_Wmi_Name" xml:space="preserve"><value>System core (WMI and Event Log)</value></data>
+  <data name="Module_Wmi_Description" xml:space="preserve"><value>WMI service and repository consistency, Windows Event Log health, and performance counter repair.</value></data>
+
+  <data name="Check_Defender_Services" xml:space="preserve"><value>Windows Security services</value></data>
+  <data name="Check_Defender_Realtime" xml:space="preserve"><value>Real-time protection</value></data>
+  <data name="Check_Defender_Signatures" xml:space="preserve"><value>Antivirus signature age</value></data>
+  <data name="Check_Defender_Firewall" xml:space="preserve"><value>Firewall profiles</value></data>
+  <data name="Check_Defender_PolicyBlock" xml:space="preserve"><value>Defender policy locks</value></data>
+  <data name="Check_Shell_ExplorerRunning" xml:space="preserve"><value>Explorer shell process</value></data>
+  <data name="Check_Shell_IconCache" xml:space="preserve"><value>Icon and thumbnail cache size</value></data>
+  <data name="Check_Shell_Crashes" xml:space="preserve"><value>Recent Explorer crashes</value></data>
+  <data name="Check_Shell_UserFolders" xml:space="preserve"><value>User shell folders</value></data>
+  <data name="Check_Shell_Services" xml:space="preserve"><value>Shell support services</value></data>
+  <data name="Check_Policy_TaskManager" xml:space="preserve"><value>Task Manager policy</value></data>
+  <data name="Check_Policy_Registry" xml:space="preserve"><value>Registry Editor policy</value></data>
+  <data name="Check_Policy_Cmd" xml:space="preserve"><value>Command Prompt policy</value></data>
+  <data name="Check_Policy_ControlPanel" xml:space="preserve"><value>Control Panel policy</value></data>
+  <data name="Check_Policy_UpdateLocks" xml:space="preserve"><value>Windows Update policy locks</value></data>
+  <data name="Check_Wmi_Service" xml:space="preserve"><value>WMI service</value></data>
+  <data name="Check_Wmi_Repository" xml:space="preserve"><value>WMI repository consistency</value></data>
+  <data name="Check_Wmi_EventLog" xml:space="preserve"><value>Event Log health</value></data>
+  <data name="Check_Wmi_PerfCounters" xml:space="preserve"><value>Performance counters</value></data>
+
+  <data name="Finding_Defender_ServicesUnhealthy" xml:space="preserve"><value>Windows Security services are disabled or stopped.</value></data>
+  <data name="Finding_Defender_RealtimeOff" xml:space="preserve"><value>Defender real-time protection is off and no other antivirus is active.</value></data>
+  <data name="Finding_Defender_SignaturesOld" xml:space="preserve"><value>Antivirus signatures are outdated.</value></data>
+  <data name="Finding_Defender_FirewallOff" xml:space="preserve"><value>One or more firewall profiles are disabled.</value></data>
+  <data name="Finding_Defender_PolicyBlocked" xml:space="preserve"><value>A policy value is blocking Windows Defender.</value></data>
+  <data name="Finding_Shell_ExplorerNotRunning" xml:space="preserve"><value>The Explorer shell is not running.</value></data>
+  <data name="Finding_Shell_CacheHeavy" xml:space="preserve"><value>Icon/thumbnail caches are unusually large and may be corrupted.</value></data>
+  <data name="Finding_Shell_RecentCrashes" xml:space="preserve"><value>Explorer crashed recently.</value></data>
+  <data name="Finding_Shell_UserFolderMissing" xml:space="preserve"><value>A mapped user folder does not exist on disk.</value></data>
+  <data name="Finding_Shell_ServicesUnhealthy" xml:space="preserve"><value>Shell support services are disabled or stopped.</value></data>
+  <data name="Finding_Policy_TaskManagerBlocked" xml:space="preserve"><value>Task Manager is blocked by a restriction policy.</value></data>
+  <data name="Finding_Policy_RegistryBlocked" xml:space="preserve"><value>Registry Editor is blocked by a restriction policy.</value></data>
+  <data name="Finding_Policy_CmdBlocked" xml:space="preserve"><value>Command Prompt is blocked by a restriction policy.</value></data>
+  <data name="Finding_Policy_ControlPanelBlocked" xml:space="preserve"><value>Control Panel and Settings are blocked by a restriction policy.</value></data>
+  <data name="Finding_Policy_UpdateLocked" xml:space="preserve"><value>Windows Update is limited by policy values.</value></data>
+  <data name="Finding_Wmi_ServiceIssue" xml:space="preserve"><value>The WMI service is not healthy.</value></data>
+  <data name="Finding_Wmi_RepositoryInconsistent" xml:space="preserve"><value>The WMI repository reports INCONSISTENT.</value></data>
+  <data name="Finding_Wmi_EventLogIssue" xml:space="preserve"><value>The Windows Event Log service or a log is unhealthy.</value></data>
+  <data name="Finding_Wmi_PerfCountersBroken" xml:space="preserve"><value>Performance counters could not be read.</value></data>
+
+  <data name="Fix_Defender_StartServices" xml:space="preserve"><value>Start Windows Security services</value></data>
+  <data name="Fix_Defender_EnableRealtime" xml:space="preserve"><value>Turn real-time protection on</value></data>
+  <data name="Fix_Defender_UpdateSignatures" xml:space="preserve"><value>Update antivirus signatures</value></data>
+  <data name="Fix_Defender_QuickScan" xml:space="preserve"><value>Run a Defender quick scan</value></data>
+  <data name="Fix_Defender_EnableFirewall" xml:space="preserve"><value>Enable all firewall profiles</value></data>
+  <data name="Fix_Defender_ClearPolicyBlock" xml:space="preserve"><value>Remove Defender policy locks</value></data>
+  <data name="Fix_Defender_RestartSecurityCenter" xml:space="preserve"><value>Restart Security Center services</value></data>
+  <data name="Fix_Shell_RestartExplorer" xml:space="preserve"><value>Restart Explorer</value></data>
+  <data name="Fix_Shell_RebuildIconCache" xml:space="preserve"><value>Rebuild the icon cache</value></data>
+  <data name="Fix_Shell_ClearThumbnails" xml:space="preserve"><value>Clear the thumbnail cache</value></data>
+  <data name="Fix_Shell_RestartShellServices" xml:space="preserve"><value>Restart shell support services</value></data>
+  <data name="Fix_Shell_RebuildFontCache" xml:space="preserve"><value>Rebuild the font cache</value></data>
+  <data name="Fix_Shell_FixUserFolders" xml:space="preserve"><value>Recreate missing user folders</value></data>
+  <data name="Fix_Shell_ClearJumpLists" xml:space="preserve"><value>Reset jump lists</value></data>
+  <data name="Fix_Shell_ResetFolderViews" xml:space="preserve"><value>Reset folder view settings</value></data>
+  <data name="Fix_Policy_EnableTaskManager" xml:space="preserve"><value>Unblock Task Manager</value></data>
+  <data name="Fix_Policy_EnableRegistry" xml:space="preserve"><value>Unblock Registry Editor</value></data>
+  <data name="Fix_Policy_EnableCmd" xml:space="preserve"><value>Unblock Command Prompt</value></data>
+  <data name="Fix_Policy_EnableControlPanel" xml:space="preserve"><value>Unblock Control Panel</value></data>
+  <data name="Fix_Policy_UnlockWindowsUpdate" xml:space="preserve"><value>Remove Windows Update policy locks</value></data>
+  <data name="Fix_Policy_GpUpdate" xml:space="preserve"><value>Refresh Group Policy (gpupdate)</value></data>
+  <data name="Fix_Policy_ResetLocalGpo" xml:space="preserve"><value>Reset local Group Policy to defaults</value></data>
+  <data name="Fix_Wmi_RestartWinmgmt" xml:space="preserve"><value>Restart the WMI service</value></data>
+  <data name="Fix_Wmi_VerifyRepository" xml:space="preserve"><value>Verify the WMI repository</value></data>
+  <data name="Fix_Wmi_SalvageRepository" xml:space="preserve"><value>Salvage the WMI repository</value></data>
+  <data name="Fix_Wmi_RestartEventLog" xml:space="preserve"><value>Restart the Event Log service</value></data>
+  <data name="Fix_Wmi_RebuildPerfCounters" xml:space="preserve"><value>Rebuild performance counters</value></data>
+  <data name="Fix_Wmi_ResyncPerf" xml:space="preserve"><value>Resync WMI performance data</value></data>
+  <data name="Fix_Update_RestartDo" xml:space="preserve"><value>Reset Delivery Optimization</value></data>
+  <data name="Fix_Disk_OptimizeVolumes" xml:space="preserve"><value>Optimize the system volume (TRIM/defrag)</value></data>
+
+  <data name="Symptom_Defender_Off" xml:space="preserve"><value>Windows Security is off or will not open</value></data>
+  <data name="Symptom_Defender_Firewall" xml:space="preserve"><value>Firewall is off or blocking connections</value></data>
+  <data name="Symptom_Shell_Unstable" xml:space="preserve"><value>Explorer crashes; taskbar or Start misbehaves</value></data>
+  <data name="Symptom_Shell_IconsBroken" xml:space="preserve"><value>Icons, thumbnails, or fonts look broken</value></data>
+  <data name="Symptom_Policy_Blocked" xml:space="preserve"><value>Task Manager, Regedit, or CMD is blocked</value></data>
+  <data name="Symptom_Policy_UpdateLocked" xml:space="preserve"><value>Windows Update settings are locked</value></data>
+  <data name="Symptom_Wmi_Broken" xml:space="preserve"><value>WMI errors, broken counters, or Event Log issues</value></data>
+
+  <data name="GuidedRepair_Effects_Defender" xml:space="preserve"><value>Security services restart briefly; signature updates need internet and a quick scan can take several minutes.</value></data>
+  <data name="GuidedRepair_Effects_Shell" xml:space="preserve"><value>The taskbar and desktop reload briefly and open Explorer windows close; icon and thumbnail caches rebuild over time.</value></data>
+  <data name="GuidedRepair_Effects_Policy" xml:space="preserve"><value>Restriction policy values are removed and Group Policy is refreshed; devices managed by an organization may re-apply settings.</value></data>
+  <data name="GuidedRepair_Effects_Wmi" xml:space="preserve"><value>Management services restart; monitoring tools and dependent services may reconnect after a short delay.</value></data>
 </root>
 

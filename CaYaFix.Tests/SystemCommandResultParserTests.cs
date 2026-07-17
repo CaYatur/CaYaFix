@@ -137,4 +137,42 @@ public sealed class SystemCommandResultParserTests
             "identifier {current}\r\nrecoveryenabled         No",
             string.Empty));
     }
+
+    [Fact]
+    public void WmiRepositoryInconsistentWinsOverConsistentSubstring()
+    {
+        // "consistent" is a substring of "INCONSISTENT"; the parser must not misread it.
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Inconsistent,
+            SystemCommandResultParsers.ParseWmiRepositoryState(
+                "WMI repository is INCONSISTENT", string.Empty, 0));
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Consistent,
+            SystemCommandResultParsers.ParseWmiRepositoryState(
+                "WMI repository is consistent", string.Empty, 0));
+    }
+
+    [Fact]
+    public void WmiRepositoryTurkishPhrasesAreRecognized()
+    {
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Inconsistent,
+            SystemCommandResultParsers.ParseWmiRepositoryState(
+                "WMI deposu tutarsız", string.Empty, 0));
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Consistent,
+            SystemCommandResultParsers.ParseWmiRepositoryState(
+                "WMI deposu tutarlı", string.Empty, 0));
+    }
+
+    [Fact]
+    public void WmiRepositoryFallsBackToExitCodeWithoutPhrases()
+    {
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Consistent,
+            SystemCommandResultParsers.ParseWmiRepositoryState(string.Empty, string.Empty, 0));
+        Assert.Equal(
+            SystemCommandResultParsers.WmiRepositoryState.Unknown,
+            SystemCommandResultParsers.ParseWmiRepositoryState(string.Empty, "error", 2));
+    }
 }

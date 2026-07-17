@@ -37,7 +37,7 @@ function Invoke-ReadOnly([string]$Name, [scriptblock]$Block, [switch]$NativeComm
         $flat = $trimmed -replace "\r?\n", " | "
         # Native PowerShell cmdlets often leave stale LASTEXITCODE; only trust exe exit codes.
         if ($NativeCommand -and $null -ne $code -and $code -ne 0) {
-            if ($flat -match 'Eri.im engellendi|Access is denied|elevated|Y.kseltilmi.|740|5$|Parametre hatal') {
+            if ($flat -match 'Eri.im engellendi|Access is denied|Access denied|0x80041003|elevated|Y.kseltilmi.|740|5$|Parametre hatal') {
                 Add-Result "INFO" $Name ("needs-admin exit=$code $flat")
             } else {
                 Add-Result "FAIL" $Name ("exit=$code $flat")
@@ -77,6 +77,15 @@ Invoke-ReadOnly "reagentc /info" { reagentc.exe /info 2>&1 } -NativeCommand
 # DISM CheckHealth is read-only (no repair) but often needs admin
 Invoke-ReadOnly "dism CheckHealth" { dism.exe /Online /Cleanup-Image /CheckHealth /English 2>&1 } -NativeCommand
 
+# WMI repository verification is read-only (salvage is the repair path)
+Invoke-ReadOnly "winmgmt /verifyrepository" { winmgmt.exe /verifyrepository 2>&1 } -NativeCommand
+
+# Security / policy inventory (read-only)
+Invoke-ReadOnly "netsh advfirewall show allprofiles state" { netsh.exe advfirewall show allprofiles state 2>&1 | Select-Object -First 15 } -NativeCommand
+Invoke-ReadOnly "sc query WinDefend" { sc.exe query WinDefend } -NativeCommand
+Invoke-ReadOnly "sc query Winmgmt" { sc.exe query Winmgmt } -NativeCommand
+Invoke-ReadOnly "sc query EventLog" { sc.exe query EventLog } -NativeCommand
+
 # Devices (read-only)
 Invoke-ReadOnly "pnputil Display class" { pnputil.exe /enum-devices /class Display 2>&1 | Select-Object -First 25 } -NativeCommand
 Invoke-ReadOnly "pnputil Net class" { pnputil.exe /enum-devices /class Net 2>&1 | Select-Object -First 15 } -NativeCommand
@@ -102,6 +111,7 @@ Invoke-ReadOnly "Get-ComputerRestorePoint" {
 $skipped = @(
     "ipconfig /release or /renew",
     "netsh winsock reset / int ip reset / full network reset",
+    "winmgmt /salvagerepository / lodctr /R / gpupdate /force",
     "SFC /scannow",
     "DISM RestoreHealth / ScanHealth / StartComponentCleanup",
     "Win+Ctrl+Shift+B graphics soft-reset",

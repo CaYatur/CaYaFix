@@ -21,8 +21,9 @@ public sealed class CommandRunner : ICommandRunner
     private static readonly HashSet<string> AllowedExecutables = new(StringComparer.OrdinalIgnoreCase)
     {
         "arp.exe", "bcdboot.exe", "bcdedit.exe", "chkdsk.exe", "chkntfs.exe", "cmd.exe", "dism.exe",
-        "fsutil.exe", "ipconfig.exe", "netsh.exe", "nslookup.exe", "ping.exe", "pnputil.exe", "powercfg.exe",
-        "powershell.exe", "reagentc.exe", "reg.exe", "route.exe", "sc.exe", "sfc.exe", "w32tm.exe", "wsreset.exe"
+        "fsutil.exe", "gpupdate.exe", "ipconfig.exe", "lodctr.exe", "netsh.exe", "nslookup.exe", "ping.exe",
+        "pnputil.exe", "powercfg.exe", "powershell.exe", "reagentc.exe", "reg.exe", "route.exe", "sc.exe",
+        "sfc.exe", "w32tm.exe", "winmgmt.exe", "wsreset.exe"
     };
     private static readonly JsonSerializerOptions JsonOptions = new()
     {

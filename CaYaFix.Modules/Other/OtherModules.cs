@@ -118,6 +118,26 @@ public sealed class WindowsUpdateModule : WindowsModuleBase
                     TimeSpan.FromMinutes(8))
             ],
             VerifyUpdateServicesAsync),
+        // Delivery Optimization backs modern Windows Update downloads; a corrupt DO cache
+        // stalls downloads at 0% (Microsoft: Delete-DeliveryOptimizationCache).
+        ExpandedRepairHelpers.TransientCommand(
+            "update.restart-do",
+            "Fix_Update_RestartDo",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "try{ Delete-DeliveryOptimizationCache -Force -ErrorAction SilentlyContinue }catch{}; " +
+                        "try{ $s=Get-Service DoSvc -ErrorAction Stop; if($s.StartType -eq 'Disabled'){ Set-Service DoSvc -StartupType Automatic }; " +
+                        "  if($s.Status -eq 'Running'){ Restart-Service DoSvc -Force -ErrorAction SilentlyContinue } else { Start-Service DoSvc -ErrorAction SilentlyContinue } }catch{}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(6))
+            ],
+            (context, ct) => ModuleHelpers.IsServiceRunningAsync(context, "DoSvc", ct)),
         ExpandedRepairHelpers.TransientCommand(
             "update.sc-defaults",
             "Fix_Update_ScDefaults",
@@ -756,6 +776,32 @@ public sealed class DiskStorageModule : WindowsModuleBase
                 var result = await context.Commands.RunAsync(
                     "chkdsk.exe", [SystemVolume(), "/scan"], TimeSpan.FromMinutes(20), ct).ConfigureAwait(false);
                 return SystemCommandResultParsers.IsChkdskOnlineScanClean(result.StdOut, result.StdErr, result.ExitCode);
+            }),
+        // Optimize-Volume picks the right operation per media type (ReTrim on SSD, defrag on HDD).
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.optimize-volumes",
+            "Fix_Disk_OptimizeVolumes",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "$letter=(Get-Item $env:SystemRoot).PSDrive.Name; " +
+                        "try{ Optimize-Volume -DriveLetter $letter -ErrorAction Stop }catch{ " +
+                        "  try{ Optimize-Volume -DriveLetter $letter -ReTrim -ErrorAction SilentlyContinue }catch{} }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(45))
+            ],
+            async (context, ct) =>
+            {
+                var root = await context.Commands.RunPsJsonAsync<JsonElement>(
+                    "$letter=(Get-Item $env:SystemRoot).PSDrive.Name; Get-Volume -DriveLetter $letter | Select-Object DriveLetter,HealthStatus",
+                    ct).ConfigureAwait(false);
+                return ModuleHelpers.Array(root).Any(row => string.Equals(
+                    ModuleHelpers.GetString(row, "HealthStatus"), "Healthy", StringComparison.OrdinalIgnoreCase));
             }),
         ExpandedRepairHelpers.TransientCommand(
             "disk.fsutil-dirty-query",
@@ -1906,11 +1952,31 @@ internal static class OtherModuleFunctions
         ModuleHelpers.TryGetPropertyIgnoreCase(element, property, out var value) &&
         (value.ValueKind == JsonValueKind.True || bool.TryParse(value.ToString(), out var parsed) && parsed);
 
-    public static double Double(JsonElement element, string property) =>
-        ModuleHelpers.TryGetPropertyIgnoreCase(element, property, out var value) &&
-        double.TryParse(value.ToString(), out var parsed)
+    /// <summary>
+    /// JSON numbers always use invariant formatting ('.' decimal separator), so the
+    /// parse must be invariant too — culture-sensitive parsing turns "515.8" into 5158
+    /// on tr-TR and creates false findings.
+    /// </summary>
+    public static double Double(JsonElement element, string property)
+    {
+        if (!ModuleHelpers.TryGetPropertyIgnoreCase(element, property, out var value))
+        {
+            return 0;
+        }
+
+        if (value.ValueKind == JsonValueKind.Number && value.TryGetDouble(out var number))
+        {
+            return number;
+        }
+
+        return double.TryParse(
+            value.ToString(),
+            System.Globalization.NumberStyles.Float,
+            System.Globalization.CultureInfo.InvariantCulture,
+            out var parsed)
             ? parsed
             : 0;
+    }
 
     public static bool TryMeasureDirectories(
         IEnumerable<string> roots,

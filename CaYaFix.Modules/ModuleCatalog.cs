@@ -27,6 +27,10 @@ public static class ModuleCatalog
         new UsbDevicesModule(),
         new WindowsSearchModule(),
         new DisplayGraphicsModule(),
-        new BootRecoveryModule()
+        new BootRecoveryModule(),
+        new WindowsSecurityModule(),
+        new ExplorerShellModule(),
+        new SystemPolicyModule(),
+        new WmiRepairModule()
     ];
 }

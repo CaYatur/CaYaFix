@@ -207,6 +207,38 @@ public static class SystemCommandResultParsers
         return false;
     }
 
+    /// <summary>
+    /// Interprets <c>winmgmt /verifyrepository</c>. "consistent" is a substring of
+    /// "INCONSISTENT", so the inconsistent phrase must win before the healthy phrase.
+    /// </summary>
+    public static WmiRepositoryState ParseWmiRepositoryState(string? stdout, string? stderr, int exitCode)
+    {
+        var text = Combine(stdout, stderr);
+        if (Contains(text, "inconsistent") ||
+            Contains(text, "tutarsız") ||
+            Contains(text, "tutarsiz"))
+        {
+            return WmiRepositoryState.Inconsistent;
+        }
+
+        if (Contains(text, "consistent") ||
+            Contains(text, "tutarlı") ||
+            Contains(text, "tutarli"))
+        {
+            return WmiRepositoryState.Consistent;
+        }
+
+        // No recognizable phrase: trust the exit code only when it is clean.
+        return exitCode == 0 ? WmiRepositoryState.Consistent : WmiRepositoryState.Unknown;
+    }
+
+    public enum WmiRepositoryState
+    {
+        Unknown,
+        Consistent,
+        Inconsistent
+    }
+
     private static bool Contains(string haystack, string needle) =>
         haystack.Contains(needle, StringComparison.OrdinalIgnoreCase);
 

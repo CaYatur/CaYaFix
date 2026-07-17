@@ -763,4 +763,97 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Symptom_Search_SlowIndex" xml:space="preserve"><value>Arama dizini yavaş veya bitmiyor</value></data>
   <data name="Symptom_Store_InstallFail" xml:space="preserve"><value>Microsoft Store uygulamaları yüklenmiyor veya güncellenmiyor</value></data>
   <data name="Symptom_Time_NoSource" xml:space="preserve"><value>Geçerli zaman kaynağı / NTP eşi yok</value></data>
+
+  <data name="Module_Defender_Name" xml:space="preserve"><value>Windows Güvenliği</value></data>
+  <data name="Module_Defender_Description" xml:space="preserve"><value>Defender virüsten koruma, gerçek zamanlı koruma, imza güncellemeleri, güvenlik duvarı profilleri ve Güvenlik Merkezi sağlığı.</value></data>
+  <data name="Module_Shell_Name" xml:space="preserve"><value>Gezgin ve masaüstü</value></data>
+  <data name="Module_Shell_Description" xml:space="preserve"><value>Dosya Gezgini kararlılığı, simge ve küçük resim önbellekleri, yazı tipi önbelleği, kullanıcı klasörleri, atlama listeleri ve klasör görünümleri.</value></data>
+  <data name="Module_Policy_Name" xml:space="preserve"><value>Sistem erişimi ve ilkeler</value></data>
+  <data name="Module_Policy_Description" xml:space="preserve"><value>Görev Yöneticisi, Kayıt Defteri Düzenleyicisi, Komut İstemi, Denetim Masası ve Windows Update ilke kilitlerini açar; yerel Grup İlkesini yeniler veya sıfırlar.</value></data>
+  <data name="Module_Wmi_Name" xml:space="preserve"><value>Sistem çekirdeği (WMI ve Olay Günlüğü)</value></data>
+  <data name="Module_Wmi_Description" xml:space="preserve"><value>WMI hizmeti ve depo tutarlılığı, Windows Olay Günlüğü sağlığı ve performans sayacı onarımı.</value></data>
+
+  <data name="Check_Defender_Services" xml:space="preserve"><value>Windows Güvenliği hizmetleri</value></data>
+  <data name="Check_Defender_Realtime" xml:space="preserve"><value>Gerçek zamanlı koruma</value></data>
+  <data name="Check_Defender_Signatures" xml:space="preserve"><value>Virüsten koruma imza yaşı</value></data>
+  <data name="Check_Defender_Firewall" xml:space="preserve"><value>Güvenlik duvarı profilleri</value></data>
+  <data name="Check_Defender_PolicyBlock" xml:space="preserve"><value>Defender ilke kilitleri</value></data>
+  <data name="Check_Shell_ExplorerRunning" xml:space="preserve"><value>Gezgin kabuk işlemi</value></data>
+  <data name="Check_Shell_IconCache" xml:space="preserve"><value>Simge ve küçük resim önbellek boyutu</value></data>
+  <data name="Check_Shell_Crashes" xml:space="preserve"><value>Son Gezgin çökmeleri</value></data>
+  <data name="Check_Shell_UserFolders" xml:space="preserve"><value>Kullanıcı kabuk klasörleri</value></data>
+  <data name="Check_Shell_Services" xml:space="preserve"><value>Kabuk destek hizmetleri</value></data>
+  <data name="Check_Policy_TaskManager" xml:space="preserve"><value>Görev Yöneticisi ilkesi</value></data>
+  <data name="Check_Policy_Registry" xml:space="preserve"><value>Kayıt Defteri Düzenleyicisi ilkesi</value></data>
+  <data name="Check_Policy_Cmd" xml:space="preserve"><value>Komut İstemi ilkesi</value></data>
+  <data name="Check_Policy_ControlPanel" xml:space="preserve"><value>Denetim Masası ilkesi</value></data>
+  <data name="Check_Policy_UpdateLocks" xml:space="preserve"><value>Windows Update ilke kilitleri</value></data>
+  <data name="Check_Wmi_Service" xml:space="preserve"><value>WMI hizmeti</value></data>
+  <data name="Check_Wmi_Repository" xml:space="preserve"><value>WMI depo tutarlılığı</value></data>
+  <data name="Check_Wmi_EventLog" xml:space="preserve"><value>Olay Günlüğü sağlığı</value></data>
+  <data name="Check_Wmi_PerfCounters" xml:space="preserve"><value>Performans sayaçları</value></data>
+
+  <data name="Finding_Defender_ServicesUnhealthy" xml:space="preserve"><value>Windows Güvenliği hizmetleri devre dışı veya durdurulmuş.</value></data>
+  <data name="Finding_Defender_RealtimeOff" xml:space="preserve"><value>Defender gerçek zamanlı koruması kapalı ve etkin başka bir virüsten koruma yok.</value></data>
+  <data name="Finding_Defender_SignaturesOld" xml:space="preserve"><value>Virüsten koruma imzaları güncel değil.</value></data>
+  <data name="Finding_Defender_FirewallOff" xml:space="preserve"><value>Bir veya daha fazla güvenlik duvarı profili devre dışı.</value></data>
+  <data name="Finding_Defender_PolicyBlocked" xml:space="preserve"><value>Bir ilke değeri Windows Defender'ı engelliyor.</value></data>
+  <data name="Finding_Shell_ExplorerNotRunning" xml:space="preserve"><value>Gezgin kabuğu çalışmıyor.</value></data>
+  <data name="Finding_Shell_CacheHeavy" xml:space="preserve"><value>Simge/küçük resim önbellekleri alışılmadık derecede büyük ve bozulmuş olabilir.</value></data>
+  <data name="Finding_Shell_RecentCrashes" xml:space="preserve"><value>Gezgin yakın zamanda çöktü.</value></data>
+  <data name="Finding_Shell_UserFolderMissing" xml:space="preserve"><value>Eşlenmiş bir kullanıcı klasörü diskte yok.</value></data>
+  <data name="Finding_Shell_ServicesUnhealthy" xml:space="preserve"><value>Kabuk destek hizmetleri devre dışı veya durdurulmuş.</value></data>
+  <data name="Finding_Policy_TaskManagerBlocked" xml:space="preserve"><value>Görev Yöneticisi bir kısıtlama ilkesiyle engellenmiş.</value></data>
+  <data name="Finding_Policy_RegistryBlocked" xml:space="preserve"><value>Kayıt Defteri Düzenleyicisi bir kısıtlama ilkesiyle engellenmiş.</value></data>
+  <data name="Finding_Policy_CmdBlocked" xml:space="preserve"><value>Komut İstemi bir kısıtlama ilkesiyle engellenmiş.</value></data>
+  <data name="Finding_Policy_ControlPanelBlocked" xml:space="preserve"><value>Denetim Masası ve Ayarlar bir kısıtlama ilkesiyle engellenmiş.</value></data>
+  <data name="Finding_Policy_UpdateLocked" xml:space="preserve"><value>Windows Update ilke değerleriyle sınırlanmış.</value></data>
+  <data name="Finding_Wmi_ServiceIssue" xml:space="preserve"><value>WMI hizmeti sağlıklı değil.</value></data>
+  <data name="Finding_Wmi_RepositoryInconsistent" xml:space="preserve"><value>WMI deposu TUTARSIZ bildiriyor.</value></data>
+  <data name="Finding_Wmi_EventLogIssue" xml:space="preserve"><value>Windows Olay Günlüğü hizmeti veya bir günlük sağlıksız.</value></data>
+  <data name="Finding_Wmi_PerfCountersBroken" xml:space="preserve"><value>Performans sayaçları okunamadı.</value></data>
+
+  <data name="Fix_Defender_StartServices" xml:space="preserve"><value>Windows Güvenliği hizmetlerini başlat</value></data>
+  <data name="Fix_Defender_EnableRealtime" xml:space="preserve"><value>Gerçek zamanlı korumayı aç</value></data>
+  <data name="Fix_Defender_UpdateSignatures" xml:space="preserve"><value>Virüsten koruma imzalarını güncelle</value></data>
+  <data name="Fix_Defender_QuickScan" xml:space="preserve"><value>Defender hızlı taraması çalıştır</value></data>
+  <data name="Fix_Defender_EnableFirewall" xml:space="preserve"><value>Tüm güvenlik duvarı profillerini etkinleştir</value></data>
+  <data name="Fix_Defender_ClearPolicyBlock" xml:space="preserve"><value>Defender ilke kilitlerini kaldır</value></data>
+  <data name="Fix_Defender_RestartSecurityCenter" xml:space="preserve"><value>Güvenlik Merkezi hizmetlerini yeniden başlat</value></data>
+  <data name="Fix_Shell_RestartExplorer" xml:space="preserve"><value>Gezgini yeniden başlat</value></data>
+  <data name="Fix_Shell_RebuildIconCache" xml:space="preserve"><value>Simge önbelleğini yeniden oluştur</value></data>
+  <data name="Fix_Shell_ClearThumbnails" xml:space="preserve"><value>Küçük resim önbelleğini temizle</value></data>
+  <data name="Fix_Shell_RestartShellServices" xml:space="preserve"><value>Kabuk destek hizmetlerini yeniden başlat</value></data>
+  <data name="Fix_Shell_RebuildFontCache" xml:space="preserve"><value>Yazı tipi önbelleğini yeniden oluştur</value></data>
+  <data name="Fix_Shell_FixUserFolders" xml:space="preserve"><value>Eksik kullanıcı klasörlerini yeniden oluştur</value></data>
+  <data name="Fix_Shell_ClearJumpLists" xml:space="preserve"><value>Atlama listelerini sıfırla</value></data>
+  <data name="Fix_Shell_ResetFolderViews" xml:space="preserve"><value>Klasör görünümü ayarlarını sıfırla</value></data>
+  <data name="Fix_Policy_EnableTaskManager" xml:space="preserve"><value>Görev Yöneticisi engelini kaldır</value></data>
+  <data name="Fix_Policy_EnableRegistry" xml:space="preserve"><value>Kayıt Defteri Düzenleyicisi engelini kaldır</value></data>
+  <data name="Fix_Policy_EnableCmd" xml:space="preserve"><value>Komut İstemi engelini kaldır</value></data>
+  <data name="Fix_Policy_EnableControlPanel" xml:space="preserve"><value>Denetim Masası engelini kaldır</value></data>
+  <data name="Fix_Policy_UnlockWindowsUpdate" xml:space="preserve"><value>Windows Update ilke kilitlerini kaldır</value></data>
+  <data name="Fix_Policy_GpUpdate" xml:space="preserve"><value>Grup İlkesini yenile (gpupdate)</value></data>
+  <data name="Fix_Policy_ResetLocalGpo" xml:space="preserve"><value>Yerel Grup İlkesini varsayılanlara sıfırla</value></data>
+  <data name="Fix_Wmi_RestartWinmgmt" xml:space="preserve"><value>WMI hizmetini yeniden başlat</value></data>
+  <data name="Fix_Wmi_VerifyRepository" xml:space="preserve"><value>WMI deposunu doğrula</value></data>
+  <data name="Fix_Wmi_SalvageRepository" xml:space="preserve"><value>WMI deposunu kurtar</value></data>
+  <data name="Fix_Wmi_RestartEventLog" xml:space="preserve"><value>Olay Günlüğü hizmetini yeniden başlat</value></data>
+  <data name="Fix_Wmi_RebuildPerfCounters" xml:space="preserve"><value>Performans sayaçlarını yeniden oluştur</value></data>
+  <data name="Fix_Wmi_ResyncPerf" xml:space="preserve"><value>WMI performans verilerini yeniden eşitle</value></data>
+  <data name="Fix_Update_RestartDo" xml:space="preserve"><value>Teslim İyileştirmeyi sıfırla</value></data>
+  <data name="Fix_Disk_OptimizeVolumes" xml:space="preserve"><value>Sistem birimini iyileştir (TRIM/birleştirme)</value></data>
+
+  <data name="Symptom_Defender_Off" xml:space="preserve"><value>Windows Güvenliği kapalı veya açılmıyor</value></data>
+  <data name="Symptom_Defender_Firewall" xml:space="preserve"><value>Güvenlik duvarı kapalı veya bağlantıları engelliyor</value></data>
+  <data name="Symptom_Shell_Unstable" xml:space="preserve"><value>Gezgin çöküyor; görev çubuğu veya Başlat düzgün çalışmıyor</value></data>
+  <data name="Symptom_Shell_IconsBroken" xml:space="preserve"><value>Simgeler, küçük resimler veya yazı tipleri bozuk görünüyor</value></data>
+  <data name="Symptom_Policy_Blocked" xml:space="preserve"><value>Görev Yöneticisi, Kayıt Defteri veya CMD engellenmiş</value></data>
+  <data name="Symptom_Policy_UpdateLocked" xml:space="preserve"><value>Windows Update ayarları kilitli</value></data>
+  <data name="Symptom_Wmi_Broken" xml:space="preserve"><value>WMI hataları, bozuk sayaçlar veya Olay Günlüğü sorunları</value></data>
+
+  <data name="GuidedRepair_Effects_Defender" xml:space="preserve"><value>Güvenlik hizmetleri kısa süreliğine yeniden başlar; imza güncellemesi internet gerektirir ve hızlı tarama birkaç dakika sürebilir.</value></data>
+  <data name="GuidedRepair_Effects_Shell" xml:space="preserve"><value>Görev çubuğu ve masaüstü kısa süreliğine yeniden yüklenir, açık Gezgin pencereleri kapanır; simge ve küçük resim önbellekleri zamanla yeniden oluşur.</value></data>
+  <data name="GuidedRepair_Effects_Policy" xml:space="preserve"><value>Kısıtlama ilke değerleri kaldırılır ve Grup İlkesi yenilenir; bir kuruluş tarafından yönetilen cihazlar ayarları yeniden uygulayabilir.</value></data>
+  <data name="GuidedRepair_Effects_Wmi" xml:space="preserve"><value>Yönetim hizmetleri yeniden başlar; izleme araçları ve bağımlı hizmetler kısa bir gecikmeyle yeniden bağlanabilir.</value></data>
 </root>

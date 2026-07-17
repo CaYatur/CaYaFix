@@ -137,6 +137,21 @@ internal static class ModuleHelpers
         return entry;
     }
 
+    /// <summary>
+    /// Registry export when the key exists; a transient marker when it does not.
+    /// Deleting values under a missing key is a no-op, so a marker is an honest backup.
+    /// </summary>
+    public static async Task<BackupEntry?> CaptureRegistryOrMarkerAsync(
+        FixContext context,
+        string key,
+        string markerLabel,
+        CancellationToken ct)
+    {
+        var registry = await context.Backups.CaptureRegistryAsync(key, BackupDirectory(context), ct)
+            .ConfigureAwait(false);
+        return registry ?? await TransientMarkerAsync(context, markerLabel, ct).ConfigureAwait(false);
+    }
+
     public static Task<BackupEntry?> CapturePnpDeviceStateAsync(
         FixContext context,
         string label,

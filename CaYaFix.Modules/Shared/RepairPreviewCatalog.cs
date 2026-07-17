@@ -523,6 +523,152 @@ internal static class RepairPreviewCatalog
             ["usb.scan-devices"] =
             [
                 "pnputil.exe /scan-devices"
+            ],
+
+            ["update.restart-do"] =
+            [
+                "Delete-DeliveryOptimizationCache -Force",
+                "Restart DoSvc (Delivery Optimization)"
+            ],
+
+            ["disk.optimize-volumes"] =
+            [
+                "Optimize-Volume for the system volume (ReTrim on SSD, defrag on HDD)"
+            ],
+
+            ["defender.start-services"] =
+            [
+                "Restore Disabled start modes for wscsvc / SecurityHealthService / WinDefend / WdNisSvc",
+                "Start stopped Windows Security services"
+            ],
+            ["defender.enable-realtime"] =
+            [
+                "Set-MpPreference -DisableRealtimeMonitoring $false"
+            ],
+            ["defender.update-signatures"] =
+            [
+                "Update-MpSignature"
+            ],
+            ["defender.quick-scan"] =
+            [
+                "Start-MpScan -ScanType QuickScan"
+            ],
+            ["defender.enable-firewall"] =
+            [
+                "netsh.exe advfirewall set allprofiles state on"
+            ],
+            ["defender.clear-policy-block"] =
+            [
+                "Delete DisableAntiSpyware / DisableAntiVirus policy values",
+                "Delete Real-Time Protection Disable* policy values"
+            ],
+            ["defender.restart-security-center"] =
+            [
+                "Restart wscsvc and SecurityHealthService"
+            ],
+
+            ["shell.restart-explorer"] =
+            [
+                "Stop the Explorer shell process",
+                "Start Explorer again (taskbar and desktop reload)"
+            ],
+            ["shell.rebuild-icon-cache"] =
+            [
+                "Stop Explorer",
+                "Delete IconCache.db and iconcache_*.db (caches rebuild automatically)",
+                "Start Explorer"
+            ],
+            ["shell.clear-thumbnails"] =
+            [
+                "Stop Explorer",
+                "Delete thumbcache_*.db (thumbnails rebuild automatically)",
+                "Start Explorer"
+            ],
+            ["shell.restart-shell-services"] =
+            [
+                "Restart Themes, ShellHWDetection, and FontCache"
+            ],
+            ["shell.rebuild-font-cache"] =
+            [
+                "Stop the Windows Font Cache services",
+                "Delete the LocalService FontCache data files",
+                "Start the Font Cache service"
+            ],
+            ["shell.fix-user-folders"] =
+            [
+                "Read HKCU User Shell Folders entries",
+                "Create any mapped folder that is missing on disk (nothing is deleted)"
+            ],
+            ["shell.clear-jumplists"] =
+            [
+                "Copy AutomaticDestinations/CustomDestinations to the session backup",
+                "Delete the jump-list files so Windows rebuilds them"
+            ],
+            ["shell.reset-folder-views"] =
+            [
+                "Backup and delete the Shell Bags / BagMRU folder-view registry keys",
+                "Restart Explorer"
+            ],
+
+            ["policy.enable-taskmgr"] =
+            [
+                "Delete the DisableTaskMgr policy value (HKCU + HKLM)"
+            ],
+            ["policy.enable-regedit"] =
+            [
+                "Delete the DisableRegistryTools policy value (HKCU + HKLM)"
+            ],
+            ["policy.enable-cmd"] =
+            [
+                "Delete the DisableCMD policy value (HKCU + HKLM)"
+            ],
+            ["policy.enable-control-panel"] =
+            [
+                "Delete the NoControlPanel policy value (HKCU + HKLM)"
+            ],
+            ["policy.unlock-windows-update"] =
+            [
+                "Delete DisableWindowsUpdateAccess / SetDisableUXWUAccess / NoAutoUpdate policy values"
+            ],
+            ["policy.gpupdate-force"] =
+            [
+                "gpupdate.exe /force"
+            ],
+            ["policy.reset-local-gpo"] =
+            [
+                "Backup Machine and User Registry.pol",
+                "Delete the local Group Policy Registry.pol files",
+                "gpupdate.exe /force"
+            ],
+
+            ["wmi.restart-winmgmt"] =
+            [
+                "Set Winmgmt to Automatic",
+                "Restart the Windows Management Instrumentation service"
+            ],
+            ["wmi.verify-repository"] =
+            [
+                "winmgmt.exe /verifyrepository"
+            ],
+            ["wmi.salvage-repository"] =
+            [
+                "winmgmt.exe /salvagerepository",
+                "winmgmt.exe /verifyrepository",
+                "Queue one restart"
+            ],
+            ["wmi.restart-eventlog"] =
+            [
+                "Set EventLog to Automatic",
+                "Restart the Windows Event Log service"
+            ],
+            ["wmi.rebuild-perfcounters"] =
+            [
+                "lodctr.exe /R (rebuild performance counters from the backup store)",
+                "winmgmt.exe /resyncperf"
+            ],
+            ["wmi.resync-perf"] =
+            [
+                "winmgmt.exe /resyncperf"
             ]
         };
 
