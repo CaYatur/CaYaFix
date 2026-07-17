@@ -8,6 +8,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>CaYaFix</AssemblyName>
     <RootNamespace>CaYaFix.App</RootNamespace>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
@@ -36,5 +37,6 @@
     <None Include="..\CaYaFix.Modules\thresholds.json" Link="thresholds.json" CopyToOutputDirectory="PreserveNewest" />
     <None Remove="Assets\Icons\*.svg" />
     <Resource Include="Assets\Icons\*.svg" />
+    <Resource Include="Assets\app.ico" />
   </ItemGroup>
 </Project>

@@ -59,16 +59,10 @@ public sealed class BootRecoveryModule : WindowsModuleBase
                     "boot.export-bcd");
             }
 
-            var disabled = output.Contains("Disabled", StringComparison.OrdinalIgnoreCase) &&
-                           !output.Contains("Enabled", StringComparison.OrdinalIgnoreCase);
-            // Prefer explicit status line when present.
-            if (output.Contains("Windows RE status", StringComparison.OrdinalIgnoreCase))
-            {
-                disabled = output.Contains("Windows RE status", StringComparison.OrdinalIgnoreCase) &&
-                           output.Contains("Disabled", StringComparison.OrdinalIgnoreCase);
-            }
-
-            return disabled
+            // Microsoft reagentc /info: only the "Windows RE status:" line is authoritative.
+            // Do not match bare Enabled/Disabled tokens elsewhere in the dump.
+            var status = SystemCommandResultParsers.ParseWinReStatus(result.StdOut, result.StdErr);
+            return status == SystemCommandResultParsers.WinReStatus.Disabled
                 ? ModuleHelpers.Finding(
                     "boot.winre",
                     Id,
@@ -78,7 +72,16 @@ public sealed class BootRecoveryModule : WindowsModuleBase
                     "boot.enable-winre",
                     "boot.export-bcd",
                     "boot.recoveryenabled")
-                : null;
+                : status == SystemCommandResultParsers.WinReStatus.Unknown && !result.Success
+                    ? ModuleHelpers.Finding(
+                        "boot.winre",
+                        Id,
+                        Severity.Warning,
+                        "Finding_Boot_WinReUnreadable",
+                        output.Trim(),
+                        "boot.enable-winre",
+                        "boot.export-bcd")
+                    : null;
         }),
         new DelegateDiagnosticCheck("boot.bcd", "Check_Boot_Bcd", Id, async (context, ct) =>
         {
@@ -199,7 +202,7 @@ public sealed class BootRecoveryModule : WindowsModuleBase
                     TimeSpan.FromMinutes(2),
                     ct).ConfigureAwait(false);
                 return result.Success &&
-                       result.StdOut.Contains("recoveryenabled", StringComparison.OrdinalIgnoreCase);
+                       SystemCommandResultParsers.IsRecoveryEnabledYes(result.StdOut, result.StdErr);
             }),
         new DelegateFixAction(
             "boot.enable-winre",
@@ -230,8 +233,8 @@ public sealed class BootRecoveryModule : WindowsModuleBase
                     ["/info"],
                     TimeSpan.FromMinutes(2),
                     ct).ConfigureAwait(false);
-                var output = result.StdOut + result.StdErr;
-                return output.Contains("Enabled", StringComparison.OrdinalIgnoreCase);
+                return SystemCommandResultParsers.ParseWinReStatus(result.StdOut, result.StdErr) ==
+                       SystemCommandResultParsers.WinReStatus.Enabled;
             }),
         new DelegateFixAction(
             "boot.rebuild-bcdboot",
@@ -279,6 +282,80 @@ public sealed class BootRecoveryModule : WindowsModuleBase
                     ["/enum", "{current}"],
                     TimeSpan.FromMinutes(2),
                     ct).ConfigureAwait(false)).Success,
-            requiresReboot: true)
+            requiresReboot: true),
+        ExpandedRepairHelpers.TransientCommand(
+            "boot.set-bootstatuspolicy-ignore",
+            "Fix_Boot_BootStatusPolicyIgnore",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep("bcdedit.exe", ["/set", "{current}", "bootstatuspolicy", "IgnoreAllFailures"])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "bcdedit.exe", ["/enum", "{current}"], TimeSpan.FromMinutes(2), ct)
+                    .ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.TransientCommand(
+            "boot.set-bootstatuspolicy-display",
+            "Fix_Boot_BootStatusPolicyDisplay",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("bcdedit.exe", ["/set", "{current}", "bootstatuspolicy", "DisplayAllFailures"])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "bcdedit.exe", ["/enum", "{current}"], TimeSpan.FromMinutes(2), ct)
+                    .ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.TransientCommand(
+            "boot.disable-recoveryenabled",
+            "Fix_Boot_DisableRecoveryEnabled",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep("bcdedit.exe", ["/set", "{current}", "recoveryenabled", "No"])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "bcdedit.exe", ["/enum", "{current}"], TimeSpan.FromMinutes(2), ct)
+                    .ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.TransientCommand(
+            "boot.reagentc-info",
+            "Fix_Boot_ReagentcInfo",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("reagentc.exe", ["/info"], TimeSpan.FromMinutes(2))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1, 2 }
+                }
+            ],
+            async (context, ct) =>
+            {
+                var result = await context.Commands.RunAsync(
+                    "reagentc.exe", ["/info"], TimeSpan.FromMinutes(2), ct).ConfigureAwait(false);
+                return !string.IsNullOrWhiteSpace(result.StdOut + result.StdErr);
+            }),
+        ExpandedRepairHelpers.TransientCommand(
+            "boot.enum-current",
+            "Fix_Boot_EnumCurrent",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("bcdedit.exe", ["/enum", "{current}"], TimeSpan.FromMinutes(2))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "bcdedit.exe", ["/enum", "{current}"], TimeSpan.FromMinutes(2), ct)
+                    .ConfigureAwait(false)).Success)
     ];
 }

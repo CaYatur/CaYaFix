@@ -64,7 +64,10 @@ public sealed class NetworkModule : IModuleDefinition
     private static IReadOnlyList<FixAction> CreateFixes() =>
     [
         CreateFlushDnsFix(),
-        CreateRenewDhcpFix(),
+        CreateRenewDhcpActiveFix(),
+        CreateRenewDhcpAllFix(),
+        CreateProfileRepairActiveFix(),
+        CreateProfileRepairAllFix(),
         CreateIpconfigSuiteFix(),
         CreateCycleAdaptersFix(),
         CreateRestartServicesFix(),
@@ -97,10 +100,10 @@ public sealed class NetworkModule : IModuleDefinition
     [
         new("network.no-internet", ModuleId, "Symptom_Network_NoInternet",
             ["net.adapters", "net.ip", "net.gateway", "net.dns", "net.internet", "net.proxy", "net.routes", "net.services", "net.eventlog", "net.bindings"],
-            ["net.ipconfig-suite", "net.soft-heal", "net.flush-dns", "net.renew-dhcp", "net.restart-services", "net.reset-stack"]),
+            ["net.ipconfig-suite", "net.soft-heal", "net.flush-dns", "net.renew-dhcp", "net.profile-repair-active", "net.restart-services", "net.reset-stack"]),
         new("network.limited", ModuleId, "Symptom_Network_Limited",
             ["net.ip", "net.gateway", "net.dns", "net.firewall", "net.bindings"],
-            ["net.ipconfig-suite", "net.soft-heal", "net.renew-dhcp", "net.clear-arp", "net.reset-stack"]),
+            ["net.ipconfig-suite", "net.soft-heal", "net.renew-dhcp", "net.profile-repair-active", "net.clear-arp", "net.reset-stack"]),
         new("network.slow", ModuleId, "Symptom_Network_Slow",
             ["net.adapters", "net.performance", "net.mtu", "net.power", "net.throughput", "net.eventlog"],
             ["net.soft-heal", "net.normalize-tcp", "net.disable-power-saving"]),
@@ -109,7 +112,7 @@ public sealed class NetworkModule : IModuleDefinition
             ["net.flush-dns", "net.soft-heal", "net.restore-hosts", "net.clear-proxy", "net.public-dns"]),
         new("network.vpn", ModuleId, "Symptom_Network_Vpn",
             ["net.vpn", "net.proxy", "net.dns", "net.ip", "net.routes", "net.eventlog"],
-            ["net.clear-proxy", "net.soft-heal", "net.renew-dhcp", "net.reset-stack"]),
+            ["net.clear-proxy", "net.soft-heal", "net.renew-dhcp", "net.profile-repair-active", "net.reset-stack"]),
         new("network.wifi-drops", ModuleId, "Symptom_Network_WifiDrops",
             ["net.adapters", "net.power", "net.performance", "net.services", "net.eventlog"],
             ["net.disable-power-saving", "net.soft-heal", "net.restart-services", "net.cycle-adapters", "net.rescan-devices"])
@@ -640,24 +643,8 @@ public sealed class NetworkModule : IModuleDefinition
     private static DelegateFixAction CreateIpconfigSuiteFix() => new(
         "net.ipconfig-suite", "Fix_Network_IpconfigSuite", ModuleId, RiskTier.Safe,
         (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "ipconfig-suite", ct),
-        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
-        [
-            // Full local TCP/IP client refresh (manual ipconfig troubleshooting pack).
-            new CommandStep("ipconfig.exe", ["/flushdns"]),
-            new CommandStep("ipconfig.exe", ["/release"], TimeSpan.FromMinutes(3))
-            {
-                AcceptedExitCodes = new HashSet<int> { 0, 1 }
-            },
-            new CommandStep("ipconfig.exe", ["/renew"], TimeSpan.FromMinutes(5))
-            {
-                AcceptedExitCodes = new HashSet<int> { 0, 1 }
-            },
-            new CommandStep("ipconfig.exe", ["/registerdns"])
-            {
-                AcceptedExitCodes = new HashSet<int> { 0, 1 }
-            },
-            new CommandStep("ipconfig.exe", ["/flushdns"])
-        ], ct),
+        // Same resilient release→renew pipeline so a partial /release failure never skips /renew.
+        (context, ct) => ApplyDhcpRenewAsync(context, activeOnly: false, includeFlushAndRegister: true, ct),
         async (context, ct) =>
         {
             var result = await context.Commands.RunAsync(
@@ -668,20 +655,197 @@ public sealed class NetworkModule : IModuleDefinition
             return result.Success && !string.IsNullOrWhiteSpace(result.StdOut);
         });
 
-    private static DelegateFixAction CreateRenewDhcpFix() => new(
+    private static DelegateFixAction CreateRenewDhcpActiveFix() => new(
         "net.renew-dhcp", "Fix_Network_RenewDhcp", ModuleId, RiskTier.Safe,
         (context, ct) => context.Backups.CaptureCommandStateAsync(
             "network-interface", "netsh.exe", ["-c", "interface", "dump"],
             "netsh.exe", ["-f", "{backup}"], ModuleHelpers.BackupDirectory(context), ct),
-        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
-            [new CommandStep("ipconfig.exe", ["/release"], TimeSpan.FromMinutes(3)), new CommandStep("ipconfig.exe", ["/renew"], TimeSpan.FromMinutes(5))], ct),
-        async (context, ct) =>
-        {
-            var root = await context.Commands.RunPsJsonAsync<JsonElement>(
-                "Get-NetIPConfiguration | Where-Object {$_.NetAdapter.Status -eq 'Up' -and $_.IPv4Address.IPAddress -notlike '169.254.*'} | Select-Object InterfaceAlias",
-                ct).ConfigureAwait(false);
-            return ModuleHelpers.Array(root).Any();
-        });
+        (context, ct) => ApplyDhcpRenewAsync(context, activeOnly: true, includeFlushAndRegister: false, ct),
+        VerifyDhcpRenewAsync);
+
+    private static DelegateFixAction CreateRenewDhcpAllFix() => new(
+        "net.renew-dhcp-all", "Fix_Network_RenewDhcpAll", ModuleId, RiskTier.Safe,
+        (context, ct) => context.Backups.CaptureCommandStateAsync(
+            "network-interface", "netsh.exe", ["-c", "interface", "dump"],
+            "netsh.exe", ["-f", "{backup}"], ModuleHelpers.BackupDirectory(context), ct),
+        (context, ct) => ApplyDhcpRenewAsync(context, activeOnly: false, includeFlushAndRegister: false, ct),
+        VerifyDhcpRenewAsync);
+
+    private static async Task<bool> VerifyDhcpRenewAsync(FixContext context, CancellationToken ct)
+    {
+        // After release/renew, wait briefly then require at least one non-APIPA address when possible.
+        await Task.Delay(TimeSpan.FromSeconds(2), ct).ConfigureAwait(false);
+        var root = await context.Commands.RunPsJsonAsync<JsonElement>(
+            "Get-NetIPConfiguration | Where-Object {$_.NetAdapter.Status -eq 'Up' -and $_.IPv4Address.IPAddress -notlike '169.254.*'} | Select-Object InterfaceAlias",
+            ct).ConfigureAwait(false);
+        if (ModuleHelpers.Array(root).Any()) return true;
+
+        // Soft pass: adapters may still be associating; avoid false-fail after a successful renew attempt.
+        var anyUp = await context.Commands.RunPsJsonAsync<JsonElement>(
+            "Get-NetAdapter -Physical | Where-Object Status -eq 'Up' | Select-Object Name",
+            ct).ConfigureAwait(false);
+        return ModuleHelpers.Array(anyUp).Any();
+    }
+
+    private static DelegateFixAction CreateProfileRepairActiveFix() => new(
+        "net.profile-repair-active", "Fix_Network_ProfileRepairActive", ModuleId, RiskTier.Safe,
+        (context, ct) => CaptureProfileRepairBackupAsync(context, "network-profile-active", ct),
+        (context, ct) => ApplyNetworkProfileRepairAsync(context, activeOnly: true, ct),
+        (context, ct) => VerifyProfileRepairAsync(context, activeOnly: true, ct));
+
+    private static DelegateFixAction CreateProfileRepairAllFix() => new(
+        "net.profile-repair-all", "Fix_Network_ProfileRepairAll", ModuleId, RiskTier.Safe,
+        (context, ct) => CaptureProfileRepairBackupAsync(context, "network-profile-all", ct),
+        (context, ct) => ApplyNetworkProfileRepairAsync(context, activeOnly: false, ct),
+        (context, ct) => VerifyProfileRepairAsync(context, activeOnly: false, ct));
+
+    private static async Task<BackupEntry?> CaptureProfileRepairBackupAsync(
+        FixContext context,
+        string label,
+        CancellationToken ct)
+    {
+        var dir = ModuleHelpers.BackupDirectory(context);
+        var state = await context.Backups.CaptureCommandStateAsync(
+            "network-interface", "netsh.exe", ["-c", "interface", "dump"],
+            "netsh.exe", ["-f", "{backup}"], dir, ct).ConfigureAwait(false);
+        var services = await context.Backups.CaptureServicesAsync(NetworkServices, dir, ct).ConfigureAwait(false);
+        return state is not null && services is not null
+            ? await context.Backups.CaptureBundleAsync(label, [state, services], dir, ct).ConfigureAwait(false)
+            : state ?? services;
+    }
+
+    private static async Task<bool> VerifyProfileRepairAsync(FixContext context, bool activeOnly, CancellationToken ct)
+    {
+        var script = activeOnly
+            ? "Get-NetConnectionProfile | Where-Object {$_.IPv4Connectivity -ne 'Disconnected' -or $_.IPv6Connectivity -ne 'Disconnected'} | Select-Object Name,InterfaceAlias,NetworkCategory"
+            : "Get-NetConnectionProfile | Select-Object Name,InterfaceAlias,NetworkCategory";
+        var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+        return ModuleHelpers.Array(root).Any() ||
+               (await context.Commands.RunAsync("sc.exe", ["query", "Dhcp"], TimeSpan.FromMinutes(1), ct)
+                   .ConfigureAwait(false)).Success;
+    }
+
+    /// <summary>
+    /// Ensures the DHCP client service is up, then release→renew per adapter without aborting on
+    /// non-zero ipconfig exit codes (the previous failure mode left the machine without a lease).
+    /// </summary>
+    private static Task<FixResult> ApplyDhcpRenewAsync(
+        FixContext context,
+        bool activeOnly,
+        bool includeFlushAndRegister,
+        CancellationToken ct)
+    {
+        var scope = activeOnly ? "$true" : "$false";
+        var flush = includeFlushAndRegister ? "$true" : "$false";
+        var script =
+            "$ErrorActionPreference='Continue'; " +
+            "$activeOnly=" + scope + "; $includeFlush=" + flush + "; " +
+            "$ipconfig=Join-Path $env:windir 'System32\\ipconfig.exe'; " +
+            "function Ensure-Svc([string]$n,[string]$start='Manual'){ " +
+            "  try{ $s=Get-Service -Name $n -ErrorAction Stop; " +
+            "    if($s.StartType -eq 'Disabled'){ Set-Service -Name $n -StartupType $start -ErrorAction SilentlyContinue }; " +
+            "    if($s.Status -ne 'Running'){ Start-Service -Name $n -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2 } " +
+            "  }catch{} " +
+            "}; " +
+            "Ensure-Svc 'Dhcp' 'Automatic'; Ensure-Svc 'Dnscache' 'Automatic'; " +
+            "Ensure-Svc 'NlaSvc' 'Automatic'; Ensure-Svc 'netprofm' 'Manual'; Ensure-Svc 'WlanSvc' 'Manual'; " +
+            "if($includeFlush){ try{ & $ipconfig /flushdns | Out-Null }catch{} }; " +
+            "$names=@(); " +
+            "try{ " +
+            "  $ifaces=@(Get-NetIPInterface -AddressFamily IPv4 -ErrorAction SilentlyContinue | Where-Object { " +
+            "    $_.Dhcp -eq 'Enabled' -and (-not $activeOnly -or $_.ConnectionState -eq 'Connected') " +
+            "  }); " +
+            "  foreach($i in $ifaces){ " +
+            "    try{ $a=Get-NetAdapter -InterfaceIndex $i.InterfaceIndex -ErrorAction SilentlyContinue; " +
+            "      if($null -ne $a -and $a.Name -and [string]$a.Status -ne 'Disabled'){ $names += [string]$a.Name } " +
+            "    }catch{} " +
+            "  } " +
+            "}catch{}; " +
+            "$names=@($names | Select-Object -Unique); " +
+            "if($names.Count -eq 0){ " +
+            "  try{ & $ipconfig /release | Out-Null }catch{}; Start-Sleep -Seconds 2; " +
+            "  try{ & $ipconfig /renew | Out-Null }catch{}; Start-Sleep -Seconds 3; " +
+            "} else { " +
+            "  foreach($name in $names){ " +
+            "    # Never abort after release: always renew the same adapter. " +
+            "    try{ & $ipconfig /release $name | Out-Null }catch{}; " +
+            "    Start-Sleep -Seconds 2; " +
+            "    try{ & $ipconfig /renew $name | Out-Null }catch{}; " +
+            "    Start-Sleep -Seconds 2; " +
+            "  }; " +
+            "  # Safety net: global renew covers any adapter the per-name loop missed. " +
+            "  try{ & $ipconfig /renew | Out-Null }catch{}; Start-Sleep -Seconds 2; " +
+            "}; " +
+            "if($includeFlush){ try{ & $ipconfig /registerdns | Out-Null }catch{}; try{ & $ipconfig /flushdns | Out-Null }catch{} }; " +
+            "exit 0";
+
+        return ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep(
+                "powershell.exe",
+                ["-NoProfile", "-NonInteractive", "-Command", script],
+                TimeSpan.FromMinutes(8))
+        ], ct);
+    }
+
+    private static Task<FixResult> ApplyNetworkProfileRepairAsync(
+        FixContext context,
+        bool activeOnly,
+        CancellationToken ct)
+    {
+        var scope = activeOnly ? "$true" : "$false";
+        var script =
+            "$ErrorActionPreference='Continue'; $activeOnly=" + scope + "; " +
+            "$ipconfig=Join-Path $env:windir 'System32\\ipconfig.exe'; " +
+            "function Ensure-Svc([string]$n,[string]$start='Manual'){ " +
+            "  try{ $s=Get-Service -Name $n -ErrorAction Stop; " +
+            "    if($s.StartType -eq 'Disabled'){ Set-Service -Name $n -StartupType $start -ErrorAction SilentlyContinue }; " +
+            "    if($s.Status -ne 'Running'){ Start-Service -Name $n -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1 } " +
+            "  }catch{} " +
+            "}; " +
+            "Ensure-Svc 'Dhcp' 'Automatic'; Ensure-Svc 'Dnscache' 'Automatic'; Ensure-Svc 'NlaSvc' 'Automatic'; " +
+            "Ensure-Svc 'netprofm' 'Manual'; Ensure-Svc 'WlanSvc' 'Manual'; Ensure-Svc 'WinHttpAutoProxySvc' 'Manual'; " +
+            "$profiles=@(); " +
+            "try{ $profiles=@(Get-NetConnectionProfile -ErrorAction SilentlyContinue) }catch{}; " +
+            "if($activeOnly){ $profiles=@($profiles | Where-Object { " +
+            "  [string]$_.IPv4Connectivity -ne 'Disconnected' -or [string]$_.IPv6Connectivity -ne 'Disconnected' }) }; " +
+            "$cats=New-Object 'System.Collections.Generic.HashSet[string]'; " +
+            "foreach($p in $profiles){ " +
+            "  try{ [void]$cats.Add([string]$p.NetworkCategory) }catch{}; " +
+            "  $idx=[int]$p.InterfaceIndex; $alias=[string]$p.InterfaceAlias; " +
+            "  try{ Set-NetIPInterface -InterfaceIndex $idx -AddressFamily IPv4 -Dhcp Enabled -ErrorAction SilentlyContinue }catch{}; " +
+            "  try{ Set-DnsClientServerAddress -InterfaceIndex $idx -ResetServerAddresses -ErrorAction SilentlyContinue }catch{}; " +
+            "  if(-not [string]::IsNullOrWhiteSpace($alias)){ " +
+            "    try{ & $ipconfig /release $alias | Out-Null }catch{}; Start-Sleep -Seconds 2; " +
+            "    try{ & $ipconfig /renew $alias | Out-Null }catch{}; Start-Sleep -Seconds 2; " +
+            "  } " +
+            "}; " +
+            "if(-not $activeOnly -or $profiles.Count -eq 0){ " +
+            "  try{ & $ipconfig /renew | Out-Null }catch{}; " +
+            "}; " +
+            "$firewallTargets=@(); " +
+            "if(-not $activeOnly){ $firewallTargets=@('Domain','Private','Public') } " +
+            "else { " +
+            "  foreach($c in $cats){ " +
+            "    if($c -eq 'DomainAuthenticated' -or $c -eq 'Domain'){ $firewallTargets += 'Domain' } " +
+            "    elseif($c -eq 'Private'){ $firewallTargets += 'Private' } " +
+            "    elseif($c -eq 'Public'){ $firewallTargets += 'Public' } " +
+            "  } " +
+            "}; " +
+            "foreach($fp in @($firewallTargets | Select-Object -Unique)){ " +
+            "  try{ Set-NetFirewallProfile -Profile $fp -Enabled True -ErrorAction SilentlyContinue }catch{} " +
+            "}; " +
+            "try{ & $ipconfig /registerdns | Out-Null }catch{}; " +
+            "exit 0";
+
+        return ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep(
+                "powershell.exe",
+                ["-NoProfile", "-NonInteractive", "-Command", script],
+                TimeSpan.FromMinutes(8))
+        ], ct);
+    }
 
     private static DelegateFixAction CreateCycleAdaptersFix() => new(
         "net.cycle-adapters", "Fix_Network_CycleAdapters", ModuleId, RiskTier.Safe,
@@ -755,8 +919,29 @@ public sealed class NetworkModule : IModuleDefinition
         "net.restart-services", "Fix_Network_RestartServices", ModuleId, RiskTier.Safe,
         (context, ct) => context.Backups.CaptureServicesAsync(NetworkServices, ModuleHelpers.BackupDirectory(context), ct),
         (context, ct) => ModuleHelpers.RunSequenceAsync(context,
-            NetworkServices.Where(name => !name.Equals("WinHttpAutoProxySvc", StringComparison.OrdinalIgnoreCase))
-                .Select(name => new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", $"$service=Get-CimInstance Win32_Service -Filter \"Name='{name}'\" -ErrorAction Stop; if($service.StartMode -eq 'Disabled'){{Set-Service -Name '{name}' -StartupType Manual}}; if((Get-Service -Name '{name}' -ErrorAction Stop).Status -ne 'Running'){{Start-Service -Name '{name}' -ErrorAction Stop}}"], TimeSpan.FromMinutes(2))), ct),
+        [
+            new CommandStep(
+                "powershell.exe",
+                [
+                    "-NoProfile", "-NonInteractive", "-Command",
+                    "$ErrorActionPreference='Continue'; " +
+                    "$map=@{" +
+                    "  'Dnscache'='Automatic'; 'Dhcp'='Automatic'; 'NlaSvc'='Automatic'; " +
+                    "  'netprofm'='Manual'; 'WlanSvc'='Manual'; 'WinHttpAutoProxySvc'='Manual' " +
+                    "}; " +
+                    "foreach($n in $map.Keys){ " +
+                    "  try{ " +
+                    "    $svc=Get-Service -Name $n -ErrorAction Stop; " +
+                    "    if($svc.StartType -eq 'Disabled'){ Set-Service -Name $n -StartupType $map[$n] -ErrorAction SilentlyContinue }; " +
+                    "    # Full restart when already running — recovers hung DHCP/DNS/NLA clients. " +
+                    "    if($svc.Status -eq 'Running'){ Restart-Service -Name $n -Force -ErrorAction SilentlyContinue } " +
+                    "    else { Start-Service -Name $n -ErrorAction SilentlyContinue }; " +
+                    "    Start-Sleep -Milliseconds 400 " +
+                    "  }catch{} " +
+                    "}; exit 0"
+                ],
+                TimeSpan.FromMinutes(4))
+        ], ct),
         async (context, ct) =>
         {
             var root = await context.Commands.RunPsJsonAsync<JsonElement>("Get-Service Dnscache,Dhcp,NlaSvc,netprofm | Select-Object Name,Status", ct).ConfigureAwait(false);
@@ -795,8 +980,14 @@ public sealed class NetworkModule : IModuleDefinition
             [new CommandStep("netsh.exe", ["interface", "tcp", "set", "global", "autotuninglevel=normal"]), new CommandStep("netsh.exe", ["interface", "tcp", "set", "global", "rss=enabled"]), new CommandStep("netsh.exe", ["interface", "tcp", "set", "heuristics", "disabled"])], ct),
         async (context, ct) =>
         {
-            var result = await context.Commands.RunAsync("netsh.exe", ["interface", "tcp", "show", "global"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false);
-            return result.Success && (result.StdOut.Contains("normal", StringComparison.OrdinalIgnoreCase) || result.StdOut.Contains("enabled", StringComparison.OrdinalIgnoreCase));
+            var result = await context.Commands.RunAsync(
+                "netsh.exe",
+                ["interface", "tcp", "show", "global"],
+                TimeSpan.FromMinutes(1),
+                ct).ConfigureAwait(false);
+            // Require Auto-Tuning Level = normal (not bare "enabled"/"normal" anywhere).
+            return result.Success &&
+                   SystemCommandResultParsers.IsTcpAutotuningNormal(result.StdOut, result.StdErr);
         });
 
     private static DelegateFixAction CreateDisablePowerSavingFix() => new(

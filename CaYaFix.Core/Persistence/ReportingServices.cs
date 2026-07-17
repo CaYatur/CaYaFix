@@ -112,9 +112,20 @@ public sealed class SupportPackageService
         _logsRoot = Path.Combine(root, "Logs");
     }
 
+    public Task<string> CreateAsync(
+        SessionManifest session,
+        string? reportPath,
+        CancellationToken ct) =>
+        CreateAsync(session, reportPath, destinationZipPath: null, ct);
+
+    /// <param name="destinationZipPath">
+    /// Optional user-chosen final .zip path. The archive is always built inside the trusted
+    /// session directory first, then copied to this location when provided.
+    /// </param>
     public async Task<string> CreateAsync(
         SessionManifest session,
         string? reportPath,
+        string? destinationZipPath,
         CancellationToken ct)
     {
         var sessionDirectory = ValidateSessionDirectory(session);
@@ -179,11 +190,91 @@ public sealed class SupportPackageService
             }
             if (File.Exists(zip)) File.Delete(zip);
             ZipFile.CreateFromDirectory(staging, zip, CompressionLevel.Optimal, false);
-            return zip;
+
+            if (string.IsNullOrWhiteSpace(destinationZipPath))
+            {
+                return zip;
+            }
+
+            return await CopyZipToUserDestinationAsync(zip, destinationZipPath, ct).ConfigureAwait(false);
         }
         finally
         {
             TryDeleteOwnedDirectory(staging);
+        }
+    }
+
+    private static async Task<string> CopyZipToUserDestinationAsync(
+        string sourceZip,
+        string destinationZipPath,
+        CancellationToken ct)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(sourceZip);
+        ArgumentException.ThrowIfNullOrWhiteSpace(destinationZipPath);
+        ct.ThrowIfCancellationRequested();
+
+        var destination = Path.GetFullPath(destinationZipPath.Trim());
+        if (destination.IndexOf('\0') >= 0 ||
+            destination.Length > 320 ||
+            !destination.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException("The support package destination must be a .zip file path.");
+        }
+
+        var parent = Path.GetDirectoryName(destination);
+        if (string.IsNullOrWhiteSpace(parent))
+        {
+            throw new InvalidOperationException("The support package destination folder is invalid.");
+        }
+
+        Directory.CreateDirectory(parent);
+        if (HasReparsePoint(parent) ||
+            (File.Exists(destination) && File.GetAttributes(destination).HasFlag(FileAttributes.ReparsePoint)))
+        {
+            throw new InvalidOperationException("The support package destination cannot be a reparse point.");
+        }
+
+        // Prefer copy+replace so a partial write does not leave a half-written user archive.
+        var temp = Path.Combine(parent, $".CaYaFix-Support-{Guid.NewGuid():N}.partial.zip");
+        try
+        {
+            await using (var input = new FileStream(
+                             sourceZip,
+                             FileMode.Open,
+                             FileAccess.Read,
+                             FileShare.Read,
+                             64 * 1024,
+                             FileOptions.Asynchronous | FileOptions.SequentialScan))
+            await using (var output = new FileStream(
+                             temp,
+                             FileMode.CreateNew,
+                             FileAccess.Write,
+                             FileShare.None,
+                             64 * 1024,
+                             FileOptions.Asynchronous | FileOptions.SequentialScan))
+            {
+                await input.CopyToAsync(output, ct).ConfigureAwait(false);
+                await output.FlushAsync(ct).ConfigureAwait(false);
+            }
+
+            if (File.Exists(destination))
+            {
+                File.Delete(destination);
+            }
+
+            File.Move(temp, destination);
+            return destination;
+        }
+        finally
+        {
+            try
+            {
+                if (File.Exists(temp)) File.Delete(temp);
+            }
+            catch
+            {
+                // Best-effort cleanup of the temporary copy.
+            }
         }
     }
 

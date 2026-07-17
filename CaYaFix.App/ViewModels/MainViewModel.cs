@@ -16,6 +16,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CaYaFix.Core;
 using CaYaFix.App.Properties;
+using Microsoft.Win32;
 
 namespace CaYaFix.App.ViewModels;
 
@@ -1660,10 +1661,42 @@ public sealed partial class MainViewModel : ObservableObject
             MessageBoxImage.Warning);
         if (consent != MessageBoxResult.Yes) return;
 
+        // Let the user choose where the finished zip is saved (Desktop/Documents/etc.).
+        var saveDialog = new SaveFileDialog
+        {
+            Title = _text.Get("Dialog_SupportPackage_SaveTitle"),
+            Filter = _text.Get("Dialog_SupportPackage_SaveFilter"),
+            DefaultExt = ".zip",
+            AddExtension = true,
+            OverwritePrompt = true,
+            CheckPathExists = true,
+            FileName = $"CaYaFix-Support-{_currentSession.Id}.zip",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+        };
+        if (string.IsNullOrWhiteSpace(saveDialog.InitialDirectory) || !Directory.Exists(saveDialog.InitialDirectory))
+        {
+            saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
+
+        if (saveDialog.ShowDialog() != true || string.IsNullOrWhiteSpace(saveDialog.FileName))
+        {
+            return;
+        }
+
+        var destination = saveDialog.FileName.Trim();
+        if (!destination.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+        {
+            destination += ".zip";
+        }
+
         BeginOperation(_text.Get("Action_CreateSupportPackage"));
         try
         {
-            var zip = await _support.CreateAsync(_currentSession, ReportPath, _operationCts!.Token).ConfigureAwait(true);
+            var zip = await _support.CreateAsync(
+                _currentSession,
+                ReportPath,
+                destination,
+                _operationCts!.Token).ConfigureAwait(true);
             StatusText = _text.Get("Status_SupportCreated", zip);
             OpenPath(zip);
         }

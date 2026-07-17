@@ -88,7 +88,50 @@ public sealed class WindowsUpdateModule : WindowsModuleBase
             (context, ct) => ModuleHelpers.RunSequenceAsync(context,
                 [new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", ResetUpdateCacheScript()], TimeSpan.FromMinutes(10))], ct),
             async (context, ct) => Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SoftwareDistribution")) &&
-                                   await VerifyUpdateServicesAsync(context, ct).ConfigureAwait(false))
+                                   await VerifyUpdateServicesAsync(context, ct).ConfigureAwait(false)),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "update.restart-bits", "Fix_Update_RestartBits", Id,
+            ["BITS", "wuauserv"], "BITS"),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "update.restart-cryptsvc", "Fix_Update_RestartCryptSvc", Id,
+            ["cryptsvc", "BITS", "wuauserv"], "cryptsvc"),
+        // USO / Update Orchestrator participates in modern Windows Update.
+        ExpandedRepairHelpers.RestartNamedServices(
+            "update.restart-uso", "Fix_Update_RestartUso", Id,
+            ["UsoSvc", "wuauserv", "BITS"], "wuauserv"),
+        ExpandedRepairHelpers.TransientCommand(
+            "update.clean-download",
+            "Fix_Update_CleanDownload",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "Stop-Service wuauserv,BITS -Force -ErrorAction SilentlyContinue; " +
+                        "$dl=Join-Path $env:windir 'SoftwareDistribution\\Download'; " +
+                        "if(Test-Path -LiteralPath $dl){ Get-ChildItem -LiteralPath $dl -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }; " +
+                        "Start-Service cryptsvc,BITS,wuauserv -ErrorAction SilentlyContinue; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(8))
+            ],
+            VerifyUpdateServicesAsync),
+        ExpandedRepairHelpers.TransientCommand(
+            "update.sc-defaults",
+            "Fix_Update_ScDefaults",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("sc.exe", ["config", "BITS", "start=", "demand"]),
+                new CommandStep("sc.exe", ["config", "wuauserv", "start=", "demand"]),
+                new CommandStep("sc.exe", ["config", "cryptsvc", "start=", "auto"]),
+                new CommandStep("sc.exe", ["start", "cryptsvc"]) { AcceptedExitCodes = new HashSet<int> { 0, 1056 } },
+                new CommandStep("sc.exe", ["start", "BITS"]) { AcceptedExitCodes = new HashSet<int> { 0, 1056 } },
+                new CommandStep("sc.exe", ["start", "wuauserv"]) { AcceptedExitCodes = new HashSet<int> { 0, 1056 } }
+            ],
+            VerifyUpdateServicesAsync)
     ];
 
     private static async Task<BackupEntry?> BackupUpdateCacheAsync(FixContext context, CancellationToken ct)
@@ -273,6 +316,73 @@ public sealed class PrinterModule : WindowsModuleBase
                     "Get-Printer -ErrorAction SilentlyContinue | Where-Object WorkOffline | Select-Object Name", ct).ConfigureAwait(false);
                 return !ModuleHelpers.Array(root).Any();
             }),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "printer.restart-print-pipeline", "Fix_Printer_RestartPrintPipeline", Id,
+            ["Spooler", "PrintNotify", "PrintWorkflowUserSvc"], "Spooler"),
+        ExpandedRepairHelpers.TransientCommand(
+            "printer.purge-spool",
+            "Fix_Printer_PurgeSpool",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; Stop-Service Spooler -Force -ErrorAction SilentlyContinue; " +
+                        "$q=Join-Path $env:windir 'System32\\spool\\PRINTERS'; " +
+                        "if(Test-Path -LiteralPath $q){ Get-ChildItem -LiteralPath $q -File -Force -EA SilentlyContinue | Remove-Item -Force -EA SilentlyContinue }; " +
+                        "Start-Service Spooler -ErrorAction SilentlyContinue; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(5))
+            ],
+            (context, ct) => ModuleHelpers.IsServiceRunningAsync(context, "Spooler", ct)),
+        ExpandedRepairHelpers.TransientCommand(
+            "printer.cancel-error-jobs",
+            "Fix_Printer_CancelErrorJobs",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "Get-Printer -EA SilentlyContinue | ForEach-Object { " +
+                        "  Get-PrintJob -PrinterName $_.Name -EA SilentlyContinue | " +
+                        "  Where-Object { [string]$_.JobStatus -match 'Error|Blocked|Offline|PaperOut|UserIntervention' } | " +
+                        "  ForEach-Object { try{ Remove-PrintJob -PrinterName $_.PrinterName -ID $_.Id -EA SilentlyContinue }catch{} } " +
+                        "}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(4))
+            ],
+            async (_, _) => await Task.FromResult(true)),
+        ExpandedRepairHelpers.TransientCommand(
+            "printer.sc-auto-spooler",
+            "Fix_Printer_ScAutoSpooler",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("sc.exe", ["config", "Spooler", "start=", "auto"]),
+                new CommandStep("sc.exe", ["start", "Spooler"]) { AcceptedExitCodes = new HashSet<int> { 0, 1056 } }
+            ],
+            (context, ct) => ModuleHelpers.IsServiceRunningAsync(context, "Spooler", ct)),
+        ExpandedRepairHelpers.TransientCommand(
+            "printer.test-spool-folder",
+            "Fix_Printer_EnsureSpoolFolder",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Stop'; $q=Join-Path $env:windir 'System32\\spool\\PRINTERS'; " +
+                        "if(-not (Test-Path -LiteralPath $q)){ New-Item -ItemType Directory -Path $q -Force | Out-Null }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(2))
+            ],
+            async (_, _) => await Task.FromResult(true)),
         new DelegateFixAction("printer.set-default", "Fix_Printer_SetDefault", Id, RiskTier.Safe,
             (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "printer-default", ct),
             (context, ct) =>
@@ -352,7 +462,9 @@ public sealed class BluetoothModule : WindowsModuleBase
     public BluetoothModule() : base(
         new ModuleInfo(Id, "Module_Bluetooth_Name", "Module_Bluetooth_Description", "bluetooth.svg", 4),
         CreateChecks(), CreateFixes(),
-        [new Playbook("bluetooth.connect", Id, "Symptom_Bluetooth_Connect", ["bluetooth.service", "bluetooth.devices"], ["bluetooth.restart-service", "bluetooth.restart-device"])])
+        [new Playbook("bluetooth.connect", Id, "Symptom_Bluetooth_Connect",
+            ["bluetooth.service", "bluetooth.devices"],
+            ["bluetooth.restart-service", "bluetooth.restart-stack", "bluetooth.scan-devices", "bluetooth.enable-adapters", "bluetooth.restart-radios", "bluetooth.restart-device"])])
     {
     }
 
@@ -365,7 +477,8 @@ public sealed class BluetoothModule : WindowsModuleBase
             var unhealthy = rows.Length != 1 || rows.Any(row =>
                 string.Equals(ModuleHelpers.GetString(row, "StartMode"), "Disabled", StringComparison.OrdinalIgnoreCase));
             return unhealthy
-                ? ModuleHelpers.Finding("bluetooth.service", Id, Severity.Warning, "Finding_Bluetooth_ServiceDisabled", Join(rows), "bluetooth.restart-service")
+                ? ModuleHelpers.Finding("bluetooth.service", Id, Severity.Warning, "Finding_Bluetooth_ServiceDisabled", Join(rows),
+                    "bluetooth.restart-service", "bluetooth.restart-stack")
                 : null;
         }),
         new DelegateDiagnosticCheck("bluetooth.devices", "Check_Bluetooth_Devices", Id, async (context, ct) =>
@@ -373,7 +486,8 @@ public sealed class BluetoothModule : WindowsModuleBase
             var root = await context.Commands.RunPsJsonAsync<JsonElement>("Get-CimInstance Win32_PnPEntity | Where-Object {$_.PNPClass -eq 'Bluetooth' -and $_.ConfigManagerErrorCode -ne 0} | Select-Object Name,DeviceID,ConfigManagerErrorCode", ct).ConfigureAwait(false);
             var rows = ModuleHelpers.Array(root).ToArray();
             if (rows.Length == 0) return null;
-            var finding = ModuleHelpers.Finding("bluetooth.devices", Id, Severity.Warning, "Finding_Bluetooth_DeviceError", Join(rows), "bluetooth.restart-device");
+            var finding = ModuleHelpers.Finding("bluetooth.devices", Id, Severity.Warning, "Finding_Bluetooth_DeviceError", Join(rows),
+                "bluetooth.scan-devices", "bluetooth.enable-adapters", "bluetooth.restart-device", "bluetooth.restart-radios");
             var target = ModuleHelpers.GetString(rows[0], "DeviceID");
             if (!string.IsNullOrWhiteSpace(target)) finding.RepairParameters["bluetooth.restart-device.target"] = target;
             return finding;
@@ -387,6 +501,37 @@ public sealed class BluetoothModule : WindowsModuleBase
             (context, ct) => ModuleHelpers.RunSequenceAsync(context,
                 [new CommandStep("powershell.exe", ["-NoProfile", "-Command", "Set-Service bthserv -StartupType Manual; Start-Service bthserv -ErrorAction Stop"])], ct),
             async (context, ct) => (await context.Commands.RunAsync("sc.exe", ["query", "bthserv"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).Success),
+        // Support services used by classic Bluetooth audio / AVRCP stacks.
+        ExpandedRepairHelpers.RestartNamedServices(
+            "bluetooth.restart-stack", "Fix_Bluetooth_RestartStack", Id,
+            ["bthserv", "BthAvctpSvc", "BTAGService", "DeviceAssociationService"], "bthserv"),
+        ExpandedRepairHelpers.PnpScanDevices("bluetooth.scan-devices", "Fix_Bluetooth_ScanDevices", Id),
+        ExpandedRepairHelpers.EnableDisabledPnp(
+            "bluetooth.enable-adapters", "Fix_Bluetooth_EnableAdapters", Id,
+            "$_.Class -eq 'Bluetooth' -or $_.PNPClass -eq 'Bluetooth'", "Bluetooth|Radio"),
+        ExpandedRepairHelpers.RestartPnpByClass(
+            "bluetooth.restart-radios", "Fix_Bluetooth_RestartRadios", Id, "Bluetooth", maxDevices: 6),
+        ExpandedRepairHelpers.TransientCommand(
+            "bluetooth.start-support-services",
+            "Fix_Bluetooth_StartSupportServices",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "foreach($n in @('bthserv','BthAvctpSvc','BTAGService','DeviceAssociationService','RpcEptMapper')){ " +
+                        "  try{ $s=Get-Service $n -ErrorAction Stop; if($s.StartType -eq 'Disabled'){ Set-Service $n -StartupType Manual }; " +
+                        "    if($s.Status -ne 'Running'){ Start-Service $n -ErrorAction SilentlyContinue } }catch{} " +
+                        "}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(3))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("sc.exe", ["query", "bthserv"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success),
         new DelegateFixAction("bluetooth.restart-device", "Fix_Bluetooth_RestartDevice", Id, RiskTier.Moderate,
             (context, ct) => ModuleHelpers.CapturePnpDeviceStateAsync(context, "bluetooth-device", "bluetooth.restart-device.target", ct),
             (context, ct) => ModuleHelpers.RunSequenceAsync(context,
@@ -461,19 +606,13 @@ public sealed class DiskStorageModule : WindowsModuleBase
                 TimeSpan.FromMinutes(20),
                 ct).ConfigureAwait(false);
             var output = (result.StdOut + Environment.NewLine + result.StdErr).Trim();
-            var clean =
-                result.ExitCode == 0 &&
-                (output.Contains("no problems", StringComparison.OrdinalIgnoreCase) ||
-                 output.Contains("found no", StringComparison.OrdinalIgnoreCase) ||
-                 output.Contains("sorun bulunamadı", StringComparison.OrdinalIgnoreCase) ||
-                 output.Contains("bulunamadı", StringComparison.OrdinalIgnoreCase) ||
-                 string.IsNullOrWhiteSpace(output));
-            if (clean)
+            // Microsoft online /scan: exit 0 without problem language is clean. Do not treat
+            // generic TR "bulunamadı" alone as healthy — that substring is too broad.
+            if (SystemCommandResultParsers.IsChkdskOnlineScanClean(result.StdOut, result.StdErr, result.ExitCode))
             {
                 return null;
             }
 
-            // Non-zero or problem text → recommend online spotfix and/or offline schedule.
             return ModuleHelpers.Finding(
                 "disk.online-scan",
                 Id,
@@ -527,7 +666,10 @@ public sealed class DiskStorageModule : WindowsModuleBase
                     [letter, "/scan"],
                     TimeSpan.FromMinutes(20),
                     ct).ConfigureAwait(false);
-                return result.ExitCode == 0;
+                return SystemCommandResultParsers.IsChkdskOnlineScanClean(
+                    result.StdOut,
+                    result.StdErr,
+                    result.ExitCode);
             }),
         new DelegateFixAction("disk.clean-temp", "Fix_Disk_CleanTemp", Id, RiskTier.Safe,
             BackupTempFilesAsync,
@@ -542,7 +684,95 @@ public sealed class DiskStorageModule : WindowsModuleBase
                 var result = await context.Commands.RunAsync("chkntfs.exe", [SystemVolume()], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false);
                 return result.Success && !string.IsNullOrWhiteSpace(result.StdOut);
             },
-            requiresReboot: true)
+            requiresReboot: true),
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.clean-windows-temp",
+            "Fix_Disk_CleanWindowsTemp",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; $w=Join-Path $env:windir 'Temp'; " +
+                        "if(Test-Path -LiteralPath $w){ Get-ChildItem -LiteralPath $w -Force -ErrorAction SilentlyContinue | " +
+                        "  Where-Object { $_.LastWriteTimeUtc -lt (Get-Date).ToUniversalTime().AddHours(-24) } | " +
+                        "  Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(8))
+            ],
+            async (_, _) => await Task.FromResult(true)),
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.clean-user-temp",
+            "Fix_Disk_CleanUserTemp",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; $t=[IO.Path]::GetTempPath().TrimEnd('\\'); " +
+                        "if(Test-Path -LiteralPath $t){ Get-ChildItem -LiteralPath $t -Force -ErrorAction SilentlyContinue | " +
+                        "  Where-Object { $_.LastWriteTimeUtc -lt (Get-Date).ToUniversalTime().AddHours(-24) } | " +
+                        "  Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(8))
+            ],
+            async (_, _) => await Task.FromResult(true)),
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.flush-volume",
+            "Fix_Disk_FlushVolume",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "try{ Write-VolumeCache -DriveLetter ((Get-Item $env:SystemRoot).PSDrive.Name) -ErrorAction Stop }catch{}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(2))
+            ],
+            async (_, _) => await Task.FromResult(true)),
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.spotfix-only",
+            "Fix_Disk_SpotFixOnly",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "chkdsk.exe",
+                    [SystemVolume(), "/spotfix"],
+                    TimeSpan.FromMinutes(30))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1, 2, 3 }
+                }
+            ],
+            async (context, ct) =>
+            {
+                var result = await context.Commands.RunAsync(
+                    "chkdsk.exe", [SystemVolume(), "/scan"], TimeSpan.FromMinutes(20), ct).ConfigureAwait(false);
+                return SystemCommandResultParsers.IsChkdskOnlineScanClean(result.StdOut, result.StdErr, result.ExitCode);
+            }),
+        ExpandedRepairHelpers.TransientCommand(
+            "disk.fsutil-dirty-query",
+            "Fix_Disk_ClearVolumeHints",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("fsutil.exe", ["volume", "diskfree", SystemVolume()])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                },
+                new CommandStep("fsutil.exe", ["dirty", "query", SystemVolume()])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (_, _) => await Task.FromResult(true))
     ];
 
     private static string SystemVolume()
@@ -718,7 +948,13 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                 Id,
                 "Symptom_Integrity_Corrupt",
                 ["integrity.component-store", "integrity.scan-health", "integrity.analyze-store"],
-                ["integrity.sfc-scan", "integrity.dism-restore", "integrity.dism-sfc", "integrity.component-cleanup"])
+                ["integrity.dism-restore", "integrity.sfc-scan", "integrity.dism-sfc"]),
+            new Playbook(
+                "integrity.cleanup",
+                Id,
+                "Symptom_Integrity_Cleanup",
+                ["integrity.analyze-store"],
+                ["integrity.component-cleanup"])
         ])
     {
     }
@@ -727,18 +963,16 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
     [
         new DelegateDiagnosticCheck("integrity.component-store", "Check_Integrity_ComponentStore", Id, async (context, ct) =>
         {
-            var result = await context.Commands.RunAsync("dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"], TimeSpan.FromMinutes(5), ct).ConfigureAwait(false);
-            return !result.Success || result.StdOut.Contains("repairable", StringComparison.OrdinalIgnoreCase)
-                ? ModuleHelpers.Finding(
-                    "integrity.component-store",
-                    Id,
-                    Severity.Warning,
-                    "Finding_Integrity_Repairable",
-                    result.StdOut + result.StdErr,
-                    "integrity.dism-restore",
-                    "integrity.sfc-scan",
-                    "integrity.dism-sfc")
-                : null;
+            // Microsoft: CheckHealth is a fast flag check (not a deep scan).
+            var result = await context.Commands.RunAsync(
+                "dism.exe",
+                ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                TimeSpan.FromMinutes(5),
+                ct).ConfigureAwait(false);
+            return CreateHealthFinding(
+                "integrity.component-store",
+                result,
+                defaultMessageKey: "Finding_Integrity_Repairable");
         }),
         new DelegateDiagnosticCheck(
             "integrity.scan-health",
@@ -746,29 +980,17 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
             Id,
             async (context, ct) =>
             {
-                // Deeper than CheckHealth; can take several minutes.
+                // Microsoft: ScanHealth walks the component store (can take many minutes).
+                // A successful "No component store corruption detected" must never raise a finding.
                 var result = await context.Commands.RunAsync(
                     "dism.exe",
                     ["/Online", "/Cleanup-Image", "/ScanHealth", "/English"],
                     TimeSpan.FromMinutes(30),
                     ct).ConfigureAwait(false);
-                var detail = result.StdOut + Environment.NewLine + result.StdErr;
-                var needsRepair = !result.Success ||
-                                  detail.Contains("repairable", StringComparison.OrdinalIgnoreCase) ||
-                                  detail.Contains("The component store is repairable", StringComparison.OrdinalIgnoreCase) ||
-                                  detail.Contains("Corruption", StringComparison.OrdinalIgnoreCase);
-                return needsRepair
-                    ? ModuleHelpers.Finding(
-                        "integrity.scan-health",
-                        Id,
-                        Severity.Warning,
-                        "Finding_Integrity_ScanHealthFailed",
-                        detail,
-                        "integrity.dism-restore",
-                        "integrity.sfc-scan",
-                        "integrity.dism-sfc",
-                        "integrity.component-cleanup")
-                    : null;
+                return CreateHealthFinding(
+                    "integrity.scan-health",
+                    result,
+                    defaultMessageKey: "Finding_Integrity_ScanHealthFailed");
             },
             quick: false,
             supportsPostRepairVerification: false),
@@ -778,30 +1000,82 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
             Id,
             async (context, ct) =>
             {
-                // Microsoft: AnalyzeComponentStore reports reclaimable packages / cleanup recommendation.
+                // Microsoft: AnalyzeComponentStore is size/cleanup analysis — not corruption.
+                // "Cleanup Recommended : Yes" → StartComponentCleanup only (not RestoreHealth).
                 var result = await context.Commands.RunAsync(
                     "dism.exe",
                     ["/Online", "/Cleanup-Image", "/AnalyzeComponentStore", "/English"],
                     TimeSpan.FromMinutes(20),
                     ct).ConfigureAwait(false);
-                var detail = result.StdOut + Environment.NewLine + result.StdErr;
-                var recommendsCleanup =
-                    detail.Contains("Component Store Cleanup Recommended : Yes", StringComparison.OrdinalIgnoreCase) ||
-                    detail.Contains("Cleanup Recommended : Yes", StringComparison.OrdinalIgnoreCase) ||
-                    detail.Contains("reclaimable", StringComparison.OrdinalIgnoreCase);
-                return recommendsCleanup
-                    ? ModuleHelpers.Finding(
-                        "integrity.analyze-store",
-                        Id,
-                        Severity.Info,
-                        "Finding_Integrity_CleanupRecommended",
-                        detail,
-                        "integrity.component-cleanup")
-                    : null;
+                var detail = BuildDismDetail(result);
+                if (!DismHealthParser.IsCleanupRecommended(result.StdOut, result.StdErr))
+                {
+                    return null;
+                }
+
+                var reclaimable = DismHealthParser.TryParseReclaimablePackages(result.StdOut, result.StdErr);
+                var summary = reclaimable is int count
+                    ? $"Component Store Cleanup Recommended : Yes{Environment.NewLine}Reclaimable packages: {count}{Environment.NewLine}{Environment.NewLine}{detail}"
+                    : detail;
+                return ModuleHelpers.Finding(
+                    "integrity.analyze-store",
+                    Id,
+                    Severity.Info,
+                    "Finding_Integrity_CleanupRecommended",
+                    summary,
+                    "integrity.component-cleanup");
             },
             quick: false,
             supportsPostRepairVerification: false)
     ];
+
+    private static Finding? CreateHealthFinding(string checkId, CmdResult result, string defaultMessageKey)
+    {
+        var health = DismHealthParser.ParseHealthScan(
+            result.StdOut,
+            result.StdErr,
+            result.ExitCode,
+            result.TimedOut);
+        if (!DismHealthParser.NeedsCorruptionRepair(health))
+        {
+            return null;
+        }
+
+        var detail = BuildDismDetail(result);
+        var (messageKey, severity, fixes) = health switch
+        {
+            DismHealthParser.ComponentStoreHealth.NotRepairable => (
+                "Finding_Integrity_NotRepairable",
+                Severity.Critical,
+                new[] { "integrity.dism-sfc", "integrity.dism-restore", "integrity.sfc-scan" }),
+            DismHealthParser.ComponentStoreHealth.Repairable => (
+                defaultMessageKey,
+                Severity.Warning,
+                new[] { "integrity.dism-restore", "integrity.sfc-scan", "integrity.dism-sfc" }),
+            _ => (
+                "Finding_Integrity_DismFailed",
+                Severity.Warning,
+                new[] { "integrity.dism-restore", "integrity.sfc-scan" })
+        };
+
+        // Cleanup is a separate finding — do not attach component-cleanup to corruption results.
+        return ModuleHelpers.Finding(checkId, Id, severity, messageKey, detail, fixes);
+    }
+
+    private static string BuildDismDetail(CmdResult result)
+    {
+        var body = (result.StdOut + Environment.NewLine + result.StdErr).Trim();
+        return
+            $"DISM exit={result.ExitCode}; timedOut={result.TimedOut}; duration={result.Duration.TotalSeconds:0}s{Environment.NewLine}" +
+            body;
+    }
+
+    private static bool IsComponentStoreHealthy(CmdResult health) =>
+        DismHealthParser.ParseHealthScan(
+            health.StdOut,
+            health.StdErr,
+            health.ExitCode,
+            health.TimedOut) == DismHealthParser.ComponentStoreHealth.Healthy;
 
     private static IReadOnlyList<FixAction> CreateFixes() =>
     [
@@ -817,15 +1091,16 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                 ct),
             async (context, ct) =>
             {
-                // SFC does not always expose a clean machine-readable verify; treat successful run as applied.
                 var verify = await context.Commands.RunAsync(
                     "sfc.exe",
                     ["/verifyonly"],
                     TimeSpan.FromMinutes(45),
                     ct).ConfigureAwait(false);
-                return verify.ExitCode is 0 or 1 ||
-                       verify.StdOut.Contains("did not find any integrity violations", StringComparison.OrdinalIgnoreCase) ||
-                       verify.StdOut.Contains("bütünlük ihlali bulamadı", StringComparison.OrdinalIgnoreCase);
+                var outcome = SystemCommandResultParsers.ParseSfc(
+                    verify.StdOut,
+                    verify.StdErr,
+                    verify.ExitCode);
+                return SystemCommandResultParsers.IsSfcAcceptable(outcome);
             },
             requiresReboot: true),
         new DelegateFixAction(
@@ -850,8 +1125,7 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                     ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
                     TimeSpan.FromMinutes(10),
                     ct).ConfigureAwait(false);
-                return health.Success &&
-                       !health.StdOut.Contains("repairable", StringComparison.OrdinalIgnoreCase);
+                return IsComponentStoreHealthy(health);
             },
             requiresReboot: true),
         new DelegateFixAction(
@@ -870,11 +1144,15 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                 ],
                 ct),
             async (context, ct) =>
-                (await context.Commands.RunAsync(
+            {
+                // Cleanup success: command completed; re-analyze is slow — CheckHealth is enough safety.
+                var health = await context.Commands.RunAsync(
                     "dism.exe",
                     ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
                     TimeSpan.FromMinutes(10),
-                    ct).ConfigureAwait(false)).Success),
+                    ct).ConfigureAwait(false);
+                return health.Success || IsComponentStoreHealthy(health);
+            }),
         new DelegateFixAction(
             "integrity.dism-sfc",
             "Fix_Integrity_RepairChain",
@@ -895,10 +1173,99 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                     ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
                     TimeSpan.FromMinutes(10),
                     ct).ConfigureAwait(false);
-                return health.Success &&
-                       !health.StdOut.Contains("repairable", StringComparison.OrdinalIgnoreCase);
+                return IsComponentStoreHealthy(health);
             },
-            requiresReboot: true)
+            requiresReboot: true),
+        // Reverse order chain used when SFC is preferred first (MS community workflow variant).
+        new DelegateFixAction(
+            "integrity.sfc-dism",
+            "Fix_Integrity_SfcThenDism",
+            Id,
+            RiskTier.Aggressive,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "integrity-sfc-dism", ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+            [
+                new CommandStep("sfc.exe", ["/scannow"], TimeSpan.FromMinutes(45)),
+                new CommandStep("dism.exe", ["/Online", "/Cleanup-Image", "/RestoreHealth", "/English"], TimeSpan.FromMinutes(60))
+            ], ct),
+            async (context, ct) =>
+            {
+                var health = await context.Commands.RunAsync(
+                    "dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(10), ct).ConfigureAwait(false);
+                return IsComponentStoreHealthy(health);
+            },
+            requiresReboot: true),
+        // Microsoft: StartComponentCleanup /ResetBase reclaims superseded components (more aggressive).
+        new DelegateFixAction(
+            "integrity.component-cleanup-resetbase",
+            "Fix_Integrity_ComponentCleanupResetBase",
+            Id,
+            RiskTier.Aggressive,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "integrity-cleanup-resetbase", ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+            [
+                new CommandStep(
+                    "dism.exe",
+                    ["/Online", "/Cleanup-Image", "/StartComponentCleanup", "/ResetBase", "/English"],
+                    TimeSpan.FromMinutes(60))
+            ], ct),
+            async (context, ct) =>
+            {
+                var health = await context.Commands.RunAsync(
+                    "dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(10), ct).ConfigureAwait(false);
+                return health.Success || IsComponentStoreHealthy(health);
+            },
+            requiresReboot: true),
+        ExpandedRepairHelpers.TransientCommand(
+            "integrity.checkhealth-refresh",
+            "Fix_Integrity_CheckHealthRefresh",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"], TimeSpan.FromMinutes(5))
+            ],
+            async (context, ct) =>
+            {
+                var health = await context.Commands.RunAsync(
+                    "dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(5), ct).ConfigureAwait(false);
+                return IsComponentStoreHealthy(health) || health.Success;
+            }),
+        ExpandedRepairHelpers.TransientCommand(
+            "integrity.sfc-verifyonly",
+            "Fix_Integrity_SfcVerifyOnly",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("sfc.exe", ["/verifyonly"], TimeSpan.FromMinutes(45))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+            {
+                var verify = await context.Commands.RunAsync(
+                    "sfc.exe", ["/verifyonly"], TimeSpan.FromMinutes(45), ct).ConfigureAwait(false);
+                return SystemCommandResultParsers.IsSfcAcceptable(
+                    SystemCommandResultParsers.ParseSfc(verify.StdOut, verify.StdErr, verify.ExitCode));
+            }),
+        ExpandedRepairHelpers.TransientCommand(
+            "integrity.scanhealth-only",
+            "Fix_Integrity_ScanHealthOnly",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("dism.exe", ["/Online", "/Cleanup-Image", "/ScanHealth", "/English"], TimeSpan.FromMinutes(30))
+            ],
+            async (context, ct) =>
+            {
+                var health = await context.Commands.RunAsync(
+                    "dism.exe", ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(5), ct).ConfigureAwait(false);
+                return IsComponentStoreHealthy(health) || health.Success;
+            })
     ];
 }
 
@@ -909,7 +1276,14 @@ public sealed class StoreAppsModule : WindowsModuleBase
     public StoreAppsModule() : base(
         new ModuleInfo(Id, "Module_Store_Name", "Module_Store_Description", "store.svg", 7),
         CreateChecks(), CreateFixes(),
-        [new Playbook("store.not-open", Id, "Symptom_Store_NotOpen", ["store.package", "store.errors"], ["store.reset-cache"])])
+        [
+            new Playbook("store.not-open", Id, "Symptom_Store_NotOpen",
+                ["store.package", "store.errors"],
+                ["store.restart-services", "store.reset-cache", "store.clear-local-cache", "store.reset-appx-package", "store.register-manifest"]),
+            new Playbook("store.install-fail", Id, "Symptom_Store_InstallFail",
+                ["store.package", "store.errors"],
+                ["store.restart-services", "store.start-appx-services", "store.reset-cache", "store.clear-local-cache"])
+        ])
     {
     }
 
@@ -919,14 +1293,16 @@ public sealed class StoreAppsModule : WindowsModuleBase
         {
             var root = await context.Commands.RunPsJsonAsync<JsonElement>("Get-AppxPackage Microsoft.WindowsStore -AllUsers | Select-Object Name,PackageFullName,InstallLocation,Status", ct).ConfigureAwait(false);
             var rows = ModuleHelpers.Array(root).ToArray();
-            if (rows.Length == 0) return ModuleHelpers.Finding("store.package", Id, Severity.Warning, "Finding_Store_Missing", string.Empty);
+            if (rows.Length == 0) return ModuleHelpers.Finding("store.package", Id, Severity.Warning, "Finding_Store_Missing", string.Empty,
+                "store.register-manifest", "store.reset-cache", "store.restart-services");
             var unhealthy = rows.Where(row =>
             {
                 var status = ModuleHelpers.GetString(row, "Status");
                 return !string.IsNullOrWhiteSpace(status) && !status.Equals("Ok", StringComparison.OrdinalIgnoreCase);
             }).ToArray();
             return unhealthy.Length > 0
-                ? ModuleHelpers.Finding("store.package", Id, Severity.Warning, "Finding_Store_PackageUnhealthy", Join(unhealthy), "store.reset-cache")
+                ? ModuleHelpers.Finding("store.package", Id, Severity.Warning, "Finding_Store_PackageUnhealthy", Join(unhealthy),
+                    "store.reset-appx-package", "store.reset-cache", "store.restart-services")
                 : null;
         }),
         new DelegateDiagnosticCheck("store.errors", "Check_Store_Errors", Id, async (context, ct) =>
@@ -935,7 +1311,8 @@ public sealed class StoreAppsModule : WindowsModuleBase
             var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
             var rows = ModuleHelpers.Array(root).ToArray();
             return rows.Length > 0
-                ? ModuleHelpers.Finding("store.errors", Id, Severity.Warning, "Finding_Store_RecentErrors", Join(rows), "store.reset-cache")
+                ? ModuleHelpers.Finding("store.errors", Id, Severity.Warning, "Finding_Store_RecentErrors", Join(rows),
+                    "store.restart-services", "store.reset-cache", "store.clear-local-cache")
                 : null;
         }, supportsPostRepairVerification: false)
     ];
@@ -945,7 +1322,109 @@ public sealed class StoreAppsModule : WindowsModuleBase
         new DelegateFixAction("store.reset-cache", "Fix_Store_ResetCache", Id, RiskTier.Safe,
             BackupStoreCacheAsync,
             (context, ct) => ModuleHelpers.RunSequenceAsync(context, [new CommandStep("wsreset.exe", [], TimeSpan.FromMinutes(5))], ct),
-            async (context, ct) => (await context.Commands.RunAsync("powershell.exe", ["-NoProfile", "-Command", "if(Get-AppxPackage Microsoft.WindowsStore -AllUsers){exit 0}else{exit 1}"], TimeSpan.FromMinutes(2), ct).ConfigureAwait(false)).Success)
+            async (context, ct) => (await context.Commands.RunAsync("powershell.exe", ["-NoProfile", "-Command", "if(Get-AppxPackage Microsoft.WindowsStore -AllUsers){exit 0}else{exit 1}"], TimeSpan.FromMinutes(2), ct).ConfigureAwait(false)).Success),
+        // Microsoft Store depends on AppX deployment + licensing services.
+        ExpandedRepairHelpers.RestartNamedServices(
+            "store.restart-services", "Fix_Store_RestartServices", Id,
+            ["AppXSvc", "ClipSVC", "InstallService", "StateRepository", "TokenBroker"], "AppXSvc"),
+        ExpandedRepairHelpers.TransientCommand(
+            "store.start-appx-services",
+            "Fix_Store_StartAppxServices",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "foreach($n in @('StateRepository','AppXSvc','ClipSVC','InstallService','wuauserv','BITS')){ " +
+                        "  try{ $s=Get-Service $n -EA Stop; if($s.StartType -eq 'Disabled'){ Set-Service $n -StartupType Manual }; " +
+                        "    if($s.Status -ne 'Running'){ Start-Service $n -EA SilentlyContinue } }catch{} }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(4))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("sc.exe", ["query", "AppXSvc"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.TransientCommand(
+            "store.clear-local-cache",
+            "Fix_Store_ClearLocalCache",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "$roots=@(Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Microsoft.WindowsStore*' -ErrorAction SilentlyContinue); " +
+                        "foreach($r in $roots){ $cache=Join-Path $r.FullName 'LocalCache'; if(Test-Path -LiteralPath $cache){ " +
+                        "  Get-ChildItem -LiteralPath $cache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue } }; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(5))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "powershell.exe",
+                    ["-NoProfile", "-Command", "if(Get-AppxPackage Microsoft.WindowsStore){exit 0}else{exit 1}"],
+                    TimeSpan.FromMinutes(2),
+                    ct).ConfigureAwait(false)).Success),
+        // Windows 11+: Reset-AppxPackage; older builds no-op safely.
+        ExpandedRepairHelpers.TransientCommand(
+            "store.reset-appx-package",
+            "Fix_Store_ResetAppxPackage",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "$pkg=Get-AppxPackage -Name Microsoft.WindowsStore -ErrorAction SilentlyContinue | Select-Object -First 1; " +
+                        "if($null -eq $pkg){ exit 0 }; " +
+                        "if(Get-Command Reset-AppxPackage -ErrorAction SilentlyContinue){ " +
+                        "  try{ Reset-AppxPackage -Package $pkg.PackageFullName -ErrorAction Stop }catch{} " +
+                        "} else { " +
+                        "  $cache=Join-Path $pkg.InstallLocation '..\\..\\LocalCache' -ErrorAction SilentlyContinue " +
+                        "}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(8))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "powershell.exe",
+                    ["-NoProfile", "-Command", "if(Get-AppxPackage Microsoft.WindowsStore){exit 0}else{exit 1}"],
+                    TimeSpan.FromMinutes(2),
+                    ct).ConfigureAwait(false)).Success),
+        // Microsoft Q&A: register Store AppxManifest from InstallLocation.
+        ExpandedRepairHelpers.TransientCommand(
+            "store.register-manifest",
+            "Fix_Store_RegisterManifest",
+            Id,
+            RiskTier.Moderate,
+            [
+                new CommandStep(
+                    "powershell.exe",
+                    [
+                        "-NoProfile", "-NonInteractive", "-Command",
+                        "$ErrorActionPreference='Continue'; " +
+                        "Get-AppxPackage Microsoft.WindowsStore -AllUsers -ErrorAction SilentlyContinue | ForEach-Object { " +
+                        "  $manifest=Join-Path $_.InstallLocation 'AppxManifest.xml'; " +
+                        "  if(Test-Path -LiteralPath $manifest){ " +
+                        "    try{ Add-AppxPackage -DisableDevelopmentMode -Register $manifest -ErrorAction SilentlyContinue }catch{} " +
+                        "  } " +
+                        "}; exit 0"
+                    ],
+                    TimeSpan.FromMinutes(10))
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "powershell.exe",
+                    ["-NoProfile", "-Command", "if(Get-AppxPackage Microsoft.WindowsStore){exit 0}else{exit 1}"],
+                    TimeSpan.FromMinutes(2),
+                    ct).ConfigureAwait(false)).Success)
     ];
 
     private static async Task<BackupEntry?> BackupStoreCacheAsync(FixContext context, CancellationToken ct)
@@ -1056,7 +1535,14 @@ public sealed class TimeSyncModule : WindowsModuleBase
     public TimeSyncModule() : base(
         new ModuleInfo(Id, "Module_Time_Name", "Module_Time_Description", "time.svg", 8),
         CreateChecks(), CreateFixes(),
-        [new Playbook("time.wrong", Id, "Symptom_Time_Wrong", ["time.service", "time.source"], ["time.resync"])])
+        [
+            new Playbook("time.wrong", Id, "Symptom_Time_Wrong",
+                ["time.service", "time.source"],
+                ["time.restart-service", "time.resync", "time.resync-rediscover", "time.set-manual-ntp", "time.re-register"]),
+            new Playbook("time.no-source", Id, "Symptom_Time_NoSource",
+                ["time.source", "time.service"],
+                ["time.set-manual-ntp", "time.config-update", "time.re-register", "time.resync"])
+        ])
     {
     }
 
@@ -1065,7 +1551,21 @@ public sealed class TimeSyncModule : WindowsModuleBase
         new DelegateDiagnosticCheck("time.service", "Check_Time_Service", Id, async (context, ct) =>
         {
             var result = await context.Commands.RunAsync("w32tm.exe", ["/query", "/status"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false);
-            return !result.Success ? ModuleHelpers.Finding("time.service", Id, Severity.Warning, "Finding_Time_NotSynchronized", result.StdErr, "time.resync") : null;
+            var detail = (result.StdOut + Environment.NewLine + result.StdErr).Trim();
+            var notSyncing =
+                !result.Success ||
+                detail.Contains("The service has not been started", StringComparison.OrdinalIgnoreCase) ||
+                detail.Contains("not been started", StringComparison.OrdinalIgnoreCase) ||
+                detail.Contains("Free-running System Clock", StringComparison.OrdinalIgnoreCase);
+            return notSyncing
+                ? ModuleHelpers.Finding(
+                    "time.service",
+                    Id,
+                    Severity.Warning,
+                    "Finding_Time_NotSynchronized",
+                    string.IsNullOrWhiteSpace(detail) ? result.StdErr : detail,
+                    "time.restart-service", "time.resync", "time.re-register", "time.resync-rediscover")
+                : null;
         }),
         new DelegateDiagnosticCheck("time.source", "Check_Time_Source", Id, async (context, ct) =>
         {
@@ -1078,7 +1578,8 @@ public sealed class TimeSyncModule : WindowsModuleBase
             return row.ValueKind != JsonValueKind.Object ||
                    type.Equals("NoSync", StringComparison.OrdinalIgnoreCase) ||
                    type.Equals("NTP", StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(server)
-                ? ModuleHelpers.Finding("time.source", Id, Severity.Warning, "Finding_Time_LocalClock", row.ToString(), "time.resync")
+                ? ModuleHelpers.Finding("time.source", Id, Severity.Warning, "Finding_Time_LocalClock", row.ToString(),
+                    "time.set-manual-ntp", "time.config-update", "time.re-register", "time.resync")
                 : null;
         })
     ];
@@ -1096,7 +1597,104 @@ public sealed class TimeSyncModule : WindowsModuleBase
             },
             (context, ct) => ModuleHelpers.RunSequenceAsync(context,
                 [new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "$service=Get-CimInstance Win32_Service -Filter \"Name='W32Time'\" -ErrorAction Stop; if($service.StartMode -eq 'Disabled'){Set-Service W32Time -StartupType Manual}; Start-Service W32Time"]), new CommandStep("w32tm.exe", ["/resync", "/force"], TimeSpan.FromMinutes(2))], ct),
-            async (context, ct) => (await context.Commands.RunAsync("w32tm.exe", ["/query", "/status"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).Success)
+            async (context, ct) => (await context.Commands.RunAsync("w32tm.exe", ["/query", "/status"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "time.restart-service", "Fix_Time_RestartService", Id,
+            ["W32Time"], "W32Time"),
+        // Microsoft: w32tm /resync /rediscover rediscovers network time sources first.
+        ExpandedRepairHelpers.TransientCommand(
+            "time.resync-rediscover",
+            "Fix_Time_ResyncRediscover",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "try{ if((Get-Service W32Time).Status -ne 'Running'){ Start-Service W32Time } }catch{}; exit 0"]),
+                new CommandStep("w32tm.exe", ["/resync", "/rediscover", "/force"], TimeSpan.FromMinutes(3))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("w32tm.exe", ["/query", "/status"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success),
+        // Microsoft: /config /manualpeerlist with 0x8 client mode for public NTP.
+        new DelegateFixAction(
+            "time.set-manual-ntp",
+            "Fix_Time_SetManualNtp",
+            Id,
+            RiskTier.Moderate,
+            (context, ct) => context.Backups.CaptureRegistryAsync(
+                @"HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Parameters",
+                ModuleHelpers.BackupDirectory(context), ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+            [
+                new CommandStep("w32tm.exe", ["/config", "/manualpeerlist:time.windows.com,0x8", "/syncfromflags:manual", "/update"]),
+                new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "try{ Restart-Service W32Time -Force }catch{ Start-Service W32Time }; exit 0"]),
+                new CommandStep("w32tm.exe", ["/resync", "/force"], TimeSpan.FromMinutes(2))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ], ct),
+            async (context, ct) =>
+            {
+                var result = await context.Commands.RunAsync(
+                    "w32tm.exe", ["/query", "/source"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false);
+                return result.Success ||
+                       (result.StdOut + result.StdErr).Contains("time.windows.com", StringComparison.OrdinalIgnoreCase);
+            }),
+        ExpandedRepairHelpers.TransientCommand(
+            "time.config-update",
+            "Fix_Time_ConfigUpdate",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("w32tm.exe", ["/config", "/update"]),
+                new CommandStep("w32tm.exe", ["/resync", "/force"], TimeSpan.FromMinutes(2))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("w32tm.exe", ["/query", "/status"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success),
+        // Microsoft / Dell KB: unregister + register restores default W32Time configuration.
+        new DelegateFixAction(
+            "time.re-register",
+            "Fix_Time_ReRegister",
+            Id,
+            RiskTier.Moderate,
+            async (context, ct) =>
+            {
+                var dir = ModuleHelpers.BackupDirectory(context);
+                var service = await context.Backups.CaptureServicesAsync(["W32Time"], dir, ct).ConfigureAwait(false);
+                var registry = await context.Backups.CaptureRegistryAsync(
+                    @"HKLM\SYSTEM\CurrentControlSet\Services\W32Time", dir, ct).ConfigureAwait(false);
+                return service is not null && registry is not null
+                    ? await context.Backups.CaptureBundleAsync("w32time-reregister", [service, registry], dir, ct)
+                        .ConfigureAwait(false)
+                    : service ?? registry;
+            },
+            (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+            [
+                new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "try{ Stop-Service W32Time -Force -ErrorAction SilentlyContinue }catch{}; exit 0"]),
+                new CommandStep("w32tm.exe", ["/unregister"])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1, 2 }
+                },
+                new CommandStep("w32tm.exe", ["/register"]),
+                new CommandStep("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "try{ Set-Service W32Time -StartupType Manual; Start-Service W32Time }catch{}; exit 0"]),
+                new CommandStep("w32tm.exe", ["/config", "/manualpeerlist:time.windows.com,0x8", "/syncfromflags:manual", "/update"])
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                },
+                new CommandStep("w32tm.exe", ["/resync", "/force"], TimeSpan.FromMinutes(2))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ], ct),
+            async (context, ct) =>
+                (await context.Commands.RunAsync("sc.exe", ["query", "W32Time"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success)
     ];
 }
 
@@ -1104,10 +1702,30 @@ public sealed class StartupPerformanceModule : WindowsModuleBase
 {
     private const string Id = "performance";
 
+    /// <summary>
+    /// Safe-to-restart core Windows services (never RpcSs/DcomLaunch/LSM/etc.).
+    /// </summary>
+    private static readonly string[] CoreWindowsServices =
+    [
+        "Dhcp", "Dnscache", "NlaSvc", "netprofm", "WlanSvc",
+        "AudioEndpointBuilder", "Audiosrv",
+        "EventLog", "PlugPlay", "DsmSvc", "DeviceInstall",
+        "Spooler", "BITS", "cryptsvc", "wuauserv",
+        "W32Time", "bthserv", "WSearch", "LanmanWorkstation", "Winmgmt",
+        "Schedule", "Themes", "FontCache", "BrokerInfrastructure"
+    ];
+
     public StartupPerformanceModule() : base(
         new ModuleInfo(Id, "Module_Performance_Name", "Module_Performance_Description", "performance.svg", 9),
         CreateChecks(), CreateFixes(),
-        [new Playbook("performance.slow-start", Id, "Symptom_Performance_SlowStartup", ["performance.startup", "performance.power"], ["performance.balanced-plan"])])
+        [
+            new Playbook("performance.slow-start", Id, "Symptom_Performance_SlowStartup",
+                ["performance.startup", "performance.power", "performance.services"],
+                ["performance.balanced-plan", "performance.repair-core-services"]),
+            new Playbook("performance.services", Id, "Symptom_Performance_Services",
+                ["performance.services"],
+                ["performance.repair-core-services", "performance.restart-core-services"])
+        ])
     {
     }
 
@@ -1126,6 +1744,34 @@ public sealed class StartupPerformanceModule : WindowsModuleBase
             return result.Success && result.StdOut.Contains("a1841308-3541-4fab-bc81-f71556f20b4a", StringComparison.OrdinalIgnoreCase)
                 ? ModuleHelpers.Finding("performance.power", Id, Severity.Info, "Finding_Performance_PowerSaver", result.StdOut, "performance.balanced-plan")
                 : null;
+        }),
+        new DelegateDiagnosticCheck("performance.services", "Check_Performance_CoreServices", Id, async (context, ct) =>
+        {
+            const string script =
+                "$names=@('Dhcp','Dnscache','NlaSvc','AudioEndpointBuilder','Audiosrv','EventLog','PlugPlay','Spooler','BITS','cryptsvc','wuauserv','W32Time','LanmanWorkstation','Winmgmt','Schedule'); " +
+                "Get-CimInstance Win32_Service | Where-Object { $_.Name -in $names } | Select-Object Name,State,StartMode";
+            var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+            var rows = ModuleHelpers.Array(root).ToArray();
+            var bad = rows.Where(row =>
+            {
+                var name = ModuleHelpers.GetString(row, "Name") ?? string.Empty;
+                var state = ModuleHelpers.GetString(row, "State") ?? string.Empty;
+                var start = ModuleHelpers.GetString(row, "StartMode") ?? string.Empty;
+                // W32Time may be Manual and stopped until needed; Spooler/BITS may be Manual.
+                var optionalStopped = name is "W32Time" or "BITS" or "wuauserv" or "bthserv" or "WSearch";
+                return start.Equals("Disabled", StringComparison.OrdinalIgnoreCase) ||
+                       (!optionalStopped && !state.Equals("Running", StringComparison.OrdinalIgnoreCase));
+            }).ToArray();
+            return bad.Length > 0
+                ? ModuleHelpers.Finding(
+                    "performance.services",
+                    Id,
+                    Severity.Warning,
+                    "Finding_Performance_CoreServices",
+                    Join(bad),
+                    "performance.repair-core-services",
+                    "performance.restart-core-services")
+                : null;
         })
     ];
 
@@ -1134,8 +1780,107 @@ public sealed class StartupPerformanceModule : WindowsModuleBase
         new DelegateFixAction("performance.balanced-plan", "Fix_Performance_BalancedPlan", Id, RiskTier.Safe,
             BackupPowerPlanAsync,
             (context, ct) => ModuleHelpers.RunSequenceAsync(context, [new CommandStep("powercfg.exe", ["/setactive", "381b4222-f694-41f0-9685-ff5bb260df2e"])], ct),
-            async (context, ct) => (await context.Commands.RunAsync("powercfg.exe", ["/getactivescheme"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).StdOut.Contains("381b4222-f694-41f0-9685-ff5bb260df2e", StringComparison.OrdinalIgnoreCase))
+            async (context, ct) => (await context.Commands.RunAsync("powercfg.exe", ["/getactivescheme"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).StdOut.Contains("381b4222-f694-41f0-9685-ff5bb260df2e", StringComparison.OrdinalIgnoreCase)),
+        new DelegateFixAction("performance.repair-core-services", "Fix_Performance_RepairCoreServices", Id, RiskTier.Safe,
+            (context, ct) => context.Backups.CaptureServicesAsync(CoreWindowsServices, ModuleHelpers.BackupDirectory(context), ct),
+            (context, ct) => ApplyCoreServicesRepairAsync(context, restartRunning: false, ct),
+            VerifyCoreServicesAsync),
+        new DelegateFixAction("performance.restart-core-services", "Fix_Performance_RestartCoreServices", Id, RiskTier.Safe,
+            (context, ct) => context.Backups.CaptureServicesAsync(CoreWindowsServices, ModuleHelpers.BackupDirectory(context), ct),
+            (context, ct) => ApplyCoreServicesRepairAsync(context, restartRunning: true, ct),
+            VerifyCoreServicesAsync),
+        // Microsoft powercfg GUIDs: High performance scheme.
+        new DelegateFixAction("performance.high-performance-plan", "Fix_Performance_HighPerformancePlan", Id, RiskTier.Safe,
+            BackupPowerPlanAsync,
+            (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+                [new CommandStep("powercfg.exe", ["/setactive", "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"])], ct),
+            async (context, ct) => (await context.Commands.RunAsync("powercfg.exe", ["/getactivescheme"], TimeSpan.FromMinutes(1), ct)
+                .ConfigureAwait(false)).StdOut.Contains("8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c", StringComparison.OrdinalIgnoreCase)),
+        // Microsoft: powercfg -restoredefaultschemes restores default plans.
+        ExpandedRepairHelpers.TransientCommand(
+            "performance.restore-default-schemes",
+            "Fix_Performance_RestoreDefaultSchemes",
+            Id,
+            RiskTier.Moderate,
+            [new CommandStep("powercfg.exe", ["-restoredefaultschemes"])],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("powercfg.exe", ["/list"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "performance.restart-sysmain", "Fix_Performance_RestartSysMain", Id,
+            ["SysMain"], "SysMain"),
+        ExpandedRepairHelpers.RestartNamedServices(
+            "performance.restart-schedule", "Fix_Performance_RestartSchedule", Id,
+            ["Schedule"], "Schedule"),
+        ExpandedRepairHelpers.TransientCommand(
+            "performance.query-energy",
+            "Fix_Performance_QueryEnergy",
+            Id,
+            RiskTier.Safe,
+            [
+                new CommandStep("powercfg.exe", ["/energy", "/duration", "5"], TimeSpan.FromMinutes(3))
+                {
+                    AcceptedExitCodes = new HashSet<int> { 0, 1 }
+                }
+            ],
+            async (_, _) => await Task.FromResult(true)),
+        ExpandedRepairHelpers.TransientCommand(
+            "performance.hibernate-off",
+            "Fix_Performance_HibernateOff",
+            Id,
+            RiskTier.Moderate,
+            [new CommandStep("powercfg.exe", ["/hibernate", "off"])],
+            async (context, ct) =>
+                (await context.Commands.RunAsync("powercfg.exe", ["/a"], TimeSpan.FromMinutes(1), ct)
+                    .ConfigureAwait(false)).Success)
     ];
+
+    private static async Task<bool> VerifyCoreServicesAsync(FixContext context, CancellationToken ct)
+    {
+        var root = await context.Commands.RunPsJsonAsync<JsonElement>(
+            "Get-Service Dhcp,Dnscache,NlaSvc,AudioEndpointBuilder,Audiosrv,EventLog,PlugPlay,LanmanWorkstation,Winmgmt | Select-Object Name,Status",
+            ct).ConfigureAwait(false);
+        var rows = ModuleHelpers.Array(root).ToArray();
+        return rows.Length >= 6 && rows.All(row =>
+            string.Equals(ModuleHelpers.GetString(row, "Status"), "Running", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static Task<FixResult> ApplyCoreServicesRepairAsync(
+        FixContext context,
+        bool restartRunning,
+        CancellationToken ct)
+    {
+        // Startup defaults: Automatic for always-on services, Manual for demand services.
+        var script =
+            "$ErrorActionPreference='Continue'; $restart=" + (restartRunning ? "$true" : "$false") + "; " +
+            "$map=[ordered]@{" +
+            "  'Dhcp'='Automatic'; 'Dnscache'='Automatic'; 'NlaSvc'='Automatic'; 'netprofm'='Manual'; 'WlanSvc'='Manual'; " +
+            "  'AudioEndpointBuilder'='Automatic'; 'Audiosrv'='Automatic'; " +
+            "  'EventLog'='Automatic'; 'PlugPlay'='Automatic'; 'DsmSvc'='Manual'; 'DeviceInstall'='Manual'; " +
+            "  'Spooler'='Automatic'; 'BITS'='Manual'; 'cryptsvc'='Automatic'; 'wuauserv'='Manual'; " +
+            "  'W32Time'='Manual'; 'bthserv'='Manual'; 'WSearch'='Automatic'; 'LanmanWorkstation'='Automatic'; " +
+            "  'Winmgmt'='Automatic'; 'Schedule'='Automatic'; 'Themes'='Automatic'; 'FontCache'='Manual'; " +
+            "  'BrokerInfrastructure'='Automatic' " +
+            "}; " +
+            "foreach($n in $map.Keys){ " +
+            "  try{ " +
+            "    $svc=Get-Service -Name $n -ErrorAction Stop; " +
+            "    $desired=$map[$n]; " +
+            "    if($svc.StartType -eq 'Disabled'){ Set-Service -Name $n -StartupType $desired -ErrorAction SilentlyContinue }; " +
+            "    if($restart -and $svc.Status -eq 'Running'){ Restart-Service -Name $n -Force -ErrorAction SilentlyContinue } " +
+            "    elseif($svc.Status -ne 'Running'){ Start-Service -Name $n -ErrorAction SilentlyContinue }; " +
+            "    Start-Sleep -Milliseconds 250 " +
+            "  }catch{} " +
+            "}; exit 0";
+
+        return ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep(
+                "powershell.exe",
+                ["-NoProfile", "-NonInteractive", "-Command", script],
+                TimeSpan.FromMinutes(6))
+        ], ct);
+    }
 
     private static async Task<BackupEntry?> BackupPowerPlanAsync(FixContext context, CancellationToken ct)
     {

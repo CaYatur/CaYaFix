@@ -30,7 +30,7 @@ This project is **tested on GitHub** via Actions on `master` (and `main`). Live 
 
 **Local + CI gates that must stay green:**
 
-- Catalog: **15 modules · 68 diagnostics · 63 repairs · 8 live tests**
+- Catalog: **15 modules · 71 diagnostics · 133 repairs · 8 live tests**
 - xUnit suite (currently **67** tests) with hang detection
 - Localization parity (EN/TR), SVG/icon policy, MIT headers, trusted executable allowlist
 - Dependabot NuGet and GitHub Actions updates are validated on the same CI path
@@ -59,13 +59,13 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Highlights
 
-- **15 troubleshooting modules** with **68 diagnostic checks**, **63 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
+- **15 troubleshooting modules** with **71 diagnostic checks**, **133 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
 - **Guided symptom repair** when a scan finds nothing: pick a problem area, read risk and side-effect warnings (audio glitches, network drops, display flicker, and similar), then apply related Safe/Moderate repairs.
 - **Manual Windows repair tools** (Settings): run Microsoft-oriented tools without waiting for a finding — ipconfig suite, network soft-heal, DISM/SFC steps, Win+Ctrl+Shift+B graphics soft-reset, BCD/WinRE helpers, and more. Aggressive tools still require Force risk acceptance.
 - **Live progress for long tools**: themed progress bar with **percent complete**, **estimated remaining minutes**, stage labels, and parsing of DISM/SFC-style console percentages when available.
 - Deep network diagnostics: adapter/IP/APIPA/gateway, DNS, captive portal, proxy, VPN residue, target-bound routes, firewall, hosts, Winsock, MTU, services, event-log correlation, IPv4/IPv6 bindings, Wi-Fi/TCP health, live ping/DNS/HTTP/MTU/speed tests, and repairs from soft-heal through stack/full reset.
 - Deep audio diagnostics: endpoints, services, levels, formats, enhancements, privacy, Bluetooth/HDMI, event log, disabled PnP devices, live speaker/mic/stability tests, plus enable-all-disabled and rescan repairs.
-- **Display/GPU**: adapter and driver health, Display/TDR event correlation, device rescan, restart-all adapters, targeted restart, and **Win+Ctrl+Shift+B** graphics driver soft-reset.
+- **Display/GPU**: adapter and driver health, **resolution/mode lock detection** (Basic Display Adapter, sparse modes, sub-native resolution, monitor errors), stuck-resolution repair pack, apply highest supported mode, Display/TDR events, rescan, restart adapters, and **Win+Ctrl+Shift+B** soft-reset.
 - **System integrity (Microsoft DISM/SFC path)**: CheckHealth, ScanHealth, AnalyzeComponentStore, SFC `/scannow`, DISM RestoreHealth, StartComponentCleanup, and full DISM→SFC chain.
 - **Boot & recovery (online-safe)**: WinRE status (`reagentc`), BCD health (`bcdedit`), BCD export backup, recovery flags, enable WinRE, and `bcdboot` rebuild. Offline-only tools such as `bootrec` stay in Windows Recovery Environment and are not automated from the desktop session.
 - Disk online `chkdsk /scan` and `/spotfix`, plus scheduled offline repair when needed.

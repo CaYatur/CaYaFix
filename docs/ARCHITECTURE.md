@@ -42,7 +42,7 @@ Non-reboot actions are ordered by tier. Reboot actions are moved to the end. An 
 
 ## Module contract
 
-Each module exposes metadata, diagnostic checks, repair actions, optional live tests, and symptom playbooks. The current catalog contains **15 modules, 68 diagnostics, 63 repairs, and 8 live tests** (Network, Audio, Update, Printers, Bluetooth, Disk, Integrity, Store, Time, Startup, Camera, USB, Search, Display, Boot & recovery). Checks return structured findings rather than UI text. Resource keys are resolved by the app so English and Turkish stay synchronized.
+Each module exposes metadata, diagnostic checks, repair actions, optional live tests, and symptom playbooks. The current catalog contains **15 modules, 71 diagnostics, 133 repairs, and 8 live tests** (Network, Audio, Update, Printers, Bluetooth, Disk, Integrity, Store, Time, Startup, Camera, USB, Search, Display, Boot & recovery). Checks return structured findings rather than UI text. Resource keys are resolved by the app so English and Turkish stay synchronized.
 
 A change is eligible for automation only when CaYaFix can capture a pre-change recovery path appropriate to the action (registry/file/service/driver/command-state/bundle or a documented transient marker). Microsoft Store package re-registration remains banned. Offline-only boot tools such as `bootrec` are not launched from a live desktop session; online boot helpers use `reagentc`, `bcdedit`, and `bcdboot` with BCD export first where practical. DISM/SFC repairs are long-running and surface percent/ETA in the operation overlay; they may still require a reboot for full verification.
 

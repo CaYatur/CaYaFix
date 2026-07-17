@@ -63,6 +63,9 @@ public sealed class AudioModule : IModuleDefinition
         CreateRestartServicesFix(),
         CreateSetDefaultFix(),
         CreateUnmuteFix(),
+        CreateRepairAllIoFix(),
+        CreateRepairOutputFix(),
+        CreateRepairInputFix(),
         CreateDisableEnhancementsFix(),
         CreateFormatResetFix(),
         CreateMicrophonePrivacyFix(),
@@ -86,16 +89,16 @@ public sealed class AudioModule : IModuleDefinition
     [
         new("audio.no-sound", ModuleId, "Symptom_Audio_NoSound",
             ["audio.output.devices", "audio.defaults", "audio.services", "audio.levels", "audio.drivers", "audio.pnp-disabled", "audio.eventlog"],
-            ["audio.restart-services", "audio.enable-all-disabled", "audio.rescan-devices", "audio.unmute", "audio.set-default", "audio.disable-enhancements"]),
+            ["audio.repair-output", "audio.restart-services", "audio.enable-all-disabled", "audio.rescan-devices", "audio.unmute", "audio.set-default", "audio.disable-enhancements"]),
         new("audio.crackle", ModuleId, "Symptom_Audio_Crackling",
             ["audio.formats", "audio.apo", "audio.drivers", "audio.bluetooth", "audio.eventlog"],
             ["audio.disable-enhancements", "audio.format-reset", "audio.restart-services", "audio.rescan-devices"]),
         new("audio.mic-none", ModuleId, "Symptom_Audio_MicNotWorking",
             ["audio.input.devices", "audio.privacy", "audio.levels", "audio.services", "audio.drivers", "audio.pnp-disabled"],
-            ["audio.microphone-privacy", "audio.enable-all-disabled", "audio.unmute", "audio.restart-services"]),
+            ["audio.repair-input", "audio.microphone-privacy", "audio.enable-all-disabled", "audio.unmute", "audio.restart-services"]),
         new("audio.mic-low", ModuleId, "Symptom_Audio_MicLow",
             ["audio.levels", "audio.formats", "audio.apo"],
-            ["audio.unmute", "audio.disable-enhancements"]),
+            ["audio.repair-input", "audio.unmute", "audio.disable-enhancements"]),
         new("audio.bluetooth-bad", ModuleId, "Symptom_Audio_BluetoothBad",
             ["audio.bluetooth", "audio.defaults", "audio.formats"],
             ["audio.set-default", "audio.bluetooth-restart", "audio.restart-services"]),
@@ -530,6 +533,201 @@ public sealed class AudioModule : IModuleDefinition
             return rows.Length == 2 && rows.All(row =>
                 string.Equals(ModuleHelpers.GetString(row, "Status"), "Running", StringComparison.OrdinalIgnoreCase));
         });
+
+    private static DelegateFixAction CreateRepairAllIoFix() =>
+        CreateEndpointRepairCore("audio.repair-all-io", "Fix_Audio_RepairAllIo", AudioEndpointScope.All);
+
+    private static DelegateFixAction CreateRepairOutputFix() =>
+        CreateEndpointRepairCore("audio.repair-output", "Fix_Audio_RepairOutput", AudioEndpointScope.Output);
+
+    private static DelegateFixAction CreateRepairInputFix() =>
+        CreateEndpointRepairCore("audio.repair-input", "Fix_Audio_RepairInput", AudioEndpointScope.Input);
+
+    private static DelegateFixAction CreateEndpointRepairCore(string id, string titleKey, AudioEndpointScope scope) => new(
+        id,
+        titleKey,
+        ModuleId,
+        RiskTier.Safe,
+        async (context, ct) =>
+        {
+            var directory = ModuleHelpers.BackupDirectory(context);
+            var services = await context.Backups.CaptureServicesAsync(AudioServices, directory, ct).ConfigureAwait(false);
+            var levels = CaptureLevels(scope);
+            var levelsEntry = levels.Count > 0
+                ? await context.Backups.CaptureValueAsync("audio-levels-" + scope, levels, directory, ct).ConfigureAwait(false)
+                : null;
+            if (levelsEntry is not null)
+            {
+                levelsEntry.Metadata["restoreHandler"] = "audio-levels-v1";
+            }
+
+            var entries = new List<BackupEntry>();
+            if (services is not null) entries.Add(services);
+            if (levelsEntry is not null) entries.Add(levelsEntry);
+            if (entries.Count == 0) return null;
+            return entries.Count == 1
+                ? entries[0]
+                : await context.Backups.CaptureBundleAsync("audio-endpoint-" + scope, entries, directory, ct)
+                    .ConfigureAwait(false);
+        },
+        (context, ct) => ApplyEndpointRepairAsync(context, scope, ct),
+        async (context, ct) =>
+        {
+            ct.ThrowIfCancellationRequested();
+            using var enumerator = new MMDeviceEnumerator();
+            foreach (var flow in FlowsFor(scope))
+            {
+                try
+                {
+                    using var device = enumerator.GetDefaultAudioEndpoint(flow, Role.Multimedia);
+                    if (device.AudioEndpointVolume.Mute) return false;
+                }
+                catch
+                {
+                    // Default endpoint may be missing; services still count as partial success.
+                }
+            }
+
+            return await ModuleHelpers.IsServiceRunningAsync(context, "Audiosrv", ct).ConfigureAwait(false);
+        });
+
+    private static async Task<FixResult> ApplyEndpointRepairAsync(
+        FixContext context,
+        AudioEndpointScope scope,
+        CancellationToken ct)
+    {
+        ct.ThrowIfCancellationRequested();
+        var details = new List<string>();
+
+        // 1) Unmute and restore levels on scoped endpoints (defaults + active devices).
+        using (var enumerator = new MMDeviceEnumerator())
+        {
+            foreach (var flow in FlowsFor(scope))
+            {
+                var devices = enumerator.EnumerateAudioEndPoints(flow, DeviceState.Active).ToArray();
+                try
+                {
+                    foreach (var device in devices)
+                    {
+                        try
+                        {
+                            device.AudioEndpointVolume.Mute = false;
+                            if (device.AudioEndpointVolume.MasterVolumeLevelScalar < .5f)
+                            {
+                                device.AudioEndpointVolume.MasterVolumeLevelScalar = .65f;
+                            }
+                        }
+                        catch
+                        {
+                            // Individual endpoint may be exclusive/locked.
+                        }
+                    }
+
+                    details.Add($"{flow}: unmuted {devices.Length} active endpoint(s)");
+                }
+                finally
+                {
+                    DisposeDevices(devices);
+                }
+            }
+        }
+
+        // 2) Microphone privacy (input scopes only).
+        if (scope is AudioEndpointScope.Input or AudioEndpointScope.All)
+        {
+            var privacy = await context.Commands.RunAsync(
+                "reg.exe",
+                [
+                    "add",
+                    @"HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone",
+                    "/v", "Value", "/t", "REG_SZ", "/d", "Allow", "/f"
+                ],
+                TimeSpan.FromMinutes(1),
+                ct).ConfigureAwait(false);
+            details.Add($"microphone-privacy: exit={privacy.ExitCode}");
+        }
+
+        // 3) Re-enable disabled PnP audio devices matching the selected flow.
+        var nameFilter = scope switch
+        {
+            AudioEndpointScope.Output => "Speaker|Headphone|Headset|Realtek|NVIDIA High Definition|AMD High Definition|HDMI|Display Audio|Output|Line Out",
+            AudioEndpointScope.Input => "Microphone|Mic |Input|Capture|Array|Webcam",
+            _ => "Audio|Sound|Speaker|Microphone|Realtek|NVIDIA High Definition|AMD High Definition|Headphone|Headset|HDMI"
+        };
+        var classFilter = scope switch
+        {
+            AudioEndpointScope.Output => "@('MEDIA','AudioEndpoint')",
+            AudioEndpointScope.Input => "@('MEDIA','AudioEndpoint','Camera','Image')",
+            _ => "@('MEDIA','AudioEndpoint','SoftwareDevice')"
+        };
+        var enableScript =
+            "$ErrorActionPreference='Continue'; $tool=Join-Path $env:windir 'System32\\pnputil.exe'; " +
+            "$namePattern='" + nameFilter + "'; " +
+            "Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue | Where-Object { " +
+            "  ($_.Class -in " + classFilter + " -or $_.FriendlyName -match $namePattern) -and " +
+            "  ($_.Status -eq 'Error' -or $_.Problem -match 'CM_PROB_DISABLED|22|DISABLED' -or $_.Status -eq 'Unknown') " +
+            "} | ForEach-Object { & $tool /enable-device $_.InstanceId | Out-Null; Start-Sleep -Milliseconds 200 }; exit 0";
+        var enable = await context.Commands.RunAsync(
+            "powershell.exe",
+            ["-NoProfile", "-NonInteractive", "-Command", enableScript],
+            TimeSpan.FromMinutes(5),
+            ct).ConfigureAwait(false);
+        details.Add($"enable-disabled: exit={enable.ExitCode}");
+
+        // 4) Soft format cleanup on scoped MMDevices branch (Render and/or Capture only).
+        var branches = scope switch
+        {
+            AudioEndpointScope.Output => new[] { "Render" },
+            AudioEndpointScope.Input => new[] { "Capture" },
+            _ => new[] { "Render", "Capture" }
+        };
+        var branchList = string.Join(",", branches.Select(b => $"'{b}'"));
+        var formatScript =
+            "$ErrorActionPreference='Continue'; " +
+            "$root='HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio'; " +
+            "foreach($b in @(" + branchList + ")){ " +
+            "  $path=Join-Path $root $b; if(-not (Test-Path -LiteralPath $path)){ continue }; " +
+            "  Get-ChildItem $path -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -eq 'Properties' } | " +
+            "    ForEach-Object { Remove-ItemProperty -Path $_.PSPath -Name '{f19f064d-082c-4e27-bc73-6882a1bb8e4c},0' -ErrorAction SilentlyContinue } " +
+            "}; exit 0";
+        var format = await context.Commands.RunAsync(
+            "powershell.exe",
+            ["-NoProfile", "-NonInteractive", "-Command", formatScript],
+            TimeSpan.FromMinutes(3),
+            ct).ConfigureAwait(false);
+        details.Add($"format-soft-reset: exit={format.ExitCode}");
+
+        // 5) Restart Windows audio stack last so endpoint changes take effect.
+        var services = await context.Commands.RunAsync(
+            "powershell.exe",
+            [
+                "-NoProfile", "-NonInteractive", "-Command",
+                "Set-Service AudioEndpointBuilder -StartupType Automatic -ErrorAction SilentlyContinue; " +
+                "Set-Service Audiosrv -StartupType Automatic -ErrorAction SilentlyContinue; " +
+                "Restart-Service AudioEndpointBuilder -Force -ErrorAction SilentlyContinue; " +
+                "Start-Sleep -Milliseconds 500; " +
+                "Restart-Service Audiosrv -Force -ErrorAction SilentlyContinue; exit 0"
+            ],
+            TimeSpan.FromMinutes(3),
+            ct).ConfigureAwait(false);
+        details.Add($"audio-services: exit={services.ExitCode}");
+
+        return FixResult.Ok("FixResult_Applied", string.Join(Environment.NewLine, details));
+    }
+
+    private static DataFlow[] FlowsFor(AudioEndpointScope scope) => scope switch
+    {
+        AudioEndpointScope.Output => [DataFlow.Render],
+        AudioEndpointScope.Input => [DataFlow.Capture],
+        _ => [DataFlow.Render, DataFlow.Capture]
+    };
+
+    private enum AudioEndpointScope
+    {
+        All,
+        Output,
+        Input
+    }
 
     private static DelegateFixAction CreateSetDefaultFix() => new(
         "audio.set-default", "Fix_Audio_SetDefault", ModuleId, RiskTier.Safe,
@@ -1024,11 +1222,13 @@ public sealed class AudioModule : IModuleDefinition
             : null;
     }
 
-    private static List<AudioLevelState> CaptureLevels()
+    private static List<AudioLevelState> CaptureLevels() => CaptureLevels(AudioEndpointScope.All);
+
+    private static List<AudioLevelState> CaptureLevels(AudioEndpointScope scope)
     {
         var result = new List<AudioLevelState>();
         using var enumerator = new MMDeviceEnumerator();
-        foreach (var flow in new[] { DataFlow.Render, DataFlow.Capture })
+        foreach (var flow in FlowsFor(scope))
         {
             try
             {
