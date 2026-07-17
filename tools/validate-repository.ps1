@@ -386,8 +386,9 @@ if ($RequireScreenshots) {
         }
         $width = [Net.IPAddress]::NetworkToHostOrder([BitConverter]::ToInt32($bytes, 16))
         $height = [Net.IPAddress]::NetworkToHostOrder([BitConverter]::ToInt32($bytes, 20))
-        if ($width -lt 1000 -or $height -lt 600) {
-            Add-Failure "Screenshot resolution is below 1000x600: $path ($width x $height)"
+        # README captures are produced at 1600×1000 DIP × 2 (192 DPI) ≈ 3200×2000.
+        if ($width -lt 1600 -or $height -lt 900) {
+            Add-Failure "Screenshot resolution is below 1600x900: $path ($width x $height)"
         }
     }
 }

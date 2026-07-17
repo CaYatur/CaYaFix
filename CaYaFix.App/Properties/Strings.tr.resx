@@ -54,10 +54,10 @@
   <data name="GuidedRepair_NeedConsent" xml:space="preserve"><value>Belirti onarımlarını uygulamadan önce risk kutusunu işaretleyin.</value></data>
   <data name="GuidedRepair_FixCount" xml:space="preserve"><value>{0} ilgili onarım</value></data>
   <data name="GuidedRepair_NoFixes" xml:space="preserve"><value>Bu belirti için otomatik Güvenli/Orta onarım eşlemesi yok.</value></data>
-  <data name="GuidedRepair_Applying" xml:space="preserve"><value>“{0}” için onarımlar uygulanıyor…</value></data>
+  <data name="GuidedRepair_Applying" xml:space="preserve"><value>“{0}” için onarımlar uygulanıyor...</value></data>
   <data name="GuidedRepair_RunningEffectsReminder" xml:space="preserve"><value>Şu anda yan etkiler görülebilir (ses cızırtısı, kısa kopmalar, titreme). Bitene kadar bu pencerede kalın.</value></data>
   <data name="GuidedRepair_ToastTitle" xml:space="preserve"><value>Belirti onarımı</value></data>
-  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>İnternet kısa süre kesilebilir, Wi‑Fi/Ethernet yeniden bağlanabilir, VPN oturumları düşebilir, indirmeler duraklayabilir ve DNS/önbellek oturana kadar siteler açılamayabilir.</value></data>
+  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>İnternet kısa süre kesilebilir, Wi-Fi/Ethernet yeniden bağlanabilir, VPN oturumları düşebilir, indirmeler duraklayabilir ve DNS/önbellek oturana kadar siteler açılamayabilir.</value></data>
   <data name="GuidedRepair_Effects_Audio" xml:space="preserve"><value>Cızırtı, kısa sessizlik, cihaz değişimi, ses sıçraması veya Bluetooth kulaklığın yeniden bağlanması olabilir. Mümkünse önemli aramaları kapatın.</value></data>
   <data name="GuidedRepair_Effects_Display" xml:space="preserve"><value>Ekran titreyebilir, kısa süre kararabilir, çözünürlük/yenileme hızı değişebilir veya monitörler yeniden algılanabilir.</value></data>
   <data name="GuidedRepair_Effects_Bluetooth" xml:space="preserve"><value>Eşleşmiş cihazlar kopabilir ve yeniden bağlanmanız gerekebilir; ses/giriş birkaç saniye düşebilir.</value></data>
@@ -75,7 +75,7 @@
   <data name="Action_StillHaveProblem" xml:space="preserve"><value>Hâlâ sorun mu var?</value></data>
   <data name="Action_ApplySymptomRepairs" xml:space="preserve"><value>İlgili onarımları uygula</value></data>
   <data name="Finding_GuidedSymptom" xml:space="preserve"><value>“{0}” için rehberli onarım: {1}</value></data>
-  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>Hâlâ bir şey ters geliyorsa Bulgular’dan belirti seçin — risk uyarısından sonra ilgili onarımlar uygulanır (çalışırken ses cızırtısı, ağ kopması veya titreme olabilir).</value></data>
+  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>Hâlâ bir şey ters geliyorsa Bulgular’dan belirti seçin - risk uyarısından sonra ilgili onarımlar uygulanır (çalışırken ses cızırtısı, ağ kopması veya titreme olabilir).</value></data>
   <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Teknik ayrıntı</value></data>
   <data name="Finding_Recommended" xml:space="preserve"><value>Önerilen onarım</value></data>
   <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>Otomatik onarım sunulmuyor; kanıtları ve önerilen el ile kontrolleri inceleyin.</value></data>
@@ -130,11 +130,11 @@
   <data name="Language_System" xml:space="preserve"><value>Windows ile aynı (İngilizce veya Türkçe)</value></data>
   <data name="Dialog_LanguageRestart_Title" xml:space="preserve"><value>Dil değişimi için yeniden başlatılsın mı?</value></data>
   <data name="Dialog_LanguageRestart" xml:space="preserve"><value>Yeni dili uygulamak için CaYaFix yeniden başlatılmalı. Yarım kalan işleri kaydedin, ardından devam edin.</value></data>
-  <data name="Status_LanguageSaved" xml:space="preserve"><value>Dil tercihi kaydedildi. Yeniden başlatılıyor…</value></data>
+  <data name="Status_LanguageSaved" xml:space="preserve"><value>Dil tercihi kaydedildi. Yeniden başlatılıyor...</value></data>
   <data name="Console_Title" xml:space="preserve"><value>İşlem Konsolu</value></data>
   <data name="Console_Hint" xml:space="preserve"><value>Komutlar ve sonuçları burada canlı görünür.</value></data>
   <data name="Status_Ready" xml:space="preserve"><value>Sistem taramaya hazır.</value></data>
-  <data name="Status_Starting" xml:space="preserve"><value>CaYaFix başlatılıyor ve kurtarma durumu kontrol ediliyor…</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>CaYaFix başlatılıyor ve kurtarma durumu kontrol ediliyor...</value></data>
   <data name="Dialog_ForceNeedsConsent" xml:space="preserve"><value>Devam etmeden önce Zorla Onarım risk onayını işaretleyin.</value></data>
   <data name="Dialog_BackuplessAggressive_Title" xml:space="preserve"><value>Yedeksiz devam edilsin mi?</value></data>
   <data name="Dialog_BackuplessAggressive" xml:space="preserve"><value>Zorla Onarım, tek bir aksiyon yedeği alınamazsa yine de devam edebilir. Bu aksiyon için otomatik geri alma kullanılamaz. Sistem Geri Yükleme noktası mümkünse hâlâ önerilir. Bu çalışmada yedeksiz agresif aksiyonlara izin verilsin mi?</value></data>
@@ -151,14 +151,14 @@
   <data name="Finding_ExpertManual" xml:space="preserve"><value>Uzman onarımı istendi: {0}</value></data>
   <data name="Action_RunExpertFix" xml:space="preserve"><value>Çalıştır</value></data>
   <data name="Finding_Network_ThirdPartyLsp" xml:space="preserve"><value>Üçüncü taraf Winsock LSP kayıtları algılandı; ağ trafiğini kesebilirler.</value></data>
-  <data name="Finding_Network_WifiBand" xml:space="preserve"><value>Wi‑Fi zayıf 2.4 GHz bandında kalmış veya düşük PHY hızı bildiriyor.</value></data>
+  <data name="Finding_Network_WifiBand" xml:space="preserve"><value>Wi-Fi zayıf 2.4 GHz bandında kalmış veya düşük PHY hızı bildiriyor.</value></data>
   <data name="Fix_Printer_SetOnline" xml:space="preserve"><value>Çevrimdışı yazıcıları çevrimiçi yap</value></data>
   <data name="Fix_Printer_SetDefault" xml:space="preserve"><value>Varsayılan yazıcıyı geri yükle</value></data>
   <data name="Fix_Audio_EnableDevice" xml:space="preserve"><value>Devre dışı ses cihazını etkinleştir</value></data>
   <data name="Status_ModeChangedRescan" xml:space="preserve"><value>Önizleme modu değişti. Onarım uygulamadan önce yeni bir tarama çalıştırın.</value></data>
-  <data name="Status_Scanning" xml:space="preserve"><value>Sistem taranıyor…</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Sistem taranıyor...</value></data>
   <data name="Status_ScanComplete" xml:space="preserve"><value>Tarama tamamlandı: {0} bulgu.</value></data>
-  <data name="Status_RepairingNow" xml:space="preserve"><value>Seçili onarımlar uygulanıyor…</value></data>
+  <data name="Status_RepairingNow" xml:space="preserve"><value>Seçili onarımlar uygulanıyor...</value></data>
   <data name="Status_RepairComplete" xml:space="preserve"><value>Onarım tamamlandı: {0} çözüldü, {1} devam ediyor.</value></data>
   <data name="Status_Cancelled" xml:space="preserve"><value>İşlem iptal edildi.</value></data>
   <data name="Status_Failed" xml:space="preserve"><value>İşlem tamamlanamadı: {0}</value></data>
@@ -166,7 +166,7 @@
   <data name="Status_NoFixAtTier" xml:space="preserve"><value>Bu kademede uygulanacak yeni bir onarım yok.</value></data>
   <data name="Status_PreviewComplete" xml:space="preserve"><value>Seçili {0} bulgu için önizleme tamamlandı. Hiçbir değişiklik uygulanmadı.</value></data>
   <data name="Status_PendingRebootSummary" xml:space="preserve"><value>Seçili onarım uygulandı ve doğrulama öncesinde Windows’un bir kez yeniden başlatılmasını bekliyor.</value></data>
-  <data name="Status_RestorePoint" xml:space="preserve"><value>Sistem Geri Yükleme noktası hazırlanıyor…</value></data>
+  <data name="Status_RestorePoint" xml:space="preserve"><value>Sistem Geri Yükleme noktası hazırlanıyor...</value></data>
   <data name="Action_SkipRestorePoint" xml:space="preserve"><value>Geri yükleme noktasını atla</value></data>
   <data name="Dialog_RestorePointOffer_Title" xml:space="preserve"><value>Sistem Geri Yükleme noktası</value></data>
   <data name="Dialog_RestorePointOffer" xml:space="preserve"><value>CaYaFix, değişikliklerden önce bir Sistem Geri Yükleme noktası oluşturabilir. Bu genelde yaklaşık 90 saniye içinde biter; Windows çalışırken az ilerleme gösterebilir.
@@ -189,7 +189,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Dialog_RestorePointFailed" xml:space="preserve"><value>Sistem Koruması kapalı, oluşturma süresi doldu (~90 sn) veya Windows geri yükleme noktasını reddetti. İşlem bazlı yedekler yine alınacak. Güvenli/orta seviye onarımlara yine de devam edilsin mi?</value></data>
   <data name="Dialog_ForceNeedsRestore" xml:space="preserve"><value>Sistem Geri Yükleme noktası oluşturulamadı (kapalı, zaman aşımı veya red). Zorla Onarım Sistem Geri Yükleme ile daha güvenlidir. Yine de geri yükleme noktası olmadan Zorla Onarıma devam edilsin mi?</value></data>
   <data name="Dialog_SupportPrivacy_Title" xml:space="preserve"><value>Kişisel veri uyarısı</value></data>
-  <data name="Dialog_SupportPrivacy" xml:space="preserve"><value>Destek paketi; bilgisayar adı, ağ yapılandırması, Wi‑Fi bilgileri, cihaz ve sürücü adları içerebilir. Paketi yalnız güvendiğiniz kişilerle paylaşın. Oluşturulsun mu?</value></data>
+  <data name="Dialog_SupportPrivacy" xml:space="preserve"><value>Destek paketi; bilgisayar adı, ağ yapılandırması, Wi-Fi bilgileri, cihaz ve sürücü adları içerebilir. Paketi yalnız güvendiğiniz kişilerle paylaşın. Oluşturulsun mu?</value></data>
   <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Oturum geri alınsın mı?</value></data>
   <data name="Dialog_Rollback" xml:space="preserve"><value>Uygulanan işlemler ters sırayla geri alınacak. Devam edilsin mi?</value></data>
   <data name="Dialog_Pending_Title" xml:space="preserve"><value>Doğrulama bekleyen oturum</value></data>
@@ -201,7 +201,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Dialog_SingleInstanceFailure" xml:space="preserve"><value>CaYaFix sistem genelindeki işlem kilidini alamadı. Hiçbir onarım başlatılmadı. Diğer CaYaFix oturumlarını kapatıp yeniden deneyin.</value></data>
   <data name="Dialog_DataRootFailure" xml:space="preserve"><value>CaYaFix korumalı ProgramData klasörüne erişemiyor. Hiçbir tanı veya onarım başlatılmadı. Uygulamayı yönetici olarak çalıştırıp klasör izinlerini denetleyin.</value></data>
   <data name="Dialog_LiveTestConfirm" xml:space="preserve"><value>Test sizin açınızdan başarıyla tamamlandı mı?</value></data>
-  <data name="Status_VerifyingPending" xml:space="preserve"><value>Yeniden başlatma sonrasında onarımlar doğrulanıyor…</value></data>
+  <data name="Status_VerifyingPending" xml:space="preserve"><value>Yeniden başlatma sonrasında onarımlar doğrulanıyor...</value></data>
   <data name="Status_PendingVerified" xml:space="preserve"><value>Yeniden başlatma doğrulaması başarılı. Bekleyen onarımlar tamamlandı.</value></data>
   <data name="Status_PendingStillDetected" xml:space="preserve"><value>Takip denetimleri sorunun sürdüğünü gösteriyor. Yeni bir onarım denemeden önce bulguları inceleyin.</value></data>
   <data name="Status_PendingRolledBack" xml:space="preserve"><value>Yeniden başlatma sonrası tanılama sorunu hâlâ algıladığı için CaYaFix doğrulanmış onarım öncesi durumu geri yükledi.</value></data>
@@ -209,7 +209,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Console_PendingCheckFailed" xml:space="preserve"><value>{0} takip denetimi çalıştırılamadı: {1}</value></data>
 
   <data name="Module_Network_Name" xml:space="preserve"><value>Ağ ve İnternet</value></data>
-  <data name="Module_Network_Description" xml:space="preserve"><value>Wi‑Fi, Ethernet, DNS, VPN, proxy ve güvenlik duvarı</value></data>
+  <data name="Module_Network_Description" xml:space="preserve"><value>Wi-Fi, Ethernet, DNS, VPN, proxy ve güvenlik duvarı</value></data>
   <data name="Module_Audio_Name" xml:space="preserve"><value>Ses ve Mikrofon</value></data>
   <data name="Module_Audio_Description" xml:space="preserve"><value>Çıkış, giriş, sürücü, sanal cihaz ve Bluetooth sesi</value></data>
   <data name="Module_Update_Name" xml:space="preserve"><value>Windows Update</value></data>
@@ -256,7 +256,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Finding_Network_PowerSavingEnabled" xml:space="preserve"><value>Windows ağ kartını güç tasarrufu için kapatabiliyor.</value></data>
   <data name="Finding_Network_ServiceStopped" xml:space="preserve"><value>Gerekli ağ servislerinden biri doğru çalışmıyor.</value></data>
   <data name="Finding_Network_TcpSettingsAbnormal" xml:space="preserve"><value>Windows TCP ayarları bağlantı hızını sınırlıyor olabilir.</value></data>
-  <data name="Finding_Network_WeakWifi" xml:space="preserve"><value>Wi‑Fi sinyali zayıf; kopma ve hız düşüşü beklenebilir.</value></data>
+  <data name="Finding_Network_WeakWifi" xml:space="preserve"><value>Wi-Fi sinyali zayıf; kopma ve hız düşüşü beklenebilir.</value></data>
   <data name="Finding_Network_ThroughputLow" xml:space="preserve"><value>Ölçülen indirme hızı olağandışı düşük.</value></data>
 
   <data name="Finding_Audio_NoOutputDevice" xml:space="preserve"><value>Etkin bir hoparlör veya kulaklık bulunamadı.</value></data>
@@ -347,7 +347,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Check_Network_Mtu" xml:space="preserve"><value>MTU yapılandırması</value></data>
   <data name="Check_Network_Power" xml:space="preserve"><value>Bağdaştırıcı güç yönetimi</value></data>
   <data name="Check_Network_Services" xml:space="preserve"><value>Ağ servisleri</value></data>
-  <data name="Check_Network_Performance" xml:space="preserve"><value>TCP ve Wi‑Fi performansı</value></data>
+  <data name="Check_Network_Performance" xml:space="preserve"><value>TCP ve Wi-Fi performansı</value></data>
   <data name="Check_Network_Throughput" xml:space="preserve"><value>İndirme hızı</value></data>
   <data name="Check_Network_EventLog" xml:space="preserve"><value>Ağ olay günlüğü eşlemesi</value></data>
   <data name="Check_Network_Bindings" xml:space="preserve"><value>IPv4/IPv6 protokol bağlamaları</value></data>
@@ -442,7 +442,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Symptom_Network_Slow" xml:space="preserve"><value>İnternet var ama yavaş</value></data>
   <data name="Symptom_Network_Sites" xml:space="preserve"><value>Belirli siteler açılmıyor</value></data>
   <data name="Symptom_Network_Vpn" xml:space="preserve"><value>VPN sonrası internet bozuldu</value></data>
-  <data name="Symptom_Network_WifiDrops" xml:space="preserve"><value>Wi‑Fi sürekli kopuyor</value></data>
+  <data name="Symptom_Network_WifiDrops" xml:space="preserve"><value>Wi-Fi sürekli kopuyor</value></data>
   <data name="Symptom_Audio_NoSound" xml:space="preserve"><value>Hiç ses yok</value></data>
   <data name="Symptom_Audio_Crackling" xml:space="preserve"><value>Ses cızırtılı veya kesik</value></data>
   <data name="Symptom_Audio_MicNotWorking" xml:space="preserve"><value>Mikrofon çalışmıyor</value></data>
@@ -553,12 +553,12 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Operation_PhaseScan" xml:space="preserve"><value>Taranıyor</value></data>
   <data name="Operation_PhaseRepair" xml:space="preserve"><value>Onarılıyor</value></data>
   <data name="Operation_PhaseRollback" xml:space="preserve"><value>Geri alınıyor</value></data>
-  <data name="Operation_PreparingRestorePoint" xml:space="preserve"><value>Değişikliklerden önce Sistem Geri Yükleme noktası oluşturuluyor…</value></data>
-  <data name="Operation_RestorePointChecking" xml:space="preserve"><value>Sistem Koruması ve son geri yükleme noktaları kontrol ediliyor…</value></data>
-  <data name="Operation_RestorePointWorking" xml:space="preserve"><value>Windows geri yükleme noktasını oluşturuyor (en fazla ~90 sn)…</value></data>
-  <data name="Operation_RestorePointWaiting" xml:space="preserve"><value>Geri yükleme noktası hâlâ oluşturuluyor… {0} sn geçti. Uyarı ile atlayabilirsiniz.</value></data>
+  <data name="Operation_PreparingRestorePoint" xml:space="preserve"><value>Değişikliklerden önce Sistem Geri Yükleme noktası oluşturuluyor...</value></data>
+  <data name="Operation_RestorePointChecking" xml:space="preserve"><value>Sistem Koruması ve son geri yükleme noktaları kontrol ediliyor...</value></data>
+  <data name="Operation_RestorePointWorking" xml:space="preserve"><value>Windows geri yükleme noktasını oluşturuyor (en fazla ~90 sn)...</value></data>
+  <data name="Operation_RestorePointWaiting" xml:space="preserve"><value>Geri yükleme noktası hâlâ oluşturuluyor... {0} sn geçti. Uyarı ile atlayabilirsiniz.</value></data>
   <data name="Operation_RestorePointCreated" xml:space="preserve"><value>Sistem Geri Yükleme noktası oluşturuldu.</value></data>
-  <data name="Operation_RestorePointAlreadyPresent" xml:space="preserve"><value>Son 24 saatte bir geri yükleme noktası zaten var — yeniden oluşturma atlandı.</value></data>
+  <data name="Operation_RestorePointAlreadyPresent" xml:space="preserve"><value>Son 24 saatte bir geri yükleme noktası zaten var - yeniden oluşturma atlandı.</value></data>
   <data name="Operation_RestorePointSkipped" xml:space="preserve"><value>Sistem Geri Yükleme noktası kullanıcı uyarısı ile atlandı. İşlem bazlı yedekler sürer.</value></data>
   <data name="Operation_RestorePointFailedDetail" xml:space="preserve"><value>Geri yükleme noktası adımı başarısız: {0}</value></data>
   <data name="Operation_ScanStep" xml:space="preserve"><value>{0} · “{1}” denetleniyor ({2}/{3})</value></data>
@@ -577,7 +577,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Toast_RollbackFailed" xml:space="preserve"><value>Geri alma başarısız</value></data>
   <data name="Toast_RecoveryDismissed" xml:space="preserve"><value>Kurtarma reddedildi</value></data>
   <data name="ModulePanel_Details" xml:space="preserve"><value>Alan ayrıntıları</value></data>
-  <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Yaygın belirtiler — odaklı tarama için birini seçin</value></data>
+  <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Yaygın belirtiler - odaklı tarama için birini seçin</value></data>
   <data name="ModulePanel_NoSymptoms" xml:space="preserve"><value>Bu alan için belirti kısayolu yok. Bunun yerine tam modül taraması çalıştırın.</value></data>
   <data name="ModulePanel_Hint" xml:space="preserve"><value>Daha derin denetim için tarayın veya bir belirti seçip risk uyarısından sonra ilgili onarımları uygulayın (cızırtı, kopma veya titreme görülebilir).</value></data>
   <data name="Action_ClosePanel" xml:space="preserve"><value>Kapat</value></data>
@@ -585,12 +585,12 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Action_ForceRepairReal" xml:space="preserve"><value>Gerçek sorunları onar</value></data>
   <data name="Action_ForceRepairAll" xml:space="preserve"><value>Yaygın bulguları da dahil et</value></data>
   <data name="Operation_PhaseComplete" xml:space="preserve"><value>Tarama tamam</value></data>
-  <data name="Operation_EtaCalculating" xml:space="preserve"><value>Süre hesaplanıyor…</value></data>
+  <data name="Operation_EtaCalculating" xml:space="preserve"><value>Süre hesaplanıyor...</value></data>
   <data name="Operation_EtaStarting" xml:space="preserve"><value>Bu adım genelde ~{0} dk sürer</value></data>
   <data name="Operation_EtaMinutes" xml:space="preserve"><value>~{0} dk kaldı</value></data>
   <data name="Operation_EtaSeconds" xml:space="preserve"><value>~{0} sn kaldı</value></data>
   <data name="Operation_EtaHoursMinutes" xml:space="preserve"><value>~{0} sa {1} dk kaldı</value></data>
-  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Neredeyse bitti…</value></data>
+  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Neredeyse bitti...</value></data>
   <data name="Operation_LongToolHint" xml:space="preserve"><value>uzun araç (~{0} dk)</value></data>
   <data name="Operation_LiveSummary" xml:space="preserve"><value>Sorunsuz denetim: {0} · Bulgu: {1}</value></data>
   <data name="Operation_StatPassed" xml:space="preserve"><value>Sorun yok</value></data>
@@ -601,7 +601,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Operation_ResultHealthyDetail" xml:space="preserve"><value>{0} denetim sorunsuz tamamlandı. Şu an bozulmuş bir şey görünmüyor.</value></data>
   <data name="Operation_ResultHealthyAdvice" xml:space="preserve"><value>Aralıklı bir belirti hissediyorsanız canlı testleri de çalıştırabilirsiniz.</value></data>
   <data name="Operation_ResultAdvisoryOnly" xml:space="preserve"><value>Yalnızca yaygın veya bilgilendirme bulguları</value></data>
-  <data name="Operation_ResultAdvisoryDetail" xml:space="preserve"><value>{0} bulgu kaydedildi; {1} tanesi yaygın/bilgilendirme niteliğinde (ör. sanal ses cihazları, zayıf Wi‑Fi veya güç tasarrufu).</value></data>
+  <data name="Operation_ResultAdvisoryDetail" xml:space="preserve"><value>{0} bulgu kaydedildi; {1} tanesi yaygın/bilgilendirme niteliğinde (ör. sanal ses cihazları, zayıf Wi-Fi veya güç tasarrufu).</value></data>
   <data name="Operation_ResultAdvisoryAdvice" xml:space="preserve"><value>Voicemeeter, sanal kablo sürücüleri, docking veya VPN yazılımlarında bunlar sık görülür ve her zaman gerçek arıza değildir. Zorla onarım öncesi inceleyin.</value></data>
   <data name="Operation_ResultMixed" xml:space="preserve"><value>Gerçek sorunlar ve yaygın bulgular bir arada</value></data>
   <data name="Operation_ResultMixedDetail" xml:space="preserve"><value>{0} muhtemel gerçek sorun, {1} yaygın/bilgilendirme bulgusu ve {2} temiz denetim.</value></data>
@@ -645,7 +645,7 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Finding_Disk_OnlineScanIssues" xml:space="preserve"><value>Çevrimiçi dosya sistemi taraması sorun bildirdi veya temiz tamamlanmadı.</value></data>
   <data name="Fix_Disk_OnlineScanFix" xml:space="preserve"><value>Çevrimiçi chkdsk /scan ve /spotfix</value></data>
   <data name="Check_Integrity_AnalyzeStore" xml:space="preserve"><value>DISM AnalyzeComponentStore</value></data>
-  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM WinSxS bileşen deposu temizliği öneriyor (alan kazanımı — dosya bozulması değil).</value></data>
+  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM WinSxS bileşen deposu temizliği öneriyor (alan kazanımı - dosya bozulması değil).</value></data>
   <data name="GuidedRepair_Effects_Boot" xml:space="preserve"><value>Önyükleme/kurtarma araçları BCD dışa aktarabilir, WinRE’yi açabilir veya önyükleme dosyalarını yeniden yazabilir. Yeniden başlatma gerekebilir. Yalnızca çevrimdışı araçlar (bootrec) çalışan masaüstünden çalıştırılmaz.</value></data>
   <data name="Expert_FixFlags" xml:space="preserve"><value>{0} · {1}</value></data>
   <data name="Expert_TargetRequired" xml:space="preserve"><value>hedef gerekli</value></data>
@@ -678,8 +678,8 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Dialog_SupportPackage_SaveFilter" xml:space="preserve"><value>ZIP arşivi (*.zip)|*.zip</value></data>
   <data name="Dialog_SupportPackage_SaveTitle" xml:space="preserve"><value>Destek paketini kaydet</value></data>
   <data name="Finding_Display_BasicAdapter" xml:space="preserve"><value>Windows Microsoft Temel Görüntü Bağdaştırıcısı kullanıyor; bu normal çözünürlük seçeneklerini kilitler veya soluklaştırır.</value></data>
-  <data name="Finding_Display_GenericMonitors" xml:space="preserve"><value>Monitörler yalnızca genel/bilinmeyen olarak tanınıyor — EDID/mod listeleri eksik olabilir.</value></data>
-  <data name="Finding_Display_ModesLocked" xml:space="preserve"><value>Çok az ekran modu listeleniyor — donanım daha fazlasını desteklese bile çözünürlük takılı veya gri kalabilir.</value></data>
+  <data name="Finding_Display_GenericMonitors" xml:space="preserve"><value>Monitörler yalnızca genel/bilinmeyen olarak tanınıyor - EDID/mod listeleri eksik olabilir.</value></data>
+  <data name="Finding_Display_ModesLocked" xml:space="preserve"><value>Çok az ekran modu listeleniyor - donanım daha fazlasını desteklese bile çözünürlük takılı veya gri kalabilir.</value></data>
   <data name="Finding_Display_MonitorError" xml:space="preserve"><value>Bağlı bir monitör aygıtı devre dışı veya hatalı; bu çözünürlük seçeneklerini kilitleyebilir.</value></data>
   <data name="Finding_Display_NoMonitor" xml:space="preserve"><value>Mod listesi için mevcut monitör aygıtı bulunamadı.</value></data>
   <data name="Finding_Display_PolicyLocked" xml:space="preserve"><value>Bir ilke ekran ayarlarını değiştirmeyi engelliyor gibi görünüyor (çözünürlük kasıtlı olarak gri olabilir).</value></data>

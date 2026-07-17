@@ -13,17 +13,41 @@ namespace CaYaFix.App;
 
 internal static class ScreenshotCaptureService
 {
+    // Logical (DIP) capture frame — wider than the default window for documentation.
+    private const double CaptureDipWidth = 1600;
+    private const double CaptureDipHeight = 1000;
+
+    // Render at 2× (192 DPI) so text stays sharp on high-DPI displays and GitHub.
+    private const double CaptureDpi = 192.0;
+    private const double CaptureScale = CaptureDpi / 96.0;
+
     public static async Task CaptureReadmeSetAsync(
         Window window,
         MainViewModel viewModel,
         string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
+
+        // Prefer universally available fonts during capture (Variable fonts may be missing on CI).
+        window.FontFamily = new FontFamily("Segoe UI");
+        TextOptions.SetTextFormattingMode(window, TextFormattingMode.Ideal);
+        TextOptions.SetTextRenderingMode(window, TextRenderingMode.ClearType);
+        TextOptions.SetTextHintingMode(window, TextHintingMode.Fixed);
+        window.UseLayoutRounding = true;
+        window.SnapsToDevicePixels = true;
+
         window.WindowState = WindowState.Normal;
-        window.Width = 1360;
-        window.Height = 860;
-        window.Left = 40;
-        window.Top = 40;
+        window.WindowStartupLocation = WindowStartupLocation.Manual;
+        window.Left = 20;
+        window.Top = 20;
+        window.MinWidth = CaptureDipWidth;
+        window.MinHeight = CaptureDipHeight;
+        window.MaxWidth = CaptureDipWidth;
+        window.MaxHeight = CaptureDipHeight;
+        ForceExactLayout(window);
+
+        await window.Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Render);
+        await Task.Delay(250);
 
         await CaptureStageAsync(window, viewModel, 0, Path.Combine(outputDirectory, "dashboard.png"));
         await CaptureStageAsync(window, viewModel, 1, Path.Combine(outputDirectory, "findings.png"));
@@ -37,15 +61,26 @@ internal static class ScreenshotCaptureService
         string destination)
     {
         viewModel.LoadReadmeDemo(page);
+        ForceExactLayout(window);
         await window.Dispatcher.InvokeAsync(() => { }, DispatcherPriority.ContextIdle);
-        await Task.Delay(650);
-        window.UpdateLayout();
+        await Task.Delay(900);
+        ForceExactLayout(window);
+        await window.Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Render);
+        await Task.Delay(200);
 
-        var dpi = VisualTreeHelper.GetDpi(window);
-        var width = Math.Max(1, (int)Math.Ceiling(window.ActualWidth * dpi.DpiScaleX));
-        var height = Math.Max(1, (int)Math.Ceiling(window.ActualHeight * dpi.DpiScaleY));
-        var bitmap = new RenderTargetBitmap(width, height, dpi.PixelsPerInchX, dpi.PixelsPerInchY, PixelFormats.Pbgra32);
+        var pixelWidth = Math.Max(1, (int)Math.Round(CaptureDipWidth * CaptureScale));
+        var pixelHeight = Math.Max(1, (int)Math.Round(CaptureDipHeight * CaptureScale));
+
+        // High-DPI RenderTargetBitmap: window stays at 1600×1000 DIP; raster is 3200×2000 @ 192 DPI.
+        var bitmap = new RenderTargetBitmap(
+            pixelWidth,
+            pixelHeight,
+            CaptureDpi,
+            CaptureDpi,
+            PixelFormats.Pbgra32);
         bitmap.Render(window);
+        bitmap.Freeze();
+
         var encoder = new PngBitmapEncoder();
         encoder.Frames.Add(BitmapFrame.Create(bitmap));
         var temporary = destination + ".new";
@@ -69,5 +104,14 @@ internal static class ScreenshotCaptureService
         {
             if (File.Exists(temporary)) File.Delete(temporary);
         }
+    }
+
+    private static void ForceExactLayout(Window window)
+    {
+        window.Width = CaptureDipWidth;
+        window.Height = CaptureDipHeight;
+        window.Measure(new Size(CaptureDipWidth, CaptureDipHeight));
+        window.Arrange(new Rect(0, 0, CaptureDipWidth, CaptureDipHeight));
+        window.UpdateLayout();
     }
 }

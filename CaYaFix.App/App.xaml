@@ -46,14 +46,21 @@
 
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <!-- Segoe UI first: Variable fonts are missing on some CI images and can fall back poorly. -->
+            <Setter Property="FontFamily" Value="Segoe UI, Segoe UI Variable Text, sans-serif" />
             <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+            <Setter Property="TextOptions.TextHintingMode" Value="Fixed" />
         </Style>
 
         <Style TargetType="Window">
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontFamily" Value="Segoe UI, Segoe UI Variable Text, sans-serif" />
             <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="UseLayoutRounding" Value="True" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         </Style>
 
         <Style x:Key="CardStyle" TargetType="Border">
@@ -156,7 +163,7 @@
 
         <Style TargetType="CheckBox">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontFamily" Value="Segoe UI, Segoe UI Variable Text, sans-serif" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
@@ -166,7 +173,7 @@
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Padding" Value="12,8" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontFamily" Value="Segoe UI, Segoe UI Variable Text, sans-serif" />
             <Setter Property="FontSize" Value="12.5" />
             <Setter Property="MinHeight" Value="38" />
             <Setter Property="Cursor" Value="Hand" />
