@@ -44,16 +44,14 @@ dotnet run --project .\tools\HarmlessDryRun\HarmlessDryRun.csproj -c Release
 
 ## Screenshots
 
-These images are captured from the running English WPF application by `tools/capture-readme-screenshots.ps1`. The capture mode loads deterministic in-app demonstration states so the dashboard, findings, and active ping/microphone animations are reproducible; the PNG files are not mockups or generated artwork.
+These images are captured from the running English WPF application by `tools/capture-readme-screenshots.ps1`. The capture mode loads deterministic in-app demonstration states so the dashboard and findings views are reproducible; the PNG files are not mockups or generated artwork.
 
 ![CaYaFix dashboard](docs/screenshots/dashboard.png)
 
 <details>
-<summary>Findings and live tests</summary>
+<summary>Findings</summary>
 
 ![Findings and repair tiers](docs/screenshots/findings.png)
-
-![Animated network and audio tests](docs/screenshots/live-tests.png)
 
 </details>
 
