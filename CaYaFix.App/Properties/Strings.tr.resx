@@ -7,761 +7,760 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
   <data name="AppName" xml:space="preserve"><value>CaYaFix</value></data>
-  <data name="AppTagline" xml:space="preserve"><value>Windows sorunlarÄ±nÄ± gÃ¼venle bulur, onarÄ±r ve geri alÄ±r.</value></data>
+  <data name="AppTagline" xml:space="preserve"><value>Windows sorunlarını güvenle bulur, onarır ve geri alır.</value></data>
   <data name="App_ReleaseChannel" xml:space="preserve"><value>BETA</value></data>
   <data name="App_VersionFormat" xml:space="preserve"><value>v{0}.{1}.{2}</value></data>
   <data name="Nav_Home" xml:space="preserve"><value>Ana Sayfa</value></data>
   <data name="Nav_Findings" xml:space="preserve"><value>Bulgular</value></data>
-  <data name="Nav_LiveTests" xml:space="preserve"><value>CanlÄ± Testler</value></data>
+  <data name="Nav_LiveTests" xml:space="preserve"><value>Canlı Testler</value></data>
   <data name="Nav_Recovery" xml:space="preserve"><value>Geri Alma</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Ayarlar</value></data>
-  <data name="AdminMode" xml:space="preserve"><value>YÃ¶netici modu</value></data>
+  <data name="AdminMode" xml:space="preserve"><value>Yönetici modu</value></data>
   <data name="Hero_Eyebrow" xml:space="preserve"><value>AKILLI WINDOWS ONARIMI</value></data>
-  <data name="Hero_Title" xml:space="preserve"><value>Sorunu bulalÄ±m, gÃ¼venli biÃ§imde dÃ¼zeltelim.</value></data>
-  <data name="Hero_Description" xml:space="preserve"><value>Ã–nce sistemi Ã¶lÃ§er, yalnÄ±z gerekli onarÄ±mlarÄ± Ã¶neririz. Her kalÄ±cÄ± deÄŸiÅŸiklik yedeklenir ve sonrasÄ±nda yeniden doÄŸrulanÄ±r.</value></data>
+  <data name="Hero_Title" xml:space="preserve"><value>Sorunu bulalım, güvenli biçimde düzeltelim.</value></data>
+  <data name="Hero_Description" xml:space="preserve"><value>Önce sistemi ölçer, yalnız gerekli onarımları öneririz. Her kalıcı değişiklik yedeklenir ve sonrasında yeniden doğrulanır.</value></data>
   <data name="Action_AutomaticScan" xml:space="preserve"><value>Otomatik Tara</value></data>
-  <data name="Action_Cancel" xml:space="preserve"><value>Ä°ptal Et</value></data>
-  <data name="Action_RepairSelected" xml:space="preserve"><value>SeÃ§ilenleri Onar</value></data>
-  <data name="Action_TryModerate" xml:space="preserve"><value>Orta Seviye OnarÄ±mlarÄ± Dene</value></data>
-  <data name="Action_ForceRepair" xml:space="preserve"><value>Zorla OnarÄ±mÄ± BaÅŸlat</value></data>
-  <data name="Action_CreateSupportPackage" xml:space="preserve"><value>Destek Paketi OluÅŸtur</value></data>
-  <data name="Action_OpenReport" xml:space="preserve"><value>Raporu AÃ§</value></data>
-  <data name="Action_OpenFolder" xml:space="preserve"><value>KlasÃ¶rÃ¼ AÃ§</value></data>
+  <data name="Action_Cancel" xml:space="preserve"><value>İptal Et</value></data>
+  <data name="Action_RepairSelected" xml:space="preserve"><value>Seçilenleri Onar</value></data>
+  <data name="Action_TryModerate" xml:space="preserve"><value>Orta Seviye Onarımları Dene</value></data>
+  <data name="Action_ForceRepair" xml:space="preserve"><value>Zorla Onarımı Başlat</value></data>
+  <data name="Action_CreateSupportPackage" xml:space="preserve"><value>Destek Paketi Oluştur</value></data>
+  <data name="Action_OpenReport" xml:space="preserve"><value>Raporu Aç</value></data>
+  <data name="Action_OpenFolder" xml:space="preserve"><value>Klasörü Aç</value></data>
   <data name="Action_UndoSession" xml:space="preserve"><value>Oturumu Geri Al</value></data>
-  <data name="Action_RunTest" xml:space="preserve"><value>Testi BaÅŸlat</value></data>
-  <data name="Action_ScanModule" xml:space="preserve"><value>Bu ModÃ¼lÃ¼ Tara</value></data>
-  <data name="Action_Minimize" xml:space="preserve"><value>Pencereyi simge durumuna kÃ¼Ã§Ã¼lt</value></data>
-  <data name="Action_Maximize" xml:space="preserve"><value>Pencereyi bÃ¼yÃ¼t veya geri yÃ¼kle</value></data>
+  <data name="Action_RunTest" xml:space="preserve"><value>Testi Başlat</value></data>
+  <data name="Action_ScanModule" xml:space="preserve"><value>Bu Modülü Tara</value></data>
+  <data name="Action_Minimize" xml:space="preserve"><value>Pencereyi simge durumuna küçült</value></data>
+  <data name="Action_Maximize" xml:space="preserve"><value>Pencereyi büyüt veya geri yükle</value></data>
   <data name="Action_Close" xml:space="preserve"><value>Pencereyi kapat</value></data>
   <data name="Action_Back" xml:space="preserve"><value>Geri</value></data>
-  <data name="Dashboard_Modules" xml:space="preserve"><value>Sorun alanlarÄ±</value></data>
-  <data name="Dashboard_ModulesHint" xml:space="preserve"><value>Belirtiyi biliyorsanÄ±z ilgili alanÄ± doÄŸrudan tarayÄ±n.</value></data>
-  <data name="Dashboard_SafetyTitle" xml:space="preserve"><value>DeÄŸiÅŸiklik yapmadan Ã¶nce</value></data>
-  <data name="Dashboard_SafetyText" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± ve iÅŸlem bazlÄ± yedekler hazÄ±rlanÄ±r. Yedek baÅŸarÄ±sÄ±zsa onarÄ±m baÅŸlamaz.</value></data>
-  <data name="Findings_Title" xml:space="preserve"><value>TanÄ±lama bulgularÄ±</value></data>
-  <data name="Findings_Description" xml:space="preserve"><value>GÃ¼venli dÃ¼zeltmeler seÃ§ili gelir. Teknik ayrÄ±ntÄ±larÄ± aÃ§arak her bulgunun kanÄ±tÄ±nÄ± gÃ¶rebilirsiniz.</value></data>
-  <data name="Findings_None" xml:space="preserve"><value>Åu anda belirgin bir sorun bulunamadÄ±.</value></data>
-  <data name="GuidedRepair_Intro" xml:space="preserve"><value>HÃ¢lÃ¢ bir ÅŸeyler ters geliyorsa aÅŸaÄŸÄ±daki belirtilerden birini seÃ§in. TanÄ± yeÅŸil kalsa bile CaYaFix ilgili GÃ¼venli/Orta onarÄ±mlarÄ± Ã§alÄ±ÅŸtÄ±rabilir.</value></data>
-  <data name="GuidedRepair_IntroRisk" xml:space="preserve"><value>Bu onarÄ±mlar sistem ayarlarÄ±nÄ± deÄŸiÅŸtirir ve ÅŸu an Ã§alÄ±ÅŸan ÅŸeyleri geÃ§ici olarak bozabilir. Devam etmeden yan etki listesini okuyun.</value></data>
-  <data name="GuidedRepair_PickTitle" xml:space="preserve"><value>HÃ¢lÃ¢ ne bozuk gibi geliyor?</value></data>
-  <data name="GuidedRepair_PickHint" xml:space="preserve"><value>Bulgular sayfasÄ±ndan bir belirti seÃ§in; risk uyarÄ±sÄ±nÄ± onayladÄ±ktan sonra ilgili onarÄ±mlar uygulanÄ±r.</value></data>
-  <data name="GuidedRepair_ConfirmTitle" xml:space="preserve"><value>Belirti onarÄ±mlarÄ± uygulansÄ±n mÄ±?</value></data>
-  <data name="GuidedRepair_Warning" xml:space="preserve"><value>Her adÄ±m iÃ§in baÅŸarÄ±sÄ±z bir tanÄ± olmadan birden fazla ilgili onarÄ±m uygulanacak. Ã‡alÄ±ÅŸan ayarlar deÄŸiÅŸebilir, servisler veya cihazlar yeniden baÅŸlatÄ±labilir ve sistem kÄ±sa sÃ¼re kararsÄ±z kalabilir. YalnÄ±zca riski anlÄ±yorsanÄ±z ve geri alma yolunuz (Kurtarma / Sistem Geri YÃ¼kleme) varsa devam edin.</value></data>
-  <data name="GuidedRepair_WarningShort" xml:space="preserve"><value>Rehberli belirti onarÄ±mÄ±: Ã§alÄ±ÅŸan ayarlarÄ± etkileyebilir.</value></data>
-  <data name="GuidedRepair_SideEffectsTitle" xml:space="preserve"><value>Uygulama sÄ±rasÄ±nda neler olabilir</value></data>
-  <data name="GuidedRepair_FixesTitle" xml:space="preserve"><value>Ã‡alÄ±ÅŸtÄ±rÄ±lacak ilgili onarÄ±mlar</value></data>
-  <data name="GuidedRepair_AcceptRisk" xml:space="preserve"><value>Bu deÄŸiÅŸikliklerin ÅŸu an Ã§alÄ±ÅŸan bir ÅŸeyi bozabileceÄŸini anlÄ±yorum ve riski kabul ediyorum.</value></data>
-  <data name="GuidedRepair_NeedConsent" xml:space="preserve"><value>Belirti onarÄ±mlarÄ±nÄ± uygulamadan Ã¶nce risk kutusunu iÅŸaretleyin.</value></data>
-  <data name="GuidedRepair_FixCount" xml:space="preserve"><value>{0} ilgili onarÄ±m</value></data>
-  <data name="GuidedRepair_NoFixes" xml:space="preserve"><value>Bu belirti iÃ§in otomatik GÃ¼venli/Orta onarÄ±m eÅŸlemesi yok.</value></data>
-  <data name="GuidedRepair_Applying" xml:space="preserve"><value>â€œ{0}â€ iÃ§in onarÄ±mlar uygulanÄ±yorâ€¦</value></data>
-  <data name="GuidedRepair_RunningEffectsReminder" xml:space="preserve"><value>Åu anda yan etkiler gÃ¶rÃ¼lebilir (ses cÄ±zÄ±rtÄ±sÄ±, kÄ±sa kopmalar, titreme). Bitene kadar bu pencerede kalÄ±n.</value></data>
-  <data name="GuidedRepair_ToastTitle" xml:space="preserve"><value>Belirti onarÄ±mÄ±</value></data>
-  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>Ä°nternet kÄ±sa sÃ¼re kesilebilir, Wiâ€‘Fi/Ethernet yeniden baÄŸlanabilir, VPN oturumlarÄ± dÃ¼ÅŸebilir, indirmeler duraklayabilir ve DNS/Ã¶nbellek oturana kadar siteler aÃ§Ä±lamayabilir.</value></data>
-  <data name="GuidedRepair_Effects_Audio" xml:space="preserve"><value>CÄ±zÄ±rtÄ±, kÄ±sa sessizlik, cihaz deÄŸiÅŸimi, ses sÄ±Ã§ramasÄ± veya Bluetooth kulaklÄ±ÄŸÄ±n yeniden baÄŸlanmasÄ± olabilir. MÃ¼mkÃ¼nse Ã¶nemli aramalarÄ± kapatÄ±n.</value></data>
-  <data name="GuidedRepair_Effects_Display" xml:space="preserve"><value>Ekran titreyebilir, kÄ±sa sÃ¼re kararabilir, Ã§Ã¶zÃ¼nÃ¼rlÃ¼k/yenileme hÄ±zÄ± deÄŸiÅŸebilir veya monitÃ¶rler yeniden algÄ±lanabilir.</value></data>
-  <data name="GuidedRepair_Effects_Bluetooth" xml:space="preserve"><value>EÅŸleÅŸmiÅŸ cihazlar kopabilir ve yeniden baÄŸlanmanÄ±z gerekebilir; ses/giriÅŸ birkaÃ§ saniye dÃ¼ÅŸebilir.</value></data>
-  <data name="GuidedRepair_Effects_Printer" xml:space="preserve"><value>YazdÄ±rma iÅŸleri iptal veya yeniden baÅŸlatÄ±labilir; yazÄ±cÄ± kuyruk servisi yeniden baÅŸlarken kÄ±sa sÃ¼re Ã§evrimdÄ±ÅŸÄ± gÃ¶rÃ¼nebilir.</value></data>
-  <data name="GuidedRepair_Effects_Disk" xml:space="preserve"><value>Disk etkinliÄŸi artabilir, bilgisayar yavaÅŸlayabilir ve daha sonra yeniden baÅŸlatma isteyen bir denetim planlanabilir.</value></data>
-  <data name="GuidedRepair_Effects_Integrity" xml:space="preserve"><value>Sistem dosyasÄ± onarÄ±mÄ± uzun sÃ¼rebilir, CPU/disk yÃ¼kÃ¼nÃ¼ yÃ¼kseltebilir ve yeniden baÅŸlatma isteyebilir. GÃ¼Ã§ kesmeyin.</value></data>
-  <data name="GuidedRepair_Effects_Update" xml:space="preserve"><value>Windows Update servisleri yeniden baÅŸlar; bekleyen kurulumlar duraklayabilir ve ardÄ±ndan yeniden baÅŸlatma gerekebilir.</value></data>
-  <data name="GuidedRepair_Effects_Store" xml:space="preserve"><value>Microsoft Store ve bazÄ± uygulamalar kapanabilir veya yeniden oturum aÃ§manÄ±z gerekebilir; indirmeler sÄ±fÄ±rlanabilir.</value></data>
-  <data name="GuidedRepair_Effects_Camera" xml:space="preserve"><value>Kamera uygulamalarÄ± cihazÄ± kÄ±sa sÃ¼re kaybedebilir; gizlilik izinleri yeniden sorulabilir.</value></data>
-  <data name="GuidedRepair_Effects_Usb" xml:space="preserve"><value>USB aygÄ±tlarÄ± kopup yeniden gÃ¶rÃ¼nebilir; aktarÄ±m bozulmasÄ±n diye depolama aygÄ±tlarÄ±nÄ± Ã¶nce gÃ¼venli kapatÄ±n.</value></data>
-  <data name="GuidedRepair_Effects_Search" xml:space="preserve"><value>Servis yeniden baÅŸlarken Arama yanÄ±t vermeyebilir; dizinleme yÃ¼ksek disk kullanÄ±mÄ±yla sÃ¼rebilir.</value></data>
-  <data name="GuidedRepair_Effects_Time" xml:space="preserve"><value>Saat bir an kayabilir; senkron bitene kadar gÃ¼venli siteler veya oturumlar hata verebilir.</value></data>
-  <data name="GuidedRepair_Effects_Performance" xml:space="preserve"><value>BaÅŸlangÄ±Ã§ Ã¶ÄŸeleri veya gÃ¼Ã§ planÄ± deÄŸiÅŸebilir; bir sonraki yeniden baÅŸlatmadan sonra sistem farklÄ± hissedilebilir.</value></data>
-  <data name="GuidedRepair_Effects_Generic" xml:space="preserve"><value>Bu alandaki servisler veya aygÄ±tlar yeniden baÅŸlayabilir. DeÄŸiÅŸiklikler uygulanÄ±rken kÄ±sa donma, yeniden baÄŸlanma veya arayÃ¼z titremesi olabilir.</value></data>
-  <data name="Action_StillHaveProblem" xml:space="preserve"><value>HÃ¢lÃ¢ sorun mu var?</value></data>
-  <data name="Action_ApplySymptomRepairs" xml:space="preserve"><value>Ä°lgili onarÄ±mlarÄ± uygula</value></data>
-  <data name="Finding_GuidedSymptom" xml:space="preserve"><value>â€œ{0}â€ iÃ§in rehberli onarÄ±m: {1}</value></data>
-  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>HÃ¢lÃ¢ bir ÅŸey ters geliyorsa Bulgularâ€™dan belirti seÃ§in â€” risk uyarÄ±sÄ±ndan sonra ilgili onarÄ±mlar uygulanÄ±r (Ã§alÄ±ÅŸÄ±rken ses cÄ±zÄ±rtÄ±sÄ±, aÄŸ kopmasÄ± veya titreme olabilir).</value></data>
-  <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Teknik ayrÄ±ntÄ±</value></data>
-  <data name="Finding_Recommended" xml:space="preserve"><value>Ã–nerilen onarÄ±m</value></data>
-  <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>Otomatik onarÄ±m sunulmuyor; kanÄ±tlarÄ± ve Ã¶nerilen el ile kontrolleri inceleyin.</value></data>
+  <data name="Dashboard_Modules" xml:space="preserve"><value>Sorun alanları</value></data>
+  <data name="Dashboard_ModulesHint" xml:space="preserve"><value>Belirtiyi biliyorsanız ilgili alanı doğrudan tarayın.</value></data>
+  <data name="Dashboard_SafetyTitle" xml:space="preserve"><value>Değişiklik yapmadan önce</value></data>
+  <data name="Dashboard_SafetyText" xml:space="preserve"><value>Sistem Geri Yükleme noktası ve işlem bazlı yedekler hazırlanır. Yedek başarısızsa onarım başlamaz.</value></data>
+  <data name="Findings_Title" xml:space="preserve"><value>Tanılama bulguları</value></data>
+  <data name="Findings_Description" xml:space="preserve"><value>Güvenli düzeltmeler seçili gelir. Teknik ayrıntıları açarak her bulgunun kanıtını görebilirsiniz.</value></data>
+  <data name="Findings_None" xml:space="preserve"><value>Şu anda belirgin bir sorun bulunamadı.</value></data>
+  <data name="GuidedRepair_Intro" xml:space="preserve"><value>Hâlâ bir şeyler ters geliyorsa aşağıdaki belirtilerden birini seçin. Tanı yeşil kalsa bile CaYaFix ilgili Güvenli/Orta onarımları çalıştırabilir.</value></data>
+  <data name="GuidedRepair_IntroRisk" xml:space="preserve"><value>Bu onarımlar sistem ayarlarını değiştirir ve şu an çalışan şeyleri geçici olarak bozabilir. Devam etmeden yan etki listesini okuyun.</value></data>
+  <data name="GuidedRepair_PickTitle" xml:space="preserve"><value>Hâlâ ne bozuk gibi geliyor?</value></data>
+  <data name="GuidedRepair_PickHint" xml:space="preserve"><value>Bulgular sayfasından bir belirti seçin; risk uyarısını onayladıktan sonra ilgili onarımlar uygulanır.</value></data>
+  <data name="GuidedRepair_ConfirmTitle" xml:space="preserve"><value>Belirti onarımları uygulansın mı?</value></data>
+  <data name="GuidedRepair_Warning" xml:space="preserve"><value>Her adım için başarısız bir tanı olmadan birden fazla ilgili onarım uygulanacak. Çalışan ayarlar değişebilir, servisler veya cihazlar yeniden başlatılabilir ve sistem kısa süre kararsız kalabilir. Yalnızca riski anlıyorsanız ve geri alma yolunuz (Kurtarma / Sistem Geri Yükleme) varsa devam edin.</value></data>
+  <data name="GuidedRepair_WarningShort" xml:space="preserve"><value>Rehberli belirti onarımı: çalışan ayarları etkileyebilir.</value></data>
+  <data name="GuidedRepair_SideEffectsTitle" xml:space="preserve"><value>Uygulama sırasında neler olabilir</value></data>
+  <data name="GuidedRepair_FixesTitle" xml:space="preserve"><value>Çalıştırılacak ilgili onarımlar</value></data>
+  <data name="GuidedRepair_AcceptRisk" xml:space="preserve"><value>Bu değişikliklerin şu an çalışan bir şeyi bozabileceğini anlıyorum ve riski kabul ediyorum.</value></data>
+  <data name="GuidedRepair_NeedConsent" xml:space="preserve"><value>Belirti onarımlarını uygulamadan önce risk kutusunu işaretleyin.</value></data>
+  <data name="GuidedRepair_FixCount" xml:space="preserve"><value>{0} ilgili onarım</value></data>
+  <data name="GuidedRepair_NoFixes" xml:space="preserve"><value>Bu belirti için otomatik Güvenli/Orta onarım eşlemesi yok.</value></data>
+  <data name="GuidedRepair_Applying" xml:space="preserve"><value>“{0}” için onarımlar uygulanıyor…</value></data>
+  <data name="GuidedRepair_RunningEffectsReminder" xml:space="preserve"><value>Şu anda yan etkiler görülebilir (ses cızırtısı, kısa kopmalar, titreme). Bitene kadar bu pencerede kalın.</value></data>
+  <data name="GuidedRepair_ToastTitle" xml:space="preserve"><value>Belirti onarımı</value></data>
+  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>İnternet kısa süre kesilebilir, Wi‑Fi/Ethernet yeniden bağlanabilir, VPN oturumları düşebilir, indirmeler duraklayabilir ve DNS/önbellek oturana kadar siteler açılamayabilir.</value></data>
+  <data name="GuidedRepair_Effects_Audio" xml:space="preserve"><value>Cızırtı, kısa sessizlik, cihaz değişimi, ses sıçraması veya Bluetooth kulaklığın yeniden bağlanması olabilir. Mümkünse önemli aramaları kapatın.</value></data>
+  <data name="GuidedRepair_Effects_Display" xml:space="preserve"><value>Ekran titreyebilir, kısa süre kararabilir, çözünürlük/yenileme hızı değişebilir veya monitörler yeniden algılanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Bluetooth" xml:space="preserve"><value>Eşleşmiş cihazlar kopabilir ve yeniden bağlanmanız gerekebilir; ses/giriş birkaç saniye düşebilir.</value></data>
+  <data name="GuidedRepair_Effects_Printer" xml:space="preserve"><value>Yazdırma işleri iptal veya yeniden başlatılabilir; yazıcı kuyruk servisi yeniden başlarken kısa süre çevrimdışı görünebilir.</value></data>
+  <data name="GuidedRepair_Effects_Disk" xml:space="preserve"><value>Disk etkinliği artabilir, bilgisayar yavaşlayabilir ve daha sonra yeniden başlatma isteyen bir denetim planlanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Integrity" xml:space="preserve"><value>Sistem dosyası onarımı uzun sürebilir, CPU/disk yükünü yükseltebilir ve yeniden başlatma isteyebilir. Güç kesmeyin.</value></data>
+  <data name="GuidedRepair_Effects_Update" xml:space="preserve"><value>Windows Update servisleri yeniden başlar; bekleyen kurulumlar duraklayabilir ve ardından yeniden başlatma gerekebilir.</value></data>
+  <data name="GuidedRepair_Effects_Store" xml:space="preserve"><value>Microsoft Store ve bazı uygulamalar kapanabilir veya yeniden oturum açmanız gerekebilir; indirmeler sıfırlanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Camera" xml:space="preserve"><value>Kamera uygulamaları cihazı kısa süre kaybedebilir; gizlilik izinleri yeniden sorulabilir.</value></data>
+  <data name="GuidedRepair_Effects_Usb" xml:space="preserve"><value>USB aygıtları kopup yeniden görünebilir; aktarım bozulmasın diye depolama aygıtlarını önce güvenli kapatın.</value></data>
+  <data name="GuidedRepair_Effects_Search" xml:space="preserve"><value>Servis yeniden başlarken Arama yanıt vermeyebilir; dizinleme yüksek disk kullanımıyla sürebilir.</value></data>
+  <data name="GuidedRepair_Effects_Time" xml:space="preserve"><value>Saat bir an kayabilir; senkron bitene kadar güvenli siteler veya oturumlar hata verebilir.</value></data>
+  <data name="GuidedRepair_Effects_Performance" xml:space="preserve"><value>Başlangıç öğeleri veya güç planı değişebilir; bir sonraki yeniden başlatmadan sonra sistem farklı hissedilebilir.</value></data>
+  <data name="GuidedRepair_Effects_Generic" xml:space="preserve"><value>Bu alandaki servisler veya aygıtlar yeniden başlayabilir. Değişiklikler uygulanırken kısa donma, yeniden bağlanma veya arayüz titremesi olabilir.</value></data>
+  <data name="Action_StillHaveProblem" xml:space="preserve"><value>Hâlâ sorun mu var?</value></data>
+  <data name="Action_ApplySymptomRepairs" xml:space="preserve"><value>İlgili onarımları uygula</value></data>
+  <data name="Finding_GuidedSymptom" xml:space="preserve"><value>“{0}” için rehberli onarım: {1}</value></data>
+  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>Hâlâ bir şey ters geliyorsa Bulgular’dan belirti seçin — risk uyarısından sonra ilgili onarımlar uygulanır (çalışırken ses cızırtısı, ağ kopması veya titreme olabilir).</value></data>
+  <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Teknik ayrıntı</value></data>
+  <data name="Finding_Recommended" xml:space="preserve"><value>Önerilen onarım</value></data>
+  <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>Otomatik onarım sunulmuyor; kanıtları ve önerilen el ile kontrolleri inceleyin.</value></data>
   <data name="Severity_Info" xml:space="preserve"><value>Bilgi</value></data>
-  <data name="Severity_Warning" xml:space="preserve"><value>UyarÄ±</value></data>
+  <data name="Severity_Warning" xml:space="preserve"><value>Uyarı</value></data>
   <data name="Severity_Critical" xml:space="preserve"><value>Kritik</value></data>
-  <data name="Status_Open" xml:space="preserve"><value>AÃ§Ä±k</value></data>
-  <data name="Status_Repairing" xml:space="preserve"><value>OnarÄ±lÄ±yor</value></data>
-  <data name="Status_Resolved" xml:space="preserve"><value>Ã‡Ã¶zÃ¼ldÃ¼</value></data>
+  <data name="Status_Open" xml:space="preserve"><value>Açık</value></data>
+  <data name="Status_Repairing" xml:space="preserve"><value>Onarılıyor</value></data>
+  <data name="Status_Resolved" xml:space="preserve"><value>Çözüldü</value></data>
   <data name="Status_Unresolved" xml:space="preserve"><value>Devam ediyor</value></data>
-  <data name="Status_Skipped" xml:space="preserve"><value>AtlandÄ±</value></data>
-  <data name="Tier_Safe" xml:space="preserve"><value>GÃ¼venli</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Atlandı</value></data>
+  <data name="Tier_Safe" xml:space="preserve"><value>Güvenli</value></data>
   <data name="Tier_Moderate" xml:space="preserve"><value>Orta</value></data>
   <data name="Tier_Aggressive" xml:space="preserve"><value>Zorla</value></data>
   <data name="Escalation_Title" xml:space="preserve"><value>Sorun devam ediyor</value></data>
-  <data name="Handoff_Title" xml:space="preserve"><value>Otomatik yazÄ±lÄ±m onarÄ±mÄ± tamamlandÄ±</value></data>
-  <data name="Handoff_Description" xml:space="preserve"><value>SeÃ§ilen gÃ¼venli onarÄ±m yollarÄ± tÃ¼m bulgularÄ± gideremedi. CaYaFix, doÄŸrulanmÄ±ÅŸ geri alma yolu olmadan iÅŸlemleri tekrarlamaz veya kapsamÄ± geniÅŸletmez.</value></data>
-  <data name="Handoff_NextSteps" xml:space="preserve"><value>HTML raporunu inceleyin, ilgiliyse kablo ve baÄŸlantÄ± noktalarÄ±nÄ± test edin, cihaz Ã¼reticisinin tanÄ± araÃ§larÄ±nÄ± denetleyin ve teknik destek istemeden Ã¶nce kiÅŸisel verileri ayÄ±klanmÄ±ÅŸ destek paketi oluÅŸturun.</value></data>
-  <data name="Escalation_ModerateText" xml:space="preserve"><value>GÃ¼venli adÄ±mlar yeterli olmadÄ±. Daha kapsamlÄ±, geri alÄ±nabilir orta seviye adÄ±mlar denenebilir.</value></data>
-  <data name="Escalation_ForceText" xml:space="preserve"><value>Bu mod; sÃ¼rÃ¼cÃ¼, aÄŸ yÄ±ÄŸÄ±nÄ± veya sistem bileÅŸenlerini sÄ±fÄ±rlayabilir. Tam yedek ve geri yÃ¼kleme noktasÄ± zorunludur.</value></data>
-  <data name="Force_Accept" xml:space="preserve"><value>Riskleri anladÄ±m ve zorla onarÄ±ma izin veriyorum.</value></data>
-  <data name="LiveTests_Title" xml:space="preserve"><value>CanlÄ± testler</value></data>
-  <data name="LiveTests_Description" xml:space="preserve"><value>BaÄŸlantÄ±yÄ±, hoparlÃ¶rÃ¼ ve mikrofonu gerÃ§ek zamanlÄ± Ã¶lÃ§Ã¼n. HÄ±z testi yalnÄ±z siz baÅŸlattÄ±ÄŸÄ±nÄ±zda veri indirir.</value></data>
-  <data name="LiveTests_Output" xml:space="preserve"><value>Test akÄ±ÅŸÄ±</value></data>
-  <data name="LiveMetrics_Title" xml:space="preserve"><value>Ã–lÃ§Ã¼len sonuÃ§lar</value></data>
+  <data name="Handoff_Title" xml:space="preserve"><value>Otomatik yazılım onarımı tamamlandı</value></data>
+  <data name="Handoff_Description" xml:space="preserve"><value>Seçilen güvenli onarım yolları tüm bulguları gideremedi. CaYaFix, doğrulanmış geri alma yolu olmadan işlemleri tekrarlamaz veya kapsamı genişletmez.</value></data>
+  <data name="Handoff_NextSteps" xml:space="preserve"><value>HTML raporunu inceleyin, ilgiliyse kablo ve bağlantı noktalarını test edin, cihaz üreticisinin tanı araçlarını denetleyin ve teknik destek istemeden önce kişisel verileri ayıklanmış destek paketi oluşturun.</value></data>
+  <data name="Escalation_ModerateText" xml:space="preserve"><value>Güvenli adımlar yeterli olmadı. Daha kapsamlı, geri alınabilir orta seviye adımlar denenebilir.</value></data>
+  <data name="Escalation_ForceText" xml:space="preserve"><value>Bu mod; sürücü, ağ yığını veya sistem bileşenlerini sıfırlayabilir. Tam yedek ve geri yükleme noktası zorunludur.</value></data>
+  <data name="Force_Accept" xml:space="preserve"><value>Riskleri anladım ve zorla onarıma izin veriyorum.</value></data>
+  <data name="LiveTests_Title" xml:space="preserve"><value>Canlı testler</value></data>
+  <data name="LiveTests_Description" xml:space="preserve"><value>Bağlantıyı, hoparlörü ve mikrofonu gerçek zamanlı ölçün. Hız testi yalnız siz başlattığınızda veri indirir.</value></data>
+  <data name="LiveTests_Output" xml:space="preserve"><value>Test akışı</value></data>
+  <data name="LiveMetrics_Title" xml:space="preserve"><value>Ölçülen sonuçlar</value></data>
   <data name="LiveMetrics_Test" xml:space="preserve"><value>Test</value></data>
-  <data name="LiveMetrics_Result" xml:space="preserve"><value>UÃ§ nokta veya sonuÃ§</value></data>
-  <data name="LiveMetrics_Measurements" xml:space="preserve"><value>Ã–lÃ§Ã¼mler</value></data>
-  <data name="LiveMetrics_PingTest" xml:space="preserve"><value>BaÄŸdaÅŸtÄ±rÄ±cÄ± baÅŸÄ±na ping</value></data>
-  <data name="LiveMetrics_DnsTest" xml:space="preserve"><value>DNS yarÄ±ÅŸÄ±</value></data>
-  <data name="LiveMetrics_Ping" xml:space="preserve"><value>GÃ¶nderilen {0:0} Â· alÄ±nan {1:0} Â· kayÄ±p %{2:0.#} Â· min/ort/maks {3:0.0}/{4:0.0}/{5:0.0} ms Â· sapma {6:0.0} ms</value></data>
-  <data name="LiveMetrics_Dns" xml:space="preserve"><value>Ã‡Ã¶zÃ¼mleme {0:0} ms Â· {1}</value></data>
-  <data name="LiveMetrics_Speed" xml:space="preserve"><value>HÄ±z {0:0.0} Mbps Â· indirilen {1:0.0} MB</value></data>
+  <data name="LiveMetrics_Result" xml:space="preserve"><value>Uç nokta veya sonuç</value></data>
+  <data name="LiveMetrics_Measurements" xml:space="preserve"><value>Ölçümler</value></data>
+  <data name="LiveMetrics_PingTest" xml:space="preserve"><value>Bağdaştırıcı başına ping</value></data>
+  <data name="LiveMetrics_DnsTest" xml:space="preserve"><value>DNS yarışı</value></data>
+  <data name="LiveMetrics_Ping" xml:space="preserve"><value>Gönderilen {0:0} · alınan {1:0} · kayıp %{2:0.#} · min/ort/maks {3:0.0}/{4:0.0}/{5:0.0} ms · sapma {6:0.0} ms</value></data>
+  <data name="LiveMetrics_Dns" xml:space="preserve"><value>Çözümleme {0:0} ms · {1}</value></data>
+  <data name="LiveMetrics_Speed" xml:space="preserve"><value>Hız {0:0.0} Mbps · indirilen {1:0.0} MB</value></data>
   <data name="LiveMetrics_AudioPeak" xml:space="preserve"><value>Tepe mikrofon seviyesi %{0:0.0}</value></data>
-  <data name="LiveMetrics_Underruns" xml:space="preserve"><value>Ses arabelleÄŸi kesintisi {0:0}</value></data>
-  <data name="LiveMetrics_Http" xml:space="preserve"><value>HTTP {0:0} Â· {1:0} ms Â· {2:0} bayt Â· beklenen sayfa {3}</value></data>
+  <data name="LiveMetrics_Underruns" xml:space="preserve"><value>Ses arabelleği kesintisi {0:0}</value></data>
+  <data name="LiveMetrics_Http" xml:space="preserve"><value>HTTP {0:0} · {1:0} ms · {2:0} bayt · beklenen sayfa {3}</value></data>
   <data name="Recovery_Title" xml:space="preserve"><value>Geri Alma Merkezi</value></data>
-  <data name="Recovery_Description" xml:space="preserve"><value>Ã–nceki oturumlarÄ±n tÃ¼mÃ¼nÃ¼ ters sÄ±rayla geri alÄ±n veya yedek klasÃ¶rÃ¼nÃ¼ inceleyin.</value></data>
-  <data name="Recovery_None" xml:space="preserve"><value>HenÃ¼z onarÄ±m oturumu yok.</value></data>
+  <data name="Recovery_Description" xml:space="preserve"><value>Önceki oturumların tümünü ters sırayla geri alın veya yedek klasörünü inceleyin.</value></data>
+  <data name="Recovery_None" xml:space="preserve"><value>Henüz onarım oturumu yok.</value></data>
   <data name="Settings_Title" xml:space="preserve"><value>Ayarlar</value></data>
-  <data name="Settings_DryRun" xml:space="preserve"><value>Ã–nizleme modu</value></data>
-  <data name="Settings_DryRunDescription" xml:space="preserve"><value>OnarÄ±mlar uygulanmaz; Ã§alÄ±ÅŸtÄ±rÄ±lacak adÄ±mlar Ä°ÅŸlem Konsoluâ€™nda gÃ¶sterilir.</value></data>
-  <data name="Settings_Expert" xml:space="preserve"><value>Uzman gÃ¶rÃ¼nÃ¼mÃ¼</value></data>
-  <data name="Settings_ExpertDescription" xml:space="preserve"><value>GÃ¼venli, Orta ve Zorla kademelerini doÄŸrudan seÃ§meyi saÄŸlar. TÃ¼m yedek ve onay korumalarÄ± uygulanmaya devam eder.</value></data>
-  <data name="Expert_TierSelector" xml:space="preserve"><value>Uzman onarÄ±m kademesi</value></data>
-  <data name="Settings_Offline" xml:space="preserve"><value>Ã‡evrimdÄ±ÅŸÄ± Ã§alÄ±ÅŸma</value></data>
-  <data name="Settings_OfflineDescription" xml:space="preserve"><value>Yerel tanÄ±lama ve onarÄ±mlar internet olmadan da Ã§alÄ±ÅŸÄ±r. YalnÄ±z internet/DNS/hÄ±z testleri baÄŸlantÄ± gerektirir.</value></data>
+  <data name="Settings_DryRun" xml:space="preserve"><value>Önizleme modu</value></data>
+  <data name="Settings_DryRunDescription" xml:space="preserve"><value>Onarımlar uygulanmaz; çalıştırılacak adımlar İşlem Konsolu’nda gösterilir.</value></data>
+  <data name="Settings_Expert" xml:space="preserve"><value>Uzman görünümü</value></data>
+  <data name="Settings_ExpertDescription" xml:space="preserve"><value>Güvenli, Orta ve Zorla kademelerini doğrudan seçmeyi sağlar. Tüm yedek ve onay korumaları uygulanmaya devam eder.</value></data>
+  <data name="Expert_TierSelector" xml:space="preserve"><value>Uzman onarım kademesi</value></data>
+  <data name="Settings_Offline" xml:space="preserve"><value>Çevrimdışı çalışma</value></data>
+  <data name="Settings_OfflineDescription" xml:space="preserve"><value>Yerel tanılama ve onarımlar internet olmadan da çalışır. Yalnız internet/DNS/hız testleri bağlantı gerektirir.</value></data>
   <data name="Settings_Language" xml:space="preserve"><value>Dil</value></data>
-  <data name="Settings_LanguageDescription" xml:space="preserve"><value>VarsayÄ±lan dil Ä°ngilizceâ€™dir. TÃ¼rkÃ§e yalnÄ±zca Windows TÃ¼rkÃ§e ise veya burada seÃ§ilirse kullanÄ±lÄ±r. Desteklenmeyen Windows dilleri Ä°ngilizceâ€™ye dÃ¼ÅŸer.</value></data>
-  <data name="Language_English" xml:space="preserve"><value>Ä°ngilizce</value></data>
-  <data name="Language_Turkish" xml:space="preserve"><value>TÃ¼rkÃ§e</value></data>
-  <data name="Language_System" xml:space="preserve"><value>Windows ile aynÄ± (Ä°ngilizce veya TÃ¼rkÃ§e)</value></data>
-  <data name="Dialog_LanguageRestart_Title" xml:space="preserve"><value>Dil deÄŸiÅŸimi iÃ§in yeniden baÅŸlatÄ±lsÄ±n mÄ±?</value></data>
-  <data name="Dialog_LanguageRestart" xml:space="preserve"><value>Yeni dili uygulamak iÃ§in CaYaFix yeniden baÅŸlatÄ±lmalÄ±. YarÄ±m kalan iÅŸleri kaydedin, ardÄ±ndan devam edin.</value></data>
-  <data name="Status_LanguageSaved" xml:space="preserve"><value>Dil tercihi kaydedildi. Yeniden baÅŸlatÄ±lÄ±yorâ€¦</value></data>
-  <data name="Console_Title" xml:space="preserve"><value>Ä°ÅŸlem Konsolu</value></data>
-  <data name="Console_Hint" xml:space="preserve"><value>Komutlar ve sonuÃ§larÄ± burada canlÄ± gÃ¶rÃ¼nÃ¼r.</value></data>
-  <data name="Status_Ready" xml:space="preserve"><value>Sistem taramaya hazÄ±r.</value></data>
-  <data name="Status_Starting" xml:space="preserve"><value>CaYaFix baÅŸlatÄ±lÄ±yor ve kurtarma durumu kontrol ediliyorâ€¦</value></data>
-  <data name="Dialog_ForceNeedsConsent" xml:space="preserve"><value>Devam etmeden Ã¶nce Zorla OnarÄ±m risk onayÄ±nÄ± iÅŸaretleyin.</value></data>
+  <data name="Settings_LanguageDescription" xml:space="preserve"><value>Varsayılan dil İngilizce’dir. Türkçe yalnızca Windows Türkçe ise veya burada seçilirse kullanılır. Desteklenmeyen Windows dilleri İngilizce’ye düşer.</value></data>
+  <data name="Language_English" xml:space="preserve"><value>İngilizce</value></data>
+  <data name="Language_Turkish" xml:space="preserve"><value>Türkçe</value></data>
+  <data name="Language_System" xml:space="preserve"><value>Windows ile aynı (İngilizce veya Türkçe)</value></data>
+  <data name="Dialog_LanguageRestart_Title" xml:space="preserve"><value>Dil değişimi için yeniden başlatılsın mı?</value></data>
+  <data name="Dialog_LanguageRestart" xml:space="preserve"><value>Yeni dili uygulamak için CaYaFix yeniden başlatılmalı. Yarım kalan işleri kaydedin, ardından devam edin.</value></data>
+  <data name="Status_LanguageSaved" xml:space="preserve"><value>Dil tercihi kaydedildi. Yeniden başlatılıyor…</value></data>
+  <data name="Console_Title" xml:space="preserve"><value>İşlem Konsolu</value></data>
+  <data name="Console_Hint" xml:space="preserve"><value>Komutlar ve sonuçları burada canlı görünür.</value></data>
+  <data name="Status_Ready" xml:space="preserve"><value>Sistem taramaya hazır.</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>CaYaFix başlatılıyor ve kurtarma durumu kontrol ediliyor…</value></data>
+  <data name="Dialog_ForceNeedsConsent" xml:space="preserve"><value>Devam etmeden önce Zorla Onarım risk onayını işaretleyin.</value></data>
   <data name="Dialog_BackuplessAggressive_Title" xml:space="preserve"><value>Yedeksiz devam edilsin mi?</value></data>
-  <data name="Dialog_BackuplessAggressive" xml:space="preserve"><value>Zorla OnarÄ±m, tek bir aksiyon yedeÄŸi alÄ±namazsa yine de devam edebilir. Bu aksiyon iÃ§in otomatik geri alma kullanÄ±lamaz. Sistem Geri YÃ¼kleme noktasÄ± mÃ¼mkÃ¼nse hÃ¢lÃ¢ Ã¶nerilir. Bu Ã§alÄ±ÅŸmada yedeksiz agresif aksiyonlara izin verilsin mi?</value></data>
-  <data name="Dialog_SystemProtectionOff_Title" xml:space="preserve"><value>Sistem KorumasÄ± kullanÄ±lamÄ±yor</value></data>
-  <data name="Dialog_SystemProtectionOff" xml:space="preserve"><value>Windows Sistem KorumasÄ± kapalÄ± veya kullanÄ±lamÄ±yor gÃ¶rÃ¼nÃ¼yor. CaYaFix yine de geri yÃ¼kleme noktasÄ± oluÅŸturmayÄ± dener; GÃ¼venli ve Orta seviye onarÄ±mlarda iÅŸlem yedeÄŸi zorunlu kalÄ±r. Bu adÄ±mÄ± uyarÄ± ile de atlayabilirsiniz.</value></data>
-  <data name="Dialog_ExpertRunFix_Title" xml:space="preserve"><value>Bu uzman onarÄ±mÄ± Ã§alÄ±ÅŸtÄ±rÄ±lsÄ±n mÄ±?</value></data>
-  <data name="Dialog_ExpertRunFix" xml:space="preserve"><value>â€œ{0}â€ ({1}) ÅŸimdi Ã§alÄ±ÅŸtÄ±rÄ±lsÄ±n mÄ±? Yedek zorunluluÄŸu sÃ¼rer; yalnÄ±zca Zorla OnarÄ±mda aÃ§Ä±k onayla yedeksiz devam mÃ¼mkÃ¼n olur.</value></data>
-  <data name="Verification_Title" xml:space="preserve"><value>DoÄŸrulama sonuÃ§larÄ±</value></data>
-  <data name="Verification_Summary" xml:space="preserve"><value>Ã‡Ã¶zÃ¼len: {0} Â· HÃ¢lÃ¢ mevcut: {1}</value></data>
-  <data name="Verification_Preview" xml:space="preserve"><value>{0} seÃ§ili bulgu iÃ§in Ã¶nizleme bitti. DeÄŸiÅŸiklik uygulanmadÄ±.</value></data>
-  <data name="Verification_PendingReboot" xml:space="preserve"><value>Åu ana kadar Ã§Ã¶zÃ¼len: {0} Â· Yeniden baÅŸlatma doÄŸrulamasÄ± bekleyen: {1}</value></data>
-  <data name="Verification_ExpertResult" xml:space="preserve"><value>{0} â†’ {1}</value></data>
-  <data name="Status_ExpertTargetMissing" xml:space="preserve"><value>â€œ{0}â€ iÃ§in hedef toplamak Ã¼zere Ã¶nce tarama yapÄ±n.</value></data>
-  <data name="Finding_ExpertManual" xml:space="preserve"><value>Uzman onarÄ±mÄ± istendi: {0}</value></data>
-  <data name="Action_RunExpertFix" xml:space="preserve"><value>Ã‡alÄ±ÅŸtÄ±r</value></data>
-  <data name="Finding_Network_ThirdPartyLsp" xml:space="preserve"><value>ÃœÃ§Ã¼ncÃ¼ taraf Winsock LSP kayÄ±tlarÄ± algÄ±landÄ±; aÄŸ trafiÄŸini kesebilirler.</value></data>
-  <data name="Finding_Network_WifiBand" xml:space="preserve"><value>Wiâ€‘Fi zayÄ±f 2.4 GHz bandÄ±nda kalmÄ±ÅŸ veya dÃ¼ÅŸÃ¼k PHY hÄ±zÄ± bildiriyor.</value></data>
-  <data name="Fix_Printer_SetOnline" xml:space="preserve"><value>Ã‡evrimdÄ±ÅŸÄ± yazÄ±cÄ±larÄ± Ã§evrimiÃ§i yap</value></data>
-  <data name="Fix_Printer_SetDefault" xml:space="preserve"><value>VarsayÄ±lan yazÄ±cÄ±yÄ± geri yÃ¼kle</value></data>
-  <data name="Fix_Audio_EnableDevice" xml:space="preserve"><value>Devre dÄ±ÅŸÄ± ses cihazÄ±nÄ± etkinleÅŸtir</value></data>
-  <data name="Status_ModeChangedRescan" xml:space="preserve"><value>Ã–nizleme modu deÄŸiÅŸti. OnarÄ±m uygulamadan Ã¶nce yeni bir tarama Ã§alÄ±ÅŸtÄ±rÄ±n.</value></data>
-  <data name="Status_Scanning" xml:space="preserve"><value>Sistem taranÄ±yorâ€¦</value></data>
-  <data name="Status_ScanComplete" xml:space="preserve"><value>Tarama tamamlandÄ±: {0} bulgu.</value></data>
-  <data name="Status_RepairingNow" xml:space="preserve"><value>SeÃ§ili onarÄ±mlar uygulanÄ±yorâ€¦</value></data>
-  <data name="Status_RepairComplete" xml:space="preserve"><value>OnarÄ±m tamamlandÄ±: {0} Ã§Ã¶zÃ¼ldÃ¼, {1} devam ediyor.</value></data>
-  <data name="Status_Cancelled" xml:space="preserve"><value>Ä°ÅŸlem iptal edildi.</value></data>
-  <data name="Status_Failed" xml:space="preserve"><value>Ä°ÅŸlem tamamlanamadÄ±: {0}</value></data>
-  <data name="Status_NoSelection" xml:space="preserve"><value>Onarmak iÃ§in en az bir bulgu seÃ§in.</value></data>
-  <data name="Status_NoFixAtTier" xml:space="preserve"><value>Bu kademede uygulanacak yeni bir onarÄ±m yok.</value></data>
-  <data name="Status_PreviewComplete" xml:space="preserve"><value>SeÃ§ili {0} bulgu iÃ§in Ã¶nizleme tamamlandÄ±. HiÃ§bir deÄŸiÅŸiklik uygulanmadÄ±.</value></data>
-  <data name="Status_PendingRebootSummary" xml:space="preserve"><value>SeÃ§ili onarÄ±m uygulandÄ± ve doÄŸrulama Ã¶ncesinde Windowsâ€™un bir kez yeniden baÅŸlatÄ±lmasÄ±nÄ± bekliyor.</value></data>
-  <data name="Status_RestorePoint" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± hazÄ±rlanÄ±yorâ€¦</value></data>
-  <data name="Action_SkipRestorePoint" xml:space="preserve"><value>Geri yÃ¼kleme noktasÄ±nÄ± atla</value></data>
-  <data name="Dialog_RestorePointOffer_Title" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ±</value></data>
-  <data name="Dialog_RestorePointOffer" xml:space="preserve"><value>CaYaFix, deÄŸiÅŸikliklerden Ã¶nce bir Sistem Geri YÃ¼kleme noktasÄ± oluÅŸturabilir. Bu genelde yaklaÅŸÄ±k 90 saniye iÃ§inde biter; Windows Ã§alÄ±ÅŸÄ±rken az ilerleme gÃ¶sterebilir.
+  <data name="Dialog_BackuplessAggressive" xml:space="preserve"><value>Zorla Onarım, tek bir aksiyon yedeği alınamazsa yine de devam edebilir. Bu aksiyon için otomatik geri alma kullanılamaz. Sistem Geri Yükleme noktası mümkünse hâlâ önerilir. Bu çalışmada yedeksiz agresif aksiyonlara izin verilsin mi?</value></data>
+  <data name="Dialog_SystemProtectionOff_Title" xml:space="preserve"><value>Sistem Koruması kullanılamıyor</value></data>
+  <data name="Dialog_SystemProtectionOff" xml:space="preserve"><value>Windows Sistem Koruması kapalı veya kullanılamıyor görünüyor. CaYaFix yine de geri yükleme noktası oluşturmayı dener; Güvenli ve Orta seviye onarımlarda işlem yedeği zorunlu kalır. Bu adımı uyarı ile de atlayabilirsiniz.</value></data>
+  <data name="Dialog_ExpertRunFix_Title" xml:space="preserve"><value>Bu uzman onarımı çalıştırılsın mı?</value></data>
+  <data name="Dialog_ExpertRunFix" xml:space="preserve"><value>“{0}” ({1}) şimdi çalıştırılsın mı? Yedek zorunluluğu sürer; yalnızca Zorla Onarımda açık onayla yedeksiz devam mümkün olur.</value></data>
+  <data name="Verification_Title" xml:space="preserve"><value>Doğrulama sonuçları</value></data>
+  <data name="Verification_Summary" xml:space="preserve"><value>Çözülen: {0} · Hâlâ mevcut: {1}</value></data>
+  <data name="Verification_Preview" xml:space="preserve"><value>{0} seçili bulgu için önizleme bitti. Değişiklik uygulanmadı.</value></data>
+  <data name="Verification_PendingReboot" xml:space="preserve"><value>Şu ana kadar çözülen: {0} · Yeniden başlatma doğrulaması bekleyen: {1}</value></data>
+  <data name="Verification_ExpertResult" xml:space="preserve"><value>{0} → {1}</value></data>
+  <data name="Status_ExpertTargetMissing" xml:space="preserve"><value>“{0}” için hedef toplamak üzere önce tarama yapın.</value></data>
+  <data name="Finding_ExpertManual" xml:space="preserve"><value>Uzman onarımı istendi: {0}</value></data>
+  <data name="Action_RunExpertFix" xml:space="preserve"><value>Çalıştır</value></data>
+  <data name="Finding_Network_ThirdPartyLsp" xml:space="preserve"><value>Üçüncü taraf Winsock LSP kayıtları algılandı; ağ trafiğini kesebilirler.</value></data>
+  <data name="Finding_Network_WifiBand" xml:space="preserve"><value>Wi‑Fi zayıf 2.4 GHz bandında kalmış veya düşük PHY hızı bildiriyor.</value></data>
+  <data name="Fix_Printer_SetOnline" xml:space="preserve"><value>Çevrimdışı yazıcıları çevrimiçi yap</value></data>
+  <data name="Fix_Printer_SetDefault" xml:space="preserve"><value>Varsayılan yazıcıyı geri yükle</value></data>
+  <data name="Fix_Audio_EnableDevice" xml:space="preserve"><value>Devre dışı ses cihazını etkinleştir</value></data>
+  <data name="Status_ModeChangedRescan" xml:space="preserve"><value>Önizleme modu değişti. Onarım uygulamadan önce yeni bir tarama çalıştırın.</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Sistem taranıyor…</value></data>
+  <data name="Status_ScanComplete" xml:space="preserve"><value>Tarama tamamlandı: {0} bulgu.</value></data>
+  <data name="Status_RepairingNow" xml:space="preserve"><value>Seçili onarımlar uygulanıyor…</value></data>
+  <data name="Status_RepairComplete" xml:space="preserve"><value>Onarım tamamlandı: {0} çözüldü, {1} devam ediyor.</value></data>
+  <data name="Status_Cancelled" xml:space="preserve"><value>İşlem iptal edildi.</value></data>
+  <data name="Status_Failed" xml:space="preserve"><value>İşlem tamamlanamadı: {0}</value></data>
+  <data name="Status_NoSelection" xml:space="preserve"><value>Onarmak için en az bir bulgu seçin.</value></data>
+  <data name="Status_NoFixAtTier" xml:space="preserve"><value>Bu kademede uygulanacak yeni bir onarım yok.</value></data>
+  <data name="Status_PreviewComplete" xml:space="preserve"><value>Seçili {0} bulgu için önizleme tamamlandı. Hiçbir değişiklik uygulanmadı.</value></data>
+  <data name="Status_PendingRebootSummary" xml:space="preserve"><value>Seçili onarım uygulandı ve doğrulama öncesinde Windows’un bir kez yeniden başlatılmasını bekliyor.</value></data>
+  <data name="Status_RestorePoint" xml:space="preserve"><value>Sistem Geri Yükleme noktası hazırlanıyor…</value></data>
+  <data name="Action_SkipRestorePoint" xml:space="preserve"><value>Geri yükleme noktasını atla</value></data>
+  <data name="Dialog_RestorePointOffer_Title" xml:space="preserve"><value>Sistem Geri Yükleme noktası</value></data>
+  <data name="Dialog_RestorePointOffer" xml:space="preserve"><value>CaYaFix, değişikliklerden önce bir Sistem Geri Yükleme noktası oluşturabilir. Bu genelde yaklaşık 90 saniye içinde biter; Windows çalışırken az ilerleme gösterebilir.
 
-Evet = geri yÃ¼kleme noktasÄ± oluÅŸtur
-HayÄ±r = bu adÄ±mÄ± uyarÄ± ile atla (iÅŸlem bazlÄ± yedekler yine alÄ±nÄ±r)
-Ä°ptal = onarÄ±mÄ± durdur</value></data>
-  <data name="Dialog_SkipRestorePoint_Title" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± atÄ±lsÄ±n mÄ±?</value></data>
-  <data name="Dialog_SkipRestorePoint" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± olmadan devam ederseniz bu oturum iÃ§in Windowsâ€™un sistem geneli geri alma seÃ§eneÄŸi olmayabilir. GÃ¼venli ve Orta seviye onarÄ±mlarda iÅŸlem bazlÄ± yedekler yine alÄ±nÄ±r; Kurtarmaâ€™dan geri alabilirsiniz.
+Evet = geri yükleme noktası oluştur
+Hayır = bu adımı uyarı ile atla (işlem bazlı yedekler yine alınır)
+İptal = onarımı durdur</value></data>
+  <data name="Dialog_SkipRestorePoint_Title" xml:space="preserve"><value>Sistem Geri Yükleme noktası atılsın mı?</value></data>
+  <data name="Dialog_SkipRestorePoint" xml:space="preserve"><value>Sistem Geri Yükleme noktası olmadan devam ederseniz bu oturum için Windows’un sistem geneli geri alma seçeneği olmayabilir. Güvenli ve Orta seviye onarımlarda işlem bazlı yedekler yine alınır; Kurtarma’dan geri alabilirsiniz.
 
-Geri yÃ¼kleme noktasÄ±nÄ± atlayÄ±p devam edilsin mi?</value></data>
-  <data name="Dialog_SkipRestoreAggressive" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± olmadan Zorla OnarÄ±m Ã¶nerilmez. BazÄ± agresif adÄ±mlarda iÅŸlem yedeÄŸi de baÅŸarÄ±sÄ±z olabilir. Otomatik kurtarmanÄ±n sÄ±nÄ±rlÄ± olabileceÄŸini kabul ediyorsanÄ±z devam edin.
+Geri yükleme noktasını atlayıp devam edilsin mi?</value></data>
+  <data name="Dialog_SkipRestoreAggressive" xml:space="preserve"><value>Sistem Geri Yükleme noktası olmadan Zorla Onarım önerilmez. Bazı agresif adımlarda işlem yedeği de başarısız olabilir. Otomatik kurtarmanın sınırlı olabileceğini kabul ediyorsanız devam edin.
 
-Geri yÃ¼kleme noktasÄ±nÄ± atlayÄ±p Zorla OnarÄ±ma devam edilsin mi?</value></data>
-  <data name="Status_ReportCreated" xml:space="preserve"><value>Rapor oluÅŸturuldu.</value></data>
-  <data name="Status_SupportCreated" xml:space="preserve"><value>Destek paketi hazÄ±r: {0}</value></data>
-  <data name="Status_RollbackComplete" xml:space="preserve"><value>Oturum geri alÄ±ndÄ±.</value></data>
-  <data name="Status_RollbackFailed" xml:space="preserve"><value>BazÄ± adÄ±mlar geri alÄ±namadÄ±. Ä°ÅŸlem Konsoluâ€™nu kontrol edin.</value></data>
-  <data name="Dialog_RestorePointFailed_Title" xml:space="preserve"><value>Geri yÃ¼kleme noktasÄ± oluÅŸturulamadÄ±</value></data>
-  <data name="Dialog_RestorePointFailed" xml:space="preserve"><value>Sistem KorumasÄ± kapalÄ±, oluÅŸturma sÃ¼resi doldu (~90 sn) veya Windows geri yÃ¼kleme noktasÄ±nÄ± reddetti. Ä°ÅŸlem bazlÄ± yedekler yine alÄ±nacak. GÃ¼venli/orta seviye onarÄ±mlara yine de devam edilsin mi?</value></data>
-  <data name="Dialog_ForceNeedsRestore" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± oluÅŸturulamadÄ± (kapalÄ±, zaman aÅŸÄ±mÄ± veya red). Zorla OnarÄ±m Sistem Geri YÃ¼kleme ile daha gÃ¼venlidir. Yine de geri yÃ¼kleme noktasÄ± olmadan Zorla OnarÄ±ma devam edilsin mi?</value></data>
-  <data name="Dialog_SupportPrivacy_Title" xml:space="preserve"><value>KiÅŸisel veri uyarÄ±sÄ±</value></data>
-  <data name="Dialog_SupportPrivacy" xml:space="preserve"><value>Destek paketi; bilgisayar adÄ±, aÄŸ yapÄ±landÄ±rmasÄ±, Wiâ€‘Fi bilgileri, cihaz ve sÃ¼rÃ¼cÃ¼ adlarÄ± iÃ§erebilir. Paketi yalnÄ±z gÃ¼vendiÄŸiniz kiÅŸilerle paylaÅŸÄ±n. OluÅŸturulsun mu?</value></data>
-  <data name="Dialog_SupportPackage_SaveTitle" xml:space="preserve"><value>Destek paketini kaydet</value></data>
-  <data name="Dialog_SupportPackage_SaveFilter" xml:space="preserve"><value>ZIP arÅŸivi (*.zip)|*.zip</value></data>
-  <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Oturum geri alÄ±nsÄ±n mÄ±?</value></data>
-  <data name="Dialog_Rollback" xml:space="preserve"><value>Uygulanan iÅŸlemler ters sÄ±rayla geri alÄ±nacak. Devam edilsin mi?</value></data>
-  <data name="Dialog_Pending_Title" xml:space="preserve"><value>DoÄŸrulama bekleyen oturum</value></data>
-  <data name="Dialog_Pending" xml:space="preserve"><value>Ã–nceki onarÄ±m yeniden baÅŸlatma bekliyor. Windowsâ€™u yeniden baÅŸlatÄ±n, ardÄ±ndan takip doÄŸrulamasÄ±nÄ± Ã§alÄ±ÅŸtÄ±rmak iÃ§in CaYaFixâ€™i yeniden aÃ§Ä±n.</value></data>
-  <data name="Dialog_Pending_Verify" xml:space="preserve"><value>Windows onarÄ±mdan sonra yeniden baÅŸlatÄ±lmÄ±ÅŸ. Sonucu doÄŸrulamak iÃ§in ilgili tanÄ± denetimleri ÅŸimdi Ã§alÄ±ÅŸtÄ±rÄ±lsÄ±n mÄ±?</value></data>
-  <data name="Dialog_InterruptedRepair_Title" xml:space="preserve"><value>Kesintiye uÄŸramÄ±ÅŸ onarÄ±m bulundu</value></data>
-  <data name="Dialog_InterruptedRepair" xml:space="preserve"><value>Bir onarÄ±mÄ±n sonucu kalÄ±cÄ± olarak doÄŸrulanamadan iÅŸlem kesildi. DoÄŸrulanmÄ±ÅŸ yedeÄŸi Geri Alma Merkeziâ€™nde kullanÄ±labilir. BaÅŸka bir onarÄ±m baÅŸlatmadan Ã¶nce iÅŸlemi geri alÄ±n.</value></data>
-  <data name="Dialog_IntegrityFailure" xml:space="preserve"><value>CaYaFix korumalÄ± oturum depolamasÄ±nÄ± baÅŸlatamadÄ±. HiÃ§bir onarÄ±m uygulanmadÄ±. Yerel uygulama verileri klasÃ¶rÃ¼ne eriÅŸimi denetleyip CaYaFixâ€™i yeniden baÅŸlatÄ±n.</value></data>
-  <data name="Dialog_SingleInstanceFailure" xml:space="preserve"><value>CaYaFix sistem genelindeki iÅŸlem kilidini alamadÄ±. HiÃ§bir onarÄ±m baÅŸlatÄ±lmadÄ±. DiÄŸer CaYaFix oturumlarÄ±nÄ± kapatÄ±p yeniden deneyin.</value></data>
-  <data name="Dialog_DataRootFailure" xml:space="preserve"><value>CaYaFix korumalÄ± ProgramData klasÃ¶rÃ¼ne eriÅŸemiyor. HiÃ§bir tanÄ± veya onarÄ±m baÅŸlatÄ±lmadÄ±. UygulamayÄ± yÃ¶netici olarak Ã§alÄ±ÅŸtÄ±rÄ±p klasÃ¶r izinlerini denetleyin.</value></data>
-  <data name="Dialog_LiveTestConfirm" xml:space="preserve"><value>Test sizin aÃ§Ä±nÄ±zdan baÅŸarÄ±yla tamamlandÄ± mÄ±?</value></data>
-  <data name="Status_VerifyingPending" xml:space="preserve"><value>Yeniden baÅŸlatma sonrasÄ±nda onarÄ±mlar doÄŸrulanÄ±yorâ€¦</value></data>
-  <data name="Status_PendingVerified" xml:space="preserve"><value>Yeniden baÅŸlatma doÄŸrulamasÄ± baÅŸarÄ±lÄ±. Bekleyen onarÄ±mlar tamamlandÄ±.</value></data>
-  <data name="Status_PendingStillDetected" xml:space="preserve"><value>Takip denetimleri sorunun sÃ¼rdÃ¼ÄŸÃ¼nÃ¼ gÃ¶steriyor. Yeni bir onarÄ±m denemeden Ã¶nce bulgularÄ± inceleyin.</value></data>
-  <data name="Status_PendingRolledBack" xml:space="preserve"><value>Yeniden baÅŸlatma sonrasÄ± tanÄ±lama sorunu hÃ¢lÃ¢ algÄ±ladÄ±ÄŸÄ± iÃ§in CaYaFix doÄŸrulanmÄ±ÅŸ onarÄ±m Ã¶ncesi durumu geri yÃ¼kledi.</value></data>
-  <data name="Console_PendingCheckMissing" xml:space="preserve"><value>Takip denetimi kullanÄ±lamÄ±yor: {0}</value></data>
-  <data name="Console_PendingCheckFailed" xml:space="preserve"><value>{0} takip denetimi Ã§alÄ±ÅŸtÄ±rÄ±lamadÄ±: {1}</value></data>
+Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></data>
+  <data name="Status_ReportCreated" xml:space="preserve"><value>Rapor oluşturuldu.</value></data>
+  <data name="Status_SupportCreated" xml:space="preserve"><value>Destek paketi hazır: {0}</value></data>
+  <data name="Status_RollbackComplete" xml:space="preserve"><value>Oturum geri alındı.</value></data>
+  <data name="Status_RollbackFailed" xml:space="preserve"><value>Bazı adımlar geri alınamadı. İşlem Konsolu’nu kontrol edin.</value></data>
+  <data name="Dialog_RestorePointFailed_Title" xml:space="preserve"><value>Geri yükleme noktası oluşturulamadı</value></data>
+  <data name="Dialog_RestorePointFailed" xml:space="preserve"><value>Sistem Koruması kapalı, oluşturma süresi doldu (~90 sn) veya Windows geri yükleme noktasını reddetti. İşlem bazlı yedekler yine alınacak. Güvenli/orta seviye onarımlara yine de devam edilsin mi?</value></data>
+  <data name="Dialog_ForceNeedsRestore" xml:space="preserve"><value>Sistem Geri Yükleme noktası oluşturulamadı (kapalı, zaman aşımı veya red). Zorla Onarım Sistem Geri Yükleme ile daha güvenlidir. Yine de geri yükleme noktası olmadan Zorla Onarıma devam edilsin mi?</value></data>
+  <data name="Dialog_SupportPrivacy_Title" xml:space="preserve"><value>Kişisel veri uyarısı</value></data>
+  <data name="Dialog_SupportPrivacy" xml:space="preserve"><value>Destek paketi; bilgisayar adı, ağ yapılandırması, Wi‑Fi bilgileri, cihaz ve sürücü adları içerebilir. Paketi yalnız güvendiğiniz kişilerle paylaşın. Oluşturulsun mu?</value></data>
+  <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Oturum geri alınsın mı?</value></data>
+  <data name="Dialog_Rollback" xml:space="preserve"><value>Uygulanan işlemler ters sırayla geri alınacak. Devam edilsin mi?</value></data>
+  <data name="Dialog_Pending_Title" xml:space="preserve"><value>Doğrulama bekleyen oturum</value></data>
+  <data name="Dialog_Pending" xml:space="preserve"><value>Önceki onarım yeniden başlatma bekliyor. Windows’u yeniden başlatın, ardından takip doğrulamasını çalıştırmak için CaYaFix’i yeniden açın.</value></data>
+  <data name="Dialog_Pending_Verify" xml:space="preserve"><value>Windows onarımdan sonra yeniden başlatılmış. Sonucu doğrulamak için ilgili tanı denetimleri şimdi çalıştırılsın mı?</value></data>
+  <data name="Dialog_InterruptedRepair_Title" xml:space="preserve"><value>Kesintiye uğramış onarım bulundu</value></data>
+  <data name="Dialog_InterruptedRepair" xml:space="preserve"><value>Bir onarımın sonucu kalıcı olarak doğrulanamadan işlem kesildi. Doğrulanmış yedeği Geri Alma Merkezi’nde kullanılabilir. Başka bir onarım başlatmadan önce işlemi geri alın.</value></data>
+  <data name="Dialog_IntegrityFailure" xml:space="preserve"><value>CaYaFix korumalı oturum depolamasını başlatamadı. Hiçbir onarım uygulanmadı. Yerel uygulama verileri klasörüne erişimi denetleyip CaYaFix’i yeniden başlatın.</value></data>
+  <data name="Dialog_SingleInstanceFailure" xml:space="preserve"><value>CaYaFix sistem genelindeki işlem kilidini alamadı. Hiçbir onarım başlatılmadı. Diğer CaYaFix oturumlarını kapatıp yeniden deneyin.</value></data>
+  <data name="Dialog_DataRootFailure" xml:space="preserve"><value>CaYaFix korumalı ProgramData klasörüne erişemiyor. Hiçbir tanı veya onarım başlatılmadı. Uygulamayı yönetici olarak çalıştırıp klasör izinlerini denetleyin.</value></data>
+  <data name="Dialog_LiveTestConfirm" xml:space="preserve"><value>Test sizin açınızdan başarıyla tamamlandı mı?</value></data>
+  <data name="Status_VerifyingPending" xml:space="preserve"><value>Yeniden başlatma sonrasında onarımlar doğrulanıyor…</value></data>
+  <data name="Status_PendingVerified" xml:space="preserve"><value>Yeniden başlatma doğrulaması başarılı. Bekleyen onarımlar tamamlandı.</value></data>
+  <data name="Status_PendingStillDetected" xml:space="preserve"><value>Takip denetimleri sorunun sürdüğünü gösteriyor. Yeni bir onarım denemeden önce bulguları inceleyin.</value></data>
+  <data name="Status_PendingRolledBack" xml:space="preserve"><value>Yeniden başlatma sonrası tanılama sorunu hâlâ algıladığı için CaYaFix doğrulanmış onarım öncesi durumu geri yükledi.</value></data>
+  <data name="Console_PendingCheckMissing" xml:space="preserve"><value>Takip denetimi kullanılamıyor: {0}</value></data>
+  <data name="Console_PendingCheckFailed" xml:space="preserve"><value>{0} takip denetimi çalıştırılamadı: {1}</value></data>
 
-  <data name="Module_Network_Name" xml:space="preserve"><value>AÄŸ ve Ä°nternet</value></data>
-  <data name="Module_Network_Description" xml:space="preserve"><value>Wiâ€‘Fi, Ethernet, DNS, VPN, proxy ve gÃ¼venlik duvarÄ±</value></data>
+  <data name="Module_Network_Name" xml:space="preserve"><value>Ağ ve İnternet</value></data>
+  <data name="Module_Network_Description" xml:space="preserve"><value>Wi‑Fi, Ethernet, DNS, VPN, proxy ve güvenlik duvarı</value></data>
   <data name="Module_Audio_Name" xml:space="preserve"><value>Ses ve Mikrofon</value></data>
-  <data name="Module_Audio_Description" xml:space="preserve"><value>Ã‡Ä±kÄ±ÅŸ, giriÅŸ, sÃ¼rÃ¼cÃ¼, sanal cihaz ve Bluetooth sesi</value></data>
+  <data name="Module_Audio_Description" xml:space="preserve"><value>Çıkış, giriş, sürücü, sanal cihaz ve Bluetooth sesi</value></data>
   <data name="Module_Update_Name" xml:space="preserve"><value>Windows Update</value></data>
-  <data name="Module_Update_Description" xml:space="preserve"><value>GÃ¼ncelleme servisleri, Ã¶nbellek ve hata kodlarÄ±</value></data>
-  <data name="Module_Printer_Name" xml:space="preserve"><value>YazÄ±cÄ±</value></data>
-  <data name="Module_Printer_Description" xml:space="preserve"><value>YazdÄ±rma kuyruÄŸu, spooler ve Ã§evrimdÄ±ÅŸÄ± yazÄ±cÄ±lar</value></data>
+  <data name="Module_Update_Description" xml:space="preserve"><value>Güncelleme servisleri, önbellek ve hata kodları</value></data>
+  <data name="Module_Printer_Name" xml:space="preserve"><value>Yazıcı</value></data>
+  <data name="Module_Printer_Description" xml:space="preserve"><value>Yazdırma kuyruğu, spooler ve çevrimdışı yazıcılar</value></data>
   <data name="Module_Bluetooth_Name" xml:space="preserve"><value>Bluetooth</value></data>
-  <data name="Module_Bluetooth_Description" xml:space="preserve"><value>Servis, sÃ¼rÃ¼cÃ¼ ve baÄŸlÄ± cihaz sorunlarÄ±</value></data>
+  <data name="Module_Bluetooth_Description" xml:space="preserve"><value>Servis, sürücü ve bağlı cihaz sorunları</value></data>
   <data name="Module_Disk_Name" xml:space="preserve"><value>Disk ve Depolama</value></data>
-  <data name="Module_Disk_Description" xml:space="preserve"><value>SMART saÄŸlÄ±ÄŸÄ±, boÅŸ alan ve yÃ¼ksek disk kullanÄ±mÄ±</value></data>
-  <data name="Module_Integrity_Name" xml:space="preserve"><value>Sistem DosyalarÄ±</value></data>
-  <data name="Module_Integrity_Description" xml:space="preserve"><value>Windows bileÅŸen deposu, DISM ve SFC</value></data>
-  <data name="Module_Store_Name" xml:space="preserve"><value>MaÄŸaza ve Uygulamalar</value></data>
-  <data name="Module_Store_Description" xml:space="preserve"><value>Microsoft Store ve UWP paket kayÄ±tlarÄ±</value></data>
+  <data name="Module_Disk_Description" xml:space="preserve"><value>SMART sağlığı, boş alan ve yüksek disk kullanımı</value></data>
+  <data name="Module_Integrity_Name" xml:space="preserve"><value>Sistem Dosyaları</value></data>
+  <data name="Module_Integrity_Description" xml:space="preserve"><value>Windows bileşen deposu, DISM ve SFC</value></data>
+  <data name="Module_Store_Name" xml:space="preserve"><value>Mağaza ve Uygulamalar</value></data>
+  <data name="Module_Store_Description" xml:space="preserve"><value>Microsoft Store ve UWP paket kayıtları</value></data>
   <data name="Module_Time_Name" xml:space="preserve"><value>Saat ve Zaman</value></data>
-  <data name="Module_Time_Description" xml:space="preserve"><value>NTP, zaman kaymasÄ± ve TLS kaynaklÄ± sorunlar</value></data>
-  <data name="Module_Performance_Name" xml:space="preserve"><value>BaÅŸlangÄ±Ã§ ve Performans</value></data>
-  <data name="Module_Performance_Description" xml:space="preserve"><value>BaÅŸlangÄ±Ã§ Ã¶ÄŸeleri ve gÃ¼Ã§ planÄ± anormallikleri</value></data>
+  <data name="Module_Time_Description" xml:space="preserve"><value>NTP, zaman kayması ve TLS kaynaklı sorunlar</value></data>
+  <data name="Module_Performance_Name" xml:space="preserve"><value>Başlangıç ve Performans</value></data>
+  <data name="Module_Performance_Description" xml:space="preserve"><value>Başlangıç öğeleri ve güç planı anormallikleri</value></data>
 
-  <data name="Finding_CheckCouldNotRun" xml:space="preserve"><value>{0} denetimi Ã§alÄ±ÅŸtÄ±rÄ±lamadÄ±.</value></data>
-  <data name="Finding_Network_NoAdapters" xml:space="preserve"><value>Windows hiÃ§bir aÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± bulamadÄ±.</value></data>
-  <data name="Finding_Network_NoConnectedAdapter" xml:space="preserve"><value>Åu anda baÄŸlÄ± fiziksel aÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± yok. BaÄŸlantÄ± onarÄ±mlarÄ±nÄ± Ã§alÄ±ÅŸtÄ±rmadan Ã¶nce Ethernet veya Wi-Fi baÄŸlayÄ±n.</value></data>
-  <data name="Finding_Network_AllAdaptersDisabled" xml:space="preserve"><value>Fiziksel aÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ±nÄ±n tamamÄ± kapalÄ± veya baÄŸlantÄ±sÄ±z.</value></data>
-  <data name="Finding_Network_OldDriver" xml:space="preserve"><value>AÄŸ sÃ¼rÃ¼cÃ¼lerinden biri Ã¼Ã§ yÄ±ldan eski.</value></data>
-  <data name="Finding_Network_LinkAt100Mbps" xml:space="preserve"><value>Ethernet baÄŸlantÄ±sÄ± 100 Mbps hÄ±zÄ±nda anlaÅŸmÄ±ÅŸ; kablo veya port hÄ±zÄ± sÄ±nÄ±rlÄ±yor olabilir.</value></data>
-  <data name="Finding_Network_NoActiveIpConfiguration" xml:space="preserve"><value>Etkin bir IP yapÄ±landÄ±rmasÄ± bulunamadÄ±.</value></data>
-  <data name="Finding_Network_Apipa" xml:space="preserve"><value>Bilgisayar yÃ¶nlendiriciden IP alamadÄ± ve geÃ§ici bir 169.254 adresi kullandÄ±.</value></data>
-  <data name="Finding_Network_MissingGateway" xml:space="preserve"><value>BaÄŸlantÄ±nÄ±n varsayÄ±lan aÄŸ geÃ§idi eksik.</value></data>
-  <data name="Finding_Network_GatewayUnreachable" xml:space="preserve"><value>Bilgisayar modem veya yÃ¶nlendiriciye ulaÅŸamÄ±yor.</value></data>
-  <data name="Finding_Network_NoDnsServer" xml:space="preserve"><value>KullanÄ±labilir bir DNS sunucusu ayarlanmamÄ±ÅŸ.</value></data>
-  <data name="Finding_Network_CurrentDnsBroken" xml:space="preserve"><value>Mevcut DNS sunucusu yanÄ±t vermiyor; genel DNS sunucularÄ± Ã§alÄ±ÅŸÄ±yor.</value></data>
-  <data name="Finding_Network_DnsResolutionFailed" xml:space="preserve"><value>DNS ad Ã§Ã¶zÃ¼mleme testi baÅŸarÄ±sÄ±z oldu.</value></data>
-  <data name="Finding_Network_InternetUnavailable" xml:space="preserve"><value>Windows internet eriÅŸim testine ulaÅŸamadÄ±.</value></data>
-  <data name="Finding_Network_CaptivePortal" xml:space="preserve"><value>BaÄŸlantÄ± bir giriÅŸ/onay sayfasÄ±na yÃ¶nlendiriliyor olabilir.</value></data>
-  <data name="Finding_Network_ProxyConfigured" xml:space="preserve"><value>Ä°nternet trafiÄŸini yÃ¶nlendiren proxy veya otomatik yapÄ±landÄ±rma ayarÄ± bulundu.</value></data>
-  <data name="Finding_Network_VpnResidue" xml:space="preserve"><value>BaÄŸlÄ± olmayan bir VPN baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± rota veya DNS ayarÄ± bÄ±rakmÄ±ÅŸ.</value></data>
-  <data name="Finding_Network_FirewallBlocking" xml:space="preserve"><value>GÃ¼venlik duvarÄ± politikasÄ± giden baÄŸlantÄ±larÄ± geniÅŸ Ã¶lÃ§Ã¼de engelliyor.</value></data>
-  <data name="Finding_Network_FirewallDisabled" xml:space="preserve"><value>Windows GÃ¼venlik DuvarÄ± profillerinden biri kapalÄ±.</value></data>
-  <data name="Finding_Network_HostsMissing" xml:space="preserve"><value>Windows hosts dosyasÄ± bulunamadÄ±.</value></data>
-  <data name="Finding_Network_CustomHosts" xml:space="preserve"><value>Hosts dosyasÄ±nda internet adreslerini deÄŸiÅŸtiren Ã¶zel kayÄ±tlar var.</value></data>
-  <data name="Finding_Network_WinsockUnreadable" xml:space="preserve"><value>Winsock kataloÄŸu okunamadÄ±.</value></data>
-  <data name="Finding_Network_WinsockThirdParty" xml:space="preserve"><value>Winsock kataloÄŸunda Ã¼Ã§Ã¼ncÃ¼ taraf aÄŸ katmanÄ± belirtileri var.</value></data>
-  <data name="Finding_Network_MtuTooLow" xml:space="preserve"><value>Etkin baÄŸlantÄ±nÄ±n MTU deÄŸeri olaÄŸandÄ±ÅŸÄ± dÃ¼ÅŸÃ¼k.</value></data>
-  <data name="Finding_Network_PowerSavingEnabled" xml:space="preserve"><value>Windows aÄŸ kartÄ±nÄ± gÃ¼Ã§ tasarrufu iÃ§in kapatabiliyor.</value></data>
-  <data name="Finding_Network_ServiceStopped" xml:space="preserve"><value>Gerekli aÄŸ servislerinden biri doÄŸru Ã§alÄ±ÅŸmÄ±yor.</value></data>
-  <data name="Finding_Network_TcpSettingsAbnormal" xml:space="preserve"><value>Windows TCP ayarlarÄ± baÄŸlantÄ± hÄ±zÄ±nÄ± sÄ±nÄ±rlÄ±yor olabilir.</value></data>
-  <data name="Finding_Network_WeakWifi" xml:space="preserve"><value>Wiâ€‘Fi sinyali zayÄ±f; kopma ve hÄ±z dÃ¼ÅŸÃ¼ÅŸÃ¼ beklenebilir.</value></data>
-  <data name="Finding_Network_ThroughputLow" xml:space="preserve"><value>Ã–lÃ§Ã¼len indirme hÄ±zÄ± olaÄŸandÄ±ÅŸÄ± dÃ¼ÅŸÃ¼k.</value></data>
+  <data name="Finding_CheckCouldNotRun" xml:space="preserve"><value>{0} denetimi çalıştırılamadı.</value></data>
+  <data name="Finding_Network_NoAdapters" xml:space="preserve"><value>Windows hiçbir ağ bağdaştırıcısı bulamadı.</value></data>
+  <data name="Finding_Network_NoConnectedAdapter" xml:space="preserve"><value>Şu anda bağlı fiziksel ağ bağdaştırıcısı yok. Bağlantı onarımlarını çalıştırmadan önce Ethernet veya Wi-Fi bağlayın.</value></data>
+  <data name="Finding_Network_AllAdaptersDisabled" xml:space="preserve"><value>Fiziksel ağ bağdaştırıcılarının tamamı kapalı veya bağlantısız.</value></data>
+  <data name="Finding_Network_OldDriver" xml:space="preserve"><value>Ağ sürücülerinden biri üç yıldan eski.</value></data>
+  <data name="Finding_Network_LinkAt100Mbps" xml:space="preserve"><value>Ethernet bağlantısı 100 Mbps hızında anlaşmış; kablo veya port hızı sınırlıyor olabilir.</value></data>
+  <data name="Finding_Network_NoActiveIpConfiguration" xml:space="preserve"><value>Etkin bir IP yapılandırması bulunamadı.</value></data>
+  <data name="Finding_Network_Apipa" xml:space="preserve"><value>Bilgisayar yönlendiriciden IP alamadı ve geçici bir 169.254 adresi kullandı.</value></data>
+  <data name="Finding_Network_MissingGateway" xml:space="preserve"><value>Bağlantının varsayılan ağ geçidi eksik.</value></data>
+  <data name="Finding_Network_GatewayUnreachable" xml:space="preserve"><value>Bilgisayar modem veya yönlendiriciye ulaşamıyor.</value></data>
+  <data name="Finding_Network_NoDnsServer" xml:space="preserve"><value>Kullanılabilir bir DNS sunucusu ayarlanmamış.</value></data>
+  <data name="Finding_Network_CurrentDnsBroken" xml:space="preserve"><value>Mevcut DNS sunucusu yanıt vermiyor; genel DNS sunucuları çalışıyor.</value></data>
+  <data name="Finding_Network_DnsResolutionFailed" xml:space="preserve"><value>DNS ad çözümleme testi başarısız oldu.</value></data>
+  <data name="Finding_Network_InternetUnavailable" xml:space="preserve"><value>Windows internet erişim testine ulaşamadı.</value></data>
+  <data name="Finding_Network_CaptivePortal" xml:space="preserve"><value>Bağlantı bir giriş/onay sayfasına yönlendiriliyor olabilir.</value></data>
+  <data name="Finding_Network_ProxyConfigured" xml:space="preserve"><value>İnternet trafiğini yönlendiren proxy veya otomatik yapılandırma ayarı bulundu.</value></data>
+  <data name="Finding_Network_VpnResidue" xml:space="preserve"><value>Bağlı olmayan bir VPN bağdaştırıcısı rota veya DNS ayarı bırakmış.</value></data>
+  <data name="Finding_Network_FirewallBlocking" xml:space="preserve"><value>Güvenlik duvarı politikası giden bağlantıları geniş ölçüde engelliyor.</value></data>
+  <data name="Finding_Network_FirewallDisabled" xml:space="preserve"><value>Windows Güvenlik Duvarı profillerinden biri kapalı.</value></data>
+  <data name="Finding_Network_HostsMissing" xml:space="preserve"><value>Windows hosts dosyası bulunamadı.</value></data>
+  <data name="Finding_Network_CustomHosts" xml:space="preserve"><value>Hosts dosyasında internet adreslerini değiştiren özel kayıtlar var.</value></data>
+  <data name="Finding_Network_WinsockUnreadable" xml:space="preserve"><value>Winsock kataloğu okunamadı.</value></data>
+  <data name="Finding_Network_WinsockThirdParty" xml:space="preserve"><value>Winsock kataloğunda üçüncü taraf ağ katmanı belirtileri var.</value></data>
+  <data name="Finding_Network_MtuTooLow" xml:space="preserve"><value>Etkin bağlantının MTU değeri olağandışı düşük.</value></data>
+  <data name="Finding_Network_PowerSavingEnabled" xml:space="preserve"><value>Windows ağ kartını güç tasarrufu için kapatabiliyor.</value></data>
+  <data name="Finding_Network_ServiceStopped" xml:space="preserve"><value>Gerekli ağ servislerinden biri doğru çalışmıyor.</value></data>
+  <data name="Finding_Network_TcpSettingsAbnormal" xml:space="preserve"><value>Windows TCP ayarları bağlantı hızını sınırlıyor olabilir.</value></data>
+  <data name="Finding_Network_WeakWifi" xml:space="preserve"><value>Wi‑Fi sinyali zayıf; kopma ve hız düşüşü beklenebilir.</value></data>
+  <data name="Finding_Network_ThroughputLow" xml:space="preserve"><value>Ölçülen indirme hızı olağandışı düşük.</value></data>
 
-  <data name="Finding_Audio_NoOutputDevice" xml:space="preserve"><value>Etkin bir hoparlÃ¶r veya kulaklÄ±k bulunamadÄ±.</value></data>
-  <data name="Finding_Audio_NoInputDevice" xml:space="preserve"><value>Etkin bir mikrofon bulunamadÄ±.</value></data>
-  <data name="Finding_Audio_NoDefaultOutput" xml:space="preserve"><value>VarsayÄ±lan ses Ã§Ä±kÄ±ÅŸÄ± ayarlanmamÄ±ÅŸ.</value></data>
-  <data name="Finding_Audio_VirtualDefaultInactive" xml:space="preserve"><value>Ses, Ã§alÄ±ÅŸmayan bir sanal ses cihazÄ±na yÃ¶nlendiriliyor.</value></data>
-  <data name="Finding_Audio_DefaultUnavailable" xml:space="preserve"><value>VarsayÄ±lan ses cihazÄ± ÅŸu anda kullanÄ±lamÄ±yor.</value></data>
-  <data name="Finding_Audio_ServiceStopped" xml:space="preserve"><value>Windows ses servislerinden biri durmuÅŸ veya devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Audio_MutedOrZero" xml:space="preserve"><value>Bir ses cihazÄ± veya uygulama sessize alÄ±nmÄ±ÅŸ ya da seviyesi sÄ±fÄ±r.</value></data>
-  <data name="Finding_Audio_DriverError" xml:space="preserve"><value>Ses sÃ¼rÃ¼cÃ¼sÃ¼ AygÄ±t YÃ¶neticisi hata kodu bildiriyor.</value></data>
-  <data name="Finding_Audio_FormatMismatch" xml:space="preserve"><value>Ses giriÅŸ ve Ã§Ä±kÄ±ÅŸ biÃ§imleri birbiriyle uyumsuz olabilir.</value></data>
-  <data name="Finding_Audio_EnhancementCrash" xml:space="preserve"><value>YakÄ±n zamanda ses iyileÅŸtirmesi/APO kaynaklÄ± hata kaydedilmiÅŸ.</value></data>
-  <data name="Finding_Audio_MicrophonePrivacyDenied" xml:space="preserve"><value>Windows gizlilik ayarÄ± mikrofon eriÅŸimini engelliyor.</value></data>
-  <data name="Finding_Audio_BluetoothHandsFree" xml:space="preserve"><value>Bluetooth kulaklÄ±k dÃ¼ÅŸÃ¼k kaliteli Eller Serbest profilinde Ã§alÄ±ÅŸÄ±yor.</value></data>
-  <data name="Finding_Audio_HdmiDefault" xml:space="preserve"><value>Ses monitÃ¶rÃ¼n HDMI/Display Audio Ã§Ä±kÄ±ÅŸÄ±na gidiyor olabilir.</value></data>
-  <data name="Finding_Audio_DuckingInvalid" xml:space="preserve"><value>Ä°letiÅŸim sÄ±rasÄ±nda ses kÄ±sma ayarÄ± geÃ§ersiz.</value></data>
-  <data name="Finding_Audio_SpeakerLiveFailed" xml:space="preserve"><value>HoparlÃ¶r testi doÄŸru duyulmadÄ±.</value></data>
-  <data name="Finding_Audio_MicrophoneLiveFailed" xml:space="preserve"><value>Mikrofon testi kullanÄ±labilir bir sonuÃ§ Ã¼retmedi.</value></data>
-  <data name="Finding_Audio_StabilityLiveFailed" xml:space="preserve"><value>KararlÄ±lÄ±k testi sÄ±rasÄ±nda ses oynatma beklenmedik biÃ§imde durdu.</value></data>
+  <data name="Finding_Audio_NoOutputDevice" xml:space="preserve"><value>Etkin bir hoparlör veya kulaklık bulunamadı.</value></data>
+  <data name="Finding_Audio_NoInputDevice" xml:space="preserve"><value>Etkin bir mikrofon bulunamadı.</value></data>
+  <data name="Finding_Audio_NoDefaultOutput" xml:space="preserve"><value>Varsayılan ses çıkışı ayarlanmamış.</value></data>
+  <data name="Finding_Audio_VirtualDefaultInactive" xml:space="preserve"><value>Ses, çalışmayan bir sanal ses cihazına yönlendiriliyor.</value></data>
+  <data name="Finding_Audio_DefaultUnavailable" xml:space="preserve"><value>Varsayılan ses cihazı şu anda kullanılamıyor.</value></data>
+  <data name="Finding_Audio_ServiceStopped" xml:space="preserve"><value>Windows ses servislerinden biri durmuş veya devre dışı.</value></data>
+  <data name="Finding_Audio_MutedOrZero" xml:space="preserve"><value>Bir ses cihazı veya uygulama sessize alınmış ya da seviyesi sıfır.</value></data>
+  <data name="Finding_Audio_DriverError" xml:space="preserve"><value>Ses sürücüsü Aygıt Yöneticisi hata kodu bildiriyor.</value></data>
+  <data name="Finding_Audio_FormatMismatch" xml:space="preserve"><value>Ses giriş ve çıkış biçimleri birbiriyle uyumsuz olabilir.</value></data>
+  <data name="Finding_Audio_EnhancementCrash" xml:space="preserve"><value>Yakın zamanda ses iyileştirmesi/APO kaynaklı hata kaydedilmiş.</value></data>
+  <data name="Finding_Audio_MicrophonePrivacyDenied" xml:space="preserve"><value>Windows gizlilik ayarı mikrofon erişimini engelliyor.</value></data>
+  <data name="Finding_Audio_BluetoothHandsFree" xml:space="preserve"><value>Bluetooth kulaklık düşük kaliteli Eller Serbest profilinde çalışıyor.</value></data>
+  <data name="Finding_Audio_HdmiDefault" xml:space="preserve"><value>Ses monitörün HDMI/Display Audio çıkışına gidiyor olabilir.</value></data>
+  <data name="Finding_Audio_DuckingInvalid" xml:space="preserve"><value>İletişim sırasında ses kısma ayarı geçersiz.</value></data>
+  <data name="Finding_Audio_SpeakerLiveFailed" xml:space="preserve"><value>Hoparlör testi doğru duyulmadı.</value></data>
+  <data name="Finding_Audio_MicrophoneLiveFailed" xml:space="preserve"><value>Mikrofon testi kullanılabilir bir sonuç üretmedi.</value></data>
+  <data name="Finding_Audio_StabilityLiveFailed" xml:space="preserve"><value>Kararlılık testi sırasında ses oynatma beklenmedik biçimde durdu.</value></data>
 
-  <data name="Finding_Update_ServiceIssue" xml:space="preserve"><value>Windows Update servislerinden biri doÄŸru yapÄ±landÄ±rÄ±lmamÄ±ÅŸ.</value></data>
-  <data name="Finding_Update_RecentErrors" xml:space="preserve"><value>Son gÃ¼ncellemelerde hata kayÄ±tlarÄ± bulundu.</value></data>
-  <data name="Finding_Update_RebootPending" xml:space="preserve"><value>Bir Windows gÃ¼ncellemesi yeniden baÅŸlatma bekliyor.</value></data>
-  <data name="Finding_Printer_SpoolerStopped" xml:space="preserve"><value>YazdÄ±rma Biriktiricisi servisi Ã§alÄ±ÅŸmÄ±yor.</value></data>
-  <data name="Finding_Printer_QueueProblem" xml:space="preserve"><value>Bir yazdÄ±rma iÅŸi engellenmiÅŸ veya kuyruÄŸu hatalÄ± durumda.</value></data>
-  <data name="Finding_Printer_Offline" xml:space="preserve"><value>YapÄ±landÄ±rÄ±lmÄ±ÅŸ bir yazÄ±cÄ± Ã§evrimdÄ±ÅŸÄ± olduÄŸunu bildiriyor. GÃ¼Ã§, kablo, Wi-Fi baÄŸlantÄ±sÄ± ve yazÄ±cÄ± baÄŸlantÄ± noktasÄ±nÄ± denetleyin.</value></data>
-  <data name="Finding_Printer_DefaultMissing" xml:space="preserve"><value>YazÄ±cÄ±lar yÃ¼klÃ¼ ancak Windows'ta varsayÄ±lan yazÄ±cÄ± yok.</value></data>
-  <data name="Finding_Bluetooth_ServiceDisabled" xml:space="preserve"><value>Bluetooth destek servisi devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Bluetooth_DeviceError" xml:space="preserve"><value>Bluetooth aygÄ±tÄ± sÃ¼rÃ¼cÃ¼ hata kodu bildiriyor.</value></data>
-  <data name="Finding_Disk_HealthCritical" xml:space="preserve"><value>Bir fiziksel disk saÄŸlÄ±klÄ± gÃ¶rÃ¼nmÃ¼yor. OnarÄ±mdan Ã¶nce Ã¶nemli verilerinizi yedekleyin.</value></data>
-  <data name="Finding_Disk_LowSpace" xml:space="preserve"><value>Bir sÃ¼rÃ¼cÃ¼de boÅŸ alan kritik seviyeye yaklaÅŸtÄ±.</value></data>
-  <data name="Finding_Disk_HighUsage" xml:space="preserve"><value>Disk kullanÄ±mÄ± Ã¶lÃ§Ã¼m boyunca Ã§ok yÃ¼ksek kaldÄ±.</value></data>
-  <data name="Finding_Integrity_Repairable" xml:space="preserve"><value>Windows bileÅŸen deposu onarÄ±labilir (DISM Ã§evrimiÃ§i dÃ¼zeltilebilecek bozulma bildirdi).</value></data>
-  <data name="Finding_Integrity_NotRepairable" xml:space="preserve"><value>Windows bileÅŸen deposu bozuk ve DISM Ã§evrimiÃ§i onarÄ±lamayacaÄŸÄ±nÄ± bildiriyor.</value></data>
-  <data name="Finding_Integrity_DismFailed" xml:space="preserve"><value>DISM gÃ¼venilir bir bileÅŸen deposu saÄŸlÄ±k denetimi tamamlayamadÄ±.</value></data>
-  <data name="Finding_Store_Missing" xml:space="preserve"><value>Microsoft Store paketi bulunamadÄ± veya kaydÄ± bozuk.</value></data>
-  <data name="Finding_Time_NotSynchronized" xml:space="preserve"><value>Windows saati bir zaman sunucusuyla eÅŸitlenmemiÅŸ.</value></data>
-  <data name="Finding_Time_LocalClock" xml:space="preserve"><value>Sistem yalnÄ±z yerel donanÄ±m saatini kullanÄ±yor.</value></data>
-  <data name="Finding_Performance_ManyStartupItems" xml:space="preserve"><value>Ã‡ok sayÄ±da uygulama Windows ile birlikte baÅŸlÄ±yor.</value></data>
-  <data name="Finding_Performance_PowerSaver" xml:space="preserve"><value>Etkin gÃ¼Ã§ planÄ± performansÄ± sÄ±nÄ±rlayan GÃ¼Ã§ Tasarrufu modunda.</value></data>
+  <data name="Finding_Update_ServiceIssue" xml:space="preserve"><value>Windows Update servislerinden biri doğru yapılandırılmamış.</value></data>
+  <data name="Finding_Update_RecentErrors" xml:space="preserve"><value>Son güncellemelerde hata kayıtları bulundu.</value></data>
+  <data name="Finding_Update_RebootPending" xml:space="preserve"><value>Bir Windows güncellemesi yeniden başlatma bekliyor.</value></data>
+  <data name="Finding_Printer_SpoolerStopped" xml:space="preserve"><value>Yazdırma Biriktiricisi servisi çalışmıyor.</value></data>
+  <data name="Finding_Printer_QueueProblem" xml:space="preserve"><value>Bir yazdırma işi engellenmiş veya kuyruğu hatalı durumda.</value></data>
+  <data name="Finding_Printer_Offline" xml:space="preserve"><value>Yapılandırılmış bir yazıcı çevrimdışı olduğunu bildiriyor. Güç, kablo, Wi-Fi bağlantısı ve yazıcı bağlantı noktasını denetleyin.</value></data>
+  <data name="Finding_Printer_DefaultMissing" xml:space="preserve"><value>Yazıcılar yüklü ancak Windows'ta varsayılan yazıcı yok.</value></data>
+  <data name="Finding_Bluetooth_ServiceDisabled" xml:space="preserve"><value>Bluetooth destek servisi devre dışı.</value></data>
+  <data name="Finding_Bluetooth_DeviceError" xml:space="preserve"><value>Bluetooth aygıtı sürücü hata kodu bildiriyor.</value></data>
+  <data name="Finding_Disk_HealthCritical" xml:space="preserve"><value>Bir fiziksel disk sağlıklı görünmüyor. Onarımdan önce önemli verilerinizi yedekleyin.</value></data>
+  <data name="Finding_Disk_LowSpace" xml:space="preserve"><value>Bir sürücüde boş alan kritik seviyeye yaklaştı.</value></data>
+  <data name="Finding_Disk_HighUsage" xml:space="preserve"><value>Disk kullanımı ölçüm boyunca çok yüksek kaldı.</value></data>
+  <data name="Finding_Integrity_Repairable" xml:space="preserve"><value>Windows bileşen deposu onarılabilir (DISM çevrimiçi düzeltilebilecek bozulma bildirdi).</value></data>
+  <data name="Finding_Store_Missing" xml:space="preserve"><value>Microsoft Store paketi bulunamadı veya kaydı bozuk.</value></data>
+  <data name="Finding_Time_NotSynchronized" xml:space="preserve"><value>Windows saati bir zaman sunucusuyla eşitlenmemiş.</value></data>
+  <data name="Finding_Time_LocalClock" xml:space="preserve"><value>Sistem yalnız yerel donanım saatini kullanıyor.</value></data>
+  <data name="Finding_Performance_ManyStartupItems" xml:space="preserve"><value>Çok sayıda uygulama Windows ile birlikte başlıyor.</value></data>
+  <data name="Finding_Performance_PowerSaver" xml:space="preserve"><value>Etkin güç planı performansı sınırlayan Güç Tasarrufu modunda.</value></data>
 
-  <data name="FixResult_Applied" xml:space="preserve"><value>OnarÄ±m uygulandÄ±.</value></data>
-  <data name="FixResult_ApplyInProgress" xml:space="preserve"><value>OnarÄ±mÄ±n sonucu kalÄ±cÄ± olarak doÄŸrulanamadan iÅŸlem kesildi. Geri alma kullanÄ±labilir.</value></data>
-  <data name="FixResult_Verified" xml:space="preserve"><value>OnarÄ±m uygulandÄ± ve yeniden Ã¶lÃ§Ã¼mle doÄŸrulandÄ±.</value></data>
-  <data name="FixResult_NotVerified" xml:space="preserve"><value>OnarÄ±m uygulandÄ± ancak sorun yeniden Ã¶lÃ§Ã¼mde devam ediyor.</value></data>
-  <data name="FixResult_PendingReboot" xml:space="preserve"><value>OnarÄ±m uygulandÄ±; doÄŸrulama iÃ§in yeniden baÅŸlatma gerekiyor.</value></data>
-  <data name="FixResult_BackupFailed" xml:space="preserve"><value>Yedek alÄ±namadÄ±ÄŸÄ± iÃ§in onarÄ±m baÅŸlatÄ±lmadÄ±.</value></data>
-  <data name="FixResult_ApplyFailed" xml:space="preserve"><value>OnarÄ±m uygulanamadÄ±.</value></data>
-  <data name="FixResult_ApplyFailedRolledBack" xml:space="preserve"><value>OnarÄ±m baÅŸarÄ±sÄ±z oldu ve yedeklenen tÃ¼m deÄŸiÅŸiklikler otomatik olarak geri alÄ±ndÄ±.</value></data>
-  <data name="FixResult_ApplyFailedRollbackFailed" xml:space="preserve"><value>OnarÄ±m baÅŸarÄ±sÄ±z oldu ve otomatik geri alma doÄŸrulanamadÄ±. Kurtarma oturumunu inceleyin.</value></data>
-  <data name="FixResult_VerificationFailedRolledBack" xml:space="preserve"><value>OnarÄ±m doÄŸrulamayÄ± geÃ§emediÄŸi iÃ§in yedeklenen deÄŸiÅŸiklikler otomatik olarak geri alÄ±ndÄ±.</value></data>
-  <data name="FixResult_VerificationFailedRollbackFailed" xml:space="preserve"><value>OnarÄ±m doÄŸrulamayÄ± geÃ§emedi ve otomatik geri alma doÄŸrulanamadÄ±. Kurtarma oturumunu inceleyin.</value></data>
-  <data name="FixResult_CancelledRolledBack" xml:space="preserve"><value>Ä°ÅŸlem iptal edildi ve yedeklenen deÄŸiÅŸiklikler geri alÄ±ndÄ±.</value></data>
-  <data name="FixResult_CancelledRollbackFailed" xml:space="preserve"><value>Ä°ÅŸlem iptal edildi ancak otomatik geri alma doÄŸrulanamadÄ±. Kurtarma oturumunu inceleyin.</value></data>
-  <data name="FixResult_CommandFailed" xml:space="preserve"><value>OnarÄ±m adÄ±mlarÄ±ndan biri hata verdi.</value></data>
-  <data name="FixResult_DryRun" xml:space="preserve"><value>Ã–nizleme modu: deÄŸiÅŸiklik uygulanmadÄ±.</value></data>
-  <data name="FixResult_ForceRequirementsMissing" xml:space="preserve"><value>Zorla onarÄ±m iÃ§in aÃ§Ä±k onay ve geri yÃ¼kleme noktasÄ± gerekiyor.</value></data>
-  <data name="FixResult_TargetRequired" xml:space="preserve"><value>Bu onarÄ±m iÃ§in hedef cihaz seÃ§ilmesi gerekiyor.</value></data>
-  <data name="FixStage_Preparing" xml:space="preserve"><value>HazÄ±rlanÄ±yor</value></data>
+  <data name="FixResult_Applied" xml:space="preserve"><value>Onarım uygulandı.</value></data>
+  <data name="FixResult_ApplyInProgress" xml:space="preserve"><value>Onarımın sonucu kalıcı olarak doğrulanamadan işlem kesildi. Geri alma kullanılabilir.</value></data>
+  <data name="FixResult_Verified" xml:space="preserve"><value>Onarım uygulandı ve yeniden ölçümle doğrulandı.</value></data>
+  <data name="FixResult_NotVerified" xml:space="preserve"><value>Onarım uygulandı ancak sorun yeniden ölçümde devam ediyor.</value></data>
+  <data name="FixResult_PendingReboot" xml:space="preserve"><value>Onarım uygulandı; doğrulama için yeniden başlatma gerekiyor.</value></data>
+  <data name="FixResult_BackupFailed" xml:space="preserve"><value>Yedek alınamadığı için onarım başlatılmadı.</value></data>
+  <data name="FixResult_ApplyFailed" xml:space="preserve"><value>Onarım uygulanamadı.</value></data>
+  <data name="FixResult_ApplyFailedRolledBack" xml:space="preserve"><value>Onarım başarısız oldu ve yedeklenen tüm değişiklikler otomatik olarak geri alındı.</value></data>
+  <data name="FixResult_ApplyFailedRollbackFailed" xml:space="preserve"><value>Onarım başarısız oldu ve otomatik geri alma doğrulanamadı. Kurtarma oturumunu inceleyin.</value></data>
+  <data name="FixResult_VerificationFailedRolledBack" xml:space="preserve"><value>Onarım doğrulamayı geçemediği için yedeklenen değişiklikler otomatik olarak geri alındı.</value></data>
+  <data name="FixResult_VerificationFailedRollbackFailed" xml:space="preserve"><value>Onarım doğrulamayı geçemedi ve otomatik geri alma doğrulanamadı. Kurtarma oturumunu inceleyin.</value></data>
+  <data name="FixResult_CancelledRolledBack" xml:space="preserve"><value>İşlem iptal edildi ve yedeklenen değişiklikler geri alındı.</value></data>
+  <data name="FixResult_CancelledRollbackFailed" xml:space="preserve"><value>İşlem iptal edildi ancak otomatik geri alma doğrulanamadı. Kurtarma oturumunu inceleyin.</value></data>
+  <data name="FixResult_CommandFailed" xml:space="preserve"><value>Onarım adımlarından biri hata verdi.</value></data>
+  <data name="FixResult_DryRun" xml:space="preserve"><value>Önizleme modu: değişiklik uygulanmadı.</value></data>
+  <data name="FixResult_ForceRequirementsMissing" xml:space="preserve"><value>Zorla onarım için açık onay ve geri yükleme noktası gerekiyor.</value></data>
+  <data name="FixResult_TargetRequired" xml:space="preserve"><value>Bu onarım için hedef cihaz seçilmesi gerekiyor.</value></data>
+  <data name="FixStage_Preparing" xml:space="preserve"><value>Hazırlanıyor</value></data>
   <data name="FixStage_BackingUp" xml:space="preserve"><value>Yedekleniyor</value></data>
-  <data name="FixStage_Applying" xml:space="preserve"><value>UygulanÄ±yor</value></data>
-  <data name="FixStage_Verifying" xml:space="preserve"><value>DoÄŸrulanÄ±yor</value></data>
-  <data name="FixStage_RolledBack" xml:space="preserve"><value>GÃ¼venle geri alÄ±ndÄ±</value></data>
+  <data name="FixStage_Applying" xml:space="preserve"><value>Uygulanıyor</value></data>
+  <data name="FixStage_Verifying" xml:space="preserve"><value>Doğrulanıyor</value></data>
+  <data name="FixStage_RolledBack" xml:space="preserve"><value>Güvenle geri alındı</value></data>
   <data name="FixStage_RollbackFailed" xml:space="preserve"><value>Geri alma incelenmeli</value></data>
-  <data name="FixStage_PendingReboot" xml:space="preserve"><value>Yeniden baÅŸlatma bekleniyor</value></data>
-  <data name="FixStage_Done" xml:space="preserve"><value>TamamlandÄ±</value></data>
+  <data name="FixStage_PendingReboot" xml:space="preserve"><value>Yeniden başlatma bekleniyor</value></data>
+  <data name="FixStage_Done" xml:space="preserve"><value>Tamamlandı</value></data>
 
-  <data name="TestStage_Running" xml:space="preserve"><value>Test Ã§alÄ±ÅŸÄ±yor</value></data>
-  <data name="TestStage_Result" xml:space="preserve"><value>SonuÃ§</value></data>
-  <data name="TestStage_Failed" xml:space="preserve"><value>Test baÅŸarÄ±sÄ±z</value></data>
-  <data name="TestStage_Left" xml:space="preserve"><value>Sol kanalÄ± dinleyin</value></data>
-  <data name="TestStage_Right" xml:space="preserve"><value>SaÄŸ kanalÄ± dinleyin</value></data>
-  <data name="TestStage_HeardQuestion" xml:space="preserve"><value>Ä°ki kanalÄ± da duydunuz mu?</value></data>
-  <data name="TestStage_Recording" xml:space="preserve"><value>Mikrofon sinyali bellekte Ã¶rnekleniyor</value></data>
-  <data name="TestStage_NoSignal" xml:space="preserve"><value>Mikrofondan sinyal alÄ±namadÄ±</value></data>
-  <data name="TestStage_Recorded" xml:space="preserve"><value>5 saniyelik mikrofon sinyal denetimi tamamlandÄ±</value></data>
-  <data name="TestStage_NotAvailable" xml:space="preserve"><value>Bu test kullanÄ±lamÄ±yor</value></data>
-  <data name="TestStage_CaptivePortal" xml:space="preserve"><value>GiriÅŸ portalÄ± veya beklenmeyen yanÄ±t algÄ±landÄ±</value></data>
+  <data name="TestStage_Running" xml:space="preserve"><value>Test çalışıyor</value></data>
+  <data name="TestStage_Result" xml:space="preserve"><value>Sonuç</value></data>
+  <data name="TestStage_Failed" xml:space="preserve"><value>Test başarısız</value></data>
+  <data name="TestStage_Left" xml:space="preserve"><value>Sol kanalı dinleyin</value></data>
+  <data name="TestStage_Right" xml:space="preserve"><value>Sağ kanalı dinleyin</value></data>
+  <data name="TestStage_HeardQuestion" xml:space="preserve"><value>İki kanalı da duydunuz mu?</value></data>
+  <data name="TestStage_Recording" xml:space="preserve"><value>Mikrofon sinyali bellekte örnekleniyor</value></data>
+  <data name="TestStage_NoSignal" xml:space="preserve"><value>Mikrofondan sinyal alınamadı</value></data>
+  <data name="TestStage_Recorded" xml:space="preserve"><value>5 saniyelik mikrofon sinyal denetimi tamamlandı</value></data>
+  <data name="TestStage_NotAvailable" xml:space="preserve"><value>Bu test kullanılamıyor</value></data>
+  <data name="TestStage_CaptivePortal" xml:space="preserve"><value>Giriş portalı veya beklenmeyen yanıt algılandı</value></data>
 
-  <data name="Check_Network_Adapters" xml:space="preserve"><value>AÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± envanteri</value></data>
-  <data name="Check_Network_Ip" xml:space="preserve"><value>IP yapÄ±landÄ±rmasÄ±</value></data>
-  <data name="Check_Network_Gateway" xml:space="preserve"><value>AÄŸ geÃ§idi eriÅŸimi</value></data>
-  <data name="Check_Network_Dns" xml:space="preserve"><value>DNS saÄŸlÄ±ÄŸÄ±</value></data>
-  <data name="Check_Network_Internet" xml:space="preserve"><value>Ä°nternet eriÅŸimi</value></data>
-  <data name="Check_Network_Proxy" xml:space="preserve"><value>Proxy ayarlarÄ±</value></data>
-  <data name="Check_Network_Vpn" xml:space="preserve"><value>VPN baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± Ã§akÄ±ÅŸmalarÄ±</value></data>
-  <data name="Check_Network_Firewall" xml:space="preserve"><value>GÃ¼venlik duvarÄ± politikasÄ±</value></data>
-  <data name="Check_Network_Hosts" xml:space="preserve"><value>Hosts dosyasÄ±</value></data>
-  <data name="Check_Network_Winsock" xml:space="preserve"><value>Winsock kataloÄŸu</value></data>
-  <data name="Check_Network_Mtu" xml:space="preserve"><value>MTU yapÄ±landÄ±rmasÄ±</value></data>
-  <data name="Check_Network_Power" xml:space="preserve"><value>BaÄŸdaÅŸtÄ±rÄ±cÄ± gÃ¼Ã§ yÃ¶netimi</value></data>
-  <data name="Check_Network_Services" xml:space="preserve"><value>AÄŸ servisleri</value></data>
-  <data name="Check_Network_Performance" xml:space="preserve"><value>TCP ve Wiâ€‘Fi performansÄ±</value></data>
-  <data name="Check_Network_Throughput" xml:space="preserve"><value>Ä°ndirme hÄ±zÄ±</value></data>
-  <data name="Check_Network_EventLog" xml:space="preserve"><value>AÄŸ olay gÃ¼nlÃ¼ÄŸÃ¼ eÅŸlemesi</value></data>
-  <data name="Check_Network_Bindings" xml:space="preserve"><value>IPv4/IPv6 protokol baÄŸlamalarÄ±</value></data>
-  <data name="Check_Audio_OutputDevices" xml:space="preserve"><value>Ã‡Ä±kÄ±ÅŸ cihazÄ± envanteri</value></data>
-  <data name="Check_Audio_InputDevices" xml:space="preserve"><value>GiriÅŸ cihazÄ± envanteri</value></data>
-  <data name="Check_Audio_DefaultDevices" xml:space="preserve"><value>VarsayÄ±lan ses cihazlarÄ±</value></data>
+  <data name="Check_Network_Adapters" xml:space="preserve"><value>Ağ bağdaştırıcısı envanteri</value></data>
+  <data name="Check_Network_Ip" xml:space="preserve"><value>IP yapılandırması</value></data>
+  <data name="Check_Network_Gateway" xml:space="preserve"><value>Ağ geçidi erişimi</value></data>
+  <data name="Check_Network_Dns" xml:space="preserve"><value>DNS sağlığı</value></data>
+  <data name="Check_Network_Internet" xml:space="preserve"><value>İnternet erişimi</value></data>
+  <data name="Check_Network_Proxy" xml:space="preserve"><value>Proxy ayarları</value></data>
+  <data name="Check_Network_Vpn" xml:space="preserve"><value>VPN bağdaştırıcısı çakışmaları</value></data>
+  <data name="Check_Network_Firewall" xml:space="preserve"><value>Güvenlik duvarı politikası</value></data>
+  <data name="Check_Network_Hosts" xml:space="preserve"><value>Hosts dosyası</value></data>
+  <data name="Check_Network_Winsock" xml:space="preserve"><value>Winsock kataloğu</value></data>
+  <data name="Check_Network_Mtu" xml:space="preserve"><value>MTU yapılandırması</value></data>
+  <data name="Check_Network_Power" xml:space="preserve"><value>Bağdaştırıcı güç yönetimi</value></data>
+  <data name="Check_Network_Services" xml:space="preserve"><value>Ağ servisleri</value></data>
+  <data name="Check_Network_Performance" xml:space="preserve"><value>TCP ve Wi‑Fi performansı</value></data>
+  <data name="Check_Network_Throughput" xml:space="preserve"><value>İndirme hızı</value></data>
+  <data name="Check_Network_EventLog" xml:space="preserve"><value>Ağ olay günlüğü eşlemesi</value></data>
+  <data name="Check_Network_Bindings" xml:space="preserve"><value>IPv4/IPv6 protokol bağlamaları</value></data>
+  <data name="Check_Audio_OutputDevices" xml:space="preserve"><value>Çıkış cihazı envanteri</value></data>
+  <data name="Check_Audio_InputDevices" xml:space="preserve"><value>Giriş cihazı envanteri</value></data>
+  <data name="Check_Audio_DefaultDevices" xml:space="preserve"><value>Varsayılan ses cihazları</value></data>
   <data name="Check_Audio_Services" xml:space="preserve"><value>Ses servisleri</value></data>
-  <data name="Check_Audio_Levels" xml:space="preserve"><value>Sessiz ve seviye ayarlarÄ±</value></data>
-  <data name="Check_Audio_Drivers" xml:space="preserve"><value>Ses sÃ¼rÃ¼cÃ¼leri</value></data>
-  <data name="Check_Audio_Formats" xml:space="preserve"><value>Ses biÃ§imleri</value></data>
-  <data name="Check_Audio_Enhancements" xml:space="preserve"><value>Ses iyileÅŸtirmeleri</value></data>
-  <data name="Check_Audio_MicrophonePrivacy" xml:space="preserve"><value>Mikrofon gizliliÄŸi</value></data>
+  <data name="Check_Audio_Levels" xml:space="preserve"><value>Sessiz ve seviye ayarları</value></data>
+  <data name="Check_Audio_Drivers" xml:space="preserve"><value>Ses sürücüleri</value></data>
+  <data name="Check_Audio_Formats" xml:space="preserve"><value>Ses biçimleri</value></data>
+  <data name="Check_Audio_Enhancements" xml:space="preserve"><value>Ses iyileştirmeleri</value></data>
+  <data name="Check_Audio_MicrophonePrivacy" xml:space="preserve"><value>Mikrofon gizliliği</value></data>
   <data name="Check_Audio_Bluetooth" xml:space="preserve"><value>Bluetooth ses profili</value></data>
   <data name="Check_Audio_Hdmi" xml:space="preserve"><value>HDMI ve Display Audio</value></data>
-  <data name="Check_Audio_Communications" xml:space="preserve"><value>Ä°letiÅŸim sesi davranÄ±ÅŸÄ±</value></data>
-  <data name="Check_Audio_EventLog" xml:space="preserve"><value>Ses olay gÃ¼nlÃ¼ÄŸÃ¼ eÅŸlemesi</value></data>
-  <data name="Check_Audio_PnpDisabled" xml:space="preserve"><value>Devre dÄ±ÅŸÄ± ses aygÄ±tlarÄ±</value></data>
-  <data name="Check_Update_Services" xml:space="preserve"><value>GÃ¼ncelleme servisleri</value></data>
-  <data name="Check_Update_Errors" xml:space="preserve"><value>Son gÃ¼ncelleme hatalarÄ±</value></data>
-  <data name="Check_Update_PendingReboot" xml:space="preserve"><value>Bekleyen yeniden baÅŸlatma</value></data>
-  <data name="Check_Printer_Spooler" xml:space="preserve"><value>YazdÄ±rma Biriktiricisi</value></data>
-  <data name="Check_Printer_Queues" xml:space="preserve"><value>YazÄ±cÄ± kuyruklarÄ±</value></data>
-  <data name="Check_Printer_Offline" xml:space="preserve"><value>Ã‡evrimdÄ±ÅŸÄ± yazÄ±cÄ±lar</value></data>
-  <data name="Check_Printer_Default" xml:space="preserve"><value>VarsayÄ±lan yazÄ±cÄ±</value></data>
+  <data name="Check_Audio_Communications" xml:space="preserve"><value>İletişim sesi davranışı</value></data>
+  <data name="Check_Audio_EventLog" xml:space="preserve"><value>Ses olay günlüğü eşlemesi</value></data>
+  <data name="Check_Audio_PnpDisabled" xml:space="preserve"><value>Devre dışı ses aygıtları</value></data>
+  <data name="Check_Update_Services" xml:space="preserve"><value>Güncelleme servisleri</value></data>
+  <data name="Check_Update_Errors" xml:space="preserve"><value>Son güncelleme hataları</value></data>
+  <data name="Check_Update_PendingReboot" xml:space="preserve"><value>Bekleyen yeniden başlatma</value></data>
+  <data name="Check_Printer_Spooler" xml:space="preserve"><value>Yazdırma Biriktiricisi</value></data>
+  <data name="Check_Printer_Queues" xml:space="preserve"><value>Yazıcı kuyrukları</value></data>
+  <data name="Check_Printer_Offline" xml:space="preserve"><value>Çevrimdışı yazıcılar</value></data>
+  <data name="Check_Printer_Default" xml:space="preserve"><value>Varsayılan yazıcı</value></data>
   <data name="Check_Bluetooth_Service" xml:space="preserve"><value>Bluetooth servisi</value></data>
-  <data name="Check_Bluetooth_Devices" xml:space="preserve"><value>Bluetooth cihazlarÄ±</value></data>
-  <data name="Check_Disk_Health" xml:space="preserve"><value>Fiziksel disk saÄŸlÄ±ÄŸÄ±</value></data>
-  <data name="Check_Disk_Space" xml:space="preserve"><value>BoÅŸ disk alanÄ±</value></data>
-  <data name="Check_Disk_Usage" xml:space="preserve"><value>Disk kullanÄ±mÄ±</value></data>
-  <data name="Check_Integrity_ComponentStore" xml:space="preserve"><value>Windows bileÅŸen deposu</value></data>
+  <data name="Check_Bluetooth_Devices" xml:space="preserve"><value>Bluetooth cihazları</value></data>
+  <data name="Check_Disk_Health" xml:space="preserve"><value>Fiziksel disk sağlığı</value></data>
+  <data name="Check_Disk_Space" xml:space="preserve"><value>Boş disk alanı</value></data>
+  <data name="Check_Disk_Usage" xml:space="preserve"><value>Disk kullanımı</value></data>
+  <data name="Check_Integrity_ComponentStore" xml:space="preserve"><value>Windows bileşen deposu</value></data>
   <data name="Check_Store_Package" xml:space="preserve"><value>Microsoft Store paketi</value></data>
   <data name="Check_Time_Service" xml:space="preserve"><value>Windows Saat servisi</value></data>
-  <data name="Check_Time_Source" xml:space="preserve"><value>Zaman kaynaÄŸÄ±</value></data>
-  <data name="Check_Performance_Startup" xml:space="preserve"><value>BaÅŸlangÄ±Ã§ uygulamalarÄ±</value></data>
-  <data name="Check_Performance_PowerPlan" xml:space="preserve"><value>Etkin gÃ¼Ã§ planÄ±</value></data>
+  <data name="Check_Time_Source" xml:space="preserve"><value>Zaman kaynağı</value></data>
+  <data name="Check_Performance_Startup" xml:space="preserve"><value>Başlangıç uygulamaları</value></data>
+  <data name="Check_Performance_PowerPlan" xml:space="preserve"><value>Etkin güç planı</value></data>
 
-  <data name="Fix_Network_FlushDns" xml:space="preserve"><value>DNS Ã¶nbelleÄŸini temizle</value></data>
-  <data name="Fix_Network_RenewDhcp" xml:space="preserve"><value>Aktif aÄŸ profilinde DHCP adresini yenile</value></data>
-  <data name="Fix_Network_RenewDhcpAll" xml:space="preserve"><value>TÃ¼m aÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ±nda DHCP adresini yenile</value></data>
-  <data name="Fix_Network_ProfileRepairActive" xml:space="preserve"><value>Aktif aÄŸ profilini onar (DHCP, DNS, gÃ¼venlik duvarÄ±)</value></data>
-  <data name="Fix_Network_ProfileRepairAll" xml:space="preserve"><value>TÃ¼m aÄŸ profillerini onar (DHCP, DNS, gÃ¼venlik duvarÄ±)</value></data>
-  <data name="Fix_Network_CycleAdapters" xml:space="preserve"><value>Etkin aÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Network_RestartServices" xml:space="preserve"><value>AÄŸ servislerini yeniden baÅŸlat / onar</value></data>
-  <data name="Fix_Network_ClearArp" xml:space="preserve"><value>ARP Ã¶nbelleÄŸini temizle</value></data>
-  <data name="Fix_Network_SoftHeal" xml:space="preserve"><value>AÄŸÄ± yumuÅŸak onar (DNS, ARP, servisler)</value></data>
+  <data name="Fix_Network_FlushDns" xml:space="preserve"><value>DNS önbelleğini temizle</value></data>
+  <data name="Fix_Network_RenewDhcp" xml:space="preserve"><value>Aktif ağ profilinde DHCP adresini yenile</value></data>
+  <data name="Fix_Network_CycleAdapters" xml:space="preserve"><value>Etkin ağ bağdaştırıcılarını yeniden başlat</value></data>
+  <data name="Fix_Network_RestartServices" xml:space="preserve"><value>Ağ servislerini yeniden başlat / onar</value></data>
+  <data name="Fix_Network_ClearArp" xml:space="preserve"><value>ARP önbelleğini temizle</value></data>
+  <data name="Fix_Network_SoftHeal" xml:space="preserve"><value>Ağı yumuşak onar (DNS, ARP, servisler)</value></data>
   <data name="Fix_Network_IpconfigSuite" xml:space="preserve"><value>Tam ipconfig paketi (flush / release / renew / register)</value></data>
-  <data name="Fix_Network_RescanDevices" xml:space="preserve"><value>AÄŸ aygÄ±tlarÄ±nÄ± yeniden tara</value></data>
-  <data name="Fix_Network_ResetStack" xml:space="preserve"><value>Winsock ve IP yÄ±ÄŸÄ±nÄ±nÄ± sÄ±fÄ±rla</value></data>
-  <data name="Fix_Network_NormalizeTcp" xml:space="preserve"><value>TCP ayarlarÄ±nÄ± normale dÃ¶ndÃ¼r</value></data>
-  <data name="Fix_Network_DisablePowerSaving" xml:space="preserve"><value>BaÄŸdaÅŸtÄ±rÄ±cÄ± gÃ¼Ã§ tasarrufunu kapat</value></data>
-  <data name="Fix_Network_ClearProxy" xml:space="preserve"><value>Eski proxy ayarlarÄ±nÄ± temizle</value></data>
-  <data name="Fix_Network_RestoreHosts" xml:space="preserve"><value>VarsayÄ±lan hosts dosyasÄ±nÄ± geri yÃ¼kle</value></data>
+  <data name="Fix_Network_RescanDevices" xml:space="preserve"><value>Ağ aygıtlarını yeniden tara</value></data>
+  <data name="Fix_Network_ResetStack" xml:space="preserve"><value>Winsock ve IP yığınını sıfırla</value></data>
+  <data name="Fix_Network_NormalizeTcp" xml:space="preserve"><value>TCP ayarlarını normale döndür</value></data>
+  <data name="Fix_Network_DisablePowerSaving" xml:space="preserve"><value>Bağdaştırıcı güç tasarrufunu kapat</value></data>
+  <data name="Fix_Network_ClearProxy" xml:space="preserve"><value>Eski proxy ayarlarını temizle</value></data>
+  <data name="Fix_Network_RestoreHosts" xml:space="preserve"><value>Varsayılan hosts dosyasını geri yükle</value></data>
   <data name="Fix_Network_PublicDns" xml:space="preserve"><value>Cloudflare ve Google DNS kullan</value></data>
-  <data name="Fix_Network_FirewallReset" xml:space="preserve"><value>Windows GÃ¼venlik DuvarÄ±â€™nÄ± sÄ±fÄ±rla</value></data>
-  <data name="Fix_Network_DriverReset" xml:space="preserve"><value>SeÃ§ili aÄŸ sÃ¼rÃ¼cÃ¼sÃ¼nÃ¼ yeniden kur</value></data>
-  <data name="Fix_Network_RemoveGhostVpn" xml:space="preserve"><value>SeÃ§ili hayalet VPN baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ±nÄ± kaldÄ±r</value></data>
-  <data name="Fix_Network_FullReset" xml:space="preserve"><value>Tam aÄŸ sÄ±fÄ±rlamasÄ± yap</value></data>
-  <data name="Fix_Network_RouteReset" xml:space="preserve"><value>TanÄ±lanan Ã§akÄ±ÅŸan rotalarÄ± kaldÄ±r</value></data>
-  <data name="Fix_Audio_RestartServices" xml:space="preserve"><value>Windows ses servislerini yeniden baÅŸlat</value></data>
-  <data name="Fix_Audio_RepairAllIo" xml:space="preserve"><value>GeliÅŸmiÅŸ onarÄ±m: tÃ¼m ses giriÅŸi ve Ã§Ä±kÄ±ÅŸÄ±</value></data>
-  <data name="Fix_Audio_RepairOutput" xml:space="preserve"><value>GeliÅŸmiÅŸ onarÄ±m: yalnÄ±zca ses Ã§Ä±kÄ±ÅŸÄ±</value></data>
-  <data name="Fix_Audio_RepairInput" xml:space="preserve"><value>GeliÅŸmiÅŸ onarÄ±m: yalnÄ±zca ses giriÅŸi</value></data>
-  <data name="Fix_Audio_SetDefault" xml:space="preserve"><value>DoÄŸru varsayÄ±lan cihazÄ± seÃ§</value></data>
-  <data name="Fix_Audio_Unmute" xml:space="preserve"><value>Sessiz ve seviye ayarlarÄ±nÄ± dÃ¼zelt</value></data>
-  <data name="Fix_Audio_DisableEnhancements" xml:space="preserve"><value>Ses iyileÅŸtirmelerini kapat</value></data>
-  <data name="Fix_Audio_FormatReset" xml:space="preserve"><value>Ã–zel ses biÃ§imlerini sÄ±fÄ±rla</value></data>
-  <data name="Fix_Audio_MicrophonePrivacy" xml:space="preserve"><value>Mikrofon eriÅŸimine izin ver</value></data>
-  <data name="Fix_Audio_MixerReset" xml:space="preserve"><value>Uygulama bazlÄ± mikseri sÄ±fÄ±rla</value></data>
-  <data name="Fix_Audio_BluetoothRestart" xml:space="preserve"><value>SeÃ§ili Bluetooth ses cihazÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Audio_EnableAllDisabled" xml:space="preserve"><value>TÃ¼m devre dÄ±ÅŸÄ± ses aygÄ±tlarÄ±nÄ± etkinleÅŸtir</value></data>
-  <data name="Fix_Audio_RescanDevices" xml:space="preserve"><value>Ses aygÄ±tlarÄ±nÄ± yeniden tara ve servisleri baÅŸlat</value></data>
-  <data name="Fix_Audio_DriverReset" xml:space="preserve"><value>SeÃ§ili ses sÃ¼rÃ¼cÃ¼sÃ¼nÃ¼ yeniden kur</value></data>
-  <data name="Fix_Audio_MmDevicesReset" xml:space="preserve"><value>Windows ses uÃ§ noktalarÄ±nÄ± yeniden oluÅŸtur</value></data>
-  <data name="Fix_Update_RestartServices" xml:space="preserve"><value>GÃ¼ncelleme servislerini dÃ¼zelt</value></data>
-  <data name="Fix_Update_ResetCache" xml:space="preserve"><value>Windows Update Ã¶nbelleÄŸini yeniden oluÅŸtur</value></data>
-  <data name="Fix_Printer_RestartSpooler" xml:space="preserve"><value>YazdÄ±rma Biriktiricisiâ€™ni yeniden baÅŸlat</value></data>
-  <data name="Fix_Printer_ResetQueue" xml:space="preserve"><value>YazdÄ±rma kuyruÄŸunu yedekle ve temizle</value></data>
-  <data name="Fix_Bluetooth_RestartService" xml:space="preserve"><value>Bluetooth servisini dÃ¼zelt</value></data>
-  <data name="Fix_Bluetooth_RestartDevice" xml:space="preserve"><value>SeÃ§ili Bluetooth cihazÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Disk_CleanTemp" xml:space="preserve"><value>Eski geÃ§ici dosyalarÄ± karantinaya taÅŸÄ±</value></data>
+  <data name="Fix_Network_FirewallReset" xml:space="preserve"><value>Windows Güvenlik Duvarı’nı sıfırla</value></data>
+  <data name="Fix_Network_DriverReset" xml:space="preserve"><value>Seçili ağ sürücüsünü yeniden kur</value></data>
+  <data name="Fix_Network_RemoveGhostVpn" xml:space="preserve"><value>Seçili hayalet VPN bağdaştırıcısını kaldır</value></data>
+  <data name="Fix_Network_FullReset" xml:space="preserve"><value>Tam ağ sıfırlaması yap</value></data>
+  <data name="Fix_Network_RouteReset" xml:space="preserve"><value>Tanılanan çakışan rotaları kaldır</value></data>
+  <data name="Fix_Audio_RestartServices" xml:space="preserve"><value>Windows ses servislerini yeniden başlat</value></data>
+  <data name="Fix_Audio_SetDefault" xml:space="preserve"><value>Doğru varsayılan cihazı seç</value></data>
+  <data name="Fix_Audio_Unmute" xml:space="preserve"><value>Sessiz ve seviye ayarlarını düzelt</value></data>
+  <data name="Fix_Audio_DisableEnhancements" xml:space="preserve"><value>Ses iyileştirmelerini kapat</value></data>
+  <data name="Fix_Audio_FormatReset" xml:space="preserve"><value>Özel ses biçimlerini sıfırla</value></data>
+  <data name="Fix_Audio_MicrophonePrivacy" xml:space="preserve"><value>Mikrofon erişimine izin ver</value></data>
+  <data name="Fix_Audio_MixerReset" xml:space="preserve"><value>Uygulama bazlı mikseri sıfırla</value></data>
+  <data name="Fix_Audio_BluetoothRestart" xml:space="preserve"><value>Seçili Bluetooth ses cihazını yeniden başlat</value></data>
+  <data name="Fix_Audio_EnableAllDisabled" xml:space="preserve"><value>Tüm devre dışı ses aygıtlarını etkinleştir</value></data>
+  <data name="Fix_Audio_RescanDevices" xml:space="preserve"><value>Ses aygıtlarını yeniden tara ve servisleri başlat</value></data>
+  <data name="Fix_Audio_DriverReset" xml:space="preserve"><value>Seçili ses sürücüsünü yeniden kur</value></data>
+  <data name="Fix_Audio_MmDevicesReset" xml:space="preserve"><value>Windows ses uç noktalarını yeniden oluştur</value></data>
+  <data name="Fix_Update_RestartServices" xml:space="preserve"><value>Güncelleme servislerini düzelt</value></data>
+  <data name="Fix_Update_ResetCache" xml:space="preserve"><value>Windows Update önbelleğini yeniden oluştur</value></data>
+  <data name="Fix_Printer_RestartSpooler" xml:space="preserve"><value>Yazdırma Biriktiricisi’ni yeniden başlat</value></data>
+  <data name="Fix_Printer_ResetQueue" xml:space="preserve"><value>Yazdırma kuyruğunu yedekle ve temizle</value></data>
+  <data name="Fix_Bluetooth_RestartService" xml:space="preserve"><value>Bluetooth servisini düzelt</value></data>
+  <data name="Fix_Bluetooth_RestartDevice" xml:space="preserve"><value>Seçili Bluetooth cihazını yeniden başlat</value></data>
+  <data name="Fix_Disk_CleanTemp" xml:space="preserve"><value>Eski geçici dosyaları karantinaya taşı</value></data>
   <data name="Fix_Disk_ScheduleChkdsk" xml:space="preserve"><value>Disk dosya sistemi denetimi planla</value></data>
-  <data name="Fix_Integrity_RepairChain" xml:space="preserve"><value>Windowsâ€™u DISM ve SFC ile onar</value></data>
-  <data name="Fix_Store_ResetCache" xml:space="preserve"><value>Microsoft Store Ã¶nbelleÄŸini sÄ±fÄ±rla</value></data>
+  <data name="Fix_Integrity_RepairChain" xml:space="preserve"><value>Windows’u DISM ve SFC ile onar</value></data>
+  <data name="Fix_Store_ResetCache" xml:space="preserve"><value>Microsoft Store önbelleğini sıfırla</value></data>
   <data name="Fix_Store_Reregister" xml:space="preserve"><value>Microsoft Store paketini yeniden kaydet</value></data>
-  <data name="Fix_Time_Resync" xml:space="preserve"><value>Windows saatini yeniden eÅŸitle</value></data>
-  <data name="Fix_Performance_BalancedPlan" xml:space="preserve"><value>Dengeli gÃ¼Ã§ planÄ±na geÃ§</value></data>
-  <data name="Fix_Performance_RepairCoreServices" xml:space="preserve"><value>Temel Windows servislerini onar (durmuÅŸlarÄ± baÅŸlat / devre dÄ±ÅŸÄ±nÄ± aÃ§)</value></data>
-  <data name="Fix_Performance_RestartCoreServices" xml:space="preserve"><value>Temel Windows servislerini yeniden baÅŸlat</value></data>
-  <data name="Check_Performance_CoreServices" xml:space="preserve"><value>Temel Windows servisleri saÄŸlÄ±ÄŸÄ±</value></data>
-  <data name="Finding_Performance_CoreServices" xml:space="preserve"><value>Bir veya daha fazla temel Windows servisi devre dÄ±ÅŸÄ± veya durmuÅŸ</value></data>
-  <data name="Symptom_Performance_Services" xml:space="preserve"><value>Windows servisleri bozuk veya baÅŸlamÄ±yor</value></data>
+  <data name="Fix_Time_Resync" xml:space="preserve"><value>Windows saatini yeniden eşitle</value></data>
+  <data name="Fix_Performance_BalancedPlan" xml:space="preserve"><value>Dengeli güç planına geç</value></data>
 
-  <data name="LiveTest_Network_Ping" xml:space="preserve"><value>BaÄŸdaÅŸtÄ±rÄ±cÄ± bazlÄ± ping testi</value></data>
-  <data name="LiveTest_Network_DnsRace" xml:space="preserve"><value>DNS Ã§Ã¶zÃ¼mleme yarÄ±ÅŸÄ±</value></data>
-  <data name="LiveTest_Network_Http" xml:space="preserve"><value>HTTP ve giriÅŸ portalÄ± sÄ±namasÄ±</value></data>
-  <data name="LiveTest_Network_Speed" xml:space="preserve"><value>10 MB indirme hÄ±z testi</value></data>
-  <data name="LiveTest_Audio_Speaker" xml:space="preserve"><value>Sol ve saÄŸ hoparlÃ¶r testi</value></data>
-  <data name="LiveTest_Audio_Microphone" xml:space="preserve"><value>BeÅŸ saniyelik mikrofon testi</value></data>
-  <data name="LiveTest_Audio_Stability" xml:space="preserve"><value>On saniyelik oynatma kararlÄ±lÄ±ÄŸÄ± testi</value></data>
+  <data name="LiveTest_Network_Ping" xml:space="preserve"><value>Bağdaştırıcı bazlı ping testi</value></data>
+  <data name="LiveTest_Network_DnsRace" xml:space="preserve"><value>DNS çözümleme yarışı</value></data>
+  <data name="LiveTest_Network_Http" xml:space="preserve"><value>HTTP ve giriş portalı sınaması</value></data>
+  <data name="LiveTest_Network_Speed" xml:space="preserve"><value>10 MB indirme hız testi</value></data>
+  <data name="LiveTest_Audio_Speaker" xml:space="preserve"><value>Sol ve sağ hoparlör testi</value></data>
+  <data name="LiveTest_Audio_Microphone" xml:space="preserve"><value>Beş saniyelik mikrofon testi</value></data>
+  <data name="LiveTest_Audio_Stability" xml:space="preserve"><value>On saniyelik oynatma kararlılığı testi</value></data>
 
-  <data name="Symptom_Network_NoInternet" xml:space="preserve"><value>Ä°nternet baÄŸlantÄ±sÄ± yok</value></data>
-  <data name="Symptom_Network_Limited" xml:space="preserve"><value>SÄ±nÄ±rlÄ± baÄŸlantÄ±</value></data>
-  <data name="Symptom_Network_Slow" xml:space="preserve"><value>Ä°nternet var ama yavaÅŸ</value></data>
-  <data name="Symptom_Network_Sites" xml:space="preserve"><value>Belirli siteler aÃ§Ä±lmÄ±yor</value></data>
-  <data name="Symptom_Network_Vpn" xml:space="preserve"><value>VPN sonrasÄ± internet bozuldu</value></data>
-  <data name="Symptom_Network_WifiDrops" xml:space="preserve"><value>Wiâ€‘Fi sÃ¼rekli kopuyor</value></data>
-  <data name="Symptom_Audio_NoSound" xml:space="preserve"><value>HiÃ§ ses yok</value></data>
-  <data name="Symptom_Audio_Crackling" xml:space="preserve"><value>Ses cÄ±zÄ±rtÄ±lÄ± veya kesik</value></data>
-  <data name="Symptom_Audio_MicNotWorking" xml:space="preserve"><value>Mikrofon Ã§alÄ±ÅŸmÄ±yor</value></data>
-  <data name="Symptom_Audio_MicLow" xml:space="preserve"><value>Mikrofon Ã§ok kÄ±sÄ±k</value></data>
-  <data name="Symptom_Audio_BluetoothBad" xml:space="preserve"><value>Bluetooth kulaklÄ±k sesi kÃ¶tÃ¼</value></data>
-  <data name="Symptom_Audio_WrongDevice" xml:space="preserve"><value>Ses yanlÄ±ÅŸ cihazdan geliyor</value></data>
-  <data name="Symptom_Update_Failed" xml:space="preserve"><value>Windows Update baÅŸarÄ±sÄ±z</value></data>
-  <data name="Symptom_Printer_Stuck" xml:space="preserve"><value>YazdÄ±rma takÄ±ldÄ± veya Ã§evrimdÄ±ÅŸÄ±</value></data>
-  <data name="Symptom_Bluetooth_Connect" xml:space="preserve"><value>Bluetooth cihazÄ± baÄŸlanmÄ±yor</value></data>
-  <data name="Symptom_Disk_Slow" xml:space="preserve"><value>Disk yavaÅŸ veya sÃ¼rekli meÅŸgul</value></data>
-  <data name="Symptom_Integrity_Corrupt" xml:space="preserve"><value>Windows dosyalarÄ± bozuk olabilir</value></data>
-  <data name="Symptom_Store_NotOpen" xml:space="preserve"><value>Microsoft Store aÃ§Ä±lmÄ±yor</value></data>
-  <data name="Symptom_Time_Wrong" xml:space="preserve"><value>Saat veya zaman eÅŸitleme yanlÄ±ÅŸ</value></data>
-  <data name="Symptom_Performance_SlowStartup" xml:space="preserve"><value>Windows yavaÅŸ aÃ§Ä±lÄ±yor</value></data>
+  <data name="Symptom_Network_NoInternet" xml:space="preserve"><value>İnternet bağlantısı yok</value></data>
+  <data name="Symptom_Network_Limited" xml:space="preserve"><value>Sınırlı bağlantı</value></data>
+  <data name="Symptom_Network_Slow" xml:space="preserve"><value>İnternet var ama yavaş</value></data>
+  <data name="Symptom_Network_Sites" xml:space="preserve"><value>Belirli siteler açılmıyor</value></data>
+  <data name="Symptom_Network_Vpn" xml:space="preserve"><value>VPN sonrası internet bozuldu</value></data>
+  <data name="Symptom_Network_WifiDrops" xml:space="preserve"><value>Wi‑Fi sürekli kopuyor</value></data>
+  <data name="Symptom_Audio_NoSound" xml:space="preserve"><value>Hiç ses yok</value></data>
+  <data name="Symptom_Audio_Crackling" xml:space="preserve"><value>Ses cızırtılı veya kesik</value></data>
+  <data name="Symptom_Audio_MicNotWorking" xml:space="preserve"><value>Mikrofon çalışmıyor</value></data>
+  <data name="Symptom_Audio_MicLow" xml:space="preserve"><value>Mikrofon çok kısık</value></data>
+  <data name="Symptom_Audio_BluetoothBad" xml:space="preserve"><value>Bluetooth kulaklık sesi kötü</value></data>
+  <data name="Symptom_Audio_WrongDevice" xml:space="preserve"><value>Ses yanlış cihazdan geliyor</value></data>
+  <data name="Symptom_Update_Failed" xml:space="preserve"><value>Windows Update başarısız</value></data>
+  <data name="Symptom_Printer_Stuck" xml:space="preserve"><value>Yazdırma takıldı veya çevrimdışı</value></data>
+  <data name="Symptom_Bluetooth_Connect" xml:space="preserve"><value>Bluetooth cihazı bağlanmıyor</value></data>
+  <data name="Symptom_Disk_Slow" xml:space="preserve"><value>Disk yavaş veya sürekli meşgul</value></data>
+  <data name="Symptom_Integrity_Corrupt" xml:space="preserve"><value>Windows dosyaları bozuk olabilir</value></data>
+  <data name="Symptom_Store_NotOpen" xml:space="preserve"><value>Microsoft Store açılmıyor</value></data>
+  <data name="Symptom_Time_Wrong" xml:space="preserve"><value>Saat veya zaman eşitleme yanlış</value></data>
+  <data name="Symptom_Performance_SlowStartup" xml:space="preserve"><value>Windows yavaş açılıyor</value></data>
 
-  <data name="Report_Title" xml:space="preserve"><value>OnarÄ±m Raporu</value></data>
+  <data name="Report_Title" xml:space="preserve"><value>Onarım Raporu</value></data>
   <data name="Report_Findings" xml:space="preserve"><value>Bulgular</value></data>
-  <data name="Report_Actions" xml:space="preserve"><value>Uygulanan iÅŸlemler</value></data>
-  <data name="Report_Action" xml:space="preserve"><value>Ä°ÅŸlem</value></data>
-  <data name="Report_Result" xml:space="preserve"><value>SonuÃ§</value></data>
+  <data name="Report_Actions" xml:space="preserve"><value>Uygulanan işlemler</value></data>
+  <data name="Report_Action" xml:space="preserve"><value>İşlem</value></data>
+  <data name="Report_Result" xml:space="preserve"><value>Sonuç</value></data>
   <data name="Report_Backup" xml:space="preserve"><value>Yedek</value></data>
   <data name="Report_Rollback" xml:space="preserve"><value>Geri alma</value></data>
-  <data name="Report_RollbackHelp" xml:space="preserve"><value>CaYaFix iÃ§indeki Geri Alma Merkeziâ€™nden bu oturumu seÃ§in. Ä°ÅŸlemler uygulama sÄ±rasÄ±nÄ±n tersine geri yÃ¼klenir.</value></data>
-  <data name="Dashboard_ModuleCount" xml:space="preserve"><value>{0} modÃ¼l</value></data>
-  <data name="Recovery_Subtitle" xml:space="preserve"><value>{0} iÅŸlem Â· {1} bulgu Â· {2}</value></data>
-  <data name="LiveTest_Running" xml:space="preserve"><value>Test sÃ¼rÃ¼yor</value></data>
+  <data name="Report_RollbackHelp" xml:space="preserve"><value>CaYaFix içindeki Geri Alma Merkezi’nden bu oturumu seçin. İşlemler uygulama sırasının tersine geri yüklenir.</value></data>
+  <data name="Dashboard_ModuleCount" xml:space="preserve"><value>{0} modül</value></data>
+  <data name="Recovery_Subtitle" xml:space="preserve"><value>{0} işlem · {1} bulgu · {2}</value></data>
+  <data name="LiveTest_Running" xml:space="preserve"><value>Test sürüyor</value></data>
   <data name="Module_Camera_Name" xml:space="preserve"><value>Kamera ve Gizlilik</value></data>
-  <data name="Module_Camera_Description" xml:space="preserve"><value>Kamera cihazlarÄ±nÄ±, eriÅŸim izinlerini ve geri alÄ±nabilir cihaz hatalarÄ±nÄ± denetler.</value></data>
+  <data name="Module_Camera_Description" xml:space="preserve"><value>Kamera cihazlarını, erişim izinlerini ve geri alınabilir cihaz hatalarını denetler.</value></data>
   <data name="Module_Usb_Name" xml:space="preserve"><value>USB ve Cihazlar</value></data>
-  <data name="Module_Usb_Description" xml:space="preserve"><value>USB cihaz hatalarÄ±nÄ± ve cihaz keÅŸfi iÃ§in gereken Windows hizmetlerini denetler.</value></data>
+  <data name="Module_Usb_Description" xml:space="preserve"><value>USB cihaz hatalarını ve cihaz keşfi için gereken Windows hizmetlerini denetler.</value></data>
   <data name="Module_Search_Name" xml:space="preserve"><value>Windows Arama</value></data>
-  <data name="Module_Search_Description" xml:space="preserve"><value>Arama hizmetinin durumunu ve son dizin oluÅŸturma hatalarÄ±nÄ± denetler.</value></data>
+  <data name="Module_Search_Description" xml:space="preserve"><value>Arama hizmetinin durumunu ve son dizin oluşturma hatalarını denetler.</value></data>
   <data name="Module_Display_Name" xml:space="preserve"><value>Ekran ve Grafik</value></data>
-  <data name="Module_Display_Description" xml:space="preserve"><value>Grafik baÄŸdaÅŸtÄ±rÄ±cÄ±lar, Ã§Ã¶zÃ¼nÃ¼rlÃ¼k/mod saÄŸlÄ±ÄŸÄ±, monitÃ¶rler ve ekran sÃ¼rÃ¼cÃ¼sÃ¼ sÄ±fÄ±rlamalarÄ±.</value></data>
-  <data name="Check_Camera_Devices" xml:space="preserve"><value>Kamera cihazlarÄ±</value></data>
-  <data name="Check_Camera_Privacy" xml:space="preserve"><value>Kamera gizlilik eriÅŸimi</value></data>
-  <data name="Check_Usb_Devices" xml:space="preserve"><value>USB cihazlarÄ±</value></data>
+  <data name="Module_Display_Description" xml:space="preserve"><value>Grafik bağdaştırıcılar, çözünürlük/mod sağlığı, monitörler ve ekran sürücüsü sıfırlamaları.</value></data>
+  <data name="Check_Camera_Devices" xml:space="preserve"><value>Kamera cihazları</value></data>
+  <data name="Check_Camera_Privacy" xml:space="preserve"><value>Kamera gizlilik erişimi</value></data>
+  <data name="Check_Usb_Devices" xml:space="preserve"><value>USB cihazları</value></data>
   <data name="Check_Usb_Services" xml:space="preserve"><value>Cihaz hizmetleri</value></data>
   <data name="Check_Search_Service" xml:space="preserve"><value>Windows Arama hizmeti</value></data>
-  <data name="Check_Search_Errors" xml:space="preserve"><value>Son arama hatalarÄ±</value></data>
-  <data name="Check_Display_Adapters" xml:space="preserve"><value>Grafik baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ±</value></data>
-  <data name="Check_Display_Driver" xml:space="preserve"><value>Grafik sÃ¼rÃ¼cÃ¼ saÄŸlÄ±ÄŸÄ±</value></data>
-  <data name="Check_Display_Modes" xml:space="preserve"><value>Ekran Ã§Ã¶zÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve kullanÄ±labilir modlar</value></data>
-  <data name="Check_Display_Monitors" xml:space="preserve"><value>BaÄŸlÄ± monitÃ¶rler</value></data>
-  <data name="Check_Display_Errors" xml:space="preserve"><value>Son ekran sÄ±fÄ±rlamalarÄ±</value></data>
-  <data name="Check_Display_Tdr" xml:space="preserve"><value>GPU zaman aÅŸÄ±mÄ± (TDR) olaylarÄ±</value></data>
-  <data name="Finding_Camera_DeviceError" xml:space="preserve"><value>Bir kamera cihazÄ± Windows cihaz hatasÄ± bildiriyor.</value></data>
-  <data name="Finding_Camera_PrivacyBlocked" xml:space="preserve"><value>Windows gizlilik ayarlarÄ± kamera eriÅŸimini engelliyor.</value></data>
-  <data name="Finding_Usb_DeviceError" xml:space="preserve"><value>BaÄŸlÄ± USB cihazlarÄ±ndan biri veya birkaÃ§Ä± hata bildiriyor.</value></data>
-  <data name="Finding_Usb_ServiceDisabled" xml:space="preserve"><value>Cihaz keÅŸfi iÃ§in gereken bir hizmet devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Search_ServiceStopped" xml:space="preserve"><value>Windows Arama durdurulmuÅŸ veya devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Search_RecentErrors" xml:space="preserve"><value>Windows Arama yakÄ±n zamanda dizin oluÅŸturma hatalarÄ± kaydetti.</value></data>
-  <data name="Finding_Display_AdapterError" xml:space="preserve"><value>Bir grafik baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± kritik cihaz hatasÄ± bildiriyor.</value></data>
-  <data name="Finding_Display_DriverError" xml:space="preserve"><value>Bir grafik sÃ¼rÃ¼cÃ¼sÃ¼ Windows aygÄ±t hata kodu bildiriyor.</value></data>
-  <data name="Finding_Display_BasicAdapter" xml:space="preserve"><value>Windows Microsoft Temel GÃ¶rÃ¼ntÃ¼ BaÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± kullanÄ±yor; bu normal Ã§Ã¶zÃ¼nÃ¼rlÃ¼k seÃ§eneklerini kilitler veya soluklaÅŸtÄ±rÄ±r.</value></data>
-  <data name="Finding_Display_ModesLocked" xml:space="preserve"><value>Ã‡ok az ekran modu listeleniyor â€” donanÄ±m daha fazlasÄ±nÄ± desteklese bile Ã§Ã¶zÃ¼nÃ¼rlÃ¼k takÄ±lÄ± veya gri kalabilir.</value></data>
-  <data name="Finding_Display_SubNativeResolution" xml:space="preserve"><value>GeÃ§erli Ã§Ã¶zÃ¼nÃ¼rlÃ¼k, sÃ¼rÃ¼cÃ¼nÃ¼n listelediÄŸi en yÃ¼ksek modun Ã§ok altÄ±nda (tek veya Ã§oklu ekran).</value></data>
-  <data name="Finding_Display_PolicyLocked" xml:space="preserve"><value>Bir ilke ekran ayarlarÄ±nÄ± deÄŸiÅŸtirmeyi engelliyor gibi gÃ¶rÃ¼nÃ¼yor (Ã§Ã¶zÃ¼nÃ¼rlÃ¼k kasÄ±tlÄ± olarak gri olabilir).</value></data>
-  <data name="Finding_Display_MonitorError" xml:space="preserve"><value>BaÄŸlÄ± bir monitÃ¶r aygÄ±tÄ± devre dÄ±ÅŸÄ± veya hatalÄ±; bu Ã§Ã¶zÃ¼nÃ¼rlÃ¼k seÃ§eneklerini kilitleyebilir.</value></data>
-  <data name="Finding_Display_GenericMonitors" xml:space="preserve"><value>MonitÃ¶rler yalnÄ±zca genel/bilinmeyen olarak tanÄ±nÄ±yor â€” EDID/mod listeleri eksik olabilir.</value></data>
-  <data name="Finding_Display_NoMonitor" xml:space="preserve"><value>Mod listesi iÃ§in mevcut monitÃ¶r aygÄ±tÄ± bulunamadÄ±.</value></data>
-  <data name="Finding_Display_RecentResets" xml:space="preserve"><value>Ekran sÃ¼rÃ¼cÃ¼sÃ¼ yakÄ±n zamanda sÄ±fÄ±rlandÄ±.</value></data>
-  <data name="Finding_Display_TdrEvents" xml:space="preserve"><value>Windows yakÄ±n zamanda GPU zaman aÅŸÄ±mÄ± (TDR) veya ekran kurtarma olaylarÄ± kaydetti.</value></data>
-  <data name="Finding_Network_EventLogErrors" xml:space="preserve"><value>AÄŸ baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ± veya TCP/IP iÃ§in yakÄ±n zamanlÄ± olay gÃ¼nlÃ¼ÄŸÃ¼ hatalarÄ± eÅŸlendi.</value></data>
-  <data name="Finding_Network_ProtocolDisabled" xml:space="preserve"><value>Bir veya daha fazla fiziksel baÄŸdaÅŸtÄ±rÄ±cÄ±da IPv4 veya IPv6 devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Audio_EventLogErrors" xml:space="preserve"><value>Ses servisleri iÃ§in yakÄ±n zamanlÄ± olay gÃ¼nlÃ¼ÄŸÃ¼ hatalarÄ± eÅŸlendi.</value></data>
-  <data name="Finding_Audio_PnpDisabled" xml:space="preserve"><value>Bir veya daha fazla ses aygÄ±tÄ± AygÄ±t YÃ¶neticisiâ€™nde devre dÄ±ÅŸÄ± veya hatalÄ±.</value></data>
-  <data name="Fix_Camera_AllowAccess" xml:space="preserve"><value>Kamera eriÅŸimine izin ver</value></data>
-  <data name="Fix_Camera_RestartDevice" xml:space="preserve"><value>Etkilenen kamerayÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Usb_StartServices" xml:space="preserve"><value>Cihaz hizmetlerini baÅŸlat</value></data>
-  <data name="Fix_Usb_RestartDevice" xml:space="preserve"><value>Etkilenen USB cihazÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Search_RestartService" xml:space="preserve"><value>Windows Arama'yÄ± onarÄ±p yeniden baÅŸlat</value></data>
+  <data name="Check_Search_Errors" xml:space="preserve"><value>Son arama hataları</value></data>
+  <data name="Check_Display_Adapters" xml:space="preserve"><value>Grafik bağdaştırıcıları</value></data>
+  <data name="Check_Display_Driver" xml:space="preserve"><value>Grafik sürücü sağlığı</value></data>
+  <data name="Check_Display_Errors" xml:space="preserve"><value>Son ekran sıfırlamaları</value></data>
+  <data name="Check_Display_Tdr" xml:space="preserve"><value>GPU zaman aşımı (TDR) olayları</value></data>
+  <data name="Finding_Camera_DeviceError" xml:space="preserve"><value>Bir kamera cihazı Windows cihaz hatası bildiriyor.</value></data>
+  <data name="Finding_Camera_PrivacyBlocked" xml:space="preserve"><value>Windows gizlilik ayarları kamera erişimini engelliyor.</value></data>
+  <data name="Finding_Usb_DeviceError" xml:space="preserve"><value>Bağlı USB cihazlarından biri veya birkaçı hata bildiriyor.</value></data>
+  <data name="Finding_Usb_ServiceDisabled" xml:space="preserve"><value>Cihaz keşfi için gereken bir hizmet devre dışı.</value></data>
+  <data name="Finding_Search_ServiceStopped" xml:space="preserve"><value>Windows Arama durdurulmuş veya devre dışı.</value></data>
+  <data name="Finding_Search_RecentErrors" xml:space="preserve"><value>Windows Arama yakın zamanda dizin oluşturma hataları kaydetti.</value></data>
+  <data name="Finding_Display_AdapterError" xml:space="preserve"><value>Bir grafik bağdaştırıcısı kritik cihaz hatası bildiriyor.</value></data>
+  <data name="Finding_Display_DriverError" xml:space="preserve"><value>Bir grafik sürücüsü Windows aygıt hata kodu bildiriyor.</value></data>
+  <data name="Finding_Display_RecentResets" xml:space="preserve"><value>Ekran sürücüsü yakın zamanda sıfırlandı.</value></data>
+  <data name="Finding_Display_TdrEvents" xml:space="preserve"><value>Windows yakın zamanda GPU zaman aşımı (TDR) veya ekran kurtarma olayları kaydetti.</value></data>
+  <data name="Finding_Network_EventLogErrors" xml:space="preserve"><value>Ağ bağdaştırıcıları veya TCP/IP için yakın zamanlı olay günlüğü hataları eşlendi.</value></data>
+  <data name="Finding_Network_ProtocolDisabled" xml:space="preserve"><value>Bir veya daha fazla fiziksel bağdaştırıcıda IPv4 veya IPv6 devre dışı.</value></data>
+  <data name="Finding_Audio_EventLogErrors" xml:space="preserve"><value>Ses servisleri için yakın zamanlı olay günlüğü hataları eşlendi.</value></data>
+  <data name="Finding_Audio_PnpDisabled" xml:space="preserve"><value>Bir veya daha fazla ses aygıtı Aygıt Yöneticisi’nde devre dışı veya hatalı.</value></data>
+  <data name="Fix_Camera_AllowAccess" xml:space="preserve"><value>Kamera erişimine izin ver</value></data>
+  <data name="Fix_Camera_RestartDevice" xml:space="preserve"><value>Etkilenen kamerayı yeniden başlat</value></data>
+  <data name="Fix_Usb_StartServices" xml:space="preserve"><value>Cihaz hizmetlerini başlat</value></data>
+  <data name="Fix_Usb_RestartDevice" xml:space="preserve"><value>Etkilenen USB cihazını yeniden başlat</value></data>
+  <data name="Fix_Search_RestartService" xml:space="preserve"><value>Windows Arama'yı onarıp yeniden başlat</value></data>
   <data name="Fix_Display_SoftReset" xml:space="preserve"><value>Grafik soft-reset (Win+Ctrl+Shift+B)</value></data>
-  <data name="Fix_Display_RepairResolution" xml:space="preserve"><value>TakÄ±lÄ± Ã§Ã¶zÃ¼nÃ¼rlÃ¼ÄŸÃ¼ onar (baÄŸdaÅŸtÄ±rÄ±cÄ±, monitÃ¶r, soft-reset, yeniden tara)</value></data>
-  <data name="Fix_Display_RestoreRecommended" xml:space="preserve"><value>Her ekranda desteklenen en yÃ¼ksek Ã§Ã¶zÃ¼nÃ¼rlÃ¼ÄŸÃ¼ uygula</value></data>
-  <data name="Fix_Display_ScanDevices" xml:space="preserve"><value>Grafik aygÄ±tlarÄ±nÄ± yeniden tara</value></data>
-  <data name="Fix_Display_RestartAll" xml:space="preserve"><value>TÃ¼m grafik baÄŸdaÅŸtÄ±rÄ±cÄ±larÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Fix_Display_RestartDevice" xml:space="preserve"><value>Grafik baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ±nÄ± yeniden baÅŸlat</value></data>
-  <data name="Check_Integrity_ScanHealth" xml:space="preserve"><value>DISM ScanHealth (derin bileÅŸen deposu)</value></data>
-  <data name="Finding_Integrity_ScanHealthFailed" xml:space="preserve"><value>DISM ScanHealth bileÅŸen deposu bozulmasÄ± buldu; onarÄ±lmalÄ± (temiz tarama deÄŸil).</value></data>
-  <data name="Fix_Integrity_SfcScan" xml:space="preserve"><value>SFC /scannow Ã§alÄ±ÅŸtÄ±r</value></data>
-  <data name="Fix_Integrity_DismRestore" xml:space="preserve"><value>DISM RestoreHealth Ã§alÄ±ÅŸtÄ±r</value></data>
+  <data name="Fix_Display_ScanDevices" xml:space="preserve"><value>Grafik aygıtlarını yeniden tara</value></data>
+  <data name="Fix_Display_RestartAll" xml:space="preserve"><value>Tüm grafik bağdaştırıcılarını yeniden başlat</value></data>
+  <data name="Fix_Display_RestartDevice" xml:space="preserve"><value>Grafik bağdaştırıcısını yeniden başlat</value></data>
+  <data name="Check_Integrity_ScanHealth" xml:space="preserve"><value>DISM ScanHealth (derin bileşen deposu)</value></data>
+  <data name="Finding_Integrity_ScanHealthFailed" xml:space="preserve"><value>DISM ScanHealth bileşen deposu bozulması buldu; onarılmalı (temiz tarama değil).</value></data>
+  <data name="Fix_Integrity_SfcScan" xml:space="preserve"><value>SFC /scannow çalıştır</value></data>
+  <data name="Fix_Integrity_DismRestore" xml:space="preserve"><value>DISM RestoreHealth çalıştır</value></data>
   <data name="Fix_Integrity_ComponentCleanup" xml:space="preserve"><value>DISM StartComponentCleanup</value></data>
-  <data name="Symptom_Camera_NotWorking" xml:space="preserve"><value>Kamera kullanÄ±lamÄ±yor veya engellenmiÅŸ</value></data>
-  <data name="Symptom_Usb_NotWorking" xml:space="preserve"><value>Bir USB cihazÄ± Ã§alÄ±ÅŸmÄ±yor</value></data>
-  <data name="Symptom_Search_NotWorking" xml:space="preserve"><value>Windows Arama Ã§alÄ±ÅŸmÄ±yor</value></data>
-  <data name="Symptom_Display_Unstable" xml:space="preserve"><value>Ekran titriyor, donuyor veya sÄ±fÄ±rlanÄ±yor</value></data>
-  <data name="Symptom_Display_ResolutionStuck" xml:space="preserve"><value>Ã‡Ã¶zÃ¼nÃ¼rlÃ¼k deÄŸiÅŸtirilemiyor (gri/takÄ±lÄ±) oysa ekran daha fazlasÄ±nÄ± destekliyor</value></data>
-  <data name="TestResult_Failed" xml:space="preserve"><value>baÅŸarÄ±sÄ±z</value></data>
-  <data name="TestResult_Passed" xml:space="preserve"><value>baÅŸarÄ±lÄ±</value></data>
+  <data name="Symptom_Camera_NotWorking" xml:space="preserve"><value>Kamera kullanılamıyor veya engellenmiş</value></data>
+  <data name="Symptom_Usb_NotWorking" xml:space="preserve"><value>Bir USB cihazı çalışmıyor</value></data>
+  <data name="Symptom_Search_NotWorking" xml:space="preserve"><value>Windows Arama çalışmıyor</value></data>
+  <data name="Symptom_Display_Unstable" xml:space="preserve"><value>Ekran titriyor, donuyor veya sıfırlanıyor</value></data>
+  <data name="TestResult_Failed" xml:space="preserve"><value>başarısız</value></data>
+  <data name="TestResult_Passed" xml:space="preserve"><value>başarılı</value></data>
   <data name="TestResult_HttpStatus" xml:space="preserve"><value>HTTP durumu {0}</value></data>
-  <data name="TestResult_NoActiveAdapter" xml:space="preserve"><value>Bu test iÃ§in etkin bir IPv4 baÄŸdaÅŸtÄ±rÄ±cÄ±sÄ± bulunmuyor.</value></data>
-  <data name="TestResult_IncompleteDownload" xml:space="preserve"><value>Ä°ndirme {0:0.0} MB'de erken sona erdi.</value></data>
-  <data name="TestResult_Mtu" xml:space="preserve"><value>{0}: tahmini yol MTU deÄŸeri {1} bayt</value></data>
-  <data name="TestResult_MtuProbing" xml:space="preserve"><value>{0}: {1} bayt sÄ±nanÄ±yor</value></data>
-  <data name="TestResult_MtuUnavailable" xml:space="preserve"><value>{0}: ICMP yol MTU Ã¶lÃ§Ã¼mÃ¼ kullanÄ±lamÄ±yor</value></data>
-  <data name="LiveMetrics_Mtu" xml:space="preserve"><value>Yol MTU: {0:0} bayt Â· ICMP yÃ¼kÃ¼: {1:0} bayt</value></data>
-  <data name="LiveTest_Network_Mtu" xml:space="preserve"><value>Yol MTU Ã¶lÃ§Ã¼mÃ¼</value></data>
-  <data name="UpdateError_80070002" xml:space="preserve"><value>GÃ¼ncelleme dosyasÄ± bulunamadÄ±.</value></data>
-  <data name="UpdateError_8007000E" xml:space="preserve"><value>Ä°ÅŸlemi tamamlamak iÃ§in yeterli bellek yok.</value></data>
-  <data name="UpdateError_80244022" xml:space="preserve"><value>GÃ¼ncelleme hizmeti geÃ§ici olarak kullanÄ±lamÄ±yor.</value></data>
-  <data name="UpdateError_800F081F" xml:space="preserve"><value>Gerekli bileÅŸen deposu kaynaÄŸÄ± bulunamadÄ±.</value></data>
-  <data name="Dialog_AlreadyRunning" xml:space="preserve"><value>CaYaFix bu Windows kullanÄ±cÄ±sÄ± iÃ§in zaten Ã§alÄ±ÅŸÄ±yor.</value></data>
-  <data name="Action_UndoAction" xml:space="preserve"><value>Ä°ÅŸlemi Geri Al</value></data>
-  <data name="Dialog_RollbackAction_Title" xml:space="preserve"><value>Bu iÅŸlem geri alÄ±nsÄ±n mÄ±?</value></data>
-  <data name="Dialog_RollbackAction" xml:space="preserve"><value>SeÃ§ilen iÅŸlem doÄŸrulanmÄ±ÅŸ yedeÄŸinden geri yÃ¼klenecek. Devam edilsin mi?</value></data>
+  <data name="TestResult_NoActiveAdapter" xml:space="preserve"><value>Bu test için etkin bir IPv4 bağdaştırıcısı bulunmuyor.</value></data>
+  <data name="TestResult_IncompleteDownload" xml:space="preserve"><value>İndirme {0:0.0} MB'de erken sona erdi.</value></data>
+  <data name="TestResult_Mtu" xml:space="preserve"><value>{0}: tahmini yol MTU değeri {1} bayt</value></data>
+  <data name="TestResult_MtuProbing" xml:space="preserve"><value>{0}: {1} bayt sınanıyor</value></data>
+  <data name="TestResult_MtuUnavailable" xml:space="preserve"><value>{0}: ICMP yol MTU ölçümü kullanılamıyor</value></data>
+  <data name="LiveMetrics_Mtu" xml:space="preserve"><value>Yol MTU: {0:0} bayt · ICMP yükü: {1:0} bayt</value></data>
+  <data name="LiveTest_Network_Mtu" xml:space="preserve"><value>Yol MTU ölçümü</value></data>
+  <data name="UpdateError_80070002" xml:space="preserve"><value>Güncelleme dosyası bulunamadı.</value></data>
+  <data name="UpdateError_8007000E" xml:space="preserve"><value>İşlemi tamamlamak için yeterli bellek yok.</value></data>
+  <data name="UpdateError_80244022" xml:space="preserve"><value>Güncelleme hizmeti geçici olarak kullanılamıyor.</value></data>
+  <data name="UpdateError_800F081F" xml:space="preserve"><value>Gerekli bileşen deposu kaynağı bulunamadı.</value></data>
+  <data name="Dialog_AlreadyRunning" xml:space="preserve"><value>CaYaFix bu Windows kullanıcısı için zaten çalışıyor.</value></data>
+  <data name="Action_UndoAction" xml:space="preserve"><value>İşlemi Geri Al</value></data>
+  <data name="Dialog_RollbackAction_Title" xml:space="preserve"><value>Bu işlem geri alınsın mı?</value></data>
+  <data name="Dialog_RollbackAction" xml:space="preserve"><value>Seçilen işlem doğrulanmış yedeğinden geri yüklenecek. Devam edilsin mi?</value></data>
   <data name="Dialog_CancelRollback_Title" xml:space="preserve"><value>Geri alma durdurulsun mu?</value></data>
-  <data name="Dialog_CancelRollback" xml:space="preserve"><value>Åimdi durdurursanÄ±z zaten geri yÃ¼klenen adÄ±mlar olduÄŸu gibi kalÄ±r. Kalan adÄ±mlar geri alÄ±nmaz. Geri alma durdurulsun mu?</value></data>
+  <data name="Dialog_CancelRollback" xml:space="preserve"><value>Şimdi durdurursanız zaten geri yüklenen adımlar olduğu gibi kalır. Kalan adımlar geri alınmaz. Geri alma durdurulsun mu?</value></data>
   <data name="Dialog_RollbackCancelled_Title" xml:space="preserve"><value>Geri alma durduruldu</value></data>
-  <data name="Dialog_RollbackCancelled" xml:space="preserve"><value>Geri alma iptal edildi. Zaten geri yÃ¼klenen adÄ±mlar geri yÃ¼klÃ¼ kaldÄ±. Yeni onarÄ±ma baÅŸlamadan Ã¶nce Geri Alma Merkeziâ€™ni inceleyin.</value></data>
-  <data name="Status_RollbackCancelled" xml:space="preserve"><value>Geri alma iptal edildi. Kalan adÄ±mlar iÃ§in Geri Alma Merkeziâ€™ni kontrol edin.</value></data>
+  <data name="Dialog_RollbackCancelled" xml:space="preserve"><value>Geri alma iptal edildi. Zaten geri yüklenen adımlar geri yüklü kaldı. Yeni onarıma başlamadan önce Geri Alma Merkezi’ni inceleyin.</value></data>
+  <data name="Status_RollbackCancelled" xml:space="preserve"><value>Geri alma iptal edildi. Kalan adımlar için Geri Alma Merkezi’ni kontrol edin.</value></data>
   <data name="Action_DismissRecovery" xml:space="preserve"><value>Reddet</value></data>
   <data name="Dialog_DismissRecovery_Title" xml:space="preserve"><value>Kurtarma gereksinimi reddedilsin mi?</value></data>
-  <data name="Dialog_DismissRecoveryAction" xml:space="preserve"><value>Bu, kesintiye uÄŸramÄ±ÅŸ veya baÅŸarÄ±sÄ±z kurtarma adÄ±mÄ±nÄ± yedeÄŸi geri yÃ¼klemeden kabul edilmiÅŸ sayar. Sistemin kÄ±smen deÄŸiÅŸmiÅŸ olabileceÄŸini anlÄ±yorsanÄ±z devam edin.</value></data>
-  <data name="Dialog_DismissRecoverySession" xml:space="preserve"><value>Bu oturumdaki tÃ¼m kesintiye uÄŸramÄ±ÅŸ veya baÅŸarÄ±sÄ±z kurtarma adÄ±mlarÄ± geri alÄ±nmadan reddedilir. DeÄŸiÅŸiklikleri olduÄŸu gibi bÄ±rakmayÄ± kabul ediyorsanÄ±z devam edin.</value></data>
+  <data name="Dialog_DismissRecoveryAction" xml:space="preserve"><value>Bu, kesintiye uğramış veya başarısız kurtarma adımını yedeği geri yüklemeden kabul edilmiş sayar. Sistemin kısmen değişmiş olabileceğini anlıyorsanız devam edin.</value></data>
+  <data name="Dialog_DismissRecoverySession" xml:space="preserve"><value>Bu oturumdaki tüm kesintiye uğramış veya başarısız kurtarma adımları geri alınmadan reddedilir. Değişiklikleri olduğu gibi bırakmayı kabul ediyorsanız devam edin.</value></data>
   <data name="Status_RecoveryDismissed" xml:space="preserve"><value>Kurtarma gereksinimi reddedildi.</value></data>
-  <data name="Status_RecoveryDismissFailed" xml:space="preserve"><value>Kurtarma adÄ±mÄ± reddedilemedi.</value></data>
+  <data name="Status_RecoveryDismissFailed" xml:space="preserve"><value>Kurtarma adımı reddedilemedi.</value></data>
   <data name="Recovery_ActionDismissed" xml:space="preserve"><value>Kurtarma reddedildi</value></data>
-  <data name="FixResult_RecoveryDismissed" xml:space="preserve"><value>Kurtarma, kullanÄ±cÄ± tarafÄ±ndan otomatik geri alma olmadan reddedildi.</value></data>
-  <data name="Operation_PhaseScan" xml:space="preserve"><value>TaranÄ±yor</value></data>
-  <data name="Operation_PhaseRepair" xml:space="preserve"><value>OnarÄ±lÄ±yor</value></data>
-  <data name="Operation_PhaseRollback" xml:space="preserve"><value>Geri alÄ±nÄ±yor</value></data>
-  <data name="Operation_PreparingRestorePoint" xml:space="preserve"><value>DeÄŸiÅŸikliklerden Ã¶nce Sistem Geri YÃ¼kleme noktasÄ± oluÅŸturuluyorâ€¦</value></data>
-  <data name="Operation_RestorePointChecking" xml:space="preserve"><value>Sistem KorumasÄ± ve son geri yÃ¼kleme noktalarÄ± kontrol ediliyorâ€¦</value></data>
-  <data name="Operation_RestorePointWorking" xml:space="preserve"><value>Windows geri yÃ¼kleme noktasÄ±nÄ± oluÅŸturuyor (en fazla ~90 sn)â€¦</value></data>
-  <data name="Operation_RestorePointWaiting" xml:space="preserve"><value>Geri yÃ¼kleme noktasÄ± hÃ¢lÃ¢ oluÅŸturuluyorâ€¦ {0} sn geÃ§ti. UyarÄ± ile atlayabilirsiniz.</value></data>
-  <data name="Operation_RestorePointCreated" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± oluÅŸturuldu.</value></data>
-  <data name="Operation_RestorePointAlreadyPresent" xml:space="preserve"><value>Son 24 saatte bir geri yÃ¼kleme noktasÄ± zaten var â€” yeniden oluÅŸturma atlandÄ±.</value></data>
-  <data name="Operation_RestorePointSkipped" xml:space="preserve"><value>Sistem Geri YÃ¼kleme noktasÄ± kullanÄ±cÄ± uyarÄ±sÄ± ile atlandÄ±. Ä°ÅŸlem bazlÄ± yedekler sÃ¼rer.</value></data>
-  <data name="Operation_RestorePointFailedDetail" xml:space="preserve"><value>Geri yÃ¼kleme noktasÄ± adÄ±mÄ± baÅŸarÄ±sÄ±z: {0}</value></data>
-  <data name="Operation_ScanStep" xml:space="preserve"><value>{0} Â· â€œ{1}â€ denetleniyor ({2}/{3})</value></data>
-  <data name="Operation_RepairStep" xml:space="preserve"><value>{0} Â· {1} ({2}/{3})</value></data>
-  <data name="Operation_FeedCheckRunning" xml:space="preserve"><value>Denetim Ã§alÄ±ÅŸÄ±yor: {0}</value></data>
+  <data name="FixResult_RecoveryDismissed" xml:space="preserve"><value>Kurtarma, kullanıcı tarafından otomatik geri alma olmadan reddedildi.</value></data>
+  <data name="Operation_PhaseScan" xml:space="preserve"><value>Taranıyor</value></data>
+  <data name="Operation_PhaseRepair" xml:space="preserve"><value>Onarılıyor</value></data>
+  <data name="Operation_PhaseRollback" xml:space="preserve"><value>Geri alınıyor</value></data>
+  <data name="Operation_PreparingRestorePoint" xml:space="preserve"><value>Değişikliklerden önce Sistem Geri Yükleme noktası oluşturuluyor…</value></data>
+  <data name="Operation_RestorePointChecking" xml:space="preserve"><value>Sistem Koruması ve son geri yükleme noktaları kontrol ediliyor…</value></data>
+  <data name="Operation_RestorePointWorking" xml:space="preserve"><value>Windows geri yükleme noktasını oluşturuyor (en fazla ~90 sn)…</value></data>
+  <data name="Operation_RestorePointWaiting" xml:space="preserve"><value>Geri yükleme noktası hâlâ oluşturuluyor… {0} sn geçti. Uyarı ile atlayabilirsiniz.</value></data>
+  <data name="Operation_RestorePointCreated" xml:space="preserve"><value>Sistem Geri Yükleme noktası oluşturuldu.</value></data>
+  <data name="Operation_RestorePointAlreadyPresent" xml:space="preserve"><value>Son 24 saatte bir geri yükleme noktası zaten var — yeniden oluşturma atlandı.</value></data>
+  <data name="Operation_RestorePointSkipped" xml:space="preserve"><value>Sistem Geri Yükleme noktası kullanıcı uyarısı ile atlandı. İşlem bazlı yedekler sürer.</value></data>
+  <data name="Operation_RestorePointFailedDetail" xml:space="preserve"><value>Geri yükleme noktası adımı başarısız: {0}</value></data>
+  <data name="Operation_ScanStep" xml:space="preserve"><value>{0} · “{1}” denetleniyor ({2}/{3})</value></data>
+  <data name="Operation_RepairStep" xml:space="preserve"><value>{0} · {1} ({2}/{3})</value></data>
+  <data name="Operation_FeedCheckRunning" xml:space="preserve"><value>Denetim çalışıyor: {0}</value></data>
   <data name="Operation_FeedCheckPassed" xml:space="preserve"><value>Sorun yok: {0}</value></data>
   <data name="Operation_FeedCheckFinding" xml:space="preserve"><value>Bulgu kaydedildi: {0}</value></data>
-  <data name="Operation_FeedRollbackAction" xml:space="preserve"><value>AdÄ±m geri alÄ±nÄ±yor: {0}</value></data>
-  <data name="Operation_FeedRollbackSession" xml:space="preserve"><value>Oturum geri alÄ±nÄ±yor: {0}</value></data>
-  <data name="Toast_ScanStarted" xml:space="preserve"><value>Tarama baÅŸladÄ±</value></data>
-  <data name="Toast_ScanComplete" xml:space="preserve"><value>Tarama tamamlandÄ±</value></data>
-  <data name="Toast_RepairStarted" xml:space="preserve"><value>OnarÄ±m baÅŸladÄ±</value></data>
-  <data name="Toast_Cancelled" xml:space="preserve"><value>Ä°ptal edildi</value></data>
-  <data name="Toast_Failed" xml:space="preserve"><value>BaÅŸarÄ±sÄ±z</value></data>
-  <data name="Toast_RollbackComplete" xml:space="preserve"><value>Geri alma tamamlandÄ±</value></data>
-  <data name="Toast_RollbackFailed" xml:space="preserve"><value>Geri alma baÅŸarÄ±sÄ±z</value></data>
+  <data name="Operation_FeedRollbackAction" xml:space="preserve"><value>Adım geri alınıyor: {0}</value></data>
+  <data name="Operation_FeedRollbackSession" xml:space="preserve"><value>Oturum geri alınıyor: {0}</value></data>
+  <data name="Toast_ScanStarted" xml:space="preserve"><value>Tarama başladı</value></data>
+  <data name="Toast_ScanComplete" xml:space="preserve"><value>Tarama tamamlandı</value></data>
+  <data name="Toast_RepairStarted" xml:space="preserve"><value>Onarım başladı</value></data>
+  <data name="Toast_Cancelled" xml:space="preserve"><value>İptal edildi</value></data>
+  <data name="Toast_Failed" xml:space="preserve"><value>Başarısız</value></data>
+  <data name="Toast_RollbackComplete" xml:space="preserve"><value>Geri alma tamamlandı</value></data>
+  <data name="Toast_RollbackFailed" xml:space="preserve"><value>Geri alma başarısız</value></data>
   <data name="Toast_RecoveryDismissed" xml:space="preserve"><value>Kurtarma reddedildi</value></data>
-  <data name="ModulePanel_Details" xml:space="preserve"><value>Alan ayrÄ±ntÄ±larÄ±</value></data>
-  <data name="ModulePanel_Symptoms" xml:space="preserve"><value>YaygÄ±n belirtiler â€” odaklÄ± tarama iÃ§in birini seÃ§in</value></data>
-  <data name="ModulePanel_NoSymptoms" xml:space="preserve"><value>Bu alan iÃ§in belirti kÄ±sayolu yok. Bunun yerine tam modÃ¼l taramasÄ± Ã§alÄ±ÅŸtÄ±rÄ±n.</value></data>
-  <data name="ModulePanel_Hint" xml:space="preserve"><value>Daha derin denetim iÃ§in tarayÄ±n veya bir belirti seÃ§ip risk uyarÄ±sÄ±ndan sonra ilgili onarÄ±mlarÄ± uygulayÄ±n (cÄ±zÄ±rtÄ±, kopma veya titreme gÃ¶rÃ¼lebilir).</value></data>
+  <data name="ModulePanel_Details" xml:space="preserve"><value>Alan ayrıntıları</value></data>
+  <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Yaygın belirtiler — odaklı tarama için birini seçin</value></data>
+  <data name="ModulePanel_NoSymptoms" xml:space="preserve"><value>Bu alan için belirti kısayolu yok. Bunun yerine tam modül taraması çalıştırın.</value></data>
+  <data name="ModulePanel_Hint" xml:space="preserve"><value>Daha derin denetim için tarayın veya bir belirti seçip risk uyarısından sonra ilgili onarımları uygulayın (cızırtı, kopma veya titreme görülebilir).</value></data>
   <data name="Action_ClosePanel" xml:space="preserve"><value>Kapat</value></data>
-  <data name="Action_ViewFindings" xml:space="preserve"><value>BulgularÄ± gÃ¶r</value></data>
-  <data name="Action_ForceRepairReal" xml:space="preserve"><value>GerÃ§ek sorunlarÄ± onar</value></data>
-  <data name="Action_ForceRepairAll" xml:space="preserve"><value>YaygÄ±n bulgularÄ± da dahil et</value></data>
+  <data name="Action_ViewFindings" xml:space="preserve"><value>Bulguları gör</value></data>
+  <data name="Action_ForceRepairReal" xml:space="preserve"><value>Gerçek sorunları onar</value></data>
+  <data name="Action_ForceRepairAll" xml:space="preserve"><value>Yaygın bulguları da dahil et</value></data>
   <data name="Operation_PhaseComplete" xml:space="preserve"><value>Tarama tamam</value></data>
-  <data name="Operation_EtaCalculating" xml:space="preserve"><value>SÃ¼re hesaplanÄ±yorâ€¦</value></data>
-  <data name="Operation_EtaStarting" xml:space="preserve"><value>Bu adÄ±m genelde ~{0} dk sÃ¼rer</value></data>
-  <data name="Operation_EtaMinutes" xml:space="preserve"><value>~{0} dk kaldÄ±</value></data>
-  <data name="Operation_EtaSeconds" xml:space="preserve"><value>~{0} sn kaldÄ±</value></data>
-  <data name="Operation_EtaHoursMinutes" xml:space="preserve"><value>~{0} sa {1} dk kaldÄ±</value></data>
-  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Neredeyse bittiâ€¦</value></data>
-  <data name="Operation_LongToolHint" xml:space="preserve"><value>uzun araÃ§ (~{0} dk)</value></data>
-  <data name="Operation_LiveSummary" xml:space="preserve"><value>Sorunsuz denetim: {0} Â· Bulgu: {1}</value></data>
+  <data name="Operation_EtaCalculating" xml:space="preserve"><value>Süre hesaplanıyor…</value></data>
+  <data name="Operation_EtaStarting" xml:space="preserve"><value>Bu adım genelde ~{0} dk sürer</value></data>
+  <data name="Operation_EtaMinutes" xml:space="preserve"><value>~{0} dk kaldı</value></data>
+  <data name="Operation_EtaSeconds" xml:space="preserve"><value>~{0} sn kaldı</value></data>
+  <data name="Operation_EtaHoursMinutes" xml:space="preserve"><value>~{0} sa {1} dk kaldı</value></data>
+  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Neredeyse bitti…</value></data>
+  <data name="Operation_LongToolHint" xml:space="preserve"><value>uzun araç (~{0} dk)</value></data>
+  <data name="Operation_LiveSummary" xml:space="preserve"><value>Sorunsuz denetim: {0} · Bulgu: {1}</value></data>
   <data name="Operation_StatPassed" xml:space="preserve"><value>Sorun yok</value></data>
   <data name="Operation_StatFindings" xml:space="preserve"><value>Bulgu</value></data>
-  <data name="Operation_StatCommon" xml:space="preserve"><value>YaygÄ±n / bilgilendirme</value></data>
-  <data name="Operation_StatActionable" xml:space="preserve"><value>Muhtemel gerÃ§ek</value></data>
-  <data name="Operation_ResultHealthy" xml:space="preserve"><value>Sorun bulunmadÄ±</value></data>
-  <data name="Operation_ResultHealthyDetail" xml:space="preserve"><value>{0} denetim sorunsuz tamamlandÄ±. Åu an bozulmuÅŸ bir ÅŸey gÃ¶rÃ¼nmÃ¼yor.</value></data>
-  <data name="Operation_ResultHealthyAdvice" xml:space="preserve"><value>AralÄ±klÄ± bir belirti hissediyorsanÄ±z canlÄ± testleri de Ã§alÄ±ÅŸtÄ±rabilirsiniz.</value></data>
-  <data name="Operation_ResultAdvisoryOnly" xml:space="preserve"><value>YalnÄ±zca yaygÄ±n veya bilgilendirme bulgularÄ±</value></data>
-  <data name="Operation_ResultAdvisoryDetail" xml:space="preserve"><value>{0} bulgu kaydedildi; {1} tanesi yaygÄ±n/bilgilendirme niteliÄŸinde (Ã¶r. sanal ses cihazlarÄ±, zayÄ±f Wiâ€‘Fi veya gÃ¼Ã§ tasarrufu).</value></data>
-  <data name="Operation_ResultAdvisoryAdvice" xml:space="preserve"><value>Voicemeeter, sanal kablo sÃ¼rÃ¼cÃ¼leri, docking veya VPN yazÄ±lÄ±mlarÄ±nda bunlar sÄ±k gÃ¶rÃ¼lÃ¼r ve her zaman gerÃ§ek arÄ±za deÄŸildir. Zorla onarÄ±m Ã¶ncesi inceleyin.</value></data>
-  <data name="Operation_ResultMixed" xml:space="preserve"><value>GerÃ§ek sorunlar ve yaygÄ±n bulgular bir arada</value></data>
-  <data name="Operation_ResultMixedDetail" xml:space="preserve"><value>{0} muhtemel gerÃ§ek sorun, {1} yaygÄ±n/bilgilendirme bulgusu ve {2} temiz denetim.</value></data>
-  <data name="Operation_ResultMixedAdvice" xml:space="preserve"><value>Ã–nce â€œGerÃ§ek sorunlarÄ± onarâ€ ile baÅŸlayÄ±n. Sanal sÃ¼rÃ¼cÃ¼ gibi yaygÄ±n bulgular normal olabilir ve yanÄ±ltÄ±cÄ± olabilir.</value></data>
+  <data name="Operation_StatCommon" xml:space="preserve"><value>Yaygın / bilgilendirme</value></data>
+  <data name="Operation_StatActionable" xml:space="preserve"><value>Muhtemel gerçek</value></data>
+  <data name="Operation_ResultHealthy" xml:space="preserve"><value>Sorun bulunmadı</value></data>
+  <data name="Operation_ResultHealthyDetail" xml:space="preserve"><value>{0} denetim sorunsuz tamamlandı. Şu an bozulmuş bir şey görünmüyor.</value></data>
+  <data name="Operation_ResultHealthyAdvice" xml:space="preserve"><value>Aralıklı bir belirti hissediyorsanız canlı testleri de çalıştırabilirsiniz.</value></data>
+  <data name="Operation_ResultAdvisoryOnly" xml:space="preserve"><value>Yalnızca yaygın veya bilgilendirme bulguları</value></data>
+  <data name="Operation_ResultAdvisoryDetail" xml:space="preserve"><value>{0} bulgu kaydedildi; {1} tanesi yaygın/bilgilendirme niteliğinde (ör. sanal ses cihazları, zayıf Wi‑Fi veya güç tasarrufu).</value></data>
+  <data name="Operation_ResultAdvisoryAdvice" xml:space="preserve"><value>Voicemeeter, sanal kablo sürücüleri, docking veya VPN yazılımlarında bunlar sık görülür ve her zaman gerçek arıza değildir. Zorla onarım öncesi inceleyin.</value></data>
+  <data name="Operation_ResultMixed" xml:space="preserve"><value>Gerçek sorunlar ve yaygın bulgular bir arada</value></data>
+  <data name="Operation_ResultMixedDetail" xml:space="preserve"><value>{0} muhtemel gerçek sorun, {1} yaygın/bilgilendirme bulgusu ve {2} temiz denetim.</value></data>
+  <data name="Operation_ResultMixedAdvice" xml:space="preserve"><value>Önce “Gerçek sorunları onar” ile başlayın. Sanal sürücü gibi yaygın bulgular normal olabilir ve yanıltıcı olabilir.</value></data>
   <data name="Operation_ResultIssues" xml:space="preserve"><value>Sorunlar bulundu</value></data>
-  <data name="Operation_ResultIssuesDetail" xml:space="preserve"><value>{0} onarÄ±labilir sorun ve {1} temiz denetim.</value></data>
-  <data name="Operation_ResultIssuesAdvice" xml:space="preserve"><value>â€œGerÃ§ek sorunlarÄ± onarâ€ ile gÃ¼venli onarÄ±mlarÄ± baÅŸlatabilirsiniz. Tam kontrol iÃ§in bulgular listesini de aÃ§abilirsiniz.</value></data>
-  <data name="Recovery_ActionSubtitle" xml:space="preserve"><value>{0} Â· {1} Â· {2}</value></data>
-  <data name="Recovery_ActionUndone" xml:space="preserve"><value>geri alÄ±ndÄ±</value></data>
-  <data name="Recovery_ActionNotApplied" xml:space="preserve"><value>uygulanmadÄ±</value></data>
-  <data name="Recovery_ActionVerified" xml:space="preserve"><value>doÄŸrulandÄ±</value></data>
-  <data name="Recovery_ActionPendingRestart" xml:space="preserve"><value>yeniden baÅŸlatma doÄŸrulamasÄ± bekliyor</value></data>
-  <data name="Recovery_ActionApplied" xml:space="preserve"><value>uygulandÄ±</value></data>
-  <data name="Check_Network_Routes" xml:space="preserve"><value>KalÄ±cÄ± rotalar</value></data>
-  <data name="Finding_Network_PersistentRouteConflict" xml:space="preserve"><value>Ã‡akÄ±ÅŸan veya eriÅŸilemeyen kalÄ±cÄ± aÄŸ rotalarÄ± algÄ±landÄ±.</value></data>
+  <data name="Operation_ResultIssuesDetail" xml:space="preserve"><value>{0} onarılabilir sorun ve {1} temiz denetim.</value></data>
+  <data name="Operation_ResultIssuesAdvice" xml:space="preserve"><value>“Gerçek sorunları onar” ile güvenli onarımları başlatabilirsiniz. Tam kontrol için bulgular listesini de açabilirsiniz.</value></data>
+  <data name="Recovery_ActionSubtitle" xml:space="preserve"><value>{0} · {1} · {2}</value></data>
+  <data name="Recovery_ActionUndone" xml:space="preserve"><value>geri alındı</value></data>
+  <data name="Recovery_ActionNotApplied" xml:space="preserve"><value>uygulanmadı</value></data>
+  <data name="Recovery_ActionVerified" xml:space="preserve"><value>doğrulandı</value></data>
+  <data name="Recovery_ActionPendingRestart" xml:space="preserve"><value>yeniden başlatma doğrulaması bekliyor</value></data>
+  <data name="Recovery_ActionApplied" xml:space="preserve"><value>uygulandı</value></data>
+  <data name="Check_Network_Routes" xml:space="preserve"><value>Kalıcı rotalar</value></data>
+  <data name="Finding_Network_PersistentRouteConflict" xml:space="preserve"><value>Çakışan veya erişilemeyen kalıcı ağ rotaları algılandı.</value></data>
   <data name="Check_Disk_FileSystem" xml:space="preserve"><value>Sistem birimi dosya sistemi</value></data>
-  <data name="Finding_Disk_FileSystemDirty" xml:space="preserve"><value>Windows, sistem birimini dosya sistemi tutarlÄ±lÄ±k denetimi iÃ§in iÅŸaretledi.</value></data>
-  <data name="Settings_ExpertCatalog" xml:space="preserve"><value>Uzman onarÄ±m kataloÄŸu</value></data>
-  <data name="Settings_ExpertCatalogDescription" xml:space="preserve"><value>Tam onarÄ±m kataloÄŸu. Tek bir onarÄ±mÄ± Ã‡alÄ±ÅŸtÄ±r ile uygulayabilirsiniz (yedek ve onay kapÄ±larÄ± geÃ§erli kalÄ±r). Hedef gerektiren onarÄ±mlar iÃ§in Ã¶nce o hedefi toplayan bir tarama gerekir.</value></data>
-  <data name="Settings_ManualTools" xml:space="preserve"><value>Manuel Windows onarÄ±m araÃ§larÄ±</value></data>
-  <data name="Settings_ManualToolsDescription" xml:space="preserve"><value>Microsoft odaklÄ± bir onarÄ±m aracÄ±nÄ± tarama bulgusu beklemeden seÃ§ip Ã§alÄ±ÅŸtÄ±rÄ±n. GÃ¼venli ve Orta araÃ§lar her zaman kullanÄ±labilir; Agresif araÃ§lar Ã¶nce Zorla OnarÄ±m risk onayÄ± ister.</value></data>
-  <data name="Settings_ManualToolsRisk" xml:space="preserve"><value>Bu araÃ§lar sistem durumunu deÄŸiÅŸtirir (ipconfig, DISM/SFC, WinRE/BCD, aÄŸ yÄ±ÄŸÄ±nÄ±, GPU soft-reset vb.). Yedek ve onaylar yine geÃ§erlidir. Boot yeniden oluÅŸturma yeniden baÅŸlatma isteyebilir; bootrec gibi yalnÄ±zca Ã§evrimdÄ±ÅŸÄ± (WinRE) komutlar masaÃ¼stÃ¼nden Ã§alÄ±ÅŸtÄ±rÄ±lmaz.</value></data>
-  <data name="Settings_ManualToolsAggressiveHint" xml:space="preserve"><value>Bulgularâ€™da Zorla OnarÄ±m riskini kabul edin, ardÄ±ndan Agresif aracÄ± yeniden Ã§alÄ±ÅŸtÄ±rÄ±n.</value></data>
-  <data name="Action_RunTool" xml:space="preserve"><value>AracÄ± Ã§alÄ±ÅŸtÄ±r</value></data>
-  <data name="Module_Boot_Name" xml:space="preserve"><value>Ã–nyÃ¼kleme ve kurtarma</value></data>
-  <data name="Module_Boot_Description" xml:space="preserve"><value>WinRE, BCD saÄŸlÄ±ÄŸÄ± ve Ã§evrimiÃ§i Ã¶nyÃ¼kleme dosyasÄ± kurtarma (bcdedit / bcdboot / reagentc).</value></data>
-  <data name="Check_Boot_WinRe" xml:space="preserve"><value>Windows Kurtarma OrtamÄ± (WinRE)</value></data>
-  <data name="Check_Boot_Bcd" xml:space="preserve"><value>Ã–nyÃ¼kleme yapÄ±landÄ±rma verisi ({current})</value></data>
-  <data name="Check_Boot_BcdFirmware" xml:space="preserve"><value>ÃœrÃ¼n yazÄ±lÄ±mÄ± Ã¶nyÃ¼kleme yÃ¶neticisi kayÄ±tlarÄ±</value></data>
-  <data name="Finding_Boot_WinReDisabled" xml:space="preserve"><value>Windows Kurtarma OrtamÄ± (WinRE) devre dÄ±ÅŸÄ±.</value></data>
-  <data name="Finding_Boot_WinReUnreadable" xml:space="preserve"><value>WinRE durumu reagentc ile okunamadÄ±.</value></data>
-  <data name="Finding_Boot_BcdUnreadable" xml:space="preserve"><value>GeÃ§erli Boot Configuration Data kaydÄ± okunamadÄ±.</value></data>
-  <data name="Finding_Boot_FirmwareEnumFailed" xml:space="preserve"><value>ÃœrÃ¼n yazÄ±lÄ±mÄ± BCD numaralandÄ±rmasÄ± baÅŸarÄ±sÄ±z ve OS yÃ¼kleyici kaydÄ± da saÄŸlÄ±ksÄ±z.</value></data>
-  <data name="Fix_Boot_ExportBcd" xml:space="preserve"><value>BCD deposunu dÄ±ÅŸa aktar (yedek)</value></data>
-  <data name="Fix_Boot_RecoveryEnabled" xml:space="preserve"><value>GeÃ§erli Ã¶nyÃ¼kleme kaydÄ±nda kurtarmayÄ± aÃ§</value></data>
-  <data name="Fix_Boot_EnableWinRe" xml:space="preserve"><value>Windows Kurtarma OrtamÄ±â€™nÄ± etkinleÅŸtir</value></data>
-  <data name="Fix_Boot_RebuildBcdBoot" xml:space="preserve"><value>bcdboot ile Ã¶nyÃ¼kleme dosyalarÄ±nÄ± yeniden oluÅŸtur</value></data>
-  <data name="Symptom_Boot_RecoveryMissing" xml:space="preserve"><value>Kurtarma ortamÄ± yok veya devre dÄ±ÅŸÄ±</value></data>
-  <data name="Symptom_Boot_ConfigSuspect" xml:space="preserve"><value>Ã–nyÃ¼kleme yapÄ±landÄ±rmasÄ± bozulmuÅŸ olabilir</value></data>
-  <data name="Check_Disk_OnlineScan" xml:space="preserve"><value>Ã‡evrimiÃ§i chkdsk /scan</value></data>
-  <data name="Finding_Disk_OnlineScanIssues" xml:space="preserve"><value>Ã‡evrimiÃ§i dosya sistemi taramasÄ± sorun bildirdi veya temiz tamamlanmadÄ±.</value></data>
-  <data name="Fix_Disk_OnlineScanFix" xml:space="preserve"><value>Ã‡evrimiÃ§i chkdsk /scan ve /spotfix</value></data>
+  <data name="Finding_Disk_FileSystemDirty" xml:space="preserve"><value>Windows, sistem birimini dosya sistemi tutarlılık denetimi için işaretledi.</value></data>
+  <data name="Settings_ExpertCatalog" xml:space="preserve"><value>Uzman onarım kataloğu</value></data>
+  <data name="Settings_ExpertCatalogDescription" xml:space="preserve"><value>Tam onarım kataloğu. Tek bir onarımı Çalıştır ile uygulayabilirsiniz (yedek ve onay kapıları geçerli kalır). Hedef gerektiren onarımlar için önce o hedefi toplayan bir tarama gerekir.</value></data>
+  <data name="Settings_ManualTools" xml:space="preserve"><value>Manuel Windows onarım araçları</value></data>
+  <data name="Settings_ManualToolsDescription" xml:space="preserve"><value>Microsoft odaklı bir onarım aracını tarama bulgusu beklemeden seçip çalıştırın. Güvenli ve Orta araçlar her zaman kullanılabilir; Agresif araçlar önce Zorla Onarım risk onayı ister.</value></data>
+  <data name="Settings_ManualToolsRisk" xml:space="preserve"><value>Bu araçlar sistem durumunu değiştirir (ipconfig, DISM/SFC, WinRE/BCD, ağ yığını, GPU soft-reset vb.). Yedek ve onaylar yine geçerlidir. Boot yeniden oluşturma yeniden başlatma isteyebilir; bootrec gibi yalnızca çevrimdışı (WinRE) komutlar masaüstünden çalıştırılmaz.</value></data>
+  <data name="Settings_ManualToolsAggressiveHint" xml:space="preserve"><value>Bulgular’da Zorla Onarım riskini kabul edin, ardından Agresif aracı yeniden çalıştırın.</value></data>
+  <data name="Action_RunTool" xml:space="preserve"><value>Aracı çalıştır</value></data>
+  <data name="Module_Boot_Name" xml:space="preserve"><value>Önyükleme ve kurtarma</value></data>
+  <data name="Module_Boot_Description" xml:space="preserve"><value>WinRE, BCD sağlığı ve çevrimiçi önyükleme dosyası kurtarma (bcdedit / bcdboot / reagentc).</value></data>
+  <data name="Check_Boot_WinRe" xml:space="preserve"><value>Windows Kurtarma Ortamı (WinRE)</value></data>
+  <data name="Check_Boot_Bcd" xml:space="preserve"><value>Önyükleme yapılandırma verisi ({current})</value></data>
+  <data name="Check_Boot_BcdFirmware" xml:space="preserve"><value>Ürün yazılımı önyükleme yöneticisi kayıtları</value></data>
+  <data name="Finding_Boot_WinReDisabled" xml:space="preserve"><value>Windows Kurtarma Ortamı (WinRE) devre dışı.</value></data>
+  <data name="Finding_Boot_WinReUnreadable" xml:space="preserve"><value>WinRE durumu reagentc ile okunamadı.</value></data>
+  <data name="Finding_Boot_BcdUnreadable" xml:space="preserve"><value>Geçerli Boot Configuration Data kaydı okunamadı.</value></data>
+  <data name="Finding_Boot_FirmwareEnumFailed" xml:space="preserve"><value>Ürün yazılımı BCD numaralandırması başarısız ve OS yükleyici kaydı da sağlıksız.</value></data>
+  <data name="Fix_Boot_ExportBcd" xml:space="preserve"><value>BCD deposunu dışa aktar (yedek)</value></data>
+  <data name="Fix_Boot_RecoveryEnabled" xml:space="preserve"><value>Geçerli önyükleme kaydında kurtarmayı aç</value></data>
+  <data name="Fix_Boot_EnableWinRe" xml:space="preserve"><value>Windows Kurtarma Ortamı’nı etkinleştir</value></data>
+  <data name="Fix_Boot_RebuildBcdBoot" xml:space="preserve"><value>bcdboot ile önyükleme dosyalarını yeniden oluştur</value></data>
+  <data name="Symptom_Boot_RecoveryMissing" xml:space="preserve"><value>Kurtarma ortamı yok veya devre dışı</value></data>
+  <data name="Symptom_Boot_ConfigSuspect" xml:space="preserve"><value>Önyükleme yapılandırması bozulmuş olabilir</value></data>
+  <data name="Check_Disk_OnlineScan" xml:space="preserve"><value>Çevrimiçi chkdsk /scan</value></data>
+  <data name="Finding_Disk_OnlineScanIssues" xml:space="preserve"><value>Çevrimiçi dosya sistemi taraması sorun bildirdi veya temiz tamamlanmadı.</value></data>
+  <data name="Fix_Disk_OnlineScanFix" xml:space="preserve"><value>Çevrimiçi chkdsk /scan ve /spotfix</value></data>
   <data name="Check_Integrity_AnalyzeStore" xml:space="preserve"><value>DISM AnalyzeComponentStore</value></data>
-  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM WinSxS bileÅŸen deposu temizliÄŸi Ã¶neriyor (alan kazanÄ±mÄ± â€” dosya bozulmasÄ± deÄŸil).</value></data>
-  <data name="Symptom_Integrity_Cleanup" xml:space="preserve"><value>Windows bileÅŸen deposu bÃ¼yÃ¼k / temizlik Ã¶neriliyor</value></data>
-  <data name="GuidedRepair_Effects_Boot" xml:space="preserve"><value>Ã–nyÃ¼kleme/kurtarma araÃ§larÄ± BCD dÄ±ÅŸa aktarabilir, WinREâ€™yi aÃ§abilir veya Ã¶nyÃ¼kleme dosyalarÄ±nÄ± yeniden yazabilir. Yeniden baÅŸlatma gerekebilir. YalnÄ±zca Ã§evrimdÄ±ÅŸÄ± araÃ§lar (bootrec) Ã§alÄ±ÅŸan masaÃ¼stÃ¼nden Ã§alÄ±ÅŸtÄ±rÄ±lmaz.</value></data>
-  <data name="Expert_FixFlags" xml:space="preserve"><value>{0} Â· {1}</value></data>
+  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM WinSxS bileşen deposu temizliği öneriyor (alan kazanımı — dosya bozulması değil).</value></data>
+  <data name="GuidedRepair_Effects_Boot" xml:space="preserve"><value>Önyükleme/kurtarma araçları BCD dışa aktarabilir, WinRE’yi açabilir veya önyükleme dosyalarını yeniden yazabilir. Yeniden başlatma gerekebilir. Yalnızca çevrimdışı araçlar (bootrec) çalışan masaüstünden çalıştırılmaz.</value></data>
+  <data name="Expert_FixFlags" xml:space="preserve"><value>{0} · {1}</value></data>
   <data name="Expert_TargetRequired" xml:space="preserve"><value>hedef gerekli</value></data>
   <data name="Expert_NoTargetRequired" xml:space="preserve"><value>cihaz hedefi yok</value></data>
-  <data name="Expert_RestartRequired" xml:space="preserve"><value>yeniden baÅŸlatma gerekli</value></data>
-  <data name="Expert_NoRestartRequired" xml:space="preserve"><value>yeniden baÅŸlatma yok</value></data>
-  <data name="Check_Store_Errors" xml:space="preserve"><value>Son Microsoft Store hatalarÄ±</value></data>
-  <data name="Finding_Store_PackageUnhealthy" xml:space="preserve"><value>Microsoft Store paketi saÄŸlÄ±ksÄ±z bir durum bildiriyor.</value></data>
-  <data name="Finding_Store_RecentErrors" xml:space="preserve"><value>Microsoft Store yakÄ±n zamanda iÅŸlem hatalarÄ± kaydetti.</value></data>
-  <data name="Dialog_CloseBusy_Title" xml:space="preserve"><value>Etkin iÅŸlem iptal edilsin mi?</value></data>
-  <data name="Dialog_CloseBusy" xml:space="preserve"><value>CaYaFix kapanmadan Ã¶nce etkin iÅŸlemi iptal etmeli, gereken geri alma iÅŸlemini tamamlamalÄ± ve oturumu kaydetmelidir. Devam edilsin mi?</value></data>
+  <data name="Expert_RestartRequired" xml:space="preserve"><value>yeniden başlatma gerekli</value></data>
+  <data name="Expert_NoRestartRequired" xml:space="preserve"><value>yeniden başlatma yok</value></data>
+  <data name="Check_Store_Errors" xml:space="preserve"><value>Son Microsoft Store hataları</value></data>
+  <data name="Finding_Store_PackageUnhealthy" xml:space="preserve"><value>Microsoft Store paketi sağlıksız bir durum bildiriyor.</value></data>
+  <data name="Finding_Store_RecentErrors" xml:space="preserve"><value>Microsoft Store yakın zamanda işlem hataları kaydetti.</value></data>
+  <data name="Dialog_CloseBusy_Title" xml:space="preserve"><value>Etkin işlem iptal edilsin mi?</value></data>
+  <data name="Dialog_CloseBusy" xml:space="preserve"><value>CaYaFix kapanmadan önce etkin işlemi iptal etmeli, gereken geri alma işlemini tamamlamalı ve oturumu kaydetmelidir. Devam edilsin mi?</value></data>
   <data name="Report_Tier" xml:space="preserve"><value>Risk kademesi</value></data>
-  <data name="SessionStatus_Created" xml:space="preserve"><value>OluÅŸturuldu</value></data>
-  <data name="SessionStatus_Running" xml:space="preserve"><value>Ã‡alÄ±ÅŸÄ±yor</value></data>
-  <data name="SessionStatus_PendingVerification" xml:space="preserve"><value>Yeniden baÅŸlatma doÄŸrulamasÄ± bekliyor</value></data>
-  <data name="SessionStatus_Completed" xml:space="preserve"><value>TamamlandÄ±</value></data>
-  <data name="SessionStatus_Cancelled" xml:space="preserve"><value>Ä°ptal edildi</value></data>
-  <data name="SessionStatus_Failed" xml:space="preserve"><value>BaÅŸarÄ±sÄ±z</value></data>
-  <data name="SessionStatus_RolledBack" xml:space="preserve"><value>Geri alÄ±ndÄ±</value></data>
-  <data name="FindingStatus_Open" xml:space="preserve"><value>AÃ§Ä±k</value></data>
-  <data name="FindingStatus_Repairing" xml:space="preserve"><value>OnarÄ±lÄ±yor</value></data>
-  <data name="FindingStatus_Resolved" xml:space="preserve"><value>Ã‡Ã¶zÃ¼ldÃ¼</value></data>
-  <data name="FindingStatus_Unresolved" xml:space="preserve"><value>Ã‡Ã¶zÃ¼lemedi</value></data>
-  <data name="FindingStatus_Skipped" xml:space="preserve"><value>AtlandÄ±</value></data>
-  <data name="TestStage_Playback" xml:space="preserve"><value>Bellekteki mikrofon Ã¶rneÄŸi geri oynatÄ±lÄ±yor</value></data>
-  <data name="TestStage_PlaybackUnavailable" xml:space="preserve"><value>Mikrofon sinyali algÄ±landÄ± ancak geri oynatma kullanÄ±lamadÄ±</value></data>
-  <data name="Fix_Camera_AllowDesktopApps" xml:space="preserve"><value>Masaüstü uygulamaları için kameraya izin ver</value></data>
-  <data name="Fix_Camera_EnableDisabled" xml:space="preserve"><value>Devre dışı kamera aygıtlarını etkinleştir</value></data>
-  <data name="Fix_Camera_ScanDevices" xml:space="preserve"><value>Kamera aygıtlarını yeniden tara</value></data>
-  <data name="Fix_Camera_RestartFrameServer" xml:space="preserve"><value>Kamera Frame Server servislerini yeniden başlat</value></data>
-  <data name="Fix_Camera_CycleCaptureServices" xml:space="preserve"><value>Kamera yakalama servislerini döngüle</value></data>
-  <data name="Fix_Usb_RestartDiscoveryServices" xml:space="preserve"><value>USB keşif servislerini yeniden başlat</value></data>
-  <data name="Fix_Usb_ScanDevices" xml:space="preserve"><value>USB aygıtlarını yeniden tara</value></data>
-  <data name="Fix_Usb_EnableDisabled" xml:space="preserve"><value>Devre dışı USB aygıtlarını etkinleştir</value></data>
-  <data name="Fix_Usb_RestartHubs" xml:space="preserve"><value>USB hub&apos;ları yeniden başlat</value></data>
-  <data name="Fix_Usb_CycleRootHubs" xml:space="preserve"><value>USB root hub&apos;ları yeniden başlat ve tara</value></data>
-  <data name="Fix_Search_SetAutomatic" xml:space="preserve"><value>Windows Arama&apos;yı Otomatik yap ve başlat</value></data>
-  <data name="Fix_Search_RebuildIndex" xml:space="preserve"><value>Windows Arama dizinini yeniden oluştur (yeniden başlatma gerekir)</value></data>
-  <data name="Fix_Search_ClearTemp" xml:space="preserve"><value>Windows Arama geçici dizin verilerini temizle</value></data>
-  <data name="Fix_Search_RestartAndRebuild" xml:space="preserve"><value>Arama&apos;yı yeniden başlat ve dizini yeniden oluştur</value></data>
-  <data name="Fix_Bluetooth_RestartStack" xml:space="preserve"><value>Bluetooth destek servis yığınını yeniden başlat</value></data>
-  <data name="Fix_Bluetooth_ScanDevices" xml:space="preserve"><value>Bluetooth aygıtlarını yeniden tara</value></data>
+  <data name="SessionStatus_Created" xml:space="preserve"><value>Oluşturuldu</value></data>
+  <data name="SessionStatus_Running" xml:space="preserve"><value>Çalışıyor</value></data>
+  <data name="SessionStatus_PendingVerification" xml:space="preserve"><value>Yeniden başlatma doğrulaması bekliyor</value></data>
+  <data name="SessionStatus_Completed" xml:space="preserve"><value>Tamamlandı</value></data>
+  <data name="SessionStatus_Cancelled" xml:space="preserve"><value>İptal edildi</value></data>
+  <data name="SessionStatus_Failed" xml:space="preserve"><value>Başarısız</value></data>
+  <data name="SessionStatus_RolledBack" xml:space="preserve"><value>Geri alındı</value></data>
+  <data name="FindingStatus_Open" xml:space="preserve"><value>Açık</value></data>
+  <data name="FindingStatus_Repairing" xml:space="preserve"><value>Onarılıyor</value></data>
+  <data name="FindingStatus_Resolved" xml:space="preserve"><value>Çözüldü</value></data>
+  <data name="FindingStatus_Unresolved" xml:space="preserve"><value>Çözülemedi</value></data>
+  <data name="FindingStatus_Skipped" xml:space="preserve"><value>Atlandı</value></data>
+  <data name="TestStage_Playback" xml:space="preserve"><value>Bellekteki mikrofon örneği geri oynatılıyor</value></data>
+  <data name="TestStage_PlaybackUnavailable" xml:space="preserve"><value>Mikrofon sinyali algılandı ancak geri oynatma kullanılamadı</value></data>
+  <data name="Check_Display_Modes" xml:space="preserve"><value>Ekran çözünürlüğü ve kullanılabilir modlar</value></data>
+  <data name="Check_Display_Monitors" xml:space="preserve"><value>Bağlı monitörler</value></data>
+  <data name="Check_Performance_CoreServices" xml:space="preserve"><value>Temel Windows servisleri sağlığı</value></data>
+  <data name="Dialog_SupportPackage_SaveFilter" xml:space="preserve"><value>ZIP arşivi (*.zip)|*.zip</value></data>
+  <data name="Dialog_SupportPackage_SaveTitle" xml:space="preserve"><value>Destek paketini kaydet</value></data>
+  <data name="Finding_Display_BasicAdapter" xml:space="preserve"><value>Windows Microsoft Temel Görüntü Bağdaştırıcısı kullanıyor; bu normal çözünürlük seçeneklerini kilitler veya soluklaştırır.</value></data>
+  <data name="Finding_Display_GenericMonitors" xml:space="preserve"><value>Monitörler yalnızca genel/bilinmeyen olarak tanınıyor — EDID/mod listeleri eksik olabilir.</value></data>
+  <data name="Finding_Display_ModesLocked" xml:space="preserve"><value>Çok az ekran modu listeleniyor — donanım daha fazlasını desteklese bile çözünürlük takılı veya gri kalabilir.</value></data>
+  <data name="Finding_Display_MonitorError" xml:space="preserve"><value>Bağlı bir monitör aygıtı devre dışı veya hatalı; bu çözünürlük seçeneklerini kilitleyebilir.</value></data>
+  <data name="Finding_Display_NoMonitor" xml:space="preserve"><value>Mod listesi için mevcut monitör aygıtı bulunamadı.</value></data>
+  <data name="Finding_Display_PolicyLocked" xml:space="preserve"><value>Bir ilke ekran ayarlarını değiştirmeyi engelliyor gibi görünüyor (çözünürlük kasıtlı olarak gri olabilir).</value></data>
+  <data name="Finding_Display_SubNativeResolution" xml:space="preserve"><value>Geçerli çözünürlük, sürücünün listelediği en yüksek modun çok altında (tek veya çoklu ekran).</value></data>
+  <data name="Finding_Integrity_DismFailed" xml:space="preserve"><value>DISM güvenilir bir bileşen deposu sağlık denetimi tamamlayamadı.</value></data>
+  <data name="Finding_Integrity_NotRepairable" xml:space="preserve"><value>Windows bileşen deposu bozuk ve DISM çevrimiçi onarılamayacağını bildiriyor.</value></data>
+  <data name="Finding_Performance_CoreServices" xml:space="preserve"><value>Bir veya daha fazla temel Windows servisi devre dışı veya durmuş</value></data>
+  <data name="Fix_Audio_RepairAllIo" xml:space="preserve"><value>Gelişmiş onarım: tüm ses girişi ve çıkışı</value></data>
+  <data name="Fix_Audio_RepairInput" xml:space="preserve"><value>Gelişmiş onarım: yalnızca ses girişi</value></data>
+  <data name="Fix_Audio_RepairOutput" xml:space="preserve"><value>Gelişmiş onarım: yalnızca ses çıkışı</value></data>
   <data name="Fix_Bluetooth_EnableAdapters" xml:space="preserve"><value>Devre dışı Bluetooth bağdaştırıcılarını etkinleştir</value></data>
   <data name="Fix_Bluetooth_RestartRadios" xml:space="preserve"><value>Bluetooth radyolarını yeniden başlat</value></data>
+  <data name="Fix_Bluetooth_RestartStack" xml:space="preserve"><value>Bluetooth destek servis yığınını yeniden başlat</value></data>
+  <data name="Fix_Bluetooth_ScanDevices" xml:space="preserve"><value>Bluetooth aygıtlarını yeniden tara</value></data>
   <data name="Fix_Bluetooth_StartSupportServices" xml:space="preserve"><value>Bluetooth destek servislerini başlat</value></data>
-  <data name="Fix_Store_RestartServices" xml:space="preserve"><value>Microsoft Store AppX servislerini yeniden başlat</value></data>
-  <data name="Fix_Store_StartAppxServices" xml:space="preserve"><value>AppX / Store ile ilgili servisleri başlat</value></data>
-  <data name="Fix_Store_ClearLocalCache" xml:space="preserve"><value>Microsoft Store yerel paket önbelleğini temizle</value></data>
-  <data name="Fix_Store_ResetAppxPackage" xml:space="preserve"><value>Microsoft Store uygulama paketini sıfırla</value></data>
-  <data name="Fix_Store_RegisterManifest" xml:space="preserve"><value>Microsoft Store AppxManifest&apos;i yeniden kaydet</value></data>
-  <data name="Fix_Time_RestartService" xml:space="preserve"><value>Windows Zaman servisini yeniden başlat</value></data>
-  <data name="Fix_Time_ResyncRediscover" xml:space="preserve"><value>Zamanı yeniden eşitle ve NTP eşlerini yeniden bul</value></data>
-  <data name="Fix_Time_SetManualNtp" xml:space="preserve"><value>time.windows.com&apos;u manuel NTP eşi yap</value></data>
-  <data name="Fix_Time_ConfigUpdate" xml:space="preserve"><value>Windows Zaman yapılandırmasını uygula ve yeniden eşitle</value></data>
-  <data name="Fix_Time_ReRegister" xml:space="preserve"><value>Windows Zaman servisini varsayılanlarla yeniden kaydet</value></data>
-  <data name="Fix_Update_RestartBits" xml:space="preserve"><value>BITS ve Windows Update&apos;i yeniden başlat</value></data>
-  <data name="Fix_Update_RestartCryptSvc" xml:space="preserve"><value>Şifreleme Hizmetleri ve Update&apos;i yeniden başlat</value></data>
-  <data name="Fix_Update_RestartUso" xml:space="preserve"><value>Update Orchestrator yığınını yeniden başlat</value></data>
-  <data name="Fix_Update_CleanDownload" xml:space="preserve"><value>Windows Update indirme önbelleğini temizle</value></data>
-  <data name="Fix_Update_ScDefaults" xml:space="preserve"><value>Windows Update servis başlatma kiplerini varsayılana al</value></data>
-  <data name="Fix_Disk_CleanWindowsTemp" xml:space="preserve"><value>Windows\\Temp içindeki eski dosyaları temizle</value></data>
+  <data name="Fix_Boot_BootStatusPolicyDisplay" xml:space="preserve"><value>Önyükleme durum ilkesini DisplayAllFailures yap</value></data>
+  <data name="Fix_Boot_BootStatusPolicyIgnore" xml:space="preserve"><value>Önyükleme durum ilkesini IgnoreAllFailures yap</value></data>
+  <data name="Fix_Boot_DisableRecoveryEnabled" xml:space="preserve"><value>Geçerli önyükleme girdisinde recoveryenabled kapat</value></data>
+  <data name="Fix_Boot_EnumCurrent" xml:space="preserve"><value>Geçerli BCD girdisini numaralandır</value></data>
+  <data name="Fix_Boot_ReagentcInfo" xml:space="preserve"><value>Windows RE durumunu yenile (reagentc /info)</value></data>
+  <data name="Fix_Camera_AllowDesktopApps" xml:space="preserve"><value>Masaüstü uygulamaları için kameraya izin ver</value></data>
+  <data name="Fix_Camera_CycleCaptureServices" xml:space="preserve"><value>Kamera yakalama servislerini döngüle</value></data>
+  <data name="Fix_Camera_EnableDisabled" xml:space="preserve"><value>Devre dışı kamera aygıtlarını etkinleştir</value></data>
+  <data name="Fix_Camera_RestartFrameServer" xml:space="preserve"><value>Kamera Frame Server servislerini yeniden başlat</value></data>
+  <data name="Fix_Camera_ScanDevices" xml:space="preserve"><value>Kamera aygıtlarını yeniden tara</value></data>
   <data name="Fix_Disk_CleanUserTemp" xml:space="preserve"><value>Kullanıcı temp klasöründeki eski dosyaları temizle</value></data>
+  <data name="Fix_Disk_CleanWindowsTemp" xml:space="preserve"><value>Windows\Temp içindeki eski dosyaları temizle</value></data>
+  <data name="Fix_Disk_ClearVolumeHints" xml:space="preserve"><value>Birim boş alan ve dirty bit sorgula</value></data>
   <data name="Fix_Disk_FlushVolume" xml:space="preserve"><value>Sistem birimi yazma önbelleğini boşalt</value></data>
   <data name="Fix_Disk_SpotFixOnly" xml:space="preserve"><value>Yalnızca chkdsk /spotfix çalıştır</value></data>
-  <data name="Fix_Disk_ClearVolumeHints" xml:space="preserve"><value>Birim boş alan ve dirty bit sorgula</value></data>
-  <data name="Fix_Integrity_SfcThenDism" xml:space="preserve"><value>SFC ardından DISM RestoreHealth zinciri</value></data>
-  <data name="Fix_Integrity_ComponentCleanupResetBase" xml:space="preserve"><value>DISM StartComponentCleanup /ResetBase</value></data>
+  <data name="Fix_Display_RepairResolution" xml:space="preserve"><value>Takılı çözünürlüğü onar (bağdaştırıcı, monitör, soft-reset, yeniden tara)</value></data>
+  <data name="Fix_Display_RestoreRecommended" xml:space="preserve"><value>Her ekranda desteklenen en yüksek çözünürlüğü uygula</value></data>
   <data name="Fix_Integrity_CheckHealthRefresh" xml:space="preserve"><value>DISM CheckHealth durumunu yenile</value></data>
-  <data name="Fix_Integrity_SfcVerifyOnly" xml:space="preserve"><value>SFC /verifyonly (onarım olmadan tarama)</value></data>
+  <data name="Fix_Integrity_ComponentCleanupResetBase" xml:space="preserve"><value>DISM StartComponentCleanup /ResetBase</value></data>
   <data name="Fix_Integrity_ScanHealthOnly" xml:space="preserve"><value>Yalnızca DISM ScanHealth</value></data>
-  <data name="Fix_Printer_RestartPrintPipeline" xml:space="preserve"><value>Yazdırma hattı servislerini yeniden başlat</value></data>
-  <data name="Fix_Printer_PurgeSpool" xml:space="preserve"><value>Yazdırma kuyruk klasörünü temizle</value></data>
-  <data name="Fix_Printer_CancelErrorJobs" xml:space="preserve"><value>Hatalı/engelli yazdırma işlerini iptal et</value></data>
-  <data name="Fix_Printer_ScAutoSpooler" xml:space="preserve"><value>Yazdırma Biriktiricisini Otomatik yap ve başlat</value></data>
-  <data name="Fix_Printer_EnsureSpoolFolder" xml:space="preserve"><value>spool PRINTERS klasörünün varlığını doğrula</value></data>
-  <data name="Fix_Boot_BootStatusPolicyIgnore" xml:space="preserve"><value>Önyükleme durum ilkesini IgnoreAllFailures yap</value></data>
-  <data name="Fix_Boot_BootStatusPolicyDisplay" xml:space="preserve"><value>Önyükleme durum ilkesini DisplayAllFailures yap</value></data>
-  <data name="Fix_Boot_DisableRecoveryEnabled" xml:space="preserve"><value>Geçerli önyükleme girdisinde recoveryenabled kapat</value></data>
-  <data name="Fix_Boot_ReagentcInfo" xml:space="preserve"><value>Windows RE durumunu yenile (reagentc /info)</value></data>
-  <data name="Fix_Boot_EnumCurrent" xml:space="preserve"><value>Geçerli BCD girdisini numaralandır</value></data>
-  <data name="Fix_Performance_HighPerformancePlan" xml:space="preserve"><value>Yüksek performans güç planına geç</value></data>
-  <data name="Fix_Performance_RestoreDefaultSchemes" xml:space="preserve"><value>Varsayılan Windows güç planlarını geri yükle</value></data>
-  <data name="Fix_Performance_RestartSysMain" xml:space="preserve"><value>SysMain (Superfetch) yeniden başlat</value></data>
-  <data name="Fix_Performance_RestartSchedule" xml:space="preserve"><value>Görev Zamanlayıcıyı yeniden başlat</value></data>
-  <data name="Fix_Performance_QueryEnergy" xml:space="preserve"><value>Kısa powercfg enerji raporu çalıştır</value></data>
+  <data name="Fix_Integrity_SfcThenDism" xml:space="preserve"><value>SFC ardından DISM RestoreHealth zinciri</value></data>
+  <data name="Fix_Integrity_SfcVerifyOnly" xml:space="preserve"><value>SFC /verifyonly (onarım olmadan tarama)</value></data>
+  <data name="Fix_Network_ProfileRepairActive" xml:space="preserve"><value>Aktif ağ profilini onar (DHCP, DNS, güvenlik duvarı)</value></data>
+  <data name="Fix_Network_ProfileRepairAll" xml:space="preserve"><value>Tüm ağ profillerini onar (DHCP, DNS, güvenlik duvarı)</value></data>
+  <data name="Fix_Network_RenewDhcpAll" xml:space="preserve"><value>Tüm ağ bağdaştırıcılarında DHCP adresini yenile</value></data>
   <data name="Fix_Performance_HibernateOff" xml:space="preserve"><value>Hazırda bekletmeyi kapat (hiberfil alanı)</value></data>
+  <data name="Fix_Performance_HighPerformancePlan" xml:space="preserve"><value>Yüksek performans güç planına geç</value></data>
+  <data name="Fix_Performance_QueryEnergy" xml:space="preserve"><value>Kısa powercfg enerji raporu çalıştır</value></data>
+  <data name="Fix_Performance_RepairCoreServices" xml:space="preserve"><value>Temel Windows servislerini onar (durmuşları başlat / devre dışını aç)</value></data>
+  <data name="Fix_Performance_RestartCoreServices" xml:space="preserve"><value>Temel Windows servislerini yeniden başlat</value></data>
+  <data name="Fix_Performance_RestartSchedule" xml:space="preserve"><value>Görev Zamanlayıcıyı yeniden başlat</value></data>
+  <data name="Fix_Performance_RestartSysMain" xml:space="preserve"><value>SysMain (Superfetch) yeniden başlat</value></data>
+  <data name="Fix_Performance_RestoreDefaultSchemes" xml:space="preserve"><value>Varsayılan Windows güç planlarını geri yükle</value></data>
+  <data name="Fix_Printer_CancelErrorJobs" xml:space="preserve"><value>Hatalı/engelli yazdırma işlerini iptal et</value></data>
+  <data name="Fix_Printer_EnsureSpoolFolder" xml:space="preserve"><value>spool PRINTERS klasörünün varlığını doğrula</value></data>
+  <data name="Fix_Printer_PurgeSpool" xml:space="preserve"><value>Yazdırma kuyruk klasörünü temizle</value></data>
+  <data name="Fix_Printer_RestartPrintPipeline" xml:space="preserve"><value>Yazdırma hattı servislerini yeniden başlat</value></data>
+  <data name="Fix_Printer_ScAutoSpooler" xml:space="preserve"><value>Yazdırma Biriktiricisini Otomatik yap ve başlat</value></data>
+  <data name="Fix_Search_ClearTemp" xml:space="preserve"><value>Windows Arama geçici dizin verilerini temizle</value></data>
+  <data name="Fix_Search_RebuildIndex" xml:space="preserve"><value>Windows Arama dizinini yeniden oluştur (yeniden başlatma gerekir)</value></data>
+  <data name="Fix_Search_RestartAndRebuild" xml:space="preserve"><value>Arama'yı yeniden başlat ve dizini yeniden oluştur</value></data>
+  <data name="Fix_Search_SetAutomatic" xml:space="preserve"><value>Windows Arama'yı Otomatik yap ve başlat</value></data>
+  <data name="Fix_Store_ClearLocalCache" xml:space="preserve"><value>Microsoft Store yerel paket önbelleğini temizle</value></data>
+  <data name="Fix_Store_RegisterManifest" xml:space="preserve"><value>Microsoft Store AppxManifest'i yeniden kaydet</value></data>
+  <data name="Fix_Store_ResetAppxPackage" xml:space="preserve"><value>Microsoft Store uygulama paketini sıfırla</value></data>
+  <data name="Fix_Store_RestartServices" xml:space="preserve"><value>Microsoft Store AppX servislerini yeniden başlat</value></data>
+  <data name="Fix_Store_StartAppxServices" xml:space="preserve"><value>AppX / Store ile ilgili servisleri başlat</value></data>
+  <data name="Fix_Time_ConfigUpdate" xml:space="preserve"><value>Windows Zaman yapılandırmasını uygula ve yeniden eşitle</value></data>
+  <data name="Fix_Time_ReRegister" xml:space="preserve"><value>Windows Zaman servisini varsayılanlarla yeniden kaydet</value></data>
+  <data name="Fix_Time_RestartService" xml:space="preserve"><value>Windows Zaman servisini yeniden başlat</value></data>
+  <data name="Fix_Time_ResyncRediscover" xml:space="preserve"><value>Zamanı yeniden eşitle ve NTP eşlerini yeniden bul</value></data>
+  <data name="Fix_Time_SetManualNtp" xml:space="preserve"><value>time.windows.com'u manuel NTP eşi yap</value></data>
+  <data name="Fix_Update_CleanDownload" xml:space="preserve"><value>Windows Update indirme önbelleğini temizle</value></data>
+  <data name="Fix_Update_RestartBits" xml:space="preserve"><value>BITS ve Windows Update'i yeniden başlat</value></data>
+  <data name="Fix_Update_RestartCryptSvc" xml:space="preserve"><value>Şifreleme Hizmetleri ve Update'i yeniden başlat</value></data>
+  <data name="Fix_Update_RestartUso" xml:space="preserve"><value>Update Orchestrator yığınını yeniden başlat</value></data>
+  <data name="Fix_Update_ScDefaults" xml:space="preserve"><value>Windows Update servis başlatma kiplerini varsayılana al</value></data>
+  <data name="Fix_Usb_CycleRootHubs" xml:space="preserve"><value>USB root hub'ları yeniden başlat ve tara</value></data>
+  <data name="Fix_Usb_EnableDisabled" xml:space="preserve"><value>Devre dışı USB aygıtlarını etkinleştir</value></data>
+  <data name="Fix_Usb_RestartDiscoveryServices" xml:space="preserve"><value>USB keşif servislerini yeniden başlat</value></data>
+  <data name="Fix_Usb_RestartHubs" xml:space="preserve"><value>USB hub'ları yeniden başlat</value></data>
+  <data name="Fix_Usb_ScanDevices" xml:space="preserve"><value>USB aygıtlarını yeniden tara</value></data>
+  <data name="Symptom_Display_ResolutionStuck" xml:space="preserve"><value>Çözünürlük değiştirilemiyor (gri/takılı) oysa ekran daha fazlasını destekliyor</value></data>
+  <data name="Symptom_Integrity_Cleanup" xml:space="preserve"><value>Windows bileşen deposu büyük / temizlik öneriliyor</value></data>
+  <data name="Symptom_Performance_Services" xml:space="preserve"><value>Windows servisleri bozuk veya başlamıyor</value></data>
   <data name="Symptom_Search_SlowIndex" xml:space="preserve"><value>Arama dizini yavaş veya bitmiyor</value></data>
   <data name="Symptom_Store_InstallFail" xml:space="preserve"><value>Microsoft Store uygulamaları yüklenmiyor veya güncellenmiyor</value></data>
   <data name="Symptom_Time_NoSource" xml:space="preserve"><value>Geçerli zaman kaynağı / NTP eşi yok</value></data>
 </root>
-
