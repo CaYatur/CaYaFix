@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaYaFix.Core", "CaYaFix.Core\CaYaFix.Core.csproj", "{B39AF78D-4E98-45A8-8DDD-66103A160A01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaYaFix.Modules", "CaYaFix.Modules\CaYaFix.Modules.csproj", "{6448D8B9-E298-4810-9ED5-C58E15889954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaYaFix.App", "CaYaFix.App\CaYaFix.App.csproj", "{28853D6F-86E1-48B7-A033-6CE2E11019D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaYaFix.Tests", "CaYaFix.Tests\CaYaFix.Tests.csproj", "{08A01C1D-3476-4938-B16B-25D93A552889}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B39AF78D-4E98-45A8-8DDD-66103A160A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B39AF78D-4E98-45A8-8DDD-66103A160A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B39AF78D-4E98-45A8-8DDD-66103A160A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B39AF78D-4E98-45A8-8DDD-66103A160A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6448D8B9-E298-4810-9ED5-C58E15889954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6448D8B9-E298-4810-9ED5-C58E15889954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6448D8B9-E298-4810-9ED5-C58E15889954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6448D8B9-E298-4810-9ED5-C58E15889954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28853D6F-86E1-48B7-A033-6CE2E11019D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28853D6F-86E1-48B7-A033-6CE2E11019D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28853D6F-86E1-48B7-A033-6CE2E11019D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28853D6F-86E1-48B7-A033-6CE2E11019D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A01C1D-3476-4938-B16B-25D93A552889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A01C1D-3476-4938-B16B-25D93A552889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A01C1D-3476-4938-B16B-25D93A552889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A01C1D-3476-4938-B16B-25D93A552889}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

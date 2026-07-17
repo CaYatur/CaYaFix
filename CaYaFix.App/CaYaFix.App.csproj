@@ -1,0 +1,40 @@
+<!-- Copyright (c) 2026 CaYaDev (https://cayadev.com) | GitHub: CaYatur (https://github.com/CaYatur) | Licensed under the MIT License. -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>CaYaFix</AssemblyName>
+    <RootNamespace>CaYaFix.App</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <PublishTrimmed>false</PublishTrimmed>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CaYaFix.Core\CaYaFix.Core.csproj" />
+    <ProjectReference Include="..\CaYaFix.Modules\CaYaFix.Modules.csproj" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CaYaFix.App.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Strings.tr.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <None Include="..\CaYaFix.Modules\thresholds.json" Link="thresholds.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Remove="Assets\Icons\*.svg" />
+    <Resource Include="Assets\Icons\*.svg" />
+  </ItemGroup>
+</Project>

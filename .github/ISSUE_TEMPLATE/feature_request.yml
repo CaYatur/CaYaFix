@@ -1,0 +1,29 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+name: Feature request
+description: Propose a diagnostic, repair, or interface improvement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Diagnostic evidence
+      description: Explain how CaYaFix can identify the problem before changing state.
+    validations:
+      required: true
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Backup, verification, and rollback
+      description: Describe the required backup, success verifier, and undo behavior.
+    validations:
+      required: true

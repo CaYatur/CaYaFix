@@ -1,0 +1,8 @@
+Pinging 1.1.1.1 with 32 bytes of data:
+Reply from 1.1.1.1: bytes=32 time=12ms TTL=57
+Reply from 1.1.1.1: bytes=32 time=15ms TTL=57
+Reply from 1.1.1.1: bytes=32 time=17ms TTL=57
+Reply from 1.1.1.1: bytes=32 time=16ms TTL=57
+
+Ping statistics for 1.1.1.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),

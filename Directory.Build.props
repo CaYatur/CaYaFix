@@ -1,0 +1,22 @@
+<!-- Copyright (c) 2026 CaYaDev (https://cayadev.com) | GitHub: CaYatur (https://github.com/CaYatur) | Licensed under the MIT License. -->
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1603;NU1605;NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+    <Deterministic>true</Deterministic>
+    <Company>CaYaDev</Company>
+    <Authors>CaYaDev</Authors>
+    <Copyright>Copyright © 2026 CaYaDev (https://cayadev.com) — GitHub: CaYatur (https://github.com/CaYatur)</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://cayadev.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CaYatur/CaYaFix</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+</Project>

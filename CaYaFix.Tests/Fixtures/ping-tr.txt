@@ -1,0 +1,7 @@
+1.1.1.1 yoklanıyor:
+1.1.1.1 yanıt: bayt=32 süre=17ms TTL=57
+1.1.1.1 yanıt: bayt=32 süre=19ms TTL=57
+1.1.1.1 yanıt: bayt=32 süre=21ms TTL=57
+
+1.1.1.1 için Ping istatistikleri:
+    Paket: Gönderilen = 4, Alınan = 3, Kaybolan = 1 (%25 kayıp),

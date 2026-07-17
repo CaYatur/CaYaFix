@@ -1,0 +1,19 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+* text=auto
+*.cs text eol=lf
+*.csproj text eol=lf
+*.md text eol=lf
+*.resx text eol=lf
+*.svg text eol=lf
+*.xaml text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.ps1 text eol=crlf
+*.sln text eol=crlf
+*.png binary
+*.ico binary
+*.zip binary

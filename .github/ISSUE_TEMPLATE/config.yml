@@ -1,0 +1,9 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://github.com/CaYatur/CaYaFix/security/advisories/new
+    about: Report a vulnerability privately.

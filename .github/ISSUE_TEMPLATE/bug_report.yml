@@ -1,0 +1,54 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+name: Bug report
+description: Report a reproducible CaYaFix defect without personal diagnostic data.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach support archives, logs, device identifiers, or credentials to a public issue.
+  - type: input
+    id: version
+    attributes:
+      label: CaYaFix version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version and build
+      placeholder: Windows 11 24H2, build 26100
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use a minimal example and remove personal data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed personal data, credentials, and device identifiers.
+          required: true
+        - label: This is not a vulnerability report; security issues use the private process in SECURITY.md.
+          required: true

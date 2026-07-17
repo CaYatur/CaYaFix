@@ -1,0 +1,33 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 3 * * 4'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: csharp
+          build-mode: manual
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore .\CaYaFix.sln
+      - run: dotnet build .\CaYaFix.sln -c Release --no-restore -warnaserror
+      - uses: github/codeql-action/analyze@v4

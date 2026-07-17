@@ -1,0 +1,60 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-publish:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Validate repository policy
+        shell: pwsh
+        run: .\tools\validate-repository.ps1
+
+      - name: Restore
+        run: dotnet restore .\CaYaFix.sln
+
+      - name: Build with warnings as errors
+        run: dotnet build .\CaYaFix.sln -c Release --no-restore -warnaserror
+
+      - name: Test with hang detection
+        run: dotnet test .\CaYaFix.Tests\CaYaFix.Tests.csproj -c Release --no-build --logger "trx;LogFileName=ci.trx" --blame-hang-timeout 5m
+
+      - name: Publish self-contained application
+        run: dotnet publish .\CaYaFix.App\CaYaFix.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=false -o .\publish\win-x64
+
+      - name: Upload test result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/TestResults/*.trx'
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload application
+        uses: actions/upload-artifact@v4
+        with:
+          name: CaYaFix-win-x64
+          path: publish/win-x64/**
+          if-no-files-found: error
+          retention-days: 14

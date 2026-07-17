@@ -1,0 +1,7 @@
+Ping wird ausgeführt für 1.1.1.1 mit 32 Bytes Daten:
+Antwort von 1.1.1.1: Bytes=32 Zeit=11ms TTL=57
+Antwort von 1.1.1.1: Bytes=32 Zeit=13ms TTL=57
+Antwort von 1.1.1.1: Bytes=32 Zeit=15ms TTL=57
+
+Ping-Statistik für 1.1.1.1:
+    Pakete: Gesendet = 4, Empfangen = 3, Verloren = 1 (25% Verlust),

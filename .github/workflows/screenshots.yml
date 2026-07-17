@@ -1,0 +1,62 @@
+# Copyright (c) 2026 CaYaDev (https://cayadev.com)
+# GitHub: CaYatur (https://github.com/CaYatur)
+# Licensed under the MIT License. See LICENSE in the project root.
+
+name: Capture real WPF screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'CaYaFix.App/**'
+      - 'CaYaFix.Core/**'
+      - 'CaYaFix.Modules/**'
+      - 'tools/capture-readme-screenshots.ps1'
+      - '.github/workflows/screenshots.yml'
+  workflow_dispatch:
+    inputs:
+      commit_images:
+        description: Commit the captured PNG files to the current branch
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore .\CaYaFix.sln
+      - name: Build with warnings as errors
+        run: dotnet build .\CaYaFix.sln -c Release --no-restore -warnaserror
+      - name: Capture the actual English WPF window
+        shell: pwsh
+        run: .\tools\capture-readme-screenshots.ps1 -NoBuild
+      - name: Validate captured images
+        shell: pwsh
+        run: .\tools\validate-repository.ps1 -RequireScreenshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CaYaFix-readme-screenshots
+          path: docs/screenshots/*.png
+          if-no-files-found: error
+      - name: Commit images
+        if: ${{ github.event_name == 'push' || inputs.commit_images }}
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots/*.png
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "docs: refresh real application screenshots"
+            git push
+          }

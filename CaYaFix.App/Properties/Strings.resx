@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2026 CaYaDev (https://cayadev.com) | GitHub: CaYatur (https://github.com/CaYatur) | Licensed under the MIT License. -->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="AppName" xml:space="preserve"><value>CaYaFix</value></data>
+  <data name="AppTagline" xml:space="preserve"><value>Find, repair, and roll back Windows problems safely.</value></data>
+  <data name="App_ReleaseChannel" xml:space="preserve"><value>BETA</value></data>
+  <data name="App_VersionFormat" xml:space="preserve"><value>v{0}.{1}.{2}</value></data>
+  <data name="Nav_Home" xml:space="preserve"><value>Home</value></data>
+  <data name="Nav_Findings" xml:space="preserve"><value>Findings</value></data>
+  <data name="Nav_LiveTests" xml:space="preserve"><value>Live Tests</value></data>
+  <data name="Nav_Recovery" xml:space="preserve"><value>Recovery</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="AdminMode" xml:space="preserve"><value>Administrator mode</value></data>
+  <data name="Hero_Eyebrow" xml:space="preserve"><value>SMART WINDOWS REPAIR</value></data>
+  <data name="Hero_Title" xml:space="preserve"><value>Find the cause. Fix it safely.</value></data>
+  <data name="Hero_Description" xml:space="preserve"><value>CaYaFix measures the system first and recommends only relevant repairs. Every persistent change is backed up and verified afterward.</value></data>
+  <data name="Action_AutomaticScan" xml:space="preserve"><value>Automatic Scan</value></data>
+  <data name="Action_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Action_RepairSelected" xml:space="preserve"><value>Repair Selected</value></data>
+  <data name="Action_TryModerate" xml:space="preserve"><value>Try Moderate Repairs</value></data>
+  <data name="Action_ForceRepair" xml:space="preserve"><value>Start Force Repair</value></data>
+  <data name="Action_CreateSupportPackage" xml:space="preserve"><value>Create Support Package</value></data>
+  <data name="Action_OpenReport" xml:space="preserve"><value>Open Report</value></data>
+  <data name="Action_OpenFolder" xml:space="preserve"><value>Open Folder</value></data>
+  <data name="Action_UndoSession" xml:space="preserve"><value>Roll Back Session</value></data>
+  <data name="Action_RunTest" xml:space="preserve"><value>Run Test</value></data>
+  <data name="Action_ScanModule" xml:space="preserve"><value>Scan This Module</value></data>
+  <data name="Action_Minimize" xml:space="preserve"><value>Minimize window</value></data>
+  <data name="Action_Maximize" xml:space="preserve"><value>Maximize or restore window</value></data>
+  <data name="Action_Close" xml:space="preserve"><value>Close window</value></data>
+  <data name="Action_Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Dashboard_Modules" xml:space="preserve"><value>Troubleshooting areas</value></data>
+  <data name="Dashboard_ModulesHint" xml:space="preserve"><value>If you know the symptom, scan the relevant area directly.</value></data>
+  <data name="Dashboard_SafetyTitle" xml:space="preserve"><value>Before anything changes</value></data>
+  <data name="Dashboard_SafetyText" xml:space="preserve"><value>CaYaFix prepares a System Restore point and action-level backups. A repair does not start if its required backup fails.</value></data>
+  <data name="Findings_Title" xml:space="preserve"><value>Diagnostic findings</value></data>
+  <data name="Findings_Description" xml:space="preserve"><value>Safe repairs are selected by default. Expand technical details to inspect the evidence behind each finding.</value></data>
+  <data name="Findings_None" xml:space="preserve"><value>No clear problem was detected.</value></data>
+  <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Technical details</value></data>
+  <data name="Finding_Recommended" xml:space="preserve"><value>Recommended repair</value></data>
+  <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>No automatic repair is offered; review the evidence and the suggested manual checks.</value></data>
+  <data name="Severity_Info" xml:space="preserve"><value>Info</value></data>
+  <data name="Severity_Warning" xml:space="preserve"><value>Warning</value></data>
+  <data name="Severity_Critical" xml:space="preserve"><value>Critical</value></data>
+  <data name="Status_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="Status_Repairing" xml:space="preserve"><value>Repairing</value></data>
+  <data name="Status_Resolved" xml:space="preserve"><value>Resolved</value></data>
+  <data name="Status_Unresolved" xml:space="preserve"><value>Still present</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Skipped</value></data>
+  <data name="Tier_Safe" xml:space="preserve"><value>Safe</value></data>
+  <data name="Tier_Moderate" xml:space="preserve"><value>Moderate</value></data>
+  <data name="Tier_Aggressive" xml:space="preserve"><value>Force</value></data>
+  <data name="Escalation_Title" xml:space="preserve"><value>The problem is still present</value></data>
+  <data name="Handoff_Title" xml:space="preserve"><value>Automated software repair is complete</value></data>
+  <data name="Handoff_Description" xml:space="preserve"><value>The selected safe repair paths did not clear every finding. CaYaFix will not repeat or broaden changes without a verified rollback path.</value></data>
+  <data name="Handoff_NextSteps" xml:space="preserve"><value>Review the HTML report, test cables and ports where relevant, check the device vendor's diagnostics, and create a privacy-redacted support package before requesting technical service.</value></data>
+  <data name="Escalation_ModerateText" xml:space="preserve"><value>Safe steps were not enough. More comprehensive, reversible moderate repairs can be attempted.</value></data>
+  <data name="Escalation_ForceText" xml:space="preserve"><value>This mode may reset drivers, network stacks, or system components. A full backup and System Restore point are mandatory.</value></data>
+  <data name="Force_Accept" xml:space="preserve"><value>I understand the risks and authorize Force Repair.</value></data>
+  <data name="LiveTests_Title" xml:space="preserve"><value>Live tests</value></data>
+  <data name="LiveTests_Description" xml:space="preserve"><value>Measure connectivity, speakers, and microphone in real time. The speed test downloads data only when you start it.</value></data>
+  <data name="LiveTests_Output" xml:space="preserve"><value>Test stream</value></data>
+  <data name="LiveMetrics_Title" xml:space="preserve"><value>Measured results</value></data>
+  <data name="LiveMetrics_Test" xml:space="preserve"><value>Test</value></data>
+  <data name="LiveMetrics_Result" xml:space="preserve"><value>Endpoint or result</value></data>
+  <data name="LiveMetrics_Measurements" xml:space="preserve"><value>Measurements</value></data>
+  <data name="LiveMetrics_PingTest" xml:space="preserve"><value>Per-adapter ping</value></data>
+  <data name="LiveMetrics_DnsTest" xml:space="preserve"><value>DNS race</value></data>
+  <data name="LiveMetrics_Ping" xml:space="preserve"><value>Sent {0:0} · received {1:0} · loss {2:0.#}% · min/avg/max {3:0.0}/{4:0.0}/{5:0.0} ms · jitter {6:0.0} ms</value></data>
+  <data name="LiveMetrics_Dns" xml:space="preserve"><value>Resolution {0:0} ms · {1}</value></data>
+  <data name="LiveMetrics_Speed" xml:space="preserve"><value>Speed {0:0.0} Mbps · downloaded {1:0.0} MB</value></data>
+  <data name="LiveMetrics_AudioPeak" xml:space="preserve"><value>Peak microphone level {0:0.0}%</value></data>
+  <data name="LiveMetrics_Underruns" xml:space="preserve"><value>Audio underruns {0:0}</value></data>
+  <data name="LiveMetrics_Http" xml:space="preserve"><value>HTTP {0:0} · {1:0} ms · {2:0} bytes · expected page {3}</value></data>
+  <data name="Recovery_Title" xml:space="preserve"><value>Recovery Center</value></data>
+  <data name="Recovery_Description" xml:space="preserve"><value>Roll back previous sessions in reverse order or inspect their backup folders.</value></data>
+  <data name="Recovery_None" xml:space="preserve"><value>No repair sessions yet.</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_DryRun" xml:space="preserve"><value>Preview mode</value></data>
+  <data name="Settings_DryRunDescription" xml:space="preserve"><value>Repairs are not applied; planned operations appear in the Operation Console.</value></data>
+  <data name="Settings_Expert" xml:space="preserve"><value>Expert view</value></data>
+  <data name="Settings_ExpertDescription" xml:space="preserve"><value>Show a direct Safe, Moderate, and Force tier selector. All backup and consent gates remain enforced.</value></data>
+  <data name="Expert_TierSelector" xml:space="preserve"><value>Expert repair tier</value></data>
+  <data name="Settings_Offline" xml:space="preserve"><value>Offline operation</value></data>
+  <data name="Settings_OfflineDescription" xml:space="preserve"><value>Local diagnostics and repairs work without internet access. Only internet, DNS, and speed tests require a connection.</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_LanguageDescription" xml:space="preserve"><value>English is the default. Turkish is used only when Windows is Turkish or you choose it here. Unsupported Windows languages fall back to English.</value></data>
+  <data name="Language_English" xml:space="preserve"><value>English</value></data>
+  <data name="Language_Turkish" xml:space="preserve"><value>Turkish</value></data>
+  <data name="Language_System" xml:space="preserve"><value>Match Windows (English or Turkish)</value></data>
+  <data name="Dialog_LanguageRestart_Title" xml:space="preserve"><value>Restart to change language?</value></data>
+  <data name="Dialog_LanguageRestart" xml:space="preserve"><value>CaYaFix must restart to apply the new language. Save any unfinished work, then continue.</value></data>
+  <data name="Status_LanguageSaved" xml:space="preserve"><value>Language preference saved. Restarting…</value></data>
+  <data name="Console_Title" xml:space="preserve"><value>Operation Console</value></data>
+  <data name="Console_Hint" xml:space="preserve"><value>Commands and their output appear here live.</value></data>
+  <data name="Status_Ready" xml:space="preserve"><value>Ready to scan.</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>Starting CaYaFix and checking recovery state…</value></data>
+  <data name="Dialog_ForceNeedsConsent" xml:space="preserve"><value>Accept the Force Repair risk confirmation before continuing.</value></data>
+  <data name="Dialog_BackuplessAggressive_Title" xml:space="preserve"><value>Continue without action backup?</value></data>
+  <data name="Dialog_BackuplessAggressive" xml:space="preserve"><value>Force Repair may continue if an individual action backup cannot be captured. Automatic undo for that action will be unavailable. A System Restore point is still strongly recommended when available. Allow backup-less Aggressive actions in this run?</value></data>
+  <data name="Dialog_SystemProtectionOff_Title" xml:space="preserve"><value>System Protection is unavailable</value></data>
+  <data name="Dialog_SystemProtectionOff" xml:space="preserve"><value>Windows System Protection appears to be off or unavailable. CaYaFix will still try to create a restore point, and action-level backups remain mandatory for Safe and Moderate repairs. You can also skip this step with a warning.</value></data>
+  <data name="Dialog_ExpertRunFix_Title" xml:space="preserve"><value>Run this expert repair?</value></data>
+  <data name="Dialog_ExpertRunFix" xml:space="preserve"><value>Run “{0}” ({1}) now? A backup is still required unless you later consent to backup-less Force Repair.</value></data>
+  <data name="Verification_Title" xml:space="preserve"><value>Verification results</value></data>
+  <data name="Verification_Summary" xml:space="preserve"><value>Resolved: {0} · Still present: {1}</value></data>
+  <data name="Verification_Preview" xml:space="preserve"><value>Preview finished for {0} selected finding(s). No changes were applied.</value></data>
+  <data name="Verification_PendingReboot" xml:space="preserve"><value>Resolved so far: {0} · Waiting for reboot verification: {1}</value></data>
+  <data name="Verification_ExpertResult" xml:space="preserve"><value>{0} → {1}</value></data>
+  <data name="Status_ExpertTargetMissing" xml:space="preserve"><value>Scan first so CaYaFix can collect a target for “{0}”.</value></data>
+  <data name="Finding_ExpertManual" xml:space="preserve"><value>Expert repair requested: {0}</value></data>
+  <data name="Action_RunExpertFix" xml:space="preserve"><value>Run</value></data>
+  <data name="Finding_Network_ThirdPartyLsp" xml:space="preserve"><value>Third-party Winsock LSP entries were detected and may intercept network traffic.</value></data>
+  <data name="Finding_Network_WifiBand" xml:space="preserve"><value>Wi‑Fi is stuck on a weak 2.4 GHz band or reports a low PHY rate.</value></data>
+  <data name="Fix_Printer_SetOnline" xml:space="preserve"><value>Bring offline printers online</value></data>
+  <data name="Fix_Printer_SetDefault" xml:space="preserve"><value>Restore a default printer</value></data>
+  <data name="Fix_Audio_EnableDevice" xml:space="preserve"><value>Enable disabled audio device</value></data>
+  <data name="Status_ModeChangedRescan" xml:space="preserve"><value>Preview mode changed. Run a new scan before applying repairs.</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Scanning the system…</value></data>
+  <data name="Status_ScanComplete" xml:space="preserve"><value>Scan complete: {0} finding(s).</value></data>
+  <data name="Status_RepairingNow" xml:space="preserve"><value>Applying selected repairs…</value></data>
+  <data name="Status_RepairComplete" xml:space="preserve"><value>Repair complete: {0} resolved, {1} still present.</value></data>
+  <data name="Status_Cancelled" xml:space="preserve"><value>Operation cancelled.</value></data>
+  <data name="Status_Failed" xml:space="preserve"><value>Operation failed: {0}</value></data>
+  <data name="Status_NoSelection" xml:space="preserve"><value>Select at least one finding to repair.</value></data>
+  <data name="Status_NoFixAtTier" xml:space="preserve"><value>No new repair is available at this tier.</value></data>
+  <data name="Status_PreviewComplete" xml:space="preserve"><value>Preview complete for {0} selected finding(s). No changes were applied.</value></data>
+  <data name="Status_PendingRebootSummary" xml:space="preserve"><value>The selected repair was applied and is waiting for one Windows restart before verification.</value></data>
+  <data name="Status_RestorePoint" xml:space="preserve"><value>Creating a System Restore point…</value></data>
+  <data name="Action_SkipRestorePoint" xml:space="preserve"><value>Skip restore point</value></data>
+  <data name="Dialog_RestorePointOffer_Title" xml:space="preserve"><value>System Restore point</value></data>
+  <data name="Dialog_RestorePointOffer" xml:space="preserve"><value>CaYaFix can create a System Restore point before applying changes. This usually finishes within about 90 seconds, but Windows may show little progress while it works.
+
+Yes = create restore point
+No = skip this step with a warning (action-level backups still run)
+Cancel = abort the repair</value></data>
+  <data name="Dialog_SkipRestorePoint_Title" xml:space="preserve"><value>Skip System Restore point?</value></data>
+  <data name="Dialog_SkipRestorePoint" xml:space="preserve"><value>Continuing without a System Restore point means Windows cannot roll the whole system back via System Restore for this session. Safe and Moderate repairs still take action-level backups you can undo from Recovery.
+
+Skip the restore point and continue?</value></data>
+  <data name="Dialog_SkipRestoreAggressive" xml:space="preserve"><value>Force Repair without a System Restore point is strongly discouraged. Action backups may also fail for some aggressive steps. Continue only if you accept that automatic recovery may be limited.
+
+Skip the restore point and continue Force Repair?</value></data>
+  <data name="Status_ReportCreated" xml:space="preserve"><value>Report created.</value></data>
+  <data name="Status_SupportCreated" xml:space="preserve"><value>Support package created: {0}</value></data>
+  <data name="Status_RollbackComplete" xml:space="preserve"><value>Session rolled back.</value></data>
+  <data name="Status_RollbackFailed" xml:space="preserve"><value>Some actions could not be rolled back. Check the Operation Console.</value></data>
+  <data name="Dialog_RestorePointFailed_Title" xml:space="preserve"><value>Could not create a restore point</value></data>
+  <data name="Dialog_RestorePointFailed" xml:space="preserve"><value>System Protection is disabled, the create step timed out (~90s), or Windows rejected the restore point. Action-level backups will still be required. Continue with safe or moderate repairs anyway?</value></data>
+  <data name="Dialog_ForceNeedsRestore" xml:space="preserve"><value>A System Restore point was not created (disabled, timed out, or rejected). Force Repair is safer with System Restore available. Continue Force Repair without a restore point anyway?</value></data>
+  <data name="Dialog_SupportPrivacy_Title" xml:space="preserve"><value>Personal data notice</value></data>
+  <data name="Dialog_SupportPrivacy" xml:space="preserve"><value>The support package may include the computer name, network configuration, Wi‑Fi information, and device or driver names. Share it only with people you trust. Create it now?</value></data>
+  <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Roll back this session?</value></data>
+  <data name="Dialog_Rollback" xml:space="preserve"><value>Applied actions will be restored in reverse order. Continue?</value></data>
+  <data name="Dialog_Pending_Title" xml:space="preserve"><value>Verification is pending</value></data>
+  <data name="Dialog_Pending" xml:space="preserve"><value>A previous repair is waiting for a restart. Restart Windows, then open CaYaFix again to run its follow-up verification.</value></data>
+  <data name="Dialog_Pending_Verify" xml:space="preserve"><value>Windows has restarted since the repair. Run the relevant diagnostic checks now to verify the result?</value></data>
+  <data name="Dialog_InterruptedRepair_Title" xml:space="preserve"><value>Interrupted repair detected</value></data>
+  <data name="Dialog_InterruptedRepair" xml:space="preserve"><value>A repair did not reach a durable verification result. Its verified backup is available in Recovery Center. Roll it back before starting another repair.</value></data>
+  <data name="Dialog_IntegrityFailure" xml:space="preserve"><value>CaYaFix could not initialize its protected session storage. No repairs were started. Check access to your local application-data folder, then start CaYaFix again.</value></data>
+  <data name="Dialog_SingleInstanceFailure" xml:space="preserve"><value>CaYaFix could not acquire its system-wide operation lock. No repairs were started. Close other CaYaFix sessions and try again.</value></data>
+  <data name="Dialog_DataRootFailure" xml:space="preserve"><value>CaYaFix cannot access its protected ProgramData folder. No diagnostics or repairs were started. Run the application as an administrator and check folder permissions.</value></data>
+  <data name="Dialog_LiveTestConfirm" xml:space="preserve"><value>Did the test complete successfully from your perspective?</value></data>
+  <data name="Status_VerifyingPending" xml:space="preserve"><value>Verifying repairs after restart…</value></data>
+  <data name="Status_PendingVerified" xml:space="preserve"><value>Restart verification passed. The pending repairs are complete.</value></data>
+  <data name="Status_PendingStillDetected" xml:space="preserve"><value>Follow-up checks still detect an issue. Review the findings before trying another repair.</value></data>
+  <data name="Status_PendingRolledBack" xml:space="preserve"><value>The post-restart diagnostic still detected the problem, so CaYaFix restored the verified pre-repair state.</value></data>
+  <data name="Console_PendingCheckMissing" xml:space="preserve"><value>Follow-up check is unavailable: {0}</value></data>
+  <data name="Console_PendingCheckFailed" xml:space="preserve"><value>Follow-up check {0} could not run: {1}</value></data>
+
+  <data name="Module_Network_Name" xml:space="preserve"><value>Network and Internet</value></data>
+  <data name="Module_Network_Description" xml:space="preserve"><value>Wi‑Fi, Ethernet, DNS, VPN, proxy, and firewall</value></data>
+  <data name="Module_Audio_Name" xml:space="preserve"><value>Audio and Microphone</value></data>
+  <data name="Module_Audio_Description" xml:space="preserve"><value>Output, input, drivers, virtual devices, and Bluetooth audio</value></data>
+  <data name="Module_Update_Name" xml:space="preserve"><value>Windows Update</value></data>
+  <data name="Module_Update_Description" xml:space="preserve"><value>Update services, cache, and error codes</value></data>
+  <data name="Module_Printer_Name" xml:space="preserve"><value>Printer</value></data>
+  <data name="Module_Printer_Description" xml:space="preserve"><value>Print queue, spooler, and offline printers</value></data>
+  <data name="Module_Bluetooth_Name" xml:space="preserve"><value>Bluetooth</value></data>
+  <data name="Module_Bluetooth_Description" xml:space="preserve"><value>Service, driver, and connected-device problems</value></data>
+  <data name="Module_Disk_Name" xml:space="preserve"><value>Disk and Storage</value></data>
+  <data name="Module_Disk_Description" xml:space="preserve"><value>SMART health, free space, and high disk usage</value></data>
+  <data name="Module_Integrity_Name" xml:space="preserve"><value>System Files</value></data>
+  <data name="Module_Integrity_Description" xml:space="preserve"><value>Windows component store, DISM, and SFC</value></data>
+  <data name="Module_Store_Name" xml:space="preserve"><value>Store and Apps</value></data>
+  <data name="Module_Store_Description" xml:space="preserve"><value>Microsoft Store and UWP package registrations</value></data>
+  <data name="Module_Time_Name" xml:space="preserve"><value>Time Sync</value></data>
+  <data name="Module_Time_Description" xml:space="preserve"><value>NTP, clock drift, and hidden TLS failures</value></data>
+  <data name="Module_Performance_Name" xml:space="preserve"><value>Startup and Performance</value></data>
+  <data name="Module_Performance_Description" xml:space="preserve"><value>Startup items and abnormal power plans</value></data>
+
+  <data name="Finding_CheckCouldNotRun" xml:space="preserve"><value>The {0} check could not run.</value></data>
+  <data name="Finding_Network_NoAdapters" xml:space="preserve"><value>Windows did not detect any network adapters.</value></data>
+  <data name="Finding_Network_NoConnectedAdapter" xml:space="preserve"><value>No physical network adapter is currently connected. Connect Ethernet or Wi-Fi before running connection repairs.</value></data>
+  <data name="Finding_Network_AllAdaptersDisabled" xml:space="preserve"><value>All physical network adapters are disabled or disconnected.</value></data>
+  <data name="Finding_Network_OldDriver" xml:space="preserve"><value>A network driver is more than three years old.</value></data>
+  <data name="Finding_Network_LinkAt100Mbps" xml:space="preserve"><value>The Ethernet link negotiated at 100 Mbps; the cable or port may be limiting speed.</value></data>
+  <data name="Finding_Network_NoActiveIpConfiguration" xml:space="preserve"><value>No active IP configuration was found.</value></data>
+  <data name="Finding_Network_Apipa" xml:space="preserve"><value>The computer could not obtain an address from the router and assigned itself a 169.254 address.</value></data>
+  <data name="Finding_Network_MissingGateway" xml:space="preserve"><value>The connection has no default gateway.</value></data>
+  <data name="Finding_Network_GatewayUnreachable" xml:space="preserve"><value>The computer cannot reach the modem or router.</value></data>
+  <data name="Finding_Network_NoDnsServer" xml:space="preserve"><value>No usable DNS server is configured.</value></data>
+  <data name="Finding_Network_CurrentDnsBroken" xml:space="preserve"><value>The current DNS server is not responding, while public DNS servers are working.</value></data>
+  <data name="Finding_Network_DnsResolutionFailed" xml:space="preserve"><value>DNS name resolution failed.</value></data>
+  <data name="Finding_Network_InternetUnavailable" xml:space="preserve"><value>Windows could not reach the internet connectivity test.</value></data>
+  <data name="Finding_Network_CaptivePortal" xml:space="preserve"><value>The connection may be redirecting to a sign-in or approval page.</value></data>
+  <data name="Finding_Network_ProxyConfigured" xml:space="preserve"><value>A proxy or automatic configuration route is controlling internet traffic.</value></data>
+  <data name="Finding_Network_VpnResidue" xml:space="preserve"><value>A disconnected VPN adapter left behind a route or DNS setting.</value></data>
+  <data name="Finding_Network_FirewallBlocking" xml:space="preserve"><value>The firewall policy is broadly blocking outbound connections.</value></data>
+  <data name="Finding_Network_FirewallDisabled" xml:space="preserve"><value>One or more Windows Firewall profiles are disabled.</value></data>
+  <data name="Finding_Network_HostsMissing" xml:space="preserve"><value>The Windows hosts file is missing.</value></data>
+  <data name="Finding_Network_CustomHosts" xml:space="preserve"><value>The hosts file contains custom entries that redirect internet addresses.</value></data>
+  <data name="Finding_Network_WinsockUnreadable" xml:space="preserve"><value>The Winsock catalog could not be read.</value></data>
+  <data name="Finding_Network_WinsockThirdParty" xml:space="preserve"><value>The Winsock catalog contains signs of a third-party network layer.</value></data>
+  <data name="Finding_Network_MtuTooLow" xml:space="preserve"><value>An active connection has an unusually low MTU.</value></data>
+  <data name="Finding_Network_PowerSavingEnabled" xml:space="preserve"><value>Windows is allowed to power down a network adapter.</value></data>
+  <data name="Finding_Network_ServiceStopped" xml:space="preserve"><value>A required network service is not running correctly.</value></data>
+  <data name="Finding_Network_TcpSettingsAbnormal" xml:space="preserve"><value>Windows TCP settings may be limiting connection speed.</value></data>
+  <data name="Finding_Network_WeakWifi" xml:space="preserve"><value>The Wi‑Fi signal is weak and may cause drops or reduced speed.</value></data>
+  <data name="Finding_Network_ThroughputLow" xml:space="preserve"><value>Measured download throughput is unusually low.</value></data>
+  <data name="Finding_Audio_NoOutputDevice" xml:space="preserve"><value>No active speaker or headset was found.</value></data>
+  <data name="Finding_Audio_NoInputDevice" xml:space="preserve"><value>No active microphone was found.</value></data>
+  <data name="Finding_Audio_NoDefaultOutput" xml:space="preserve"><value>No default audio output is configured.</value></data>
+  <data name="Finding_Audio_VirtualDefaultInactive" xml:space="preserve"><value>Audio is routed to an inactive virtual audio device.</value></data>
+  <data name="Finding_Audio_DefaultUnavailable" xml:space="preserve"><value>The default audio device is currently unavailable.</value></data>
+  <data name="Finding_Audio_ServiceStopped" xml:space="preserve"><value>A Windows audio service is stopped or disabled.</value></data>
+  <data name="Finding_Audio_MutedOrZero" xml:space="preserve"><value>An audio device or application is muted or set to zero volume.</value></data>
+  <data name="Finding_Audio_DriverError" xml:space="preserve"><value>An audio driver is reporting a Device Manager error code.</value></data>
+  <data name="Finding_Audio_FormatMismatch" xml:space="preserve"><value>The input and output formats may be incompatible.</value></data>
+  <data name="Finding_Audio_EnhancementCrash" xml:space="preserve"><value>A recent audio enhancement or APO failure was recorded.</value></data>
+  <data name="Finding_Audio_MicrophonePrivacyDenied" xml:space="preserve"><value>Windows privacy settings are blocking microphone access.</value></data>
+  <data name="Finding_Audio_BluetoothHandsFree" xml:space="preserve"><value>The Bluetooth headset is using the low-quality Hands-Free profile.</value></data>
+  <data name="Finding_Audio_HdmiDefault" xml:space="preserve"><value>Audio may be routed to the monitor through HDMI or Display Audio.</value></data>
+  <data name="Finding_Audio_DuckingInvalid" xml:space="preserve"><value>The communications volume-reduction setting is invalid.</value></data>
+  <data name="Finding_Audio_SpeakerLiveFailed" xml:space="preserve"><value>The speaker test was not heard correctly.</value></data>
+  <data name="Finding_Audio_MicrophoneLiveFailed" xml:space="preserve"><value>The microphone test did not produce a usable result.</value></data>
+  <data name="Finding_Audio_StabilityLiveFailed" xml:space="preserve"><value>Audio playback stopped unexpectedly during the stability test.</value></data>
+  <data name="Finding_Update_ServiceIssue" xml:space="preserve"><value>A Windows Update service is configured incorrectly.</value></data>
+  <data name="Finding_Update_RecentErrors" xml:space="preserve"><value>Recent Windows Update errors were found.</value></data>
+  <data name="Finding_Update_RebootPending" xml:space="preserve"><value>A Windows update is waiting for a restart.</value></data>
+  <data name="Finding_Printer_SpoolerStopped" xml:space="preserve"><value>The Print Spooler service is not running.</value></data>
+  <data name="Finding_Printer_QueueProblem" xml:space="preserve"><value>A print job is blocked or its queue is in an error state.</value></data>
+  <data name="Finding_Printer_Offline" xml:space="preserve"><value>A configured printer reports that it is offline. Check its power, cable, Wi-Fi connection, and printer port.</value></data>
+  <data name="Finding_Printer_DefaultMissing" xml:space="preserve"><value>Printers are installed, but Windows has no default printer.</value></data>
+  <data name="Finding_Bluetooth_ServiceDisabled" xml:space="preserve"><value>The Bluetooth support service is disabled.</value></data>
+  <data name="Finding_Bluetooth_DeviceError" xml:space="preserve"><value>A Bluetooth device is reporting a driver error code.</value></data>
+  <data name="Finding_Disk_HealthCritical" xml:space="preserve"><value>A physical disk does not appear healthy. Back up important data before attempting repairs.</value></data>
+  <data name="Finding_Disk_LowSpace" xml:space="preserve"><value>A drive is approaching critically low free space.</value></data>
+  <data name="Finding_Disk_HighUsage" xml:space="preserve"><value>Disk utilization remained very high throughout the sample.</value></data>
+  <data name="Finding_Integrity_Repairable" xml:space="preserve"><value>The Windows component store may require repair.</value></data>
+  <data name="Finding_Store_Missing" xml:space="preserve"><value>The Microsoft Store package is missing or not registered correctly.</value></data>
+  <data name="Finding_Time_NotSynchronized" xml:space="preserve"><value>Windows is not synchronized with a time server.</value></data>
+  <data name="Finding_Time_LocalClock" xml:space="preserve"><value>The system is relying only on the local hardware clock.</value></data>
+  <data name="Finding_Performance_ManyStartupItems" xml:space="preserve"><value>Many applications start with Windows.</value></data>
+  <data name="Finding_Performance_PowerSaver" xml:space="preserve"><value>The active Power Saver plan may be limiting performance.</value></data>
+
+  <data name="FixResult_Applied" xml:space="preserve"><value>Repair applied.</value></data>
+  <data name="FixResult_ApplyInProgress" xml:space="preserve"><value>The repair was interrupted before its result could be durably verified. Recovery is available.</value></data>
+  <data name="FixResult_Verified" xml:space="preserve"><value>The repair was applied and verified by a fresh measurement.</value></data>
+  <data name="FixResult_NotVerified" xml:space="preserve"><value>The repair was applied, but the issue is still present.</value></data>
+  <data name="FixResult_PendingReboot" xml:space="preserve"><value>The repair was applied; verification requires a restart.</value></data>
+  <data name="FixResult_BackupFailed" xml:space="preserve"><value>The repair was blocked because its backup failed.</value></data>
+  <data name="FixResult_ApplyFailed" xml:space="preserve"><value>The repair could not be applied.</value></data>
+  <data name="FixResult_ApplyFailedRolledBack" xml:space="preserve"><value>The repair failed, and all backed-up changes were automatically rolled back.</value></data>
+  <data name="FixResult_ApplyFailedRollbackFailed" xml:space="preserve"><value>The repair failed, and automatic rollback could not be verified. Review the recovery session.</value></data>
+  <data name="FixResult_VerificationFailedRolledBack" xml:space="preserve"><value>The repair did not pass verification, so its backed-up changes were automatically rolled back.</value></data>
+  <data name="FixResult_VerificationFailedRollbackFailed" xml:space="preserve"><value>The repair did not pass verification, and automatic rollback could not be verified. Review the recovery session.</value></data>
+  <data name="FixResult_CancelledRolledBack" xml:space="preserve"><value>The operation was cancelled and its backed-up changes were rolled back.</value></data>
+  <data name="FixResult_CancelledRollbackFailed" xml:space="preserve"><value>The operation was cancelled, but automatic rollback could not be verified. Review the recovery session.</value></data>
+  <data name="FixResult_CommandFailed" xml:space="preserve"><value>A repair step returned an error.</value></data>
+  <data name="FixResult_DryRun" xml:space="preserve"><value>Preview mode: no change was applied.</value></data>
+  <data name="FixResult_ForceRequirementsMissing" xml:space="preserve"><value>Force Repair requires explicit consent and a restore point.</value></data>
+  <data name="FixResult_TargetRequired" xml:space="preserve"><value>This repair requires a target device.</value></data>
+  <data name="FixStage_Preparing" xml:space="preserve"><value>Preparing</value></data>
+  <data name="FixStage_BackingUp" xml:space="preserve"><value>Backing up</value></data>
+  <data name="FixStage_Applying" xml:space="preserve"><value>Applying</value></data>
+  <data name="FixStage_Verifying" xml:space="preserve"><value>Verifying</value></data>
+  <data name="FixStage_RolledBack" xml:space="preserve"><value>Rolled back safely</value></data>
+  <data name="FixStage_RollbackFailed" xml:space="preserve"><value>Rollback needs attention</value></data>
+  <data name="FixStage_PendingReboot" xml:space="preserve"><value>Waiting for restart</value></data>
+  <data name="FixStage_Done" xml:space="preserve"><value>Complete</value></data>
+  <data name="TestStage_Running" xml:space="preserve"><value>Test running</value></data>
+  <data name="TestStage_Result" xml:space="preserve"><value>Result</value></data>
+  <data name="TestStage_Failed" xml:space="preserve"><value>Test failed</value></data>
+  <data name="TestStage_Left" xml:space="preserve"><value>Listen to the left channel</value></data>
+  <data name="TestStage_Right" xml:space="preserve"><value>Listen to the right channel</value></data>
+  <data name="TestStage_HeardQuestion" xml:space="preserve"><value>Did you hear both channels?</value></data>
+  <data name="TestStage_Recording" xml:space="preserve"><value>Sampling the microphone in memory</value></data>
+  <data name="TestStage_NoSignal" xml:space="preserve"><value>No microphone signal detected</value></data>
+  <data name="TestStage_Recorded" xml:space="preserve"><value>The five-second microphone signal check completed</value></data>
+  <data name="TestStage_NotAvailable" xml:space="preserve"><value>This test is unavailable</value></data>
+  <data name="TestStage_CaptivePortal" xml:space="preserve"><value>Captive portal or unexpected response detected</value></data>
+
+  <data name="Check_Network_Adapters" xml:space="preserve"><value>Network adapter inventory</value></data>
+  <data name="Check_Network_Ip" xml:space="preserve"><value>IP configuration</value></data>
+  <data name="Check_Network_Gateway" xml:space="preserve"><value>Gateway reachability</value></data>
+  <data name="Check_Network_Dns" xml:space="preserve"><value>DNS health</value></data>
+  <data name="Check_Network_Internet" xml:space="preserve"><value>Internet connectivity</value></data>
+  <data name="Check_Network_Proxy" xml:space="preserve"><value>Proxy settings</value></data>
+  <data name="Check_Network_Vpn" xml:space="preserve"><value>VPN adapter conflicts</value></data>
+  <data name="Check_Network_Firewall" xml:space="preserve"><value>Firewall policy</value></data>
+  <data name="Check_Network_Hosts" xml:space="preserve"><value>Hosts file</value></data>
+  <data name="Check_Network_Winsock" xml:space="preserve"><value>Winsock catalog</value></data>
+  <data name="Check_Network_Mtu" xml:space="preserve"><value>MTU configuration</value></data>
+  <data name="Check_Network_Power" xml:space="preserve"><value>Adapter power management</value></data>
+  <data name="Check_Network_Services" xml:space="preserve"><value>Network services</value></data>
+  <data name="Check_Network_Performance" xml:space="preserve"><value>TCP and Wi‑Fi performance</value></data>
+  <data name="Check_Network_Throughput" xml:space="preserve"><value>Download throughput</value></data>
+  <data name="Check_Audio_OutputDevices" xml:space="preserve"><value>Output device inventory</value></data>
+  <data name="Check_Audio_InputDevices" xml:space="preserve"><value>Input device inventory</value></data>
+  <data name="Check_Audio_DefaultDevices" xml:space="preserve"><value>Default audio devices</value></data>
+  <data name="Check_Audio_Services" xml:space="preserve"><value>Audio services</value></data>
+  <data name="Check_Audio_Levels" xml:space="preserve"><value>Mute and volume levels</value></data>
+  <data name="Check_Audio_Drivers" xml:space="preserve"><value>Audio drivers</value></data>
+  <data name="Check_Audio_Formats" xml:space="preserve"><value>Audio formats</value></data>
+  <data name="Check_Audio_Enhancements" xml:space="preserve"><value>Audio enhancements</value></data>
+  <data name="Check_Audio_MicrophonePrivacy" xml:space="preserve"><value>Microphone privacy</value></data>
+  <data name="Check_Audio_Bluetooth" xml:space="preserve"><value>Bluetooth audio profile</value></data>
+  <data name="Check_Audio_Hdmi" xml:space="preserve"><value>HDMI and Display Audio</value></data>
+  <data name="Check_Audio_Communications" xml:space="preserve"><value>Communications audio behavior</value></data>
+  <data name="Check_Update_Services" xml:space="preserve"><value>Update services</value></data>
+  <data name="Check_Update_Errors" xml:space="preserve"><value>Recent update errors</value></data>
+  <data name="Check_Update_PendingReboot" xml:space="preserve"><value>Pending restart</value></data>
+  <data name="Check_Printer_Spooler" xml:space="preserve"><value>Print Spooler</value></data>
+  <data name="Check_Printer_Queues" xml:space="preserve"><value>Printer queues</value></data>
+  <data name="Check_Printer_Offline" xml:space="preserve"><value>Offline printers</value></data>
+  <data name="Check_Printer_Default" xml:space="preserve"><value>Default printer</value></data>
+  <data name="Check_Bluetooth_Service" xml:space="preserve"><value>Bluetooth service</value></data>
+  <data name="Check_Bluetooth_Devices" xml:space="preserve"><value>Bluetooth devices</value></data>
+  <data name="Check_Disk_Health" xml:space="preserve"><value>Physical disk health</value></data>
+  <data name="Check_Disk_Space" xml:space="preserve"><value>Free disk space</value></data>
+  <data name="Check_Disk_Usage" xml:space="preserve"><value>Disk utilization</value></data>
+  <data name="Check_Integrity_ComponentStore" xml:space="preserve"><value>Windows component store</value></data>
+  <data name="Check_Store_Package" xml:space="preserve"><value>Microsoft Store package</value></data>
+  <data name="Check_Time_Service" xml:space="preserve"><value>Windows Time service</value></data>
+  <data name="Check_Time_Source" xml:space="preserve"><value>Time source</value></data>
+  <data name="Check_Performance_Startup" xml:space="preserve"><value>Startup applications</value></data>
+  <data name="Check_Performance_PowerPlan" xml:space="preserve"><value>Active power plan</value></data>
+
+  <data name="Fix_Network_FlushDns" xml:space="preserve"><value>Flush the DNS cache</value></data>
+  <data name="Fix_Network_RenewDhcp" xml:space="preserve"><value>Renew the DHCP lease</value></data>
+  <data name="Fix_Network_CycleAdapters" xml:space="preserve"><value>Restart active network adapters</value></data>
+  <data name="Fix_Network_RestartServices" xml:space="preserve"><value>Restart network services</value></data>
+  <data name="Fix_Network_ClearArp" xml:space="preserve"><value>Clear the ARP cache</value></data>
+  <data name="Fix_Network_ResetStack" xml:space="preserve"><value>Reset Winsock and the IP stack</value></data>
+  <data name="Fix_Network_NormalizeTcp" xml:space="preserve"><value>Restore normal TCP settings</value></data>
+  <data name="Fix_Network_DisablePowerSaving" xml:space="preserve"><value>Disable adapter power saving</value></data>
+  <data name="Fix_Network_ClearProxy" xml:space="preserve"><value>Remove stale proxy settings</value></data>
+  <data name="Fix_Network_RestoreHosts" xml:space="preserve"><value>Restore the default hosts file</value></data>
+  <data name="Fix_Network_PublicDns" xml:space="preserve"><value>Use Cloudflare and Google DNS</value></data>
+  <data name="Fix_Network_FirewallReset" xml:space="preserve"><value>Reset Windows Firewall</value></data>
+  <data name="Fix_Network_DriverReset" xml:space="preserve"><value>Reinstall the selected network driver</value></data>
+  <data name="Fix_Network_RemoveGhostVpn" xml:space="preserve"><value>Remove the selected ghost VPN adapter</value></data>
+  <data name="Fix_Network_FullReset" xml:space="preserve"><value>Perform a full network reset</value></data>
+  <data name="Fix_Network_RouteReset" xml:space="preserve"><value>Remove diagnosed conflicting routes</value></data>
+  <data name="Fix_Audio_RestartServices" xml:space="preserve"><value>Restart Windows audio services</value></data>
+  <data name="Fix_Audio_SetDefault" xml:space="preserve"><value>Select the correct default device</value></data>
+  <data name="Fix_Audio_Unmute" xml:space="preserve"><value>Restore mute and volume levels</value></data>
+  <data name="Fix_Audio_DisableEnhancements" xml:space="preserve"><value>Disable audio enhancements</value></data>
+  <data name="Fix_Audio_FormatReset" xml:space="preserve"><value>Reset custom audio formats</value></data>
+  <data name="Fix_Audio_MicrophonePrivacy" xml:space="preserve"><value>Allow microphone access</value></data>
+  <data name="Fix_Audio_MixerReset" xml:space="preserve"><value>Reset per-app mixer settings</value></data>
+  <data name="Fix_Audio_BluetoothRestart" xml:space="preserve"><value>Restart the selected Bluetooth audio device</value></data>
+  <data name="Fix_Audio_DriverReset" xml:space="preserve"><value>Reinstall the selected audio driver</value></data>
+  <data name="Fix_Audio_MmDevicesReset" xml:space="preserve"><value>Rebuild Windows audio endpoints</value></data>
+  <data name="Fix_Update_RestartServices" xml:space="preserve"><value>Restore update services</value></data>
+  <data name="Fix_Update_ResetCache" xml:space="preserve"><value>Rebuild the Windows Update cache</value></data>
+  <data name="Fix_Printer_RestartSpooler" xml:space="preserve"><value>Restart the Print Spooler</value></data>
+  <data name="Fix_Printer_ResetQueue" xml:space="preserve"><value>Back up and clear the print queue</value></data>
+  <data name="Fix_Bluetooth_RestartService" xml:space="preserve"><value>Restore the Bluetooth service</value></data>
+  <data name="Fix_Bluetooth_RestartDevice" xml:space="preserve"><value>Restart the selected Bluetooth device</value></data>
+  <data name="Fix_Disk_CleanTemp" xml:space="preserve"><value>Move old temporary files to quarantine</value></data>
+  <data name="Fix_Disk_ScheduleChkdsk" xml:space="preserve"><value>Schedule a disk file-system check</value></data>
+  <data name="Fix_Integrity_RepairChain" xml:space="preserve"><value>Repair Windows with DISM and SFC</value></data>
+  <data name="Fix_Store_ResetCache" xml:space="preserve"><value>Reset the Microsoft Store cache</value></data>
+  <data name="Fix_Store_Reregister" xml:space="preserve"><value>Re-register the Microsoft Store package</value></data>
+  <data name="Fix_Time_Resync" xml:space="preserve"><value>Resynchronize Windows time</value></data>
+  <data name="Fix_Performance_BalancedPlan" xml:space="preserve"><value>Switch to the Balanced power plan</value></data>
+
+  <data name="LiveTest_Network_Ping" xml:space="preserve"><value>Per-adapter ping test</value></data>
+  <data name="LiveTest_Network_DnsRace" xml:space="preserve"><value>DNS resolution race</value></data>
+  <data name="LiveTest_Network_Http" xml:space="preserve"><value>HTTP and captive portal probe</value></data>
+  <data name="LiveTest_Network_Speed" xml:space="preserve"><value>10 MB download speed test</value></data>
+  <data name="LiveTest_Audio_Speaker" xml:space="preserve"><value>Left and right speaker test</value></data>
+  <data name="LiveTest_Audio_Microphone" xml:space="preserve"><value>Five-second microphone test</value></data>
+  <data name="LiveTest_Audio_Stability" xml:space="preserve"><value>Ten-second playback stability test</value></data>
+
+  <data name="Symptom_Network_NoInternet" xml:space="preserve"><value>No internet connection</value></data>
+  <data name="Symptom_Network_Limited" xml:space="preserve"><value>Limited connectivity</value></data>
+  <data name="Symptom_Network_Slow" xml:space="preserve"><value>Internet works but is slow</value></data>
+  <data name="Symptom_Network_Sites" xml:space="preserve"><value>Some websites do not open</value></data>
+  <data name="Symptom_Network_Vpn" xml:space="preserve"><value>Internet broke after using a VPN</value></data>
+  <data name="Symptom_Network_WifiDrops" xml:space="preserve"><value>Wi‑Fi keeps disconnecting</value></data>
+  <data name="Symptom_Audio_NoSound" xml:space="preserve"><value>No sound</value></data>
+  <data name="Symptom_Audio_Crackling" xml:space="preserve"><value>Crackling or interrupted sound</value></data>
+  <data name="Symptom_Audio_MicNotWorking" xml:space="preserve"><value>Microphone does not work</value></data>
+  <data name="Symptom_Audio_MicLow" xml:space="preserve"><value>Microphone is too quiet</value></data>
+  <data name="Symptom_Audio_BluetoothBad" xml:space="preserve"><value>Poor Bluetooth headset quality</value></data>
+  <data name="Symptom_Audio_WrongDevice" xml:space="preserve"><value>Sound comes from the wrong device</value></data>
+  <data name="Symptom_Update_Failed" xml:space="preserve"><value>Windows Update fails</value></data>
+  <data name="Symptom_Printer_Stuck" xml:space="preserve"><value>Printing is stuck or offline</value></data>
+  <data name="Symptom_Bluetooth_Connect" xml:space="preserve"><value>Bluetooth device will not connect</value></data>
+  <data name="Symptom_Disk_Slow" xml:space="preserve"><value>Disk is slow or always busy</value></data>
+  <data name="Symptom_Integrity_Corrupt" xml:space="preserve"><value>Windows files may be damaged</value></data>
+  <data name="Symptom_Store_NotOpen" xml:space="preserve"><value>Microsoft Store does not open</value></data>
+  <data name="Symptom_Time_Wrong" xml:space="preserve"><value>Clock or time sync is wrong</value></data>
+  <data name="Symptom_Performance_SlowStartup" xml:space="preserve"><value>Windows starts slowly</value></data>
+
+  <data name="Report_Title" xml:space="preserve"><value>Repair Report</value></data>
+  <data name="Report_Findings" xml:space="preserve"><value>Findings</value></data>
+  <data name="Report_Actions" xml:space="preserve"><value>Applied actions</value></data>
+  <data name="Report_Action" xml:space="preserve"><value>Action</value></data>
+  <data name="Report_Result" xml:space="preserve"><value>Result</value></data>
+  <data name="Report_Backup" xml:space="preserve"><value>Backup</value></data>
+  <data name="Report_Rollback" xml:space="preserve"><value>Rollback</value></data>
+  <data name="Report_RollbackHelp" xml:space="preserve"><value>Open Recovery Center in CaYaFix and select this session. Actions are restored in reverse order.</value></data>
+  <data name="Dashboard_ModuleCount" xml:space="preserve"><value>{0} modules</value></data>
+  <data name="Recovery_Subtitle" xml:space="preserve"><value>{0} actions · {1} findings · {2}</value></data>
+  <data name="LiveTest_Running" xml:space="preserve"><value>Test in progress</value></data>
+  <data name="Module_Camera_Name" xml:space="preserve"><value>Camera &amp; Privacy</value></data>
+  <data name="Module_Camera_Description" xml:space="preserve"><value>Camera devices, access permissions, and recoverable device faults.</value></data>
+  <data name="Module_Usb_Name" xml:space="preserve"><value>USB &amp; Devices</value></data>
+  <data name="Module_Usb_Description" xml:space="preserve"><value>USB device errors and the Windows services behind device discovery.</value></data>
+  <data name="Module_Search_Name" xml:space="preserve"><value>Windows Search</value></data>
+  <data name="Module_Search_Description" xml:space="preserve"><value>Search service health and recent indexing failures.</value></data>
+  <data name="Module_Display_Name" xml:space="preserve"><value>Display &amp; Graphics</value></data>
+  <data name="Module_Display_Description" xml:space="preserve"><value>Graphics adapter state and recent display-driver resets.</value></data>
+  <data name="Check_Camera_Devices" xml:space="preserve"><value>Camera devices</value></data>
+  <data name="Check_Camera_Privacy" xml:space="preserve"><value>Camera privacy access</value></data>
+  <data name="Check_Usb_Devices" xml:space="preserve"><value>USB devices</value></data>
+  <data name="Check_Usb_Services" xml:space="preserve"><value>Device services</value></data>
+  <data name="Check_Search_Service" xml:space="preserve"><value>Windows Search service</value></data>
+  <data name="Check_Search_Errors" xml:space="preserve"><value>Recent search errors</value></data>
+  <data name="Check_Display_Adapters" xml:space="preserve"><value>Graphics adapters</value></data>
+  <data name="Check_Display_Errors" xml:space="preserve"><value>Recent display resets</value></data>
+  <data name="Finding_Camera_DeviceError" xml:space="preserve"><value>A camera device reports a Windows device error.</value></data>
+  <data name="Finding_Camera_PrivacyBlocked" xml:space="preserve"><value>Windows privacy settings currently block camera access.</value></data>
+  <data name="Finding_Usb_DeviceError" xml:space="preserve"><value>One or more connected USB devices report an error.</value></data>
+  <data name="Finding_Usb_ServiceDisabled" xml:space="preserve"><value>A service required for device discovery is disabled.</value></data>
+  <data name="Finding_Search_ServiceStopped" xml:space="preserve"><value>Windows Search is stopped or disabled.</value></data>
+  <data name="Finding_Search_RecentErrors" xml:space="preserve"><value>Windows Search logged recent indexing errors.</value></data>
+  <data name="Finding_Display_AdapterError" xml:space="preserve"><value>A graphics adapter reports a critical device error.</value></data>
+  <data name="Finding_Display_RecentResets" xml:space="preserve"><value>The display driver was reset recently.</value></data>
+  <data name="Fix_Camera_AllowAccess" xml:space="preserve"><value>Allow camera access</value></data>
+  <data name="Fix_Camera_RestartDevice" xml:space="preserve"><value>Restart affected camera</value></data>
+  <data name="Fix_Usb_StartServices" xml:space="preserve"><value>Start device services</value></data>
+  <data name="Fix_Usb_RestartDevice" xml:space="preserve"><value>Restart affected USB device</value></data>
+  <data name="Fix_Search_RestartService" xml:space="preserve"><value>Repair and restart Windows Search</value></data>
+  <data name="Fix_Display_RestartDevice" xml:space="preserve"><value>Restart graphics adapter</value></data>
+  <data name="Symptom_Camera_NotWorking" xml:space="preserve"><value>Camera is unavailable or blocked</value></data>
+  <data name="Symptom_Usb_NotWorking" xml:space="preserve"><value>A USB device is not working</value></data>
+  <data name="Symptom_Search_NotWorking" xml:space="preserve"><value>Windows Search is not working</value></data>
+  <data name="Symptom_Display_Unstable" xml:space="preserve"><value>Display flickers, freezes, or resets</value></data>
+  <data name="TestResult_Failed" xml:space="preserve"><value>failed</value></data>
+  <data name="TestResult_Passed" xml:space="preserve"><value>passed</value></data>
+  <data name="TestResult_HttpStatus" xml:space="preserve"><value>HTTP status {0}</value></data>
+  <data name="TestResult_NoActiveAdapter" xml:space="preserve"><value>No active IPv4 adapter is available for this test.</value></data>
+  <data name="TestResult_IncompleteDownload" xml:space="preserve"><value>The download ended early at {0:0.0} MB.</value></data>
+  <data name="TestResult_Mtu" xml:space="preserve"><value>{0}: estimated path MTU is {1} bytes</value></data>
+  <data name="TestResult_MtuProbing" xml:space="preserve"><value>{0}: testing {1} bytes</value></data>
+  <data name="TestResult_MtuUnavailable" xml:space="preserve"><value>{0}: the ICMP path MTU probe is unavailable</value></data>
+  <data name="LiveMetrics_Mtu" xml:space="preserve"><value>Path MTU: {0:0} bytes · ICMP payload: {1:0} bytes</value></data>
+  <data name="LiveTest_Network_Mtu" xml:space="preserve"><value>Path MTU probe</value></data>
+  <data name="UpdateError_80070002" xml:space="preserve"><value>The update file could not be found.</value></data>
+  <data name="UpdateError_8007000E" xml:space="preserve"><value>There is not enough memory to complete the operation.</value></data>
+  <data name="UpdateError_80244022" xml:space="preserve"><value>The update service is temporarily unavailable.</value></data>
+  <data name="UpdateError_800F081F" xml:space="preserve"><value>A required component-store source could not be found.</value></data>
+  <data name="Dialog_AlreadyRunning" xml:space="preserve"><value>CaYaFix is already running for this Windows user.</value></data>
+  <data name="Action_UndoAction" xml:space="preserve"><value>Roll Back Action</value></data>
+  <data name="Dialog_RollbackAction_Title" xml:space="preserve"><value>Roll back this action?</value></data>
+  <data name="Dialog_RollbackAction" xml:space="preserve"><value>The selected action will be restored from its verified backup. Continue?</value></data>
+  <data name="Dialog_CancelRollback_Title" xml:space="preserve"><value>Stop the rollback?</value></data>
+  <data name="Dialog_CancelRollback" xml:space="preserve"><value>Stopping now will leave any already restored actions as they are. Remaining actions will not be rolled back. Stop the rollback?</value></data>
+  <data name="Dialog_RollbackCancelled_Title" xml:space="preserve"><value>Rollback stopped</value></data>
+  <data name="Dialog_RollbackCancelled" xml:space="preserve"><value>The rollback was cancelled. Actions already restored remain restored. Review Recovery Center before starting new repairs.</value></data>
+  <data name="Status_RollbackCancelled" xml:space="preserve"><value>Rollback cancelled. Review Recovery Center for remaining actions.</value></data>
+  <data name="Action_DismissRecovery" xml:space="preserve"><value>Dismiss</value></data>
+  <data name="Dialog_DismissRecovery_Title" xml:space="preserve"><value>Dismiss recovery requirement?</value></data>
+  <data name="Dialog_DismissRecoveryAction" xml:space="preserve"><value>This marks the interrupted or failed recovery item as acknowledged without restoring the backup. Only continue if you understand the system may still be partially changed.</value></data>
+  <data name="Dialog_DismissRecoverySession" xml:space="preserve"><value>All interrupted or failed recovery items in this session will be dismissed without rolling them back. Continue only if you accept leaving those changes as-is.</value></data>
+  <data name="Status_RecoveryDismissed" xml:space="preserve"><value>Recovery requirement dismissed.</value></data>
+  <data name="Status_RecoveryDismissFailed" xml:space="preserve"><value>The recovery item could not be dismissed.</value></data>
+  <data name="Recovery_ActionDismissed" xml:space="preserve"><value>Recovery dismissed</value></data>
+  <data name="FixResult_RecoveryDismissed" xml:space="preserve"><value>Recovery was dismissed by the user without automatic rollback.</value></data>
+  <data name="Operation_PhaseScan" xml:space="preserve"><value>Scanning</value></data>
+  <data name="Operation_PhaseRepair" xml:space="preserve"><value>Repairing</value></data>
+  <data name="Operation_PhaseRollback" xml:space="preserve"><value>Rolling back</value></data>
+  <data name="Operation_PreparingRestorePoint" xml:space="preserve"><value>Creating a System Restore point before changes…</value></data>
+  <data name="Operation_RestorePointChecking" xml:space="preserve"><value>Checking System Protection and recent restore points…</value></data>
+  <data name="Operation_RestorePointWorking" xml:space="preserve"><value>Windows is creating the restore point (up to ~90 seconds)…</value></data>
+  <data name="Operation_RestorePointWaiting" xml:space="preserve"><value>Still creating the restore point… {0}s elapsed. You can skip with a warning.</value></data>
+  <data name="Operation_RestorePointCreated" xml:space="preserve"><value>System Restore point created.</value></data>
+  <data name="Operation_RestorePointAlreadyPresent" xml:space="preserve"><value>A recent System Restore point is already available — create skipped.</value></data>
+  <data name="Operation_RestorePointSkipped" xml:space="preserve"><value>System Restore point skipped with user warning. Action-level backups still apply.</value></data>
+  <data name="Operation_RestorePointFailedDetail" xml:space="preserve"><value>Restore point step did not succeed: {0}</value></data>
+  <data name="Operation_ScanStep" xml:space="preserve"><value>{0} · checking “{1}” ({2}/{3})</value></data>
+  <data name="Operation_RepairStep" xml:space="preserve"><value>{0} · {1} ({2}/{3})</value></data>
+  <data name="Operation_FeedCheckRunning" xml:space="preserve"><value>Running check: {0}</value></data>
+  <data name="Operation_FeedCheckPassed" xml:space="preserve"><value>No issue: {0}</value></data>
+  <data name="Operation_FeedCheckFinding" xml:space="preserve"><value>Finding recorded: {0}</value></data>
+  <data name="Operation_FeedRollbackAction" xml:space="preserve"><value>Rolling back action: {0}</value></data>
+  <data name="Operation_FeedRollbackSession" xml:space="preserve"><value>Rolling back session: {0}</value></data>
+  <data name="Toast_ScanStarted" xml:space="preserve"><value>Scan started</value></data>
+  <data name="Toast_ScanComplete" xml:space="preserve"><value>Scan complete</value></data>
+  <data name="Toast_RepairStarted" xml:space="preserve"><value>Repair started</value></data>
+  <data name="Toast_Cancelled" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="Toast_Failed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Toast_RollbackComplete" xml:space="preserve"><value>Rollback complete</value></data>
+  <data name="Toast_RollbackFailed" xml:space="preserve"><value>Rollback failed</value></data>
+  <data name="Toast_RecoveryDismissed" xml:space="preserve"><value>Recovery dismissed</value></data>
+  <data name="ModulePanel_Details" xml:space="preserve"><value>Area details</value></data>
+  <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Common symptoms — pick one to run a focused scan</value></data>
+  <data name="Action_ClosePanel" xml:space="preserve"><value>Close</value></data>
+  <data name="Action_ViewFindings" xml:space="preserve"><value>View findings</value></data>
+  <data name="Action_ForceRepairReal" xml:space="preserve"><value>Fix real issues</value></data>
+  <data name="Action_ForceRepairAll" xml:space="preserve"><value>Include common findings</value></data>
+  <data name="Operation_PhaseComplete" xml:space="preserve"><value>Scan complete</value></data>
+  <data name="Operation_LiveSummary" xml:space="preserve"><value>Healthy checks: {0} · Findings so far: {1}</value></data>
+  <data name="Operation_StatPassed" xml:space="preserve"><value>No issue</value></data>
+  <data name="Operation_StatFindings" xml:space="preserve"><value>Findings</value></data>
+  <data name="Operation_StatCommon" xml:space="preserve"><value>Common / advisory</value></data>
+  <data name="Operation_StatActionable" xml:space="preserve"><value>Likely real</value></data>
+  <data name="Operation_ResultHealthy" xml:space="preserve"><value>No problems found</value></data>
+  <data name="Operation_ResultHealthyDetail" xml:space="preserve"><value>{0} checks completed cleanly. Nothing looks broken right now.</value></data>
+  <data name="Operation_ResultHealthyAdvice" xml:space="preserve"><value>You can still open live tests if something feels intermittent.</value></data>
+  <data name="Operation_ResultAdvisoryOnly" xml:space="preserve"><value>Only common or advisory findings</value></data>
+  <data name="Operation_ResultAdvisoryDetail" xml:space="preserve"><value>{0} finding(s) were recorded, and {1} look like common/advisory situations (for example virtual audio devices, weak Wi‑Fi, or power-saving settings).</value></data>
+  <data name="Operation_ResultAdvisoryAdvice" xml:space="preserve"><value>These often appear on machines with Voicemeeter, cable drivers, docking stations, or VPN software and are not always a real fault. Review them before forcing repairs.</value></data>
+  <data name="Operation_ResultMixed" xml:space="preserve"><value>Real issues plus common findings</value></data>
+  <data name="Operation_ResultMixedDetail" xml:space="preserve"><value>{0} likely real issue(s), {1} common/advisory finding(s), and {2} clean checks.</value></data>
+  <data name="Operation_ResultMixedAdvice" xml:space="preserve"><value>Start with “Fix real issues”. Common findings such as virtual drivers can be normal and may be misleading if repaired first.</value></data>
+  <data name="Operation_ResultIssues" xml:space="preserve"><value>Problems were found</value></data>
+  <data name="Operation_ResultIssuesDetail" xml:space="preserve"><value>{0} actionable issue(s) and {1} clean checks.</value></data>
+  <data name="Operation_ResultIssuesAdvice" xml:space="preserve"><value>Use “Fix real issues” to start Safe repairs for selected findings. You can still open the findings list for full control.</value></data>
+  <data name="Recovery_ActionSubtitle" xml:space="preserve"><value>{0} · {1} · {2}</value></data>
+  <data name="Recovery_ActionUndone" xml:space="preserve"><value>rolled back</value></data>
+  <data name="Recovery_ActionNotApplied" xml:space="preserve"><value>not applied</value></data>
+  <data name="Recovery_ActionVerified" xml:space="preserve"><value>verified</value></data>
+  <data name="Recovery_ActionPendingRestart" xml:space="preserve"><value>pending restart verification</value></data>
+  <data name="Recovery_ActionApplied" xml:space="preserve"><value>applied</value></data>
+  <data name="Check_Network_Routes" xml:space="preserve"><value>Persistent routes</value></data>
+  <data name="Finding_Network_PersistentRouteConflict" xml:space="preserve"><value>Conflicting or unreachable persistent network routes were detected.</value></data>
+  <data name="Check_Disk_FileSystem" xml:space="preserve"><value>System volume file system</value></data>
+  <data name="Finding_Disk_FileSystemDirty" xml:space="preserve"><value>Windows marked the system volume for a file-system consistency check.</value></data>
+  <data name="Settings_ExpertCatalog" xml:space="preserve"><value>Expert repair catalog</value></data>
+  <data name="Settings_ExpertCatalogDescription" xml:space="preserve"><value>Full repair catalog. Use Run to apply a single repair (backup and consent gates still apply). Target-required repairs need a prior scan that captured the target.</value></data>
+  <data name="Expert_FixFlags" xml:space="preserve"><value>{0} · {1}</value></data>
+  <data name="Expert_TargetRequired" xml:space="preserve"><value>target required</value></data>
+  <data name="Expert_NoTargetRequired" xml:space="preserve"><value>no device target</value></data>
+  <data name="Expert_RestartRequired" xml:space="preserve"><value>restart required</value></data>
+  <data name="Expert_NoRestartRequired" xml:space="preserve"><value>no restart</value></data>
+  <data name="Check_Store_Errors" xml:space="preserve"><value>Recent Microsoft Store errors</value></data>
+  <data name="Finding_Store_PackageUnhealthy" xml:space="preserve"><value>The Microsoft Store package reports an unhealthy state.</value></data>
+  <data name="Finding_Store_RecentErrors" xml:space="preserve"><value>Microsoft Store logged recent operational errors.</value></data>
+  <data name="Dialog_CloseBusy_Title" xml:space="preserve"><value>Cancel the active operation?</value></data>
+  <data name="Dialog_CloseBusy" xml:space="preserve"><value>CaYaFix must cancel the active operation, finish any required rollback, and save the session before it can close. Continue?</value></data>
+  <data name="Report_Tier" xml:space="preserve"><value>Risk tier</value></data>
+  <data name="SessionStatus_Created" xml:space="preserve"><value>Created</value></data>
+  <data name="SessionStatus_Running" xml:space="preserve"><value>Running</value></data>
+  <data name="SessionStatus_PendingVerification" xml:space="preserve"><value>Pending restart verification</value></data>
+  <data name="SessionStatus_Completed" xml:space="preserve"><value>Completed</value></data>
+  <data name="SessionStatus_Cancelled" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="SessionStatus_Failed" xml:space="preserve"><value>Failed</value></data>
+  <data name="SessionStatus_RolledBack" xml:space="preserve"><value>Rolled back</value></data>
+  <data name="FindingStatus_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="FindingStatus_Repairing" xml:space="preserve"><value>Repairing</value></data>
+  <data name="FindingStatus_Resolved" xml:space="preserve"><value>Resolved</value></data>
+  <data name="FindingStatus_Unresolved" xml:space="preserve"><value>Unresolved</value></data>
+  <data name="FindingStatus_Skipped" xml:space="preserve"><value>Skipped</value></data>
+  <data name="TestStage_Playback" xml:space="preserve"><value>Playing the in-memory microphone sample</value></data>
+  <data name="TestStage_PlaybackUnavailable" xml:space="preserve"><value>The microphone signal was detected, but playback was unavailable</value></data>
+</root>

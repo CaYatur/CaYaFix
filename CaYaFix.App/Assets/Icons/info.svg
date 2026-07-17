@@ -1,0 +1,6 @@
+<!-- Copyright (c) 2026 CaYaDev (https://cayadev.com) | GitHub: CaYatur (https://github.com/CaYatur) | Licensed under the MIT License. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" fill="none" stroke="#5AA7FF" stroke-width="1.6"/>
+  <path fill="none" stroke="#5AA7FF" stroke-width="1.9" stroke-linecap="round" d="M12 10.5v6"/>
+  <circle cx="12" cy="7.6" r="1.15" fill="#5AA7FF"/>
+</svg>

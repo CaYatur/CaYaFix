@@ -1,0 +1,15 @@
+{
+  "network": {
+    "driverAgeYears": 3,
+    "packetLossWarningPercent": 5,
+    "packetLossCriticalPercent": 20,
+    "jitterWarningMs": 30,
+    "wifiSignalWarningPercent": 45,
+    "throughputToLinkWarningRatio": 0.10,
+    "speedTestBytes": 10485760
+  },
+  "disk": {
+    "freeSpaceWarningPercent": 10,
+    "freeSpaceCriticalPercent": 5
+  }
+}
