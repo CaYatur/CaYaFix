@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CaYaFix.Core\CaYaFix.Core.csproj" />
     <PackageReference Include="NAudio" Version="2.3.0" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="System.Management" Version="10.0.10" />
   </ItemGroup>
   <ItemGroup>
     <None Include="thresholds.json" CopyToOutputDirectory="PreserveNewest" />

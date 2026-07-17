@@ -99,7 +99,7 @@ abstract class LiveTest {  // kullanıcı önünde canlı çalışan testler (pi
 - Alt tarafta kalıcı, açılır-kapanır **İşlem Konsolu** (çalıştırılan komut + çıktı canlı akar).
 
 ### Akış A — Otomatik
-1. Tüm modüllerin hızlı check'leri koşar (canlı ilerleme: modül adı + check adı + ✓/⚠/✖).
+1. Tüm modüllerin hızlı check'leri koşar (canlı ilerleme: modül adı + check adı + [OK]/[WARN]/[FAIL]).
 2. **Bulgular ekranı:** her bulgu = kullanıcı dilinde açıklama + önem derecesi + önerilen düzeltmeler. Safe tier düzeltmeler önceden işaretli gelir.
 3. Kullanıcı "Onar" der → FixEngine Tier 1'leri uygular, her fix sonrası Verify.
 4. **Doğrulama ekranı:** çözülen/çözülemeyen listesi.
