@@ -24,7 +24,7 @@ This project is **tested on GitHub** via Actions on `master` (and `main`). Live 
 |---|---|
 | **CI** (`ci.yml`) | `validate-repository.ps1`, Release build (`-warnaserror`), unit/integration tests, self-contained `win-x64` publish + artifacts |
 | **CodeQL** (`codeql.yml`) | Static security analysis for C# |
-| **Screenshots** (`screenshots.yml`) | Real English WPF capture of `dashboard.png` and `findings.png` |
+| **Screenshots** (`screenshots.yml`) | Real English WPF capture of `dashboard.png`, `findings.png`, `live-tests.png` |
 | **Soak** (`soak.yml`) | Scheduled process-isolated soak with memory/handle ceilings |
 | **Release** (`release.yml`) | Tagged `v*` builds, zip + SHA-256 checksum upload |
 
@@ -44,14 +44,16 @@ dotnet run --project .\tools\HarmlessDryRun\HarmlessDryRun.csproj -c Release
 
 ## Screenshots
 
-These images are captured from the running English WPF application by `tools/capture-readme-screenshots.ps1`. The capture mode loads deterministic in-app demonstration states so the dashboard and findings views are reproducible; the PNG files are not mockups or generated artwork.
+These images are captured from the running English WPF application by `tools/capture-readme-screenshots.ps1`. The capture mode loads deterministic in-app demonstration states so the dashboard, findings, and related views are reproducible; the PNG files are not mockups or generated artwork.
 
 ![CaYaFix dashboard](docs/screenshots/dashboard.png)
 
 <details>
-<summary>Findings</summary>
+<summary>Findings and more</summary>
 
 ![Findings and repair tiers](docs/screenshots/findings.png)
+
+![Live tests view](docs/screenshots/live-tests.png)
 
 </details>
 

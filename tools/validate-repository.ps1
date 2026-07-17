@@ -272,7 +272,7 @@ else {
 }
 
 $readme = Get-Content -LiteralPath (Join-Path $root 'README.md') -Raw
-foreach ($requiredReadmeText in '90 diagnostic checks', '163 repair actions', 'https://github.com/CaYatur', 'https://cayadev.com', 'docs/screenshots/dashboard.png', 'docs/screenshots/findings.png') {
+foreach ($requiredReadmeText in '90 diagnostic checks', '163 repair actions', 'https://github.com/CaYatur', 'https://cayadev.com', 'docs/screenshots/dashboard.png', 'docs/screenshots/findings.png', 'docs/screenshots/live-tests.png') {
     if ($readme.IndexOf($requiredReadmeText, [System.StringComparison]::Ordinal) -lt 0) { Add-Failure "README is missing: $requiredReadmeText" }
 }
 if ($readme -match '(?i)manifest\.sig') { Add-Failure 'README still describes the obsolete detached manifest signature format.' }
