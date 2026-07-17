@@ -6,14 +6,41 @@
   <p>Diagnostics-first Windows troubleshooting with verifiable repair and rollback.</p>
 </div>
 
-[![CI](https://github.com/CaYatur/CaYaFix/actions/workflows/ci.yml/badge.svg)](https://github.com/CaYatur/CaYaFix/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/CaYatur/CaYaFix/actions/workflows/codeql.yml/badge.svg)](https://github.com/CaYatur/CaYaFix/actions/workflows/codeql.yml)
+[![CI](https://github.com/CaYatur/CaYaFix/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/CaYatur/CaYaFix/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/CaYatur/CaYaFix/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/CaYatur/CaYaFix/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-51DEC1.svg)](LICENSE)
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-5AA7FF.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
+[![GitHub](https://img.shields.io/badge/GitHub-CaYatur%2FCaYaFix-181717?logo=github)](https://github.com/CaYatur/CaYaFix)
 
 CaYaFix is a modern WPF desktop application for diagnosing and repairing common Windows problems. It starts with read-only evidence gathering, maps findings to targeted actions, creates a recoverable backup, applies one change, verifies the action and the originating diagnostic, and records the full session. It does not use one-click scripts that reset unrelated settings, download drivers, collect credentials, or send telemetry.
 
 Repository: [github.com/CaYatur/CaYaFix](https://github.com/CaYatur/CaYaFix)
+
+## GitHub testing
+
+This project is **tested on GitHub** via Actions on `master` (and `main`). Live workflow status is shown in the badges above; runs are listed under [Actions](https://github.com/CaYatur/CaYaFix/actions).
+
+| Workflow | What it verifies |
+|---|---|
+| **CI** (`ci.yml`) | `validate-repository.ps1`, Release build (`-warnaserror`), unit/integration tests, self-contained `win-x64` publish + artifacts |
+| **CodeQL** (`codeql.yml`) | Static security analysis for C# |
+| **Screenshots** (`screenshots.yml`) | Real English WPF capture of `dashboard.png`, `findings.png`, `live-tests.png` |
+| **Soak** (`soak.yml`) | Scheduled process-isolated soak with memory/handle ceilings |
+| **Release** (`release.yml`) | Tagged `v*` builds, zip + SHA-256 checksum upload |
+
+**Local + CI gates that must stay green:**
+
+- Catalog: **15 modules · 68 diagnostics · 63 repairs · 8 live tests**
+- xUnit suite (currently **67** tests) with hang detection
+- Localization parity (EN/TR), SVG/icon policy, MIT headers, trusted executable allowlist
+- Dependabot NuGet and GitHub Actions updates are validated on the same CI path
+
+Harmless dry-run tooling for every repair preview (no system mutation):
+
+```powershell
+dotnet run --project .\tools\HarmlessDryRun\HarmlessDryRun.csproj -c Release
+.\tools\harmless-tool-smoke.ps1   # read-only OS probes only
+```
 
 ## Screenshots
 
@@ -191,7 +218,7 @@ More detail is available in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Report security issues privately as described in [SECURITY.md](SECURITY.md); do not publish exploit details in a public issue.
 
-GitHub Actions provides Windows build/test/publish, CodeQL, dependency updates, release archives with SHA-256 checksums, a scheduled 50-process soak with memory/handle ceilings, and a real-WPF screenshot capture workflow. The screenshot workflow forces English, validates PNG signatures and minimum dimensions, uploads the images as an artifact, and can commit them to the current branch.
+See **[GitHub testing](#github-testing)** above for the full CI matrix. GitHub Actions provides Windows build/test/publish, CodeQL, Dependabot updates, release archives with SHA-256 checksums, a scheduled soak with memory/handle ceilings, and a real-WPF screenshot capture workflow. The screenshot workflow forces English, validates PNG signatures and minimum dimensions, uploads the images as an artifact, and can commit them to the current branch. CI and CodeQL run on pushes to `master` and `main` and on pull requests.
 
 ## License and author
 
