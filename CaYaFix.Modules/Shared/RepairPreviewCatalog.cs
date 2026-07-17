@@ -11,9 +11,26 @@ internal static class RepairPreviewCatalog
         {
             ["net.flush-dns"] = ["ipconfig.exe /flushdns"],
             ["net.renew-dhcp"] = ["ipconfig.exe /release", "ipconfig.exe /renew"],
+            ["net.ipconfig-suite"] =
+            [
+                "ipconfig.exe /flushdns",
+                "ipconfig.exe /release",
+                "ipconfig.exe /renew",
+                "ipconfig.exe /registerdns",
+                "ipconfig.exe /flushdns"
+            ],
             ["net.cycle-adapters"] = ["Enable disabled physical adapters", "Restart active physical adapters"],
             ["net.restart-services"] = ["Restore required network services from Disabled to Manual", "Start stopped network services"],
             ["net.clear-arp"] = ["arp.exe -d *", "netsh.exe interface ip delete arpcache"],
+            ["net.soft-heal"] =
+            [
+                "ipconfig.exe /flushdns",
+                "arp.exe -d *",
+                "netsh.exe interface ip delete arpcache",
+                "Start stopped core network services (DnsCache, DHCP, NlaSvc, netprofm, WlanSvc)",
+                "ipconfig.exe /registerdns"
+            ],
+            ["net.rescan-devices"] = ["pnputil.exe /scan-devices"],
             ["net.reset-stack"] = ["netsh.exe winsock reset", "netsh.exe int ip reset", "netsh.exe int ipv6 reset", "Queue one restart"],
             ["net.normalize-tcp"] = ["netsh.exe interface tcp set global autotuninglevel=normal", "netsh.exe interface tcp set global rss=enabled", "netsh.exe interface tcp set heuristics disabled"],
             ["net.disable-power-saving"] = ["Disable MSPower_DeviceEnable only for physical network adapters"],
@@ -35,6 +52,16 @@ internal static class RepairPreviewCatalog
             ["audio.mixer-reset"] = ["Reset the current-user per-application audio property store", "Restart Audiosrv"],
             ["audio.bluetooth-restart"] = ["pnputil.exe /restart-device <diagnosed-bluetooth-instance>"],
             ["audio.enable-device"] = ["pnputil.exe /enable-device <diagnosed-audio-instance>"],
+            ["audio.enable-all-disabled"] =
+            [
+                "pnputil.exe /enable-device for disabled or error MEDIA/AudioEndpoint devices",
+                "Restart AudioEndpointBuilder and Audiosrv"
+            ],
+            ["audio.rescan-devices"] =
+            [
+                "pnputil.exe /scan-devices",
+                "Restart AudioEndpointBuilder and Audiosrv"
+            ],
             ["audio.driver-reset"] = ["pnputil.exe /delete-driver <diagnosed-oem.inf> /uninstall /force", "pnputil.exe /scan-devices", "Queue one restart"],
             ["audio.mmdevices-reset"] = ["Stop Windows audio services", "Rebuild MMDevices render and capture endpoint state", "Start Windows audio services", "pnputil.exe /scan-devices", "Queue one restart"],
 
@@ -47,8 +74,34 @@ internal static class RepairPreviewCatalog
             ["bluetooth.restart-service"] = ["Set bthserv to Manual", "Start bthserv"],
             ["bluetooth.restart-device"] = ["pnputil.exe /restart-device <diagnosed-bluetooth-instance>"],
             ["disk.clean-temp"] = ["Move eligible files from user and Windows temporary roots into the session quarantine"],
+            ["disk.online-scan-fix"] =
+            [
+                "chkdsk.exe <system-volume> /scan",
+                "chkdsk.exe <system-volume> /spotfix"
+            ],
             ["disk.schedule-chkdsk"] = ["chkntfs.exe /c <system-volume>", "Queue one restart"],
-            ["integrity.dism-sfc"] = ["dism.exe /Online /Cleanup-Image /RestoreHealth", "sfc.exe /scannow", "Queue one restart"],
+            ["integrity.sfc-scan"] = ["sfc.exe /scannow", "Queue one restart"],
+            ["integrity.dism-restore"] = ["dism.exe /Online /Cleanup-Image /RestoreHealth", "Queue one restart"],
+            ["integrity.component-cleanup"] = ["dism.exe /Online /Cleanup-Image /StartComponentCleanup"],
+            ["integrity.dism-sfc"] =
+            [
+                "dism.exe /Online /Cleanup-Image /RestoreHealth",
+                "sfc.exe /scannow",
+                "Queue one restart"
+            ],
+            ["boot.export-bcd"] = ["bcdedit.exe /export <session>\\bcd-export-*.bcd"],
+            ["boot.recoveryenabled"] =
+            [
+                "bcdedit.exe /set {current} recoveryenabled Yes",
+                "bcdedit.exe /set {current} bootstatuspolicy DisplayAllFailures"
+            ],
+            ["boot.enable-winre"] = ["reagentc.exe /enable"],
+            ["boot.rebuild-bcdboot"] =
+            [
+                "bcdedit.exe /export <session backup>",
+                "bcdboot.exe %SystemRoot% /f ALL",
+                "Queue one restart"
+            ],
             ["store.reset-cache"] = ["wsreset.exe"],
             ["time.resync"] = ["Set W32Time to Manual only if disabled", "Start W32Time", "w32tm.exe /resync /force"],
             ["performance.balanced-plan"] = ["powercfg.exe /setactive SCHEME_BALANCED"],
@@ -57,6 +110,17 @@ internal static class RepairPreviewCatalog
             ["usb.start-services"] = ["Set DsmSvc and DeviceInstall to Manual", "Start PlugPlay, DsmSvc, and DeviceInstall"],
             ["usb.restart-device"] = ["pnputil.exe /restart-device <diagnosed-usb-instance>"],
             ["search.restart-service"] = ["Set WSearch to Automatic", "Restart WSearch"],
+            ["display.soft-reset"] =
+            [
+                "Trigger Win+Ctrl+Shift+B graphics driver reset (brief black screen)",
+                "pnputil.exe /scan-devices"
+            ],
+            ["display.scan-devices"] = ["pnputil.exe /scan-devices"],
+            ["display.restart-all"] =
+            [
+                "pnputil.exe /restart-device for each present Display-class adapter",
+                "Screen may flicker or go blank briefly"
+            ],
             ["display.restart-device"] = ["pnputil.exe /restart-device <diagnosed-display-instance>"]
         };
 

@@ -30,7 +30,7 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Highlights
 
-- 14 troubleshooting modules with 56 diagnostic checks, 47 repair actions with transactional recovery, 8 interactive live tests, and symptom-focused playbooks.
+- 15 troubleshooting modules with 68 diagnostic checks, 63 repair actions with transactional recovery, 8 interactive live tests, and symptom-focused playbooks.
 - Deep network diagnostics: adapter/IP/APIPA/gateway state, DNS comparison, captive portal, proxy, VPN residue, target-bound persistent-route repair, firewall, hosts, Winsock, MTU, services, Wi-Fi/TCP health, latency, jitter, loss, DNS race, animated path-MTU binary search, a 64 KiB-bounded HTTP/NCSI probe, and bounded throughput.
 - Deep audio diagnostics: output/input/default endpoints, virtual devices, services, levels, formats, enhancements, privacy, Bluetooth/HDMI routing, speaker channels, bounded in-memory microphone capture/playback, and stream stability.
 - Additional coverage for Windows Update, blocked print jobs, offline/default printers, Bluetooth, disk health/dirty volumes/free space, component integrity, Microsoft Store package/cache health, time sync, startup performance, camera/privacy, USB devices, Windows Search, and graphics adapters.
@@ -166,7 +166,7 @@ CaYaFix does not send telemetry. Network live tests contact only the explicitly 
 ```mermaid
 flowchart TD
     UI[WPF + MVVM] --> Engine[Diagnostic and fix engines]
-    Engine --> Modules[14 module definitions]
+    Engine --> Modules[15 module definitions]
     Engine --> Runner[Trusted command runner]
     Engine --> Recovery[Atomic signed sessions and verified backups]
     Modules --> Windows[Windows APIs and system tools]

@@ -41,6 +41,41 @@
   <data name="Findings_Title" xml:space="preserve"><value>Diagnostic findings</value></data>
   <data name="Findings_Description" xml:space="preserve"><value>Safe repairs are selected by default. Expand technical details to inspect the evidence behind each finding.</value></data>
   <data name="Findings_None" xml:space="preserve"><value>No clear problem was detected.</value></data>
+  <data name="GuidedRepair_Intro" xml:space="preserve"><value>If something still feels wrong, pick a symptom below. CaYaFix can run the related Safe/Moderate repairs even when diagnostics stayed green.</value></data>
+  <data name="GuidedRepair_IntroRisk" xml:space="preserve"><value>These repairs change system settings and can temporarily disturb things that currently work. Read the side-effects list before you continue.</value></data>
+  <data name="GuidedRepair_PickTitle" xml:space="preserve"><value>What still feels wrong?</value></data>
+  <data name="GuidedRepair_PickHint" xml:space="preserve"><value>Choose a symptom on Findings, then confirm the risk warning to apply related repairs.</value></data>
+  <data name="GuidedRepair_ConfirmTitle" xml:space="preserve"><value>Apply symptom repairs?</value></data>
+  <data name="GuidedRepair_Warning" xml:space="preserve"><value>You are about to apply several related repairs without a failed diagnostic for each step. This can change working settings, restart services or devices, and may leave the system briefly unstable. Only continue if you understand the risk and have a way to undo (Recovery / System Restore).</value></data>
+  <data name="GuidedRepair_WarningShort" xml:space="preserve"><value>Guided symptom repair: changes may affect working settings.</value></data>
+  <data name="GuidedRepair_SideEffectsTitle" xml:space="preserve"><value>What you may notice while this runs</value></data>
+  <data name="GuidedRepair_FixesTitle" xml:space="preserve"><value>Related repairs that will run</value></data>
+  <data name="GuidedRepair_AcceptRisk" xml:space="preserve"><value>I understand these changes can break something that currently works, and I accept the risk.</value></data>
+  <data name="GuidedRepair_NeedConsent" xml:space="preserve"><value>Accept the risk checkbox before applying symptom repairs.</value></data>
+  <data name="GuidedRepair_FixCount" xml:space="preserve"><value>{0} related repair(s)</value></data>
+  <data name="GuidedRepair_NoFixes" xml:space="preserve"><value>No automatic Safe/Moderate repairs are mapped for this symptom.</value></data>
+  <data name="GuidedRepair_Applying" xml:space="preserve"><value>Applying repairs for “{0}”…</value></data>
+  <data name="GuidedRepair_RunningEffectsReminder" xml:space="preserve"><value>Side effects may appear now (audio glitches, brief disconnects, flicker). Stay on this window until finished.</value></data>
+  <data name="GuidedRepair_ToastTitle" xml:space="preserve"><value>Symptom repair</value></data>
+  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>Internet may drop for a short time, Wi‑Fi/Ethernet can reconnect, VPN sessions may end, downloads can pause, and sites may fail until DNS/cache settles.</value></data>
+  <data name="GuidedRepair_Effects_Audio" xml:space="preserve"><value>You may hear crackling, brief silence, device switches, volume jumps, or Bluetooth headsets reconnecting. Close critical calls if possible.</value></data>
+  <data name="GuidedRepair_Effects_Display" xml:space="preserve"><value>The screen may flicker, go black briefly, change resolution/refresh rate, or re-detect monitors.</value></data>
+  <data name="GuidedRepair_Effects_Bluetooth" xml:space="preserve"><value>Paired devices may disconnect and need to reconnect; audio/input can drop for several seconds.</value></data>
+  <data name="GuidedRepair_Effects_Printer" xml:space="preserve"><value>Print jobs may be cancelled or restarted; the printer can go offline briefly while the spooler restarts.</value></data>
+  <data name="GuidedRepair_Effects_Disk" xml:space="preserve"><value>Disk activity can spike, the PC may feel slower, and a scheduled check may require a restart later.</value></data>
+  <data name="GuidedRepair_Effects_Integrity" xml:space="preserve"><value>System file repair can take a long time, use CPU/disk heavily, and may ask for a reboot. Do not interrupt power.</value></data>
+  <data name="GuidedRepair_Effects_Update" xml:space="preserve"><value>Windows Update services restart; pending installs may pause, and a reboot can be required afterward.</value></data>
+  <data name="GuidedRepair_Effects_Store" xml:space="preserve"><value>Microsoft Store and some apps may close or re-sign-in; downloads can reset.</value></data>
+  <data name="GuidedRepair_Effects_Camera" xml:space="preserve"><value>Camera apps may lose the device briefly; privacy prompts can reappear.</value></data>
+  <data name="GuidedRepair_Effects_Usb" xml:space="preserve"><value>USB devices can disconnect and reappear; storage drives should be closed first to avoid interrupted transfers.</value></data>
+  <data name="GuidedRepair_Effects_Search" xml:space="preserve"><value>Search may stop responding while the service restarts; indexing can resume with higher disk use.</value></data>
+  <data name="GuidedRepair_Effects_Time" xml:space="preserve"><value>The clock may jump; secure sites or tokens can fail until time sync finishes.</value></data>
+  <data name="GuidedRepair_Effects_Performance" xml:space="preserve"><value>Startup items or power plans may change; the PC can feel different after the next reboot.</value></data>
+  <data name="GuidedRepair_Effects_Generic" xml:space="preserve"><value>Services or devices in this area may restart. Expect brief freezes, reconnects, or UI flicker while changes apply.</value></data>
+  <data name="Action_StillHaveProblem" xml:space="preserve"><value>Still having a problem?</value></data>
+  <data name="Action_ApplySymptomRepairs" xml:space="preserve"><value>Apply related repairs</value></data>
+  <data name="Finding_GuidedSymptom" xml:space="preserve"><value>Guided repair for “{0}”: {1}</value></data>
+  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>If something still feels wrong, open Findings and pick a symptom — CaYaFix can apply related repairs after a risk warning (audio glitches, network drops, or flicker may occur while it runs).</value></data>
   <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Technical details</value></data>
   <data name="Finding_Recommended" xml:space="preserve"><value>Recommended repair</value></data>
   <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>No automatic repair is offered; review the evidence and the suggested manual checks.</value></data>
@@ -311,6 +346,8 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Check_Network_Services" xml:space="preserve"><value>Network services</value></data>
   <data name="Check_Network_Performance" xml:space="preserve"><value>TCP and Wi‑Fi performance</value></data>
   <data name="Check_Network_Throughput" xml:space="preserve"><value>Download throughput</value></data>
+  <data name="Check_Network_EventLog" xml:space="preserve"><value>Network event log correlation</value></data>
+  <data name="Check_Network_Bindings" xml:space="preserve"><value>IPv4/IPv6 protocol bindings</value></data>
   <data name="Check_Audio_OutputDevices" xml:space="preserve"><value>Output device inventory</value></data>
   <data name="Check_Audio_InputDevices" xml:space="preserve"><value>Input device inventory</value></data>
   <data name="Check_Audio_DefaultDevices" xml:space="preserve"><value>Default audio devices</value></data>
@@ -323,6 +360,8 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Check_Audio_Bluetooth" xml:space="preserve"><value>Bluetooth audio profile</value></data>
   <data name="Check_Audio_Hdmi" xml:space="preserve"><value>HDMI and Display Audio</value></data>
   <data name="Check_Audio_Communications" xml:space="preserve"><value>Communications audio behavior</value></data>
+  <data name="Check_Audio_EventLog" xml:space="preserve"><value>Audio event log correlation</value></data>
+  <data name="Check_Audio_PnpDisabled" xml:space="preserve"><value>Disabled audio devices</value></data>
   <data name="Check_Update_Services" xml:space="preserve"><value>Update services</value></data>
   <data name="Check_Update_Errors" xml:space="preserve"><value>Recent update errors</value></data>
   <data name="Check_Update_PendingReboot" xml:space="preserve"><value>Pending restart</value></data>
@@ -347,6 +386,9 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Fix_Network_CycleAdapters" xml:space="preserve"><value>Restart active network adapters</value></data>
   <data name="Fix_Network_RestartServices" xml:space="preserve"><value>Restart network services</value></data>
   <data name="Fix_Network_ClearArp" xml:space="preserve"><value>Clear the ARP cache</value></data>
+  <data name="Fix_Network_SoftHeal" xml:space="preserve"><value>Soft-heal network (DNS, ARP, services)</value></data>
+  <data name="Fix_Network_IpconfigSuite" xml:space="preserve"><value>Full ipconfig suite (flush / release / renew / register)</value></data>
+  <data name="Fix_Network_RescanDevices" xml:space="preserve"><value>Rescan network devices</value></data>
   <data name="Fix_Network_ResetStack" xml:space="preserve"><value>Reset Winsock and the IP stack</value></data>
   <data name="Fix_Network_NormalizeTcp" xml:space="preserve"><value>Restore normal TCP settings</value></data>
   <data name="Fix_Network_DisablePowerSaving" xml:space="preserve"><value>Disable adapter power saving</value></data>
@@ -366,6 +408,8 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Fix_Audio_MicrophonePrivacy" xml:space="preserve"><value>Allow microphone access</value></data>
   <data name="Fix_Audio_MixerReset" xml:space="preserve"><value>Reset per-app mixer settings</value></data>
   <data name="Fix_Audio_BluetoothRestart" xml:space="preserve"><value>Restart the selected Bluetooth audio device</value></data>
+  <data name="Fix_Audio_EnableAllDisabled" xml:space="preserve"><value>Enable all disabled audio devices</value></data>
+  <data name="Fix_Audio_RescanDevices" xml:space="preserve"><value>Rescan audio devices and restart services</value></data>
   <data name="Fix_Audio_DriverReset" xml:space="preserve"><value>Reinstall the selected audio driver</value></data>
   <data name="Fix_Audio_MmDevicesReset" xml:space="preserve"><value>Rebuild Windows audio endpoints</value></data>
   <data name="Fix_Update_RestartServices" xml:space="preserve"><value>Restore update services</value></data>
@@ -437,7 +481,9 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Check_Search_Service" xml:space="preserve"><value>Windows Search service</value></data>
   <data name="Check_Search_Errors" xml:space="preserve"><value>Recent search errors</value></data>
   <data name="Check_Display_Adapters" xml:space="preserve"><value>Graphics adapters</value></data>
+  <data name="Check_Display_Driver" xml:space="preserve"><value>Graphics driver health</value></data>
   <data name="Check_Display_Errors" xml:space="preserve"><value>Recent display resets</value></data>
+  <data name="Check_Display_Tdr" xml:space="preserve"><value>GPU timeout (TDR) events</value></data>
   <data name="Finding_Camera_DeviceError" xml:space="preserve"><value>A camera device reports a Windows device error.</value></data>
   <data name="Finding_Camera_PrivacyBlocked" xml:space="preserve"><value>Windows privacy settings currently block camera access.</value></data>
   <data name="Finding_Usb_DeviceError" xml:space="preserve"><value>One or more connected USB devices report an error.</value></data>
@@ -445,13 +491,27 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Finding_Search_ServiceStopped" xml:space="preserve"><value>Windows Search is stopped or disabled.</value></data>
   <data name="Finding_Search_RecentErrors" xml:space="preserve"><value>Windows Search logged recent indexing errors.</value></data>
   <data name="Finding_Display_AdapterError" xml:space="preserve"><value>A graphics adapter reports a critical device error.</value></data>
+  <data name="Finding_Display_DriverError" xml:space="preserve"><value>A graphics driver reports a Windows device error code.</value></data>
   <data name="Finding_Display_RecentResets" xml:space="preserve"><value>The display driver was reset recently.</value></data>
+  <data name="Finding_Display_TdrEvents" xml:space="preserve"><value>Windows logged recent GPU timeout (TDR) or display recovery events.</value></data>
+  <data name="Finding_Network_EventLogErrors" xml:space="preserve"><value>Recent Windows event log errors were correlated for network adapters or TCP/IP.</value></data>
+  <data name="Finding_Network_ProtocolDisabled" xml:space="preserve"><value>IPv4 or IPv6 is disabled on one or more physical adapters.</value></data>
+  <data name="Finding_Audio_EventLogErrors" xml:space="preserve"><value>Recent Windows event log errors were correlated for audio services.</value></data>
+  <data name="Finding_Audio_PnpDisabled" xml:space="preserve"><value>One or more audio devices are disabled or in an error state in Device Manager.</value></data>
   <data name="Fix_Camera_AllowAccess" xml:space="preserve"><value>Allow camera access</value></data>
   <data name="Fix_Camera_RestartDevice" xml:space="preserve"><value>Restart affected camera</value></data>
   <data name="Fix_Usb_StartServices" xml:space="preserve"><value>Start device services</value></data>
   <data name="Fix_Usb_RestartDevice" xml:space="preserve"><value>Restart affected USB device</value></data>
   <data name="Fix_Search_RestartService" xml:space="preserve"><value>Repair and restart Windows Search</value></data>
+  <data name="Fix_Display_SoftReset" xml:space="preserve"><value>Soft-reset graphics (Win+Ctrl+Shift+B)</value></data>
+  <data name="Fix_Display_ScanDevices" xml:space="preserve"><value>Rescan graphics devices</value></data>
+  <data name="Fix_Display_RestartAll" xml:space="preserve"><value>Restart all graphics adapters</value></data>
   <data name="Fix_Display_RestartDevice" xml:space="preserve"><value>Restart graphics adapter</value></data>
+  <data name="Check_Integrity_ScanHealth" xml:space="preserve"><value>DISM ScanHealth (deep component store)</value></data>
+  <data name="Finding_Integrity_ScanHealthFailed" xml:space="preserve"><value>DISM ScanHealth reported component-store corruption that may need repair.</value></data>
+  <data name="Fix_Integrity_SfcScan" xml:space="preserve"><value>Run SFC /scannow</value></data>
+  <data name="Fix_Integrity_DismRestore" xml:space="preserve"><value>Run DISM RestoreHealth</value></data>
+  <data name="Fix_Integrity_ComponentCleanup" xml:space="preserve"><value>DISM StartComponentCleanup</value></data>
   <data name="Symptom_Camera_NotWorking" xml:space="preserve"><value>Camera is unavailable or blocked</value></data>
   <data name="Symptom_Usb_NotWorking" xml:space="preserve"><value>A USB device is not working</value></data>
   <data name="Symptom_Search_NotWorking" xml:space="preserve"><value>Windows Search is not working</value></data>
@@ -515,11 +575,20 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Toast_RecoveryDismissed" xml:space="preserve"><value>Recovery dismissed</value></data>
   <data name="ModulePanel_Details" xml:space="preserve"><value>Area details</value></data>
   <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Common symptoms — pick one to run a focused scan</value></data>
+  <data name="ModulePanel_NoSymptoms" xml:space="preserve"><value>No symptom shortcuts for this area. Run a full module scan instead.</value></data>
+  <data name="ModulePanel_Hint" xml:space="preserve"><value>Scan this area for deeper checks, or pick a symptom to apply related repairs after a risk warning (side effects such as crackling, disconnects, or flicker may appear while repairs run).</value></data>
   <data name="Action_ClosePanel" xml:space="preserve"><value>Close</value></data>
   <data name="Action_ViewFindings" xml:space="preserve"><value>View findings</value></data>
   <data name="Action_ForceRepairReal" xml:space="preserve"><value>Fix real issues</value></data>
   <data name="Action_ForceRepairAll" xml:space="preserve"><value>Include common findings</value></data>
   <data name="Operation_PhaseComplete" xml:space="preserve"><value>Scan complete</value></data>
+  <data name="Operation_EtaCalculating" xml:space="preserve"><value>Estimating time…</value></data>
+  <data name="Operation_EtaStarting" xml:space="preserve"><value>Typically ~{0} min for this step</value></data>
+  <data name="Operation_EtaMinutes" xml:space="preserve"><value>~{0} min remaining</value></data>
+  <data name="Operation_EtaSeconds" xml:space="preserve"><value>~{0}s remaining</value></data>
+  <data name="Operation_EtaHoursMinutes" xml:space="preserve"><value>~{0}h {1}m remaining</value></data>
+  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Almost done…</value></data>
+  <data name="Operation_LongToolHint" xml:space="preserve"><value>long tool (~{0} min)</value></data>
   <data name="Operation_LiveSummary" xml:space="preserve"><value>Healthy checks: {0} · Findings so far: {1}</value></data>
   <data name="Operation_StatPassed" xml:space="preserve"><value>No issue</value></data>
   <data name="Operation_StatFindings" xml:space="preserve"><value>Findings</value></data>
@@ -549,6 +618,32 @@ Skip the restore point and continue Force Repair?</value></data>
   <data name="Finding_Disk_FileSystemDirty" xml:space="preserve"><value>Windows marked the system volume for a file-system consistency check.</value></data>
   <data name="Settings_ExpertCatalog" xml:space="preserve"><value>Expert repair catalog</value></data>
   <data name="Settings_ExpertCatalogDescription" xml:space="preserve"><value>Full repair catalog. Use Run to apply a single repair (backup and consent gates still apply). Target-required repairs need a prior scan that captured the target.</value></data>
+  <data name="Settings_ManualTools" xml:space="preserve"><value>Manual Windows repair tools</value></data>
+  <data name="Settings_ManualToolsDescription" xml:space="preserve"><value>Pick a Microsoft-oriented repair tool and run it without waiting for a scan finding. Safe and Moderate tools are always available; Aggressive tools need Force risk acceptance first.</value></data>
+  <data name="Settings_ManualToolsRisk" xml:space="preserve"><value>These tools change system state (ipconfig, DISM/SFC, WinRE/BCD, network stack, GPU soft-reset, and more). Backups and confirmations still apply. Boot rebuild can require a restart; offline-only commands such as bootrec stay in Windows Recovery Environment.</value></data>
+  <data name="Settings_ManualToolsAggressiveHint" xml:space="preserve"><value>Accept Force Repair risk on Findings, then run the Aggressive tool again.</value></data>
+  <data name="Action_RunTool" xml:space="preserve"><value>Run tool</value></data>
+  <data name="Module_Boot_Name" xml:space="preserve"><value>Boot &amp; recovery</value></data>
+  <data name="Module_Boot_Description" xml:space="preserve"><value>WinRE, BCD health, and online boot-file recovery (bcdedit / bcdboot / reagentc).</value></data>
+  <data name="Check_Boot_WinRe" xml:space="preserve"><value>Windows Recovery Environment (WinRE)</value></data>
+  <data name="Check_Boot_Bcd" xml:space="preserve"><value>Boot Configuration Data ({current})</value></data>
+  <data name="Check_Boot_BcdFirmware" xml:space="preserve"><value>Firmware boot manager entries</value></data>
+  <data name="Finding_Boot_WinReDisabled" xml:space="preserve"><value>Windows Recovery Environment (WinRE) is disabled.</value></data>
+  <data name="Finding_Boot_WinReUnreadable" xml:space="preserve"><value>WinRE status could not be read with reagentc.</value></data>
+  <data name="Finding_Boot_BcdUnreadable" xml:space="preserve"><value>The current Boot Configuration Data entry could not be read.</value></data>
+  <data name="Finding_Boot_FirmwareEnumFailed" xml:space="preserve"><value>Firmware BCD enumeration failed while the OS loader entry is also unhealthy.</value></data>
+  <data name="Fix_Boot_ExportBcd" xml:space="preserve"><value>Export BCD store (backup)</value></data>
+  <data name="Fix_Boot_RecoveryEnabled" xml:space="preserve"><value>Enable recovery on current boot entry</value></data>
+  <data name="Fix_Boot_EnableWinRe" xml:space="preserve"><value>Enable Windows Recovery Environment</value></data>
+  <data name="Fix_Boot_RebuildBcdBoot" xml:space="preserve"><value>Rebuild boot files with bcdboot</value></data>
+  <data name="Symptom_Boot_RecoveryMissing" xml:space="preserve"><value>Recovery environment missing or disabled</value></data>
+  <data name="Symptom_Boot_ConfigSuspect" xml:space="preserve"><value>Boot configuration may be damaged</value></data>
+  <data name="Check_Disk_OnlineScan" xml:space="preserve"><value>Online chkdsk /scan</value></data>
+  <data name="Finding_Disk_OnlineScanIssues" xml:space="preserve"><value>Online file-system scan reported issues or did not complete cleanly.</value></data>
+  <data name="Fix_Disk_OnlineScanFix" xml:space="preserve"><value>Online chkdsk /scan and /spotfix</value></data>
+  <data name="Check_Integrity_AnalyzeStore" xml:space="preserve"><value>DISM AnalyzeComponentStore</value></data>
+  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM recommends component-store cleanup (reclaimable packages).</value></data>
+  <data name="GuidedRepair_Effects_Boot" xml:space="preserve"><value>Boot/recovery tools may export BCD, enable WinRE, or rewrite boot files. A restart can be required. Offline-only tools (bootrec) are not run from a running desktop session.</value></data>
   <data name="Expert_FixFlags" xml:space="preserve"><value>{0} · {1}</value></data>
   <data name="Expert_TargetRequired" xml:space="preserve"><value>target required</value></data>
   <data name="Expert_NoTargetRequired" xml:space="preserve"><value>no device target</value></data>

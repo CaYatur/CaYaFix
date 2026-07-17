@@ -17,7 +17,7 @@
         ResizeMode="CanResize"
         Background="{StaticResource BackgroundBrush}">
     <shell:WindowChrome.WindowChrome>
-        <shell:WindowChrome CaptionHeight="0"
+        <shell:WindowChrome CaptionHeight="48"
                             ResizeBorderThickness="6"
                             CornerRadius="12"
                             GlassFrameThickness="0"
@@ -39,26 +39,32 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Custom title bar -->
-        <Border Grid.Row="0" Background="#091522" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
-            <Grid MouseLeftButtonDown="OnTitleBarMouseDown">
+        <!-- Custom title bar (CaptionHeight=48: drag via chrome; IsHitTestVisibleInChrome for custom chrome hit-testing) -->
+        <Border Grid.Row="0"
+                Background="#091522"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1"
+                shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                PreviewMouseLeftButtonDown="OnTitleBarMouseDown"
+                MouseLeftButtonDown="OnTitleBarMouseDown">
+            <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{Binding ActualWidth, ElementName=RootWindow, Converter={StaticResource ResponsiveGridLength}, ConverterParameter=1120:220:76}" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0" IsHitTestVisible="False">
                     <app:SvgIcon Icon="logo.svg" Width="25" Height="25" IsHitTestVisible="False" />
                     <TextBlock Text="{x:Static p:Strings.AppName}" FontWeight="Bold" FontSize="15" Margin="9,0,0,0" VerticalAlignment="Center" Visibility="{Binding ActualWidth, ElementName=RootWindow, Converter={StaticResource WidthThresholdVisibility}, ConverterParameter=1120}" />
                     <Border Background="#16342F" CornerRadius="6" Padding="7,3" Margin="10,0,0,0" Visibility="{Binding ActualWidth, ElementName=RootWindow, Converter={StaticResource WidthThresholdVisibility}, ConverterParameter=1120}">
                         <TextBlock Text="{x:Static p:Strings.App_ReleaseChannel}" Foreground="{StaticResource PrimaryBrush}" FontSize="9" FontWeight="Bold" />
                     </Border>
                 </StackPanel>
-                <TextBlock Grid.Column="1" Text="{Binding ActiveOperation}" Foreground="{StaticResource MutedBrush}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <StackPanel Grid.Column="2" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True">
-                    <Button Width="46" Height="47" Background="Transparent" BorderThickness="0" Click="OnMinimizeClick" AutomationProperties.Name="{x:Static p:Strings.Action_Minimize}" ToolTip="{x:Static p:Strings.Action_Minimize}"><app:SvgIcon Icon="window-minimize.svg" Width="15" Height="15" IsHitTestVisible="False" /></Button>
-                    <Button Width="46" Height="47" Background="Transparent" BorderThickness="0" Click="OnMaximizeClick" AutomationProperties.Name="{x:Static p:Strings.Action_Maximize}" ToolTip="{x:Static p:Strings.Action_Maximize}"><app:SvgIcon Icon="window-maximize.svg" Width="15" Height="15" IsHitTestVisible="False" /></Button>
-                    <Button Width="48" Height="47" Background="Transparent" BorderThickness="0" Click="OnCloseClick" AutomationProperties.Name="{x:Static p:Strings.Action_Close}" ToolTip="{x:Static p:Strings.Action_Close}"><app:SvgIcon Icon="window-close.svg" Width="16" Height="16" IsHitTestVisible="False" /></Button>
+                <TextBlock Grid.Column="1" Text="{Binding ActiveOperation}" Foreground="{StaticResource MutedBrush}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" />
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Width="46" Height="47" Background="Transparent" BorderThickness="0" Click="OnMinimizeClick" shell:WindowChrome.IsHitTestVisibleInChrome="True" AutomationProperties.Name="{x:Static p:Strings.Action_Minimize}" ToolTip="{x:Static p:Strings.Action_Minimize}"><app:SvgIcon Icon="window-minimize.svg" Width="15" Height="15" IsHitTestVisible="False" /></Button>
+                    <Button Width="46" Height="47" Background="Transparent" BorderThickness="0" Click="OnMaximizeClick" shell:WindowChrome.IsHitTestVisibleInChrome="True" AutomationProperties.Name="{x:Static p:Strings.Action_Maximize}" ToolTip="{x:Static p:Strings.Action_Maximize}"><app:SvgIcon Icon="window-maximize.svg" Width="15" Height="15" IsHitTestVisible="False" /></Button>
+                    <Button Width="48" Height="47" Background="Transparent" BorderThickness="0" Click="OnCloseClick" shell:WindowChrome.IsHitTestVisibleInChrome="True" AutomationProperties.Name="{x:Static p:Strings.Action_Close}" ToolTip="{x:Static p:Strings.Action_Close}"><app:SvgIcon Icon="window-close.svg" Width="16" Height="16" IsHitTestVisible="False" /></Button>
                 </StackPanel>
             </Grid>
         </Border>
@@ -214,65 +220,24 @@
                                                     <Style TargetType="Border">
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding IsExpanded}" Value="True">
-                                                                <Setter Property="Width" Value="560" />
-                                                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryDarkBrush}" />
+                                                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+                                                                <Setter Property="Background" Value="#122A3F" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </Border.Style>
-                                                <StackPanel>
-                                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Padding="0" Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Stretch">
-                                                        <Grid Margin="18">
-                                                            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                                                            <Grid Grid.Row="0">
-                                                                <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                                                <Border Width="38" Height="38" CornerRadius="11" Background="#173B39"><app:SvgIcon Icon="{Binding IconPath}" Width="22" Height="22" IsHitTestVisible="False" /></Border>
-                                                                <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="SemiBold" FontSize="15" Margin="12,0,0,0" VerticalAlignment="Center" />
-                                                                <app:SvgIcon Grid.Column="2" Icon="chevron-down.svg" Width="16" Height="16" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
-                                                                    <app:SvgIcon.RenderTransform>
-                                                                        <RotateTransform Angle="0" />
-                                                                    </app:SvgIcon.RenderTransform>
-                                                                    <app:SvgIcon.Style>
-                                                                        <Style TargetType="app:SvgIcon">
-                                                                            <Style.Triggers>
-                                                                                <DataTrigger Binding="{Binding IsExpanded}" Value="True">
-                                                                                    <Setter Property="RenderTransform">
-                                                                                        <Setter.Value><RotateTransform Angle="180" /></Setter.Value>
-                                                                                    </Setter>
-                                                                                </DataTrigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </app:SvgIcon.Style>
-                                                                </app:SvgIcon>
-                                                            </Grid>
-                                                            <TextBlock Grid.Row="1" Text="{Binding Description}" Foreground="{StaticResource MutedBrush}" FontSize="11.5" TextWrapping="Wrap" LineHeight="17" Margin="0,11,0,0" />
+                                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Padding="0" Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                                                    <Grid Margin="18">
+                                                        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0">
+                                                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                                            <Border Width="38" Height="38" CornerRadius="11" Background="#173B39"><app:SvgIcon Icon="{Binding IconPath}" Width="22" Height="22" IsHitTestVisible="False" /></Border>
+                                                            <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="SemiBold" FontSize="15" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                                            <app:SvgIcon Grid.Column="2" Icon="chevron-right.svg" Width="16" Height="16" IsHitTestVisible="False" />
                                                         </Grid>
-                                                    </Button>
-                                                    <Border Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" Padding="16,12,16,16" Background="#0B1825">
-                                                        <StackPanel>
-                                                            <TextBlock Text="{x:Static p:Strings.ModulePanel_Details}" Foreground="{StaticResource PrimaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,0,0,8" />
-                                                            <TextBlock Text="{Binding Description}" Foreground="#B8C9DB" FontSize="12" TextWrapping="Wrap" LineHeight="18" Margin="0,0,0,12" />
-                                                            <TextBlock Text="{x:Static p:Strings.ModulePanel_Symptoms}" Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,0,0,8" />
-                                                            <ItemsControl ItemsSource="{Binding Symptoms}" Margin="0,0,0,12">
-                                                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                                                <ItemsControl.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <Button Style="{StaticResource SecondaryButton}" Command="{Binding RunCommand}" Content="{Binding Title}" Margin="0,0,8,8" Padding="12,8" />
-                                                                    </DataTemplate>
-                                                                </ItemsControl.ItemTemplate>
-                                                            </ItemsControl>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <Button Style="{StaticResource PrimaryButton}" Command="{Binding ScanCommand}" Padding="16,10" Margin="0,0,8,0">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <app:SvgIcon Icon="search.svg" Width="15" Height="15" Margin="0,0,8,0" IsHitTestVisible="False" />
-                                                                        <TextBlock Text="{x:Static p:Strings.Action_ScanModule}" Foreground="#07110F" />
-                                                                    </StackPanel>
-                                                                </Button>
-                                                                <Button Style="{StaticResource SecondaryButton}" Command="{Binding CloseCommand}" Content="{x:Static p:Strings.Action_ClosePanel}" Padding="14,10" />
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </Border>
-                                                </StackPanel>
+                                                        <TextBlock Grid.Row="1" Text="{Binding Description}" Foreground="{StaticResource MutedBrush}" FontSize="11.5" TextWrapping="Wrap" LineHeight="17" Margin="0,11,0,0" />
+                                                    </Grid>
+                                                </Button>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -299,8 +264,57 @@
 
                             <ScrollViewer Grid.Row="1">
                                 <Grid>
-                                    <TextBlock Text="{x:Static p:Strings.Findings_None}" Foreground="{StaticResource MutedBrush}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Findings.Count, Converter={StaticResource ZeroCountToVisibility}}" Margin="0,90" />
-                                    <ItemsControl ItemsSource="{Binding Findings}">
+                                    <!-- No findings: pick a symptom and apply related repairs with risk warning -->
+                                    <StackPanel Visibility="{Binding Findings.Count, Converter={StaticResource ZeroCountToVisibility}}" Margin="0,12,0,24">
+                                        <Border Background="#102035" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="16" Padding="22" Margin="0,0,0,18">
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                                    <Border Width="40" Height="40" CornerRadius="11" Background="#173A37" Margin="0,0,12,0">
+                                                        <app:SvgIcon Icon="check.svg" Width="22" Height="22" IsHitTestVisible="False" />
+                                                    </Border>
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <TextBlock Text="{x:Static p:Strings.Findings_None}" FontSize="18" FontWeight="SemiBold" />
+                                                        <TextBlock Text="{x:Static p:Strings.GuidedRepair_Intro}" Foreground="{StaticResource MutedBrush}" FontSize="12.5" TextWrapping="Wrap" Margin="0,4,0,0" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <Border Background="#271E18" BorderBrush="#6B4B29" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,4,0,0">
+                                                    <TextBlock Text="{x:Static p:Strings.GuidedRepair_IntroRisk}" Foreground="#E8D2B4" FontSize="12" TextWrapping="Wrap" LineHeight="18" />
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+                                        <TextBlock Text="{x:Static p:Strings.GuidedRepair_PickTitle}" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,12" />
+                                        <ItemsControl ItemsSource="{Binding GuidedSymptoms}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Padding="0" Margin="0,0,12,12" Background="Transparent" BorderThickness="0">
+                                                        <Border Width="300" MinHeight="108" Background="{StaticResource CardBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="14" Padding="14">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Border Width="40" Height="40" CornerRadius="11" Background="#173B39" Margin="0,0,12,0" VerticalAlignment="Top">
+                                                                    <app:SvgIcon Icon="{Binding ModuleIcon}" Width="22" Height="22" IsHitTestVisible="False" />
+                                                                </Border>
+                                                                <StackPanel Grid.Column="1">
+                                                                    <TextBlock Text="{Binding ModuleName}" Foreground="{StaticResource MutedBrush}" FontSize="10.5" />
+                                                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="13.5" TextWrapping="Wrap" Margin="0,3,0,0" />
+                                                                    <TextBlock Text="{Binding FixCountLabel}" Foreground="{StaticResource PrimaryBrush}" FontSize="11" Margin="0,8,0,0" />
+                                                                    <TextBlock Text="{Binding FixTitlesPreview}" Foreground="#8FA3BA" FontSize="10.5" TextWrapping="Wrap" Margin="0,4,0,0" />
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Findings}" Visibility="{Binding Findings.Count, Converter={StaticResource CountToVisibility}}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12" Padding="18">
@@ -606,7 +620,15 @@
                     <TabItem>
                         <ScrollViewer>
                             <Grid MaxWidth="900" Margin="32,28,32,38" HorizontalAlignment="Left">
-                                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0" Text="{x:Static p:Strings.Settings_Title}" FontFamily="Segoe UI Variable Display, Segoe UI" FontSize="28" FontWeight="Bold" Margin="0,0,0,22" />
                                 <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
                                     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
@@ -641,7 +663,40 @@
                                                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
                                     </Grid>
                                 </Border>
-                                <Border Grid.Row="5" Style="{StaticResource CardStyle}" Visibility="{Binding ExpertMode, Converter={StaticResource BoolToVisibility}}">
+                                <!-- Always-available manual Windows repair tools (Microsoft-oriented toolkit) -->
+                                <Border Grid.Row="5" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Static p:Strings.Settings_ManualTools}" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{x:Static p:Strings.Settings_ManualToolsDescription}" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,10" />
+                                        <Border Background="#271E18" BorderBrush="#6B4B29" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,0,0,14">
+                                            <TextBlock Text="{x:Static p:Strings.Settings_ManualToolsRisk}" Foreground="#E8D2B4" FontSize="11.5" TextWrapping="Wrap" LineHeight="17" />
+                                        </Border>
+                                        <ItemsControl ItemsSource="{Binding ManualTools}">
+                                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Width="392" MinHeight="78" Background="#0B1825" BorderBrush="{Binding Tier, Converter={StaticResource RiskTierBrush}}" BorderThickness="1" CornerRadius="10" Padding="11" Margin="0,0,10,10">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                                            <StackPanel Margin="0,0,12,0">
+                                                                <TextBlock Text="{Binding ModuleName}" Foreground="{StaticResource MutedBrush}" FontSize="9.5" FontWeight="SemiBold" />
+                                                                <TextBlock Text="{Binding Title}" FontSize="11.5" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,3,0,0" />
+                                                                <TextBlock Text="{Binding Detail}" Foreground="{StaticResource MutedBrush}" FontSize="9" TextWrapping="Wrap" Margin="0,4,0,0" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                                                                <Border BorderBrush="{Binding Tier, Converter={StaticResource RiskTierBrush}}" BorderThickness="1" CornerRadius="7" Padding="7,4" HorizontalAlignment="Right">
+                                                                    <TextBlock Text="{Binding TierLabel}" Foreground="{Binding Tier, Converter={StaticResource RiskTierBrush}}" FontSize="9" FontWeight="Bold" />
+                                                                </Border>
+                                                                <Button Style="{StaticResource SecondaryButton}" Command="{Binding RunCommand}" Content="{x:Static p:Strings.Action_RunTool}" Padding="10,5" Margin="0,8,0,0" HorizontalAlignment="Right" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="6" Style="{StaticResource CardStyle}" Visibility="{Binding ExpertMode, Converter={StaticResource BoolToVisibility}}">
                                     <StackPanel>
                                         <TextBlock Text="{x:Static p:Strings.Settings_ExpertCatalog}" FontSize="16" FontWeight="SemiBold" />
                                         <TextBlock Text="{x:Static p:Strings.Settings_ExpertCatalogDescription}" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,14" />
@@ -698,13 +753,117 @@
                     </Grid>
                 </Border>
 
+                <!-- Full-screen module detail panel (home area expand) -->
+                <Border Grid.Row="0" Grid.RowSpan="4"
+                        Background="#F207101D"
+                        Visibility="{Binding HasSelectedModule, Converter={StaticResource BoolToVisibility}}"
+                        Panel.ZIndex="30">
+                    <Border Margin="18"
+                            Background="#0C1828"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="18"
+                            Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Header -->
+                            <Border Grid.Row="0" Background="#102035" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,0,1" CornerRadius="18,18,0,0" Padding="28,22">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="64" Height="64" CornerRadius="18" Background="#173A37" Margin="0,0,18,0">
+                                        <app:SvgIcon Icon="{Binding SelectedModuleIcon}" Width="34" Height="34" IsHitTestVisible="False" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                        <TextBlock Text="{x:Static p:Strings.ModulePanel_Details}" Foreground="{StaticResource PrimaryBrush}" FontSize="12" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding SelectedModuleName}" FontSize="26" FontWeight="SemiBold" Margin="0,6,0,0" TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding SelectedModuleDescription}" Foreground="#AEC4DA" FontSize="13.5" Margin="0,8,0,0" TextWrapping="Wrap" LineHeight="21" />
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource SecondaryButton}"
+                                            Command="{Binding CloseModulePanelCommand}"
+                                            Content="{x:Static p:Strings.Action_ClosePanel}"
+                                            Padding="16,10"
+                                            VerticalAlignment="Top" />
+                                </Grid>
+                            </Border>
+
+                            <!-- Body: symptoms + actions -->
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="28,22,28,12">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Static p:Strings.ModulePanel_Symptoms}" Foreground="{StaticResource MutedBrush}" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,12" />
+                                    <TextBlock Text="{x:Static p:Strings.ModulePanel_NoSymptoms}"
+                                               Foreground="#6F849B"
+                                               FontSize="13"
+                                               Margin="0,0,0,16"
+                                               Visibility="{Binding Symptoms.Count, Converter={StaticResource ZeroCountToVisibility}}" />
+                                    <ItemsControl ItemsSource="{Binding Symptoms}" Margin="0,0,0,8">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource SecondaryButton}"
+                                                        Command="{Binding RunCommand}"
+                                                        Content="{Binding Title}"
+                                                        Margin="0,0,10,10"
+                                                        Padding="16,12"
+                                                        MinWidth="180"
+                                                        HorizontalContentAlignment="Left" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <Border Background="#0B1825" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="14" Padding="18" Margin="0,10,0,0">
+                                        <TextBlock Text="{x:Static p:Strings.ModulePanel_Hint}"
+                                                   Foreground="#9DB0C8"
+                                                   FontSize="12.5"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="19" />
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <!-- Footer actions -->
+                            <Border Grid.Row="2" Background="#0A1522" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" CornerRadius="0,0,18,18" Padding="28,16">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Style="{StaticResource SecondaryButton}"
+                                            Command="{Binding CloseModulePanelCommand}"
+                                            Content="{x:Static p:Strings.Action_ClosePanel}"
+                                            Padding="18,11"
+                                            Margin="0,0,10,0" />
+                                    <Button Style="{StaticResource PrimaryButton}"
+                                            Command="{Binding ScanSelectedModuleCommand}"
+                                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
+                                            Padding="22,11">
+                                        <StackPanel Orientation="Horizontal">
+                                            <app:SvgIcon Icon="search.svg" Width="16" Height="16" Margin="0,0,9,0" IsHitTestVisible="False" />
+                                            <TextBlock Text="{x:Static p:Strings.Action_ScanModule}" Foreground="#07110F" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Border>
+
                 <!-- Full-screen operation overlay / scan summary -->
                 <Border Grid.Row="0" Grid.RowSpan="4"
                         Background="#E607101D"
                         Visibility="{Binding ShowOperationOverlay, Converter={StaticResource BoolToVisibility}}"
                         Panel.ZIndex="40">
-                    <Border MaxWidth="820" MinHeight="460" Margin="28"
-                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                    <!-- Stretch + constrained height so the feed ScrollViewer can scroll instead of growing the dialog -->
+                    <Border MaxWidth="900" MinHeight="420" Margin="24"
+                            HorizontalAlignment="Center" VerticalAlignment="Stretch"
                             Background="#102035" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
                             CornerRadius="20" Padding="28">
                         <Grid>
@@ -713,7 +872,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" MinHeight="140" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
@@ -755,10 +914,44 @@
                                 </Border>
                             </UniformGrid>
 
-                            <ProgressBar Grid.Row="2" Value="{Binding ProgressValue}" Maximum="100" Height="8" Margin="0,0,0,10" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
-                            <TextBlock Grid.Row="3" Text="{Binding ActiveOperation}" Foreground="#AEC4DA" FontSize="12" Margin="0,0,0,10" TextTrimming="CharacterEllipsis" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+                            <StackPanel Grid.Row="2" Margin="0,0,0,12" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding ProgressStatusText}"
+                                               Foreground="#AEC4DA"
+                                               FontSize="12"
+                                               TextTrimming="CharacterEllipsis"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding ProgressPercentText}"
+                                               Foreground="{StaticResource PrimaryBrush}"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Margin="12,0,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                                <ProgressBar Style="{StaticResource OperationProgressBar}"
+                                             Value="{Binding ProgressValue}"
+                                             Maximum="100"
+                                             Height="14" />
+                                <Grid Margin="0,8,0,0">
+                                    <TextBlock Text="{Binding ActiveOperation}"
+                                               Foreground="#7F96AD"
+                                               FontSize="11"
+                                               TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding ProgressEtaText}"
+                                               Foreground="{StaticResource WarningBrush}"
+                                               FontSize="11.5"
+                                               FontWeight="SemiBold"
+                                               HorizontalAlignment="Right" />
+                                </Grid>
+                            </StackPanel>
+                            <TextBlock Grid.Row="3" Height="0" Visibility="Collapsed" />
 
-                            <Border Grid.Row="4" Background="#0B1825" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="12" Padding="12" MinHeight="160">
+                            <Border Grid.Row="4" Background="#0B1825" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="12" Padding="12" MinHeight="140">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -766,8 +959,12 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Text="{Binding OperationSummaryAdvice}" Foreground="#AEC4DA" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,10"
                                                Visibility="{Binding ShowOperationSummary, Converter={StaticResource BoolToVisibility}}" />
-                                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                        <ItemsControl ItemsSource="{Binding OperationFeed}">
+                                    <ScrollViewer x:Name="OperationFeedScroll"
+                                                  Grid.Row="1"
+                                                  VerticalScrollBarVisibility="Auto"
+                                                  HorizontalScrollBarVisibility="Disabled"
+                                                  CanContentScroll="False">
+                                        <ItemsControl x:Name="OperationFeedList" ItemsSource="{Binding OperationFeed}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="0,0,0,10">
@@ -803,15 +1000,114 @@
                             <!-- Summary actions -->
                             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0" Visibility="{Binding ShowOperationSummary, Converter={StaticResource BoolToVisibility}}">
                                 <Button Style="{StaticResource SecondaryButton}" Command="{Binding CloseOperationSummaryCommand}" Content="{x:Static p:Strings.Action_ClosePanel}" Padding="16,10" Margin="0,0,8,0" />
+                                <Button Style="{StaticResource SecondaryButton}"
+                                        Command="{Binding OpenGuidedRepairFromSummaryCommand}"
+                                        Content="{x:Static p:Strings.Action_StillHaveProblem}"
+                                        Padding="16,10"
+                                        Margin="0,0,8,0"
+                                        Visibility="{Binding OperationFindingCount, Converter={StaticResource ZeroCountToVisibility}}" />
                                 <Button Style="{StaticResource SecondaryButton}" Command="{Binding ViewFindingsFromSummaryCommand}" Content="{x:Static p:Strings.Action_ViewFindings}" Padding="16,10" Margin="0,0,8,0" />
                                 <Button Style="{StaticResource SecondaryButton}" Command="{Binding ForceRepairAllFromSummaryCommand}" Content="{x:Static p:Strings.Action_ForceRepairAll}" Padding="16,10" Margin="0,0,8,0" />
                                 <Button Style="{StaticResource PrimaryButton}" Command="{Binding ForceRepairFromSummaryCommand}" Padding="18,10">
                                     <StackPanel Orientation="Horizontal">
-                                        <app:SvgIcon Icon="wrench.svg" Width="15" Height="15" Margin="0,0,8,0" IsHitTestVisible="False" />
+                                        <app:SvgIcon Icon="wrench-on-primary.svg" Width="16" Height="16" Margin="0,0,8,0" IsHitTestVisible="False" />
                                         <TextBlock Text="{x:Static p:Strings.Action_ForceRepairReal}" Foreground="#07110F" />
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
+                        </Grid>
+                    </Border>
+                </Border>
+
+                <!-- Guided symptom repair confirmation (risk + side effects) -->
+                <Border Grid.Row="0" Grid.RowSpan="4"
+                        Background="#F207101D"
+                        Visibility="{Binding ShowGuidedRepairConfirm, Converter={StaticResource BoolToVisibility}}"
+                        Panel.ZIndex="35">
+                    <Border MaxWidth="760" Margin="28"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Background="#122033" BorderBrush="#6B4B29" BorderThickness="1"
+                            CornerRadius="18" Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="#271E18" BorderBrush="#6B4B29" BorderThickness="0,0,0,1" CornerRadius="18,18,0,0" Padding="24,20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="56" Height="56" CornerRadius="16" Background="#3A2A1C" Margin="0,0,16,0">
+                                        <app:SvgIcon Icon="{Binding GuidedRepairIcon}" Width="30" Height="30" IsHitTestVisible="False" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Static p:Strings.GuidedRepair_ConfirmTitle}" Foreground="{StaticResource WarningBrush}" FontSize="12" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding GuidedRepairTitle}" FontSize="22" FontWeight="SemiBold" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding GuidedRepairModule}" Foreground="#DCC9B0" FontSize="12.5" Margin="0,6,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="420" Padding="24,18">
+                                <StackPanel>
+                                    <Border Background="#321C24" BorderBrush="#7A3A4A" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,14">
+                                        <TextBlock Text="{Binding GuidedRepairWarning}" Foreground="#FFD6DE" FontSize="12.5" TextWrapping="Wrap" LineHeight="19" />
+                                    </Border>
+
+                                    <TextBlock Text="{x:Static p:Strings.GuidedRepair_SideEffectsTitle}" Foreground="{StaticResource WarningBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,0,0,8" />
+                                    <Border Background="#271E18" BorderBrush="#6B4B29" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,16">
+                                        <TextBlock Text="{Binding GuidedRepairSideEffects}" Foreground="#E8D2B4" FontSize="12.5" TextWrapping="Wrap" LineHeight="20" />
+                                    </Border>
+
+                                    <TextBlock Text="{x:Static p:Strings.GuidedRepair_FixesTitle}" Foreground="{StaticResource PrimaryBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,0,0,8" />
+                                    <Border Background="#0B1825" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,16">
+                                        <ItemsControl ItemsSource="{Binding GuidedRepairFixList}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                                        <TextBlock Text="•" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,8,0" />
+                                                        <TextBlock Text="{Binding}" Foreground="#D7E5F4" FontSize="12.5" TextWrapping="Wrap" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Border>
+
+                                    <CheckBox IsChecked="{Binding GuidedRepairRiskAccepted}"
+                                              Foreground="#F2F7FF"
+                                              FontSize="12.5"
+                                              Margin="2,0,0,0">
+                                        <TextBlock Text="{x:Static p:Strings.GuidedRepair_AcceptRisk}"
+                                                   TextWrapping="Wrap"
+                                                   Foreground="#F2F7FF"
+                                                   FontSize="12.5"
+                                                   MaxWidth="640" />
+                                    </CheckBox>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <Border Grid.Row="2" Background="#0A1522" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" CornerRadius="0,0,18,18" Padding="24,16">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Style="{StaticResource SecondaryButton}"
+                                            Command="{Binding CancelGuidedRepairCommand}"
+                                            Content="{x:Static p:Strings.Action_Cancel}"
+                                            Padding="18,11"
+                                            Margin="0,0,10,0" />
+                                    <Button Style="{StaticResource DangerButton}"
+                                            Command="{Binding ConfirmGuidedRepairCommand}"
+                                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
+                                            Padding="18,11">
+                                        <StackPanel Orientation="Horizontal">
+                                            <app:SvgIcon Icon="wrench.svg" Width="16" Height="16" Margin="0,0,9,0" IsHitTestVisible="False" />
+                                            <TextBlock Text="{x:Static p:Strings.Action_ApplySymptomRepairs}" Foreground="#FFD6DE" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
                         </Grid>
                     </Border>
                 </Border>
@@ -859,7 +1155,17 @@
                             <Ellipse Width="7" Height="7" Fill="{StaticResource BlueBrush}" Margin="0,0,8,0" />
                             <TextBlock Text="{Binding StatusText}" Foreground="#B3C5D8" FontSize="11" TextTrimming="CharacterEllipsis" />
                         </StackPanel>
-                        <ProgressBar Grid.Column="1" Value="{Binding ProgressValue}" Maximum="100" VerticalAlignment="Center" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+                        <Grid Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ProgressBar Style="{StaticResource OperationProgressBar}" Value="{Binding ProgressValue}" Maximum="100" Height="8" />
+                            <Grid Grid.Row="1" Margin="0,3,0,0">
+                                <TextBlock Text="{Binding ProgressPercentText}" Foreground="{StaticResource PrimaryBrush}" FontSize="10" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding ProgressEtaText}" Foreground="#9DB0C8" FontSize="10" HorizontalAlignment="Right" />
+                            </Grid>
+                        </Grid>
                         <Button Grid.Column="2" Command="{Binding ToggleConsoleCommand}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedBrush}" Padding="14,5" Content="{x:Static p:Strings.Console_Title}" />
                     </Grid>
                 </Border>

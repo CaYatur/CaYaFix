@@ -207,8 +207,8 @@ $liveMatches = [regex]::Matches($moduleSource, 'new\s+DelegateLiveTest\s*\(\s*"(
 $checkIds = @($checkMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
 $fixIds = @($fixMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
 $liveIds = @($liveMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
-if ($checkIds.Count -ne 56 -or $checkMatches.Count -ne $checkIds.Count) { Add-Failure "Expected 56 unique diagnostics; found $($checkIds.Count)." }
-if ($fixIds.Count -ne 47 -or $fixMatches.Count -ne $fixIds.Count) { Add-Failure "Expected 47 unique repair actions; found $($fixIds.Count)." }
+if ($checkIds.Count -ne 68 -or $checkMatches.Count -ne $checkIds.Count) { Add-Failure "Expected 68 unique diagnostics; found $($checkIds.Count)." }
+if ($fixIds.Count -ne 63 -or $fixMatches.Count -ne $fixIds.Count) { Add-Failure "Expected 63 unique repair actions; found $($fixIds.Count)." }
 if ($liveIds.Count -ne 8 -or $liveMatches.Count -ne $liveIds.Count) { Add-Failure "Expected 8 unique live tests; found $($liveIds.Count)." }
 
 $previewSource = Get-Content -LiteralPath (Join-Path $root 'CaYaFix.Modules\Shared\RepairPreviewCatalog.cs') -Raw
@@ -243,9 +243,9 @@ if ($moduleSource -match '&\s+pnputil\.exe\b') {
 
 $catalogSource = Get-Content -LiteralPath (Join-Path $root 'CaYaFix.Modules\ModuleCatalog.cs') -Raw
 $moduleMatches = [regex]::Matches($catalogSource, 'new\s+[A-Za-z][A-Za-z0-9]*Module\s*\(\s*\)')
-if ($moduleMatches.Count -ne 14) { Add-Failure "Expected 14 module registrations; found $($moduleMatches.Count)." }
+if ($moduleMatches.Count -ne 15) { Add-Failure "Expected 15 module registrations; found $($moduleMatches.Count)." }
 $catalogTests = Get-Content -LiteralPath (Join-Path $root 'CaYaFix.Tests\ModuleCatalogTests.cs') -Raw
-foreach ($expectation in 'Assert.Equal(14, modules.Count)', 'Assert.Equal(56, modules.Sum(module => module.Checks.Count))', 'Assert.Equal(47, modules.Sum(module => module.Fixes.Count))', 'Assert.Equal(8, modules.Sum(module => module.LiveTests.Count))') {
+foreach ($expectation in 'Assert.Equal(15, modules.Count)', 'Assert.Equal(68, modules.Sum(module => module.Checks.Count))', 'Assert.Equal(63, modules.Sum(module => module.Fixes.Count))', 'Assert.Equal(8, modules.Sum(module => module.LiveTests.Count))') {
     if ($catalogTests.IndexOf($expectation, [System.StringComparison]::Ordinal) -lt 0) { Add-Failure "Catalog regression test is missing: $expectation" }
 }
 
@@ -272,7 +272,7 @@ else {
 }
 
 $readme = Get-Content -LiteralPath (Join-Path $root 'README.md') -Raw
-foreach ($requiredReadmeText in '56 diagnostic checks', '47 repair actions', '8 interactive live tests', 'https://github.com/CaYatur', 'https://cayadev.com', 'docs/screenshots/dashboard.png', 'docs/screenshots/findings.png', 'docs/screenshots/live-tests.png') {
+foreach ($requiredReadmeText in '68 diagnostic checks', '63 repair actions', '8 interactive live tests', 'https://github.com/CaYatur', 'https://cayadev.com', 'docs/screenshots/dashboard.png', 'docs/screenshots/findings.png', 'docs/screenshots/live-tests.png') {
     if ($readme.IndexOf($requiredReadmeText, [System.StringComparison]::Ordinal) -lt 0) { Add-Failure "README is missing: $requiredReadmeText" }
 }
 if ($readme -match '(?i)manifest\.sig') { Add-Failure 'README still describes the obsolete detached manifest signature format.' }
@@ -397,4 +397,4 @@ if ($failures.Count -gt 0) {
     throw "Repository validation failed with $($failures.Count) issue(s)."
 }
 
-Write-Host "Repository validation passed: $($english.Count) localized keys, $($svgFiles.Count) SVG icons, 14 modules, 56 diagnostics, 47 repairs, and 8 live tests." -ForegroundColor Green
+Write-Host "Repository validation passed: $($english.Count) localized keys, $($svgFiles.Count) SVG icons, 15 modules, 68 diagnostics, 63 repairs, and 8 live tests." -ForegroundColor Green

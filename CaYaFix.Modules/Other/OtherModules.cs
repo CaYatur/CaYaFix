@@ -403,7 +403,12 @@ public sealed class DiskStorageModule : WindowsModuleBase
     public DiskStorageModule() : base(
         new ModuleInfo(Id, "Module_Disk_Name", "Module_Disk_Description", "disk.svg", 5),
         CreateChecks(), CreateFixes(),
-        [new Playbook("disk.slow", Id, "Symptom_Disk_Slow", ["disk.health", "disk.filesystem", "disk.space", "disk.usage"], ["disk.clean-temp", "disk.schedule-chkdsk"])])
+        [new Playbook(
+            "disk.slow",
+            Id,
+            "Symptom_Disk_Slow",
+            ["disk.health", "disk.filesystem", "disk.space", "disk.usage", "disk.online-scan"],
+            ["disk.clean-temp", "disk.online-scan-fix", "disk.schedule-chkdsk"])])
     {
     }
 
@@ -445,6 +450,39 @@ public sealed class DiskStorageModule : WindowsModuleBase
             }).ToArray();
             return bad.Length > 0 ? ModuleHelpers.Finding("disk.space", Id, Severity.Warning, "Finding_Disk_LowSpace", Join(bad), "disk.clean-temp") : null;
         }),
+        new DelegateDiagnosticCheck("disk.online-scan", "Check_Disk_OnlineScan", Id, async (context, ct) =>
+        {
+            // Microsoft: chkdsk /scan runs an online scan without forcing a dismount.
+            var system = Path.GetPathRoot(Environment.SystemDirectory) ?? "C:\\";
+            var letter = system.TrimEnd('\\');
+            var result = await context.Commands.RunAsync(
+                "chkdsk.exe",
+                [letter, "/scan"],
+                TimeSpan.FromMinutes(20),
+                ct).ConfigureAwait(false);
+            var output = (result.StdOut + Environment.NewLine + result.StdErr).Trim();
+            var clean =
+                result.ExitCode == 0 &&
+                (output.Contains("no problems", StringComparison.OrdinalIgnoreCase) ||
+                 output.Contains("found no", StringComparison.OrdinalIgnoreCase) ||
+                 output.Contains("sorun bulunamadı", StringComparison.OrdinalIgnoreCase) ||
+                 output.Contains("bulunamadı", StringComparison.OrdinalIgnoreCase) ||
+                 string.IsNullOrWhiteSpace(output));
+            if (clean)
+            {
+                return null;
+            }
+
+            // Non-zero or problem text → recommend online spotfix and/or offline schedule.
+            return ModuleHelpers.Finding(
+                "disk.online-scan",
+                Id,
+                Severity.Warning,
+                "Finding_Disk_OnlineScanIssues",
+                string.IsNullOrWhiteSpace(output) ? $"chkdsk exit={result.ExitCode}" : output,
+                "disk.online-scan-fix",
+                "disk.schedule-chkdsk");
+        }, quick: false, supportsPostRepairVerification: false),
         new DelegateDiagnosticCheck("disk.usage", "Check_Disk_Usage", Id, async (context, ct) =>
         {
             const string script = "$samples=Get-Counter '\\PhysicalDisk(_Total)\\% Disk Time' -SampleInterval 1 -MaxSamples 3 -ErrorAction SilentlyContinue; $avg=($samples.CounterSamples.CookedValue|Measure-Object -Average).Average; [pscustomobject]@{Average=[math]::Round($avg,1);SysMain=(Get-Service SysMain -ErrorAction SilentlyContinue).Status;Search=(Get-Service WSearch -ErrorAction SilentlyContinue).Status}";
@@ -458,6 +496,39 @@ public sealed class DiskStorageModule : WindowsModuleBase
 
     private static IReadOnlyList<FixAction> CreateFixes() =>
     [
+        new DelegateFixAction(
+            "disk.online-scan-fix",
+            "Fix_Disk_OnlineScanFix",
+            Id,
+            RiskTier.Moderate,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "disk-online-scan-fix", ct),
+            async (context, ct) =>
+            {
+                var system = Path.GetPathRoot(Environment.SystemDirectory) ?? "C:\\";
+                var letter = system.TrimEnd('\\');
+                // Microsoft: /spotfix attempts online repair after /scan findings.
+                return await ModuleHelpers.RunSequenceAsync(
+                    context,
+                    [
+                        new CommandStep("chkdsk.exe", [letter, "/scan"], TimeSpan.FromMinutes(20)),
+                        new CommandStep("chkdsk.exe", [letter, "/spotfix"], TimeSpan.FromMinutes(30))
+                        {
+                            AcceptedExitCodes = new HashSet<int> { 0, 1, 2, 3 }
+                        }
+                    ],
+                    ct).ConfigureAwait(false);
+            },
+            async (context, ct) =>
+            {
+                var system = Path.GetPathRoot(Environment.SystemDirectory) ?? "C:\\";
+                var letter = system.TrimEnd('\\');
+                var result = await context.Commands.RunAsync(
+                    "chkdsk.exe",
+                    [letter, "/scan"],
+                    TimeSpan.FromMinutes(20),
+                    ct).ConfigureAwait(false);
+                return result.ExitCode == 0;
+            }),
         new DelegateFixAction("disk.clean-temp", "Fix_Disk_CleanTemp", Id, RiskTier.Safe,
             BackupTempFilesAsync,
             ApplyTempCleanupAsync,
@@ -641,7 +712,14 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
     public SystemIntegrityModule() : base(
         new ModuleInfo(Id, "Module_Integrity_Name", "Module_Integrity_Description", "integrity.svg", 6),
         CreateChecks(), CreateFixes(),
-        [new Playbook("integrity.corrupt", Id, "Symptom_Integrity_Corrupt", ["integrity.component-store"], ["integrity.dism-sfc"])])
+        [
+            new Playbook(
+                "integrity.corrupt",
+                Id,
+                "Symptom_Integrity_Corrupt",
+                ["integrity.component-store", "integrity.scan-health", "integrity.analyze-store"],
+                ["integrity.sfc-scan", "integrity.dism-restore", "integrity.dism-sfc", "integrity.component-cleanup"])
+        ])
     {
     }
 
@@ -657,13 +735,146 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
                     Severity.Warning,
                     "Finding_Integrity_Repairable",
                     result.StdOut + result.StdErr,
+                    "integrity.dism-restore",
+                    "integrity.sfc-scan",
                     "integrity.dism-sfc")
                 : null;
-        })
+        }),
+        new DelegateDiagnosticCheck(
+            "integrity.scan-health",
+            "Check_Integrity_ScanHealth",
+            Id,
+            async (context, ct) =>
+            {
+                // Deeper than CheckHealth; can take several minutes.
+                var result = await context.Commands.RunAsync(
+                    "dism.exe",
+                    ["/Online", "/Cleanup-Image", "/ScanHealth", "/English"],
+                    TimeSpan.FromMinutes(30),
+                    ct).ConfigureAwait(false);
+                var detail = result.StdOut + Environment.NewLine + result.StdErr;
+                var needsRepair = !result.Success ||
+                                  detail.Contains("repairable", StringComparison.OrdinalIgnoreCase) ||
+                                  detail.Contains("The component store is repairable", StringComparison.OrdinalIgnoreCase) ||
+                                  detail.Contains("Corruption", StringComparison.OrdinalIgnoreCase);
+                return needsRepair
+                    ? ModuleHelpers.Finding(
+                        "integrity.scan-health",
+                        Id,
+                        Severity.Warning,
+                        "Finding_Integrity_ScanHealthFailed",
+                        detail,
+                        "integrity.dism-restore",
+                        "integrity.sfc-scan",
+                        "integrity.dism-sfc",
+                        "integrity.component-cleanup")
+                    : null;
+            },
+            quick: false,
+            supportsPostRepairVerification: false),
+        new DelegateDiagnosticCheck(
+            "integrity.analyze-store",
+            "Check_Integrity_AnalyzeStore",
+            Id,
+            async (context, ct) =>
+            {
+                // Microsoft: AnalyzeComponentStore reports reclaimable packages / cleanup recommendation.
+                var result = await context.Commands.RunAsync(
+                    "dism.exe",
+                    ["/Online", "/Cleanup-Image", "/AnalyzeComponentStore", "/English"],
+                    TimeSpan.FromMinutes(20),
+                    ct).ConfigureAwait(false);
+                var detail = result.StdOut + Environment.NewLine + result.StdErr;
+                var recommendsCleanup =
+                    detail.Contains("Component Store Cleanup Recommended : Yes", StringComparison.OrdinalIgnoreCase) ||
+                    detail.Contains("Cleanup Recommended : Yes", StringComparison.OrdinalIgnoreCase) ||
+                    detail.Contains("reclaimable", StringComparison.OrdinalIgnoreCase);
+                return recommendsCleanup
+                    ? ModuleHelpers.Finding(
+                        "integrity.analyze-store",
+                        Id,
+                        Severity.Info,
+                        "Finding_Integrity_CleanupRecommended",
+                        detail,
+                        "integrity.component-cleanup")
+                    : null;
+            },
+            quick: false,
+            supportsPostRepairVerification: false)
     ];
 
     private static IReadOnlyList<FixAction> CreateFixes() =>
     [
+        new DelegateFixAction(
+            "integrity.sfc-scan",
+            "Fix_Integrity_SfcScan",
+            Id,
+            RiskTier.Moderate,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "integrity-sfc-scan", ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(
+                context,
+                [new CommandStep("sfc.exe", ["/scannow"], TimeSpan.FromMinutes(45))],
+                ct),
+            async (context, ct) =>
+            {
+                // SFC does not always expose a clean machine-readable verify; treat successful run as applied.
+                var verify = await context.Commands.RunAsync(
+                    "sfc.exe",
+                    ["/verifyonly"],
+                    TimeSpan.FromMinutes(45),
+                    ct).ConfigureAwait(false);
+                return verify.ExitCode is 0 or 1 ||
+                       verify.StdOut.Contains("did not find any integrity violations", StringComparison.OrdinalIgnoreCase) ||
+                       verify.StdOut.Contains("bütünlük ihlali bulamadı", StringComparison.OrdinalIgnoreCase);
+            },
+            requiresReboot: true),
+        new DelegateFixAction(
+            "integrity.dism-restore",
+            "Fix_Integrity_DismRestore",
+            Id,
+            RiskTier.Aggressive,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "integrity-dism-restore", ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(
+                context,
+                [
+                    new CommandStep(
+                        "dism.exe",
+                        ["/Online", "/Cleanup-Image", "/RestoreHealth", "/English"],
+                        TimeSpan.FromMinutes(60))
+                ],
+                ct),
+            async (context, ct) =>
+            {
+                var health = await context.Commands.RunAsync(
+                    "dism.exe",
+                    ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(10),
+                    ct).ConfigureAwait(false);
+                return health.Success &&
+                       !health.StdOut.Contains("repairable", StringComparison.OrdinalIgnoreCase);
+            },
+            requiresReboot: true),
+        new DelegateFixAction(
+            "integrity.component-cleanup",
+            "Fix_Integrity_ComponentCleanup",
+            Id,
+            RiskTier.Moderate,
+            (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "integrity-component-cleanup", ct),
+            (context, ct) => ModuleHelpers.RunSequenceAsync(
+                context,
+                [
+                    new CommandStep(
+                        "dism.exe",
+                        ["/Online", "/Cleanup-Image", "/StartComponentCleanup", "/English"],
+                        TimeSpan.FromMinutes(45))
+                ],
+                ct),
+            async (context, ct) =>
+                (await context.Commands.RunAsync(
+                    "dism.exe",
+                    ["/Online", "/Cleanup-Image", "/CheckHealth", "/English"],
+                    TimeSpan.FromMinutes(10),
+                    ct).ConfigureAwait(false)).Success),
         new DelegateFixAction(
             "integrity.dism-sfc",
             "Fix_Integrity_RepairChain",
@@ -673,7 +884,7 @@ public sealed class SystemIntegrityModule : WindowsModuleBase
             (context, ct) => ModuleHelpers.RunSequenceAsync(
                 context,
                 [
-                    new CommandStep("dism.exe", ["/Online", "/Cleanup-Image", "/RestoreHealth", "/English"], TimeSpan.FromMinutes(45)),
+                    new CommandStep("dism.exe", ["/Online", "/Cleanup-Image", "/RestoreHealth", "/English"], TimeSpan.FromMinutes(60)),
                     new CommandStep("sfc.exe", ["/scannow"], TimeSpan.FromMinutes(45))
                 ],
                 ct),

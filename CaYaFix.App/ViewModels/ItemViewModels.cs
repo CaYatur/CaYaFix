@@ -186,6 +186,44 @@ public sealed class SymptomViewModel
     public IAsyncRelayCommand RunCommand { get; }
 }
 
+/// <summary>
+/// Catalog entry for guided symptom repairs when diagnostics found nothing (or user insists).
+/// </summary>
+public sealed class GuidedSymptomItemViewModel
+{
+    public GuidedSymptomItemViewModel(
+        Playbook playbook,
+        string moduleName,
+        string moduleIcon,
+        IReadOnlyList<string> fixTitles,
+        string sideEffects,
+        ITextProvider text,
+        Func<GuidedSymptomItemViewModel, Task> select)
+    {
+        Playbook = playbook;
+        ModuleName = moduleName;
+        ModuleIcon = moduleIcon;
+        Title = text.Get(playbook.SymptomKey);
+        FixCountLabel = text.Get("GuidedRepair_FixCount", fixTitles.Count);
+        FixTitlesPreview = fixTitles.Count == 0
+            ? text.Get("GuidedRepair_NoFixes")
+            : string.Join(" · ", fixTitles.Take(4)) + (fixTitles.Count > 4 ? "…" : string.Empty);
+        SideEffects = sideEffects;
+        FixTitles = fixTitles;
+        SelectCommand = new AsyncRelayCommand(() => select(this));
+    }
+
+    public Playbook Playbook { get; }
+    public string ModuleName { get; }
+    public string ModuleIcon { get; }
+    public string Title { get; }
+    public string FixCountLabel { get; }
+    public string FixTitlesPreview { get; }
+    public string SideEffects { get; }
+    public IReadOnlyList<string> FixTitles { get; }
+    public IAsyncRelayCommand SelectCommand { get; }
+}
+
 public sealed partial class LiveTestItemViewModel : ObservableObject
 {
     public LiveTestItemViewModel(LiveTest test, string moduleName, ITextProvider text, Func<LiveTestItemViewModel, Task> run)

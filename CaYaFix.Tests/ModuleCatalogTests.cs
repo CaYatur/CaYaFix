@@ -13,9 +13,9 @@ public sealed class ModuleCatalogTests
     {
         var modules = ModuleCatalog.CreateAll();
 
-        Assert.Equal(14, modules.Count);
-        Assert.Equal(56, modules.Sum(module => module.Checks.Count));
-        Assert.Equal(47, modules.Sum(module => module.Fixes.Count));
+        Assert.Equal(15, modules.Count);
+        Assert.Equal(68, modules.Sum(module => module.Checks.Count));
+        Assert.Equal(63, modules.Sum(module => module.Fixes.Count));
         Assert.Equal(8, modules.Sum(module => module.LiveTests.Count));
         Assert.Equal(modules.Count, modules.Select(module => module.Info.Id).Distinct(StringComparer.OrdinalIgnoreCase).Count());
         foreach (var module in modules)

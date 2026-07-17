@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using System.Windows;
 using System.Windows.Threading;
@@ -47,6 +48,20 @@ public sealed partial class MainViewModel : ObservableObject
     private bool _startupComplete;
     private bool _languageSelectionReady;
     private bool _isRollbackOperation;
+    private DateTimeOffset _operationStartedAt;
+    private double _progressFloor;
+    private double _progressCeiling = 100;
+    private double _toolPercent;
+    private double _expectedToolMinutes;
+    private string _currentFixId = string.Empty;
+    private string _currentStageKey = string.Empty;
+    private DispatcherTimer? _progressTicker;
+    private static readonly Regex ProgressPercentRegex = new(
+        @"(?<!\d)(?<p>\d{1,3}(?:\.\d+)?)\s*%",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+    private static readonly Regex ProgressVerificationRegex = new(
+        @"(?:Verification|Doğrulama|verification)\s+(?<p>\d{1,3})\s*%",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
     private readonly ConcurrentQueue<ConsoleLine> _pendingConsoleLines = new();
     private int _pendingConsoleLineCount;
     private int _consoleFlushScheduled;
@@ -101,10 +116,94 @@ public sealed partial class MainViewModel : ObservableObject
                         text,
                         RunExpertFixAsync))));
 
+        // Manual toolkit: no target required so users can pick and run Microsoft-oriented tools directly.
+        ManualTools = new ObservableCollection<ExpertFixViewModel>(
+            modules
+                .OrderBy(module => module.Info.Priority)
+                .SelectMany(module => module.Fixes
+                    .Where(fix => !fix.RequiresTargetParameter)
+                    .OrderBy(fix => fix.Tier)
+                    .ThenBy(fix => text.Get(fix.TitleKey), StringComparer.CurrentCultureIgnoreCase)
+                    .Select(fix => new ExpertFixViewModel(
+                        fix,
+                        text.Get(module.Info.NameKey),
+                        text,
+                        RunExpertFixAsync))));
+
+        RebuildGuidedSymptoms();
         RefreshLanguageOptions(selectCurrent: true);
         _languageSelectionReady = true;
         _console.LineWritten += OnConsoleLine;
     }
+
+    private void RebuildGuidedSymptoms()
+    {
+        GuidedSymptoms.Clear();
+        foreach (var module in _modules.OrderBy(item => item.Info.Priority))
+        {
+            var moduleName = _text.Get(module.Info.NameKey);
+            var moduleIcon = ResolveModuleIcon(module.Info.Id);
+            foreach (var playbook in module.Playbooks)
+            {
+                var fixTitles = ResolvePlaybookFixes(module, playbook)
+                    .Select(fix => _text.Get(fix.TitleKey))
+                    .ToArray();
+                GuidedSymptoms.Add(new GuidedSymptomItemViewModel(
+                    playbook,
+                    moduleName,
+                    moduleIcon,
+                    fixTitles,
+                    ResolveModuleSideEffects(module.Info.Id),
+                    _text,
+                    OpenGuidedRepairConfirmAsync));
+            }
+        }
+    }
+
+    private IReadOnlyList<FixAction> ResolvePlaybookFixes(IModuleDefinition module, Playbook playbook)
+    {
+        var preferred = playbook.PreferredFixIds
+            .Select(id => module.Fixes.FirstOrDefault(fix =>
+                fix.Id.Equals(id, StringComparison.OrdinalIgnoreCase)))
+            .Where(fix => fix is not null)
+            .Cast<FixAction>()
+            // Guided repair stays on Safe/Moderate — Aggressive needs the force path separately.
+            .Where(fix => fix.Tier is RiskTier.Safe or RiskTier.Moderate)
+            .Where(fix => !fix.RequiresTargetParameter)
+            .GroupBy(fix => fix.Id, StringComparer.OrdinalIgnoreCase)
+            .Select(group => group.First())
+            .ToArray();
+        if (preferred.Length > 0) return preferred;
+
+        return module.Fixes
+            .Where(fix => fix.Tier is RiskTier.Safe or RiskTier.Moderate)
+            .Where(fix => !fix.RequiresTargetParameter)
+            .OrderBy(fix => fix.Tier)
+            .ThenBy(fix => fix.Id, StringComparer.OrdinalIgnoreCase)
+            .Take(8)
+            .ToArray();
+    }
+
+    private string ResolveModuleSideEffects(string moduleId) =>
+        _text.Get(moduleId.ToLowerInvariant() switch
+        {
+            "network" => "GuidedRepair_Effects_Network",
+            "audio" => "GuidedRepair_Effects_Audio",
+            "display" or "display-graphics" => "GuidedRepair_Effects_Display",
+            "bluetooth" => "GuidedRepair_Effects_Bluetooth",
+            "printers" or "printer" => "GuidedRepair_Effects_Printer",
+            "disk" or "disk-storage" => "GuidedRepair_Effects_Disk",
+            "integrity" => "GuidedRepair_Effects_Integrity",
+            "windows-update" or "update" => "GuidedRepair_Effects_Update",
+            "store" or "store-apps" => "GuidedRepair_Effects_Store",
+            "camera" or "camera-privacy" => "GuidedRepair_Effects_Camera",
+            "usb" or "usb-devices" => "GuidedRepair_Effects_Usb",
+            "search" or "windows-search" => "GuidedRepair_Effects_Search",
+            "time" or "time-sync" => "GuidedRepair_Effects_Time",
+            "startup" or "startup-performance" or "performance" => "GuidedRepair_Effects_Performance",
+            "boot" => "GuidedRepair_Effects_Boot",
+            _ => "GuidedRepair_Effects_Generic"
+        });
 
     private void RefreshLanguageOptions(bool selectCurrent)
     {
@@ -206,7 +305,10 @@ public sealed partial class MainViewModel : ObservableObject
     public ObservableCollection<FindingViewModel> Findings { get; } = [];
     public ObservableCollection<LiveTestItemViewModel> LiveTests { get; }
     public ObservableCollection<ExpertFixViewModel> ExpertFixes { get; }
+    public ObservableCollection<ExpertFixViewModel> ManualTools { get; }
     public ObservableCollection<SymptomViewModel> Symptoms { get; } = [];
+    public ObservableCollection<GuidedSymptomItemViewModel> GuidedSymptoms { get; } = [];
+    public ObservableCollection<string> GuidedRepairFixList { get; } = [];
     public ObservableCollection<RecoverySessionViewModel> RecoverySessions { get; } = [];
     public ObservableCollection<ConsoleLineViewModel> ConsoleLines { get; } = [];
     public ObservableCollection<string> TestOutput { get; } = [];
@@ -235,6 +337,7 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty] private string escalationText = string.Empty;
     [ObservableProperty] private string selectedModuleName = string.Empty;
     [ObservableProperty] private string selectedModuleDescription = string.Empty;
+    [ObservableProperty] private string selectedModuleIcon = "home.svg";
     [ObservableProperty] private bool hasSelectedModule;
     [ObservableProperty] private RiskTier currentTier = RiskTier.Safe;
     [ObservableProperty] private string? reportPath;
@@ -252,6 +355,18 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty] private int operationActionableFindingCount;
     [ObservableProperty] private string operationResultIcon = "check.svg";
     [ObservableProperty] private bool canSkipRestorePoint;
+    [ObservableProperty] private string progressPercentText = "0%";
+    [ObservableProperty] private string progressEtaText = string.Empty;
+    [ObservableProperty] private string progressStatusText = string.Empty;
+    [ObservableProperty] private bool showGuidedRepairConfirm;
+    [ObservableProperty] private bool guidedRepairRiskAccepted;
+    [ObservableProperty] private string guidedRepairTitle = string.Empty;
+    [ObservableProperty] private string guidedRepairModule = string.Empty;
+    [ObservableProperty] private string guidedRepairIcon = "alert.svg";
+    [ObservableProperty] private string guidedRepairWarning = string.Empty;
+    [ObservableProperty] private string guidedRepairSideEffects = string.Empty;
+    [ObservableProperty] private string guidedRepairFixesSummary = string.Empty;
+    private GuidedSymptomItemViewModel? _pendingGuidedSymptom;
 
     public bool ShowOperationOverlay => IsBusy || ShowOperationSummary;
 
@@ -272,6 +387,21 @@ public sealed partial class MainViewModel : ObservableObject
     partial void OnReportPathChanged(string? value) => OnPropertyChanged(nameof(HasReport));
     partial void OnIsBusyChanged(bool value) => OnPropertyChanged(nameof(ShowOperationOverlay));
     partial void OnShowOperationSummaryChanged(bool value) => OnPropertyChanged(nameof(ShowOperationOverlay));
+
+    partial void OnCurrentPageChanged(int value)
+    {
+        // Module detail is a home overlay; dismiss it whenever the user leaves or jumps pages
+        // (e.g. "View findings" sets CurrentPage directly without NavigateCommand).
+        if (HasSelectedModule)
+        {
+            CloseModulePanel();
+        }
+
+        if (ShowGuidedRepairConfirm && value != 1)
+        {
+            CancelGuidedRepair();
+        }
+    }
 
     partial void OnDryRunChanged(bool value)
     {
@@ -730,11 +860,7 @@ public sealed partial class MainViewModel : ObservableObject
             card.IsExpanded = false;
             if (ReferenceEquals(_selectedModule, card.Module))
             {
-                _selectedModule = null;
-                HasSelectedModule = false;
-                SelectedModuleName = string.Empty;
-                SelectedModuleDescription = string.Empty;
-                Symptoms.Clear();
+                ClearSelectedModule();
             }
 
             return Task.CompletedTask;
@@ -748,8 +874,10 @@ public sealed partial class MainViewModel : ObservableObject
         _selectedModule = card.Module;
         SelectedModuleName = card.Name;
         SelectedModuleDescription = card.Description;
+        SelectedModuleIcon = card.IconPath;
         Symptoms.Clear();
-        card.LoadSymptoms(card.Module.Playbooks, ScanPlaybookAsync);
+        // Symptom chips open guided repair (apply related fixes with risk warning), not only a re-scan.
+        card.LoadSymptoms(card.Module.Playbooks, OpenGuidedRepairFromPlaybookAsync);
         foreach (var symptom in card.Symptoms)
         {
             Symptoms.Add(symptom);
@@ -758,6 +886,40 @@ public sealed partial class MainViewModel : ObservableObject
         card.IsExpanded = true;
         HasSelectedModule = true;
         return Task.CompletedTask;
+    }
+
+    private Task OpenGuidedRepairFromPlaybookAsync(Playbook playbook)
+    {
+        var item = GuidedSymptoms.FirstOrDefault(candidate =>
+            candidate.Playbook.Id.Equals(playbook.Id, StringComparison.OrdinalIgnoreCase));
+        if (item is null)
+        {
+            // Fallback: focused scan if the catalog entry is missing.
+            return ScanPlaybookAsync(playbook);
+        }
+
+        return OpenGuidedRepairConfirmAsync(item);
+    }
+
+    [RelayCommand]
+    private void CloseModulePanel()
+    {
+        foreach (var card in Modules.Where(item => item.IsExpanded))
+        {
+            card.IsExpanded = false;
+        }
+
+        ClearSelectedModule();
+    }
+
+    private void ClearSelectedModule()
+    {
+        _selectedModule = null;
+        HasSelectedModule = false;
+        SelectedModuleName = string.Empty;
+        SelectedModuleDescription = string.Empty;
+        SelectedModuleIcon = "home.svg";
+        Symptoms.Clear();
     }
 
     private async Task ScanModuleCardAsync(ModuleCardViewModel card)
@@ -771,6 +933,246 @@ public sealed partial class MainViewModel : ObservableObject
         var module = _modules.First(item => item.Info.Id == playbook.ModuleId);
         var filtered = new FilteredModuleDefinition(module, playbook.CheckIds);
         await ScanAsync([filtered], quickOnly: false).ConfigureAwait(true);
+    }
+
+    private Task OpenGuidedRepairConfirmAsync(GuidedSymptomItemViewModel item)
+    {
+        if (IsBusy || !EnsureReadyForUserWork()) return Task.CompletedTask;
+
+        _pendingGuidedSymptom = item;
+        GuidedRepairTitle = item.Title;
+        GuidedRepairModule = item.ModuleName;
+        GuidedRepairIcon = item.ModuleIcon;
+        GuidedRepairWarning = _text.Get("GuidedRepair_Warning");
+        GuidedRepairSideEffects = item.SideEffects;
+        GuidedRepairFixesSummary = item.FixTitles.Count == 0
+            ? _text.Get("GuidedRepair_NoFixes")
+            : string.Join(Environment.NewLine, item.FixTitles.Select(title => "• " + title));
+        GuidedRepairFixList.Clear();
+        foreach (var title in item.FixTitles)
+        {
+            GuidedRepairFixList.Add(title);
+        }
+
+        GuidedRepairRiskAccepted = false;
+        ShowGuidedRepairConfirm = true;
+        ShowOperationSummary = false;
+        CloseModulePanel();
+        return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    private void CancelGuidedRepair()
+    {
+        ShowGuidedRepairConfirm = false;
+        GuidedRepairRiskAccepted = false;
+        _pendingGuidedSymptom = null;
+        GuidedRepairFixList.Clear();
+    }
+
+    [RelayCommand]
+    private void OpenGuidedRepairFromSummary()
+    {
+        ShowOperationSummary = false;
+        CloseModulePanel();
+        CurrentPage = 1;
+        StatusText = _text.Get("GuidedRepair_PickHint");
+        PushToast(
+            _text.Get("GuidedRepair_ToastTitle"),
+            _text.Get("GuidedRepair_PickHint"),
+            "alert.svg",
+            "warning");
+    }
+
+    [RelayCommand]
+    private async Task ConfirmGuidedRepairAsync()
+    {
+        if (IsBusy || _pendingGuidedSymptom is null || !EnsureReadyForUserWork()) return;
+        if (!GuidedRepairRiskAccepted)
+        {
+            StatusText = _text.Get("GuidedRepair_NeedConsent");
+            PushToast(
+                _text.Get("GuidedRepair_ToastTitle"),
+                _text.Get("GuidedRepair_NeedConsent"),
+                "alert.svg",
+                "warning");
+            return;
+        }
+
+        var item = _pendingGuidedSymptom;
+        ShowGuidedRepairConfirm = false;
+        GuidedRepairRiskAccepted = false;
+        _pendingGuidedSymptom = null;
+
+        var module = _modules.FirstOrDefault(candidate =>
+            candidate.Info.Id.Equals(item.Playbook.ModuleId, StringComparison.OrdinalIgnoreCase));
+        if (module is null)
+        {
+            StatusText = _text.Get("Status_Failed", item.ModuleName);
+            return;
+        }
+
+        var fixes = ResolvePlaybookFixes(module, item.Playbook);
+        if (fixes.Count == 0)
+        {
+            StatusText = _text.Get("GuidedRepair_NoFixes");
+            return;
+        }
+
+        BeginOperation(
+            _text.Get("GuidedRepair_Applying", item.Title),
+            icon: item.ModuleIcon,
+            phase: _text.Get("Operation_PhaseRepair"));
+        UpdateOperation(
+            _text.Get("GuidedRepair_Applying", item.Title),
+            item.SideEffects,
+            "alert.svg");
+        AddOperationFeed(_text.Get("GuidedRepair_WarningShort"), "alert.svg", "warning");
+        AddOperationFeed(item.SideEffects, "info.svg", "info");
+        PushToast(
+            _text.Get("Toast_RepairStarted"),
+            _text.Get("GuidedRepair_Applying", item.Title),
+            "wrench.svg",
+            "info");
+
+        try
+        {
+            _currentSession ??= await _sessions.CreateAsync(DryRun, _operationCts!.Token).ConfigureAwait(true);
+            var sessionDryRun = _currentSession.DryRun;
+            var maxTier = fixes.Max(fix => fix.Tier);
+
+            if (!sessionDryRun && !HasUsableRestorePointGate())
+            {
+                UpdateOperation(
+                    _text.Get("Status_RestorePoint"),
+                    _text.Get("Operation_PreparingRestorePoint"),
+                    "recovery.svg");
+                var ensured = await EnsureSessionRestorePointAsync(maxTier, _operationCts!.Token)
+                    .ConfigureAwait(true);
+                if (!ensured)
+                {
+                    StatusText = _text.Get("Status_Cancelled");
+                    PushToast(_text.Get("Toast_Cancelled"), _text.Get("Status_Cancelled"), "alert.svg", "warning");
+                    return;
+                }
+            }
+
+            // Keep side-effect reminder visible while changes run.
+            OperationDetail = item.SideEffects;
+            AddOperationFeed(_text.Get("GuidedRepair_RunningEffectsReminder"), "alert.svg", "warning");
+
+            var appliedKeys = _currentSession.Actions
+                .Where(action => action.Applied && !action.Undone)
+                .Select(action => $"{action.FindingCheckId}\0{action.FixId}")
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            var requests = new List<FixRequest>();
+            var syntheticFindings = new List<Finding>();
+            foreach (var fix in fixes)
+            {
+                var checkId = $"symptom.{item.Playbook.Id}.{fix.Id}";
+                if (appliedKeys.Contains($"{checkId}\0{fix.Id}")) continue;
+
+                var finding = new Finding
+                {
+                    CheckId = checkId,
+                    ModuleId = module.Info.Id,
+                    Severity = Severity.Warning,
+                    MessageKey = "Finding_GuidedSymptom",
+                    MessageArguments = [item.Title, _text.Get(fix.TitleKey)],
+                    RecommendedFixIds = [fix.Id],
+                    TechnicalDetail = item.SideEffects
+                };
+                syntheticFindings.Add(finding);
+                requests.Add(CreateFixRequest(finding, fix));
+                appliedKeys.Add($"{checkId}\0{fix.Id}");
+            }
+
+            if (requests.Count == 0)
+            {
+                StatusText = _text.Get("Status_NoFixAtTier");
+                return;
+            }
+
+            foreach (var finding in syntheticFindings)
+            {
+                Findings.Add(new FindingViewModel(
+                    finding,
+                    _text.Get(module.Info.NameKey),
+                    module.Fixes,
+                    _text));
+                _currentSession.Findings.Add(ToSessionFinding(finding));
+            }
+
+            var progress = new Progress<FixProgress>(value =>
+            {
+                var fixTitle = _text.Get(value.TitleKey);
+                var stage = _text.Get(value.StageKey);
+                ActiveOperation = $"{fixTitle} · {stage}";
+                OperationDetail = item.SideEffects + Environment.NewLine +
+                                  _text.Get("Operation_RepairStep", fixTitle, stage, value.Completed, value.Total);
+                OperationIcon = item.ModuleIcon;
+                ReportFixPipelineProgress(value);
+                AddOperationFeed($"{fixTitle} — {stage}", "wrench.svg", value.Success is false ? "warning" : "info");
+            });
+
+            var context = new FixContext
+            {
+                Commands = _commands,
+                Backups = _backups,
+                Console = _console,
+                Text = _text,
+                Session = _currentSession,
+                DryRun = sessionDryRun,
+                ForceModeConfirmed = false,
+                RestorePointAvailable = sessionDryRun || HasUsableRestorePointGate(),
+                AllowBackuplessAggressive = false,
+                Thresholds = LoadThresholds()
+            };
+            await _fixes.RunAsync(requests, context, progress, _operationCts!.Token).ConfigureAwait(true);
+
+            foreach (var findingVm in Findings)
+            {
+                findingVm.Refresh();
+                var stored = _currentSession.Findings.FirstOrDefault(entry =>
+                    entry.CheckId.Equals(findingVm.Model.CheckId, StringComparison.OrdinalIgnoreCase));
+                if (stored is not null) stored.Status = findingVm.Model.Status;
+            }
+
+            await _sessions.SaveAsync(_currentSession, _operationCts.Token).ConfigureAwait(true);
+            ReportPath = await _reports.CreateAsync(_currentSession, _text, _operationCts.Token).ConfigureAwait(true);
+
+            var guided = Findings
+                .Where(finding => syntheticFindings.Any(source =>
+                    source.CheckId.Equals(finding.Model.CheckId, StringComparison.OrdinalIgnoreCase)))
+                .ToArray();
+            var resolved = guided.Count(finding => finding.Model.Status == FindingStatus.Resolved);
+            var unresolved = guided.Length - resolved;
+            PublishVerificationSummary(resolved, unresolved, sessionDryRun, _currentSession.PendingVerify);
+            CurrentPage = 1;
+            StatusText = sessionDryRun
+                ? _text.Get("Status_PreviewComplete", guided.Length)
+                : _text.Get("Status_RepairComplete", resolved, unresolved);
+            PushToast(
+                _text.Get("Toast_RepairStarted"),
+                StatusText,
+                resolved > 0 ? "check.svg" : "alert.svg",
+                resolved > 0 ? "success" : "warning");
+        }
+        catch (OperationCanceledException)
+        {
+            StatusText = _text.Get("Status_Cancelled");
+            PushToast(_text.Get("Toast_Cancelled"), StatusText, "alert.svg", "warning");
+        }
+        catch (Exception ex)
+        {
+            StatusText = _text.Get("Status_Failed", ex.Message);
+            PushToast(_text.Get("Toast_Failed"), ex.Message, "error.svg", "error");
+        }
+        finally
+        {
+            EndOperation();
+        }
     }
 
     private async Task ScanAsync(
@@ -801,7 +1203,6 @@ public sealed partial class MainViewModel : ObservableObject
 
             var progress = new Progress<DiagnosticProgress>(value =>
             {
-                ProgressValue = value.Total == 0 ? 0 : value.Completed * 100d / value.Total;
                 var checkTitle = _text.Get(value.TitleKey);
                 var moduleName = _modules.FirstOrDefault(module =>
                     module.Info.Id.Equals(value.ModuleId, StringComparison.OrdinalIgnoreCase)) is { } module
@@ -810,6 +1211,10 @@ public sealed partial class MainViewModel : ObservableObject
                 ActiveOperation = $"{checkTitle}  ·  {value.Completed}/{value.Total}";
                 OperationDetail = _text.Get("Operation_ScanStep", moduleName, checkTitle, value.Completed, value.Total);
                 OperationIcon = ResolveModuleIcon(value.ModuleId);
+                ReportScanProgress(
+                    value.Completed,
+                    value.Total,
+                    $"{checkTitle} · {value.Completed}/{value.Total}");
                 if (value.Passed is true)
                 {
                     OperationPassedCount++;
@@ -1003,12 +1408,12 @@ public sealed partial class MainViewModel : ObservableObject
 
             var progress = new Progress<FixProgress>(value =>
             {
-                ProgressValue = value.Total == 0 ? 0 : value.Completed * 100d / value.Total;
                 var fixTitle = _text.Get(value.TitleKey);
                 var stage = _text.Get(value.StageKey);
                 ActiveOperation = $"{fixTitle} · {stage}";
                 OperationDetail = _text.Get("Operation_RepairStep", fixTitle, stage, value.Completed, value.Total);
                 OperationIcon = "wrench.svg";
+                ReportFixPipelineProgress(value);
                 AddOperationFeed($"{fixTitle} — {stage}", "wrench.svg", value.Success is false ? "warning" : "info");
             });
             var context = new FixContext
@@ -1686,7 +2091,8 @@ public sealed partial class MainViewModel : ObservableObject
 
     private async Task RunExpertFixAsync(ExpertFixViewModel item)
     {
-        if (IsBusy || !EnsureReadyForUserWork() || !ExpertMode) return;
+        // Manual tools catalog is available without Expert Mode; Aggressive still needs risk acceptance.
+        if (IsBusy || !EnsureReadyForUserWork()) return;
 
         if (item.Fix.Tier == RiskTier.Aggressive && !RiskAccepted)
         {
@@ -1694,7 +2100,13 @@ public sealed partial class MainViewModel : ObservableObject
             CurrentTier = RiskTier.Aggressive;
             ShowEscalation = true;
             IsForceStage = true;
+            ExpertMode = true;
             StatusText = _text.Get("Dialog_ForceNeedsConsent");
+            PushToast(
+                _text.Get("Dialog_ForceNeedsConsent"),
+                _text.Get("Settings_ManualToolsAggressiveHint"),
+                "alert.svg",
+                "warning");
             return;
         }
 
@@ -2014,6 +2426,17 @@ public sealed partial class MainViewModel : ObservableObject
 
     private void BeginOperation(string title, bool isRollback = false, string icon = "search.svg", string? phase = null)
     {
+        // Don't keep the home module overlay under scan/repair dialogs.
+        if (HasSelectedModule)
+        {
+            CloseModulePanel();
+        }
+
+        if (ShowGuidedRepairConfirm)
+        {
+            CancelGuidedRepair();
+        }
+
         _operationCts?.Dispose();
         _operationCts = new CancellationTokenSource();
         CanSkipRestorePoint = false;
@@ -2022,7 +2445,15 @@ public sealed partial class MainViewModel : ObservableObject
         _isRollbackOperation = isRollback;
         OperationFeed.Clear();
         IsBusy = true;
-        ProgressValue = 0;
+        _operationStartedAt = DateTimeOffset.Now;
+        _progressFloor = 0;
+        _progressCeiling = 100;
+        _toolPercent = 0;
+        _expectedToolMinutes = 0;
+        _currentFixId = string.Empty;
+        _currentStageKey = string.Empty;
+        SetOperationProgress(0, forceEta: true);
+        ProgressStatusText = title;
         ActiveOperation = title;
         StatusText = title;
         OperationTitle = title;
@@ -2030,6 +2461,7 @@ public sealed partial class MainViewModel : ObservableObject
         OperationIcon = icon;
         OperationPhase = phase ?? title;
         AddOperationFeed(title, icon, "info");
+        StartProgressTicker();
     }
 
     private void UpdateOperation(string title, string detail, string icon)
@@ -2049,10 +2481,11 @@ public sealed partial class MainViewModel : ObservableObject
             BoundStoredDetail(text),
             icon,
             kind);
-        OperationFeed.Insert(0, item);
+        // Chronological log (newest at bottom) so the scan panel can auto-scroll down.
+        OperationFeed.Add(item);
         while (OperationFeed.Count > 40)
         {
-            OperationFeed.RemoveAt(OperationFeed.Count - 1);
+            OperationFeed.RemoveAt(0);
         }
     }
 
@@ -2103,6 +2536,7 @@ public sealed partial class MainViewModel : ObservableObject
         "usb" or "usb-devices" => "usb.svg",
         "search" or "windows-search" => "search-index.svg",
         "display" or "display-graphics" => "display.svg",
+        "boot" => "recovery.svg",
         _ => "search.svg"
     };
 
@@ -2119,7 +2553,7 @@ public sealed partial class MainViewModel : ObservableObject
         {
             OperationSummaryHeadline = _text.Get("Operation_ResultHealthy");
             OperationSummaryDetail = _text.Get("Operation_ResultHealthyDetail", passedCount);
-            OperationSummaryAdvice = _text.Get("Operation_ResultHealthyAdvice");
+            OperationSummaryAdvice = _text.Get("Operation_ResultHealthyAdviceGuided");
             OperationResultIcon = "check.svg";
         }
         else if (actionable == 0)
@@ -2175,6 +2609,7 @@ public sealed partial class MainViewModel : ObservableObject
     private void CloseOperationSummary()
     {
         ShowOperationSummary = false;
+        CloseModulePanel();
         if (Findings.Count > 0) CurrentPage = 1;
     }
 
@@ -2182,6 +2617,7 @@ public sealed partial class MainViewModel : ObservableObject
     private void ViewFindingsFromSummary()
     {
         ShowOperationSummary = false;
+        CloseModulePanel();
         CurrentPage = 1;
     }
 
@@ -2190,6 +2626,7 @@ public sealed partial class MainViewModel : ObservableObject
     {
         if (IsBusy) return;
         ShowOperationSummary = false;
+        CloseModulePanel();
         CurrentPage = 1;
         foreach (var finding in Findings)
         {
@@ -2215,6 +2652,7 @@ public sealed partial class MainViewModel : ObservableObject
     {
         if (IsBusy) return;
         ShowOperationSummary = false;
+        CloseModulePanel();
         CurrentPage = 1;
         foreach (var finding in Findings)
         {
@@ -2233,11 +2671,18 @@ public sealed partial class MainViewModel : ObservableObject
 
     private void EndOperation()
     {
+        StopProgressTicker();
         CanSkipRestorePoint = false;
         _restorePointCts?.Dispose();
         _restorePointCts = null;
         IsBusy = false;
         ProgressValue = 0;
+        ProgressPercentText = "0%";
+        ProgressEtaText = string.Empty;
+        ProgressStatusText = string.Empty;
+        _toolPercent = 0;
+        _expectedToolMinutes = 0;
+        _currentFixId = string.Empty;
         ActiveOperation = string.Empty;
         if (!ShowOperationSummary)
         {
@@ -2249,6 +2694,221 @@ public sealed partial class MainViewModel : ObservableObject
         _isRollbackOperation = false;
         _operationCts?.Dispose();
         _operationCts = null;
+    }
+
+    private void StartProgressTicker()
+    {
+        StopProgressTicker();
+        _progressTicker = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _progressTicker.Tick += (_, _) =>
+        {
+            if (!IsBusy) return;
+            // Time-based fill for long tools that print little progress (within current stage window).
+            if (_toolPercent <= 0.5 && _expectedToolMinutes > 0 &&
+                _currentStageKey is "FixStage_Applying" or "FixStage_Verifying" or "")
+            {
+                var elapsedMin = (DateTimeOffset.Now - _operationStartedAt).TotalMinutes;
+                var synthetic = Math.Min(92, elapsedMin / _expectedToolMinutes * 100);
+                if (synthetic > _toolPercent)
+                {
+                    _toolPercent = synthetic;
+                }
+            }
+
+            RefreshOperationProgressDisplay();
+        };
+        _progressTicker.Start();
+    }
+
+    private void StopProgressTicker()
+    {
+        if (_progressTicker is null) return;
+        _progressTicker.Stop();
+        _progressTicker = null;
+    }
+
+    private void ReportScanProgress(int completed, int total, string status)
+    {
+        total = Math.Max(1, total);
+        completed = Math.Clamp(completed, 0, total);
+        _progressFloor = 0;
+        _progressCeiling = 100;
+        _toolPercent = completed * 100d / total;
+        _expectedToolMinutes = Math.Max(1.5, total * 0.35);
+        ProgressStatusText = status;
+        SetOperationProgress(_toolPercent);
+    }
+
+    private void ReportFixPipelineProgress(FixProgress value)
+    {
+        var total = Math.Max(1, value.Total);
+        var index = Math.Clamp(value.Completed, 0, total);
+        // Each queue item owns an equal slice; within the slice map stages.
+        var slice = 100d / total;
+        var floor = index * slice;
+        var ceiling = Math.Min(100, (index + 1) * slice);
+        _currentFixId = value.FixId ?? string.Empty;
+        _currentStageKey = value.StageKey ?? string.Empty;
+        _expectedToolMinutes = EstimateToolMinutes(_currentFixId);
+
+        double within = value.StageKey switch
+        {
+            "FixStage_Preparing" => 0.05,
+            "FixStage_BackingUp" => 0.12,
+            "FixStage_Applying" => 0.20 + 0.70 * (_toolPercent / 100d),
+            "FixStage_Verifying" => 0.92,
+            "FixStage_Completed" or "FixStage_Failed" => 1.0,
+            _ => 0.15
+        };
+        within = Math.Clamp(within, 0, 1);
+        _progressFloor = floor;
+        _progressCeiling = ceiling;
+        var overall = floor + (ceiling - floor) * within;
+        var stageKey = string.IsNullOrWhiteSpace(value.StageKey) ? "FixStage_Applying" : value.StageKey;
+        var titleKey = string.IsNullOrWhiteSpace(value.TitleKey) ? "Status_RepairingNow" : value.TitleKey;
+        var stageLabel = _text.Get(stageKey);
+        var fixTitle = _text.Get(titleKey);
+        ProgressStatusText = $"{fixTitle} · {stageLabel}";
+        if (_expectedToolMinutes >= 8 && stageKey == "FixStage_Applying")
+        {
+            ProgressStatusText += " · " + _text.Get("Operation_LongToolHint", _expectedToolMinutes.ToString("0"));
+        }
+
+        SetOperationProgress(overall);
+    }
+
+    private void SetOperationProgress(double overallPercent, bool forceEta = false)
+    {
+        overallPercent = Math.Clamp(overallPercent, 0, IsBusy ? 99.4 : 100);
+        ProgressValue = overallPercent;
+        ProgressPercentText = $"{overallPercent:0}%";
+        if (!IsBusy)
+        {
+            ProgressEtaText = string.Empty;
+            return;
+        }
+
+        var elapsed = DateTimeOffset.Now - _operationStartedAt;
+        if (overallPercent < 1.2 && !forceEta)
+        {
+            ProgressEtaText = _expectedToolMinutes > 0
+                ? _text.Get("Operation_EtaStarting", _expectedToolMinutes.ToString("0"))
+                : _text.Get("Operation_EtaCalculating");
+            return;
+        }
+
+        if (overallPercent >= 1.2)
+        {
+            var totalTicks = elapsed.TotalSeconds / (overallPercent / 100d);
+            var remaining = TimeSpan.FromSeconds(Math.Max(0, totalTicks - elapsed.TotalSeconds));
+            ProgressEtaText = FormatEta(remaining);
+        }
+    }
+
+    private void RefreshOperationProgressDisplay()
+    {
+        if (!IsBusy) return;
+        if (_progressCeiling > _progressFloor && _toolPercent > 0 &&
+            _currentStageKey is "FixStage_Applying")
+        {
+            var within = 0.20 + 0.70 * (_toolPercent / 100d);
+            var overall = _progressFloor + (_progressCeiling - _progressFloor) * Math.Clamp(within, 0, 1);
+            SetOperationProgress(overall);
+            return;
+        }
+
+        SetOperationProgress(ProgressValue);
+    }
+
+    private void TryIngestProgressFromConsole(string text)
+    {
+        if (!IsBusy || string.IsNullOrWhiteSpace(text)) return;
+        var percent = TryParseProgressPercent(text);
+        if (percent is null) return;
+        if (percent.Value + 0.4 < _toolPercent && _toolPercent > 5)
+        {
+            // Ignore noisy regressions except near start.
+            return;
+        }
+
+        _toolPercent = Math.Clamp(percent.Value, 0, 100);
+        if (_progressCeiling > _progressFloor)
+        {
+            var within = _currentStageKey == "FixStage_Applying"
+                ? 0.20 + 0.70 * (_toolPercent / 100d)
+                : _toolPercent / 100d;
+            var overall = _progressFloor + (_progressCeiling - _progressFloor) * Math.Clamp(within, 0, 1);
+            SetOperationProgress(overall);
+        }
+        else
+        {
+            SetOperationProgress(_toolPercent);
+        }
+    }
+
+    private static double? TryParseProgressPercent(string text)
+    {
+        var verify = ProgressVerificationRegex.Match(text);
+        if (verify.Success &&
+            double.TryParse(verify.Groups["p"].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var vp) &&
+            vp is >= 0 and <= 100)
+        {
+            return vp;
+        }
+
+        // Prefer the last percentage token on the line (DISM progress bars often append it).
+        Match? last = null;
+        foreach (Match match in ProgressPercentRegex.Matches(text))
+        {
+            last = match;
+        }
+
+        if (last is { Success: true } &&
+            double.TryParse(last.Groups["p"].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var p) &&
+            p is >= 0 and <= 100)
+        {
+            return p;
+        }
+
+        return null;
+    }
+
+    private static double EstimateToolMinutes(string fixId)
+    {
+        if (string.IsNullOrWhiteSpace(fixId)) return 3;
+        var id = fixId.ToLowerInvariant();
+        if (id.Contains("dism-sfc", StringComparison.Ordinal)) return 55;
+        if (id.Contains("dism-restore", StringComparison.Ordinal) || id.Contains("restorehealth", StringComparison.Ordinal)) return 40;
+        if (id.Contains("scan-health", StringComparison.Ordinal) || id.Contains("scanhealth", StringComparison.Ordinal)) return 25;
+        if (id.Contains("sfc", StringComparison.Ordinal)) return 30;
+        if (id.Contains("component-cleanup", StringComparison.Ordinal) || id.Contains("analyze", StringComparison.Ordinal)) return 15;
+        if (id.Contains("chkdsk", StringComparison.Ordinal) || id.Contains("online-scan", StringComparison.Ordinal)) return 12;
+        if (id.Contains("full-reset", StringComparison.Ordinal) || id.Contains("reset-stack", StringComparison.Ordinal)) return 8;
+        if (id.Contains("integrity", StringComparison.Ordinal)) return 35;
+        return 4;
+    }
+
+    private string FormatEta(TimeSpan remaining)
+    {
+        if (remaining.TotalSeconds < 25)
+        {
+            return _text.Get("Operation_EtaAlmostDone");
+        }
+
+        if (remaining.TotalMinutes < 1.5)
+        {
+            return _text.Get("Operation_EtaSeconds", Math.Max(30, (int)remaining.TotalSeconds).ToString(CultureInfo.InvariantCulture));
+        }
+
+        var minutes = Math.Max(1, (int)Math.Ceiling(remaining.TotalMinutes));
+        if (minutes >= 60)
+        {
+            var hours = minutes / 60;
+            var mins = minutes % 60;
+            return _text.Get("Operation_EtaHoursMinutes", hours.ToString(CultureInfo.InvariantCulture), mins.ToString(CultureInfo.InvariantCulture));
+        }
+
+        return _text.Get("Operation_EtaMinutes", minutes.ToString(CultureInfo.InvariantCulture));
     }
 
     private void OnConsoleLine(object? sender, ConsoleLine line)
@@ -2287,6 +2947,7 @@ public sealed partial class MainViewModel : ObservableObject
         {
             Interlocked.Decrement(ref _pendingConsoleLineCount);
             ConsoleLines.Add(new ConsoleLineViewModel(line.Timestamp.ToString("HH:mm:ss"), line.Level, line.Text));
+            TryIngestProgressFromConsole(line.Text);
             processed++;
         }
 

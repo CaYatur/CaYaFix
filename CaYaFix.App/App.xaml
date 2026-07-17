@@ -305,6 +305,37 @@
             <Setter Property="BorderThickness" Value="0" />
         </Style>
 
+        <Style x:Key="OperationProgressBar" TargetType="ProgressBar">
+            <Setter Property="Height" Value="14" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Maximum" Value="100" />
+            <Setter Property="Background" Value="#0B1825" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" ClipToBounds="True">
+                            <Grid>
+                                <Border x:Name="PART_Track" Background="#122033" CornerRadius="8" />
+                                <Border x:Name="PART_Indicator"
+                                        HorizontalAlignment="Left"
+                                        CornerRadius="8">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="#1E8F7D" Offset="0" />
+                                            <GradientStop Color="#51DEC1" Offset="0.55" />
+                                            <GradientStop Color="#7AEED8" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="ScrollViewer">
             <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="VerticalScrollBarVisibility" Value="Auto" />

@@ -26,6 +26,7 @@ public static class ModuleCatalog
         new CameraPrivacyModule(),
         new UsbDevicesModule(),
         new WindowsSearchModule(),
-        new DisplayGraphicsModule()
+        new DisplayGraphicsModule(),
+        new BootRecoveryModule()
     ];
 }

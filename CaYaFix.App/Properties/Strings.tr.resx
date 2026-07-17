@@ -41,6 +41,41 @@
   <data name="Findings_Title" xml:space="preserve"><value>Tanılama bulguları</value></data>
   <data name="Findings_Description" xml:space="preserve"><value>Güvenli düzeltmeler seçili gelir. Teknik ayrıntıları açarak her bulgunun kanıtını görebilirsiniz.</value></data>
   <data name="Findings_None" xml:space="preserve"><value>Şu anda belirgin bir sorun bulunamadı.</value></data>
+  <data name="GuidedRepair_Intro" xml:space="preserve"><value>Hâlâ bir şeyler ters geliyorsa aşağıdaki belirtilerden birini seçin. Tanı yeşil kalsa bile CaYaFix ilgili Güvenli/Orta onarımları çalıştırabilir.</value></data>
+  <data name="GuidedRepair_IntroRisk" xml:space="preserve"><value>Bu onarımlar sistem ayarlarını değiştirir ve şu an çalışan şeyleri geçici olarak bozabilir. Devam etmeden yan etki listesini okuyun.</value></data>
+  <data name="GuidedRepair_PickTitle" xml:space="preserve"><value>Hâlâ ne bozuk gibi geliyor?</value></data>
+  <data name="GuidedRepair_PickHint" xml:space="preserve"><value>Bulgular sayfasından bir belirti seçin; risk uyarısını onayladıktan sonra ilgili onarımlar uygulanır.</value></data>
+  <data name="GuidedRepair_ConfirmTitle" xml:space="preserve"><value>Belirti onarımları uygulansın mı?</value></data>
+  <data name="GuidedRepair_Warning" xml:space="preserve"><value>Her adım için başarısız bir tanı olmadan birden fazla ilgili onarım uygulanacak. Çalışan ayarlar değişebilir, servisler veya cihazlar yeniden başlatılabilir ve sistem kısa süre kararsız kalabilir. Yalnızca riski anlıyorsanız ve geri alma yolunuz (Kurtarma / Sistem Geri Yükleme) varsa devam edin.</value></data>
+  <data name="GuidedRepair_WarningShort" xml:space="preserve"><value>Rehberli belirti onarımı: çalışan ayarları etkileyebilir.</value></data>
+  <data name="GuidedRepair_SideEffectsTitle" xml:space="preserve"><value>Uygulama sırasında neler olabilir</value></data>
+  <data name="GuidedRepair_FixesTitle" xml:space="preserve"><value>Çalıştırılacak ilgili onarımlar</value></data>
+  <data name="GuidedRepair_AcceptRisk" xml:space="preserve"><value>Bu değişikliklerin şu an çalışan bir şeyi bozabileceğini anlıyorum ve riski kabul ediyorum.</value></data>
+  <data name="GuidedRepair_NeedConsent" xml:space="preserve"><value>Belirti onarımlarını uygulamadan önce risk kutusunu işaretleyin.</value></data>
+  <data name="GuidedRepair_FixCount" xml:space="preserve"><value>{0} ilgili onarım</value></data>
+  <data name="GuidedRepair_NoFixes" xml:space="preserve"><value>Bu belirti için otomatik Güvenli/Orta onarım eşlemesi yok.</value></data>
+  <data name="GuidedRepair_Applying" xml:space="preserve"><value>“{0}” için onarımlar uygulanıyor…</value></data>
+  <data name="GuidedRepair_RunningEffectsReminder" xml:space="preserve"><value>Şu anda yan etkiler görülebilir (ses cızırtısı, kısa kopmalar, titreme). Bitene kadar bu pencerede kalın.</value></data>
+  <data name="GuidedRepair_ToastTitle" xml:space="preserve"><value>Belirti onarımı</value></data>
+  <data name="GuidedRepair_Effects_Network" xml:space="preserve"><value>İnternet kısa süre kesilebilir, Wi‑Fi/Ethernet yeniden bağlanabilir, VPN oturumları düşebilir, indirmeler duraklayabilir ve DNS/önbellek oturana kadar siteler açılamayabilir.</value></data>
+  <data name="GuidedRepair_Effects_Audio" xml:space="preserve"><value>Cızırtı, kısa sessizlik, cihaz değişimi, ses sıçraması veya Bluetooth kulaklığın yeniden bağlanması olabilir. Mümkünse önemli aramaları kapatın.</value></data>
+  <data name="GuidedRepair_Effects_Display" xml:space="preserve"><value>Ekran titreyebilir, kısa süre kararabilir, çözünürlük/yenileme hızı değişebilir veya monitörler yeniden algılanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Bluetooth" xml:space="preserve"><value>Eşleşmiş cihazlar kopabilir ve yeniden bağlanmanız gerekebilir; ses/giriş birkaç saniye düşebilir.</value></data>
+  <data name="GuidedRepair_Effects_Printer" xml:space="preserve"><value>Yazdırma işleri iptal veya yeniden başlatılabilir; yazıcı kuyruk servisi yeniden başlarken kısa süre çevrimdışı görünebilir.</value></data>
+  <data name="GuidedRepair_Effects_Disk" xml:space="preserve"><value>Disk etkinliği artabilir, bilgisayar yavaşlayabilir ve daha sonra yeniden başlatma isteyen bir denetim planlanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Integrity" xml:space="preserve"><value>Sistem dosyası onarımı uzun sürebilir, CPU/disk yükünü yükseltebilir ve yeniden başlatma isteyebilir. Güç kesmeyin.</value></data>
+  <data name="GuidedRepair_Effects_Update" xml:space="preserve"><value>Windows Update servisleri yeniden başlar; bekleyen kurulumlar duraklayabilir ve ardından yeniden başlatma gerekebilir.</value></data>
+  <data name="GuidedRepair_Effects_Store" xml:space="preserve"><value>Microsoft Store ve bazı uygulamalar kapanabilir veya yeniden oturum açmanız gerekebilir; indirmeler sıfırlanabilir.</value></data>
+  <data name="GuidedRepair_Effects_Camera" xml:space="preserve"><value>Kamera uygulamaları cihazı kısa süre kaybedebilir; gizlilik izinleri yeniden sorulabilir.</value></data>
+  <data name="GuidedRepair_Effects_Usb" xml:space="preserve"><value>USB aygıtları kopup yeniden görünebilir; aktarım bozulmasın diye depolama aygıtlarını önce güvenli kapatın.</value></data>
+  <data name="GuidedRepair_Effects_Search" xml:space="preserve"><value>Servis yeniden başlarken Arama yanıt vermeyebilir; dizinleme yüksek disk kullanımıyla sürebilir.</value></data>
+  <data name="GuidedRepair_Effects_Time" xml:space="preserve"><value>Saat bir an kayabilir; senkron bitene kadar güvenli siteler veya oturumlar hata verebilir.</value></data>
+  <data name="GuidedRepair_Effects_Performance" xml:space="preserve"><value>Başlangıç öğeleri veya güç planı değişebilir; bir sonraki yeniden başlatmadan sonra sistem farklı hissedilebilir.</value></data>
+  <data name="GuidedRepair_Effects_Generic" xml:space="preserve"><value>Bu alandaki servisler veya aygıtlar yeniden başlayabilir. Değişiklikler uygulanırken kısa donma, yeniden bağlanma veya arayüz titremesi olabilir.</value></data>
+  <data name="Action_StillHaveProblem" xml:space="preserve"><value>Hâlâ sorun mu var?</value></data>
+  <data name="Action_ApplySymptomRepairs" xml:space="preserve"><value>İlgili onarımları uygula</value></data>
+  <data name="Finding_GuidedSymptom" xml:space="preserve"><value>“{0}” için rehberli onarım: {1}</value></data>
+  <data name="Operation_ResultHealthyAdviceGuided" xml:space="preserve"><value>Hâlâ bir şey ters geliyorsa Bulgular’dan belirti seçin — risk uyarısından sonra ilgili onarımlar uygulanır (çalışırken ses cızırtısı, ağ kopması veya titreme olabilir).</value></data>
   <data name="Finding_TechnicalDetail" xml:space="preserve"><value>Teknik ayrıntı</value></data>
   <data name="Finding_Recommended" xml:space="preserve"><value>Önerilen onarım</value></data>
   <data name="Finding_NoAutomaticFix" xml:space="preserve"><value>Otomatik onarım sunulmuyor; kanıtları ve önerilen el ile kontrolleri inceleyin.</value></data>
@@ -314,6 +349,8 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Check_Network_Services" xml:space="preserve"><value>Ağ servisleri</value></data>
   <data name="Check_Network_Performance" xml:space="preserve"><value>TCP ve Wi‑Fi performansı</value></data>
   <data name="Check_Network_Throughput" xml:space="preserve"><value>İndirme hızı</value></data>
+  <data name="Check_Network_EventLog" xml:space="preserve"><value>Ağ olay günlüğü eşlemesi</value></data>
+  <data name="Check_Network_Bindings" xml:space="preserve"><value>IPv4/IPv6 protokol bağlamaları</value></data>
   <data name="Check_Audio_OutputDevices" xml:space="preserve"><value>Çıkış cihazı envanteri</value></data>
   <data name="Check_Audio_InputDevices" xml:space="preserve"><value>Giriş cihazı envanteri</value></data>
   <data name="Check_Audio_DefaultDevices" xml:space="preserve"><value>Varsayılan ses cihazları</value></data>
@@ -326,6 +363,8 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Check_Audio_Bluetooth" xml:space="preserve"><value>Bluetooth ses profili</value></data>
   <data name="Check_Audio_Hdmi" xml:space="preserve"><value>HDMI ve Display Audio</value></data>
   <data name="Check_Audio_Communications" xml:space="preserve"><value>İletişim sesi davranışı</value></data>
+  <data name="Check_Audio_EventLog" xml:space="preserve"><value>Ses olay günlüğü eşlemesi</value></data>
+  <data name="Check_Audio_PnpDisabled" xml:space="preserve"><value>Devre dışı ses aygıtları</value></data>
   <data name="Check_Update_Services" xml:space="preserve"><value>Güncelleme servisleri</value></data>
   <data name="Check_Update_Errors" xml:space="preserve"><value>Son güncelleme hataları</value></data>
   <data name="Check_Update_PendingReboot" xml:space="preserve"><value>Bekleyen yeniden başlatma</value></data>
@@ -350,6 +389,9 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Fix_Network_CycleAdapters" xml:space="preserve"><value>Etkin ağ bağdaştırıcılarını yeniden başlat</value></data>
   <data name="Fix_Network_RestartServices" xml:space="preserve"><value>Ağ servislerini yeniden başlat</value></data>
   <data name="Fix_Network_ClearArp" xml:space="preserve"><value>ARP önbelleğini temizle</value></data>
+  <data name="Fix_Network_SoftHeal" xml:space="preserve"><value>Ağı yumuşak onar (DNS, ARP, servisler)</value></data>
+  <data name="Fix_Network_IpconfigSuite" xml:space="preserve"><value>Tam ipconfig paketi (flush / release / renew / register)</value></data>
+  <data name="Fix_Network_RescanDevices" xml:space="preserve"><value>Ağ aygıtlarını yeniden tara</value></data>
   <data name="Fix_Network_ResetStack" xml:space="preserve"><value>Winsock ve IP yığınını sıfırla</value></data>
   <data name="Fix_Network_NormalizeTcp" xml:space="preserve"><value>TCP ayarlarını normale döndür</value></data>
   <data name="Fix_Network_DisablePowerSaving" xml:space="preserve"><value>Bağdaştırıcı güç tasarrufunu kapat</value></data>
@@ -369,6 +411,8 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Fix_Audio_MicrophonePrivacy" xml:space="preserve"><value>Mikrofon erişimine izin ver</value></data>
   <data name="Fix_Audio_MixerReset" xml:space="preserve"><value>Uygulama bazlı mikseri sıfırla</value></data>
   <data name="Fix_Audio_BluetoothRestart" xml:space="preserve"><value>Seçili Bluetooth ses cihazını yeniden başlat</value></data>
+  <data name="Fix_Audio_EnableAllDisabled" xml:space="preserve"><value>Tüm devre dışı ses aygıtlarını etkinleştir</value></data>
+  <data name="Fix_Audio_RescanDevices" xml:space="preserve"><value>Ses aygıtlarını yeniden tara ve servisleri başlat</value></data>
   <data name="Fix_Audio_DriverReset" xml:space="preserve"><value>Seçili ses sürücüsünü yeniden kur</value></data>
   <data name="Fix_Audio_MmDevicesReset" xml:space="preserve"><value>Windows ses uç noktalarını yeniden oluştur</value></data>
   <data name="Fix_Update_RestartServices" xml:space="preserve"><value>Güncelleme servislerini düzelt</value></data>
@@ -440,7 +484,9 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Check_Search_Service" xml:space="preserve"><value>Windows Arama hizmeti</value></data>
   <data name="Check_Search_Errors" xml:space="preserve"><value>Son arama hataları</value></data>
   <data name="Check_Display_Adapters" xml:space="preserve"><value>Grafik bağdaştırıcıları</value></data>
+  <data name="Check_Display_Driver" xml:space="preserve"><value>Grafik sürücü sağlığı</value></data>
   <data name="Check_Display_Errors" xml:space="preserve"><value>Son ekran sıfırlamaları</value></data>
+  <data name="Check_Display_Tdr" xml:space="preserve"><value>GPU zaman aşımı (TDR) olayları</value></data>
   <data name="Finding_Camera_DeviceError" xml:space="preserve"><value>Bir kamera cihazı Windows cihaz hatası bildiriyor.</value></data>
   <data name="Finding_Camera_PrivacyBlocked" xml:space="preserve"><value>Windows gizlilik ayarları kamera erişimini engelliyor.</value></data>
   <data name="Finding_Usb_DeviceError" xml:space="preserve"><value>Bağlı USB cihazlarından biri veya birkaçı hata bildiriyor.</value></data>
@@ -448,13 +494,27 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Finding_Search_ServiceStopped" xml:space="preserve"><value>Windows Arama durdurulmuş veya devre dışı.</value></data>
   <data name="Finding_Search_RecentErrors" xml:space="preserve"><value>Windows Arama yakın zamanda dizin oluşturma hataları kaydetti.</value></data>
   <data name="Finding_Display_AdapterError" xml:space="preserve"><value>Bir grafik bağdaştırıcısı kritik cihaz hatası bildiriyor.</value></data>
+  <data name="Finding_Display_DriverError" xml:space="preserve"><value>Bir grafik sürücüsü Windows aygıt hata kodu bildiriyor.</value></data>
   <data name="Finding_Display_RecentResets" xml:space="preserve"><value>Ekran sürücüsü yakın zamanda sıfırlandı.</value></data>
+  <data name="Finding_Display_TdrEvents" xml:space="preserve"><value>Windows yakın zamanda GPU zaman aşımı (TDR) veya ekran kurtarma olayları kaydetti.</value></data>
+  <data name="Finding_Network_EventLogErrors" xml:space="preserve"><value>Ağ bağdaştırıcıları veya TCP/IP için yakın zamanlı olay günlüğü hataları eşlendi.</value></data>
+  <data name="Finding_Network_ProtocolDisabled" xml:space="preserve"><value>Bir veya daha fazla fiziksel bağdaştırıcıda IPv4 veya IPv6 devre dışı.</value></data>
+  <data name="Finding_Audio_EventLogErrors" xml:space="preserve"><value>Ses servisleri için yakın zamanlı olay günlüğü hataları eşlendi.</value></data>
+  <data name="Finding_Audio_PnpDisabled" xml:space="preserve"><value>Bir veya daha fazla ses aygıtı Aygıt Yöneticisi’nde devre dışı veya hatalı.</value></data>
   <data name="Fix_Camera_AllowAccess" xml:space="preserve"><value>Kamera erişimine izin ver</value></data>
   <data name="Fix_Camera_RestartDevice" xml:space="preserve"><value>Etkilenen kamerayı yeniden başlat</value></data>
   <data name="Fix_Usb_StartServices" xml:space="preserve"><value>Cihaz hizmetlerini başlat</value></data>
   <data name="Fix_Usb_RestartDevice" xml:space="preserve"><value>Etkilenen USB cihazını yeniden başlat</value></data>
   <data name="Fix_Search_RestartService" xml:space="preserve"><value>Windows Arama'yı onarıp yeniden başlat</value></data>
+  <data name="Fix_Display_SoftReset" xml:space="preserve"><value>Grafik soft-reset (Win+Ctrl+Shift+B)</value></data>
+  <data name="Fix_Display_ScanDevices" xml:space="preserve"><value>Grafik aygıtlarını yeniden tara</value></data>
+  <data name="Fix_Display_RestartAll" xml:space="preserve"><value>Tüm grafik bağdaştırıcılarını yeniden başlat</value></data>
   <data name="Fix_Display_RestartDevice" xml:space="preserve"><value>Grafik bağdaştırıcısını yeniden başlat</value></data>
+  <data name="Check_Integrity_ScanHealth" xml:space="preserve"><value>DISM ScanHealth (derin bileşen deposu)</value></data>
+  <data name="Finding_Integrity_ScanHealthFailed" xml:space="preserve"><value>DISM ScanHealth, onarım gerektirebilecek bileşen deposu bozulması bildirdi.</value></data>
+  <data name="Fix_Integrity_SfcScan" xml:space="preserve"><value>SFC /scannow çalıştır</value></data>
+  <data name="Fix_Integrity_DismRestore" xml:space="preserve"><value>DISM RestoreHealth çalıştır</value></data>
+  <data name="Fix_Integrity_ComponentCleanup" xml:space="preserve"><value>DISM StartComponentCleanup</value></data>
   <data name="Symptom_Camera_NotWorking" xml:space="preserve"><value>Kamera kullanılamıyor veya engellenmiş</value></data>
   <data name="Symptom_Usb_NotWorking" xml:space="preserve"><value>Bir USB cihazı çalışmıyor</value></data>
   <data name="Symptom_Search_NotWorking" xml:space="preserve"><value>Windows Arama çalışmıyor</value></data>
@@ -518,11 +578,20 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Toast_RecoveryDismissed" xml:space="preserve"><value>Kurtarma reddedildi</value></data>
   <data name="ModulePanel_Details" xml:space="preserve"><value>Alan ayrıntıları</value></data>
   <data name="ModulePanel_Symptoms" xml:space="preserve"><value>Yaygın belirtiler — odaklı tarama için birini seçin</value></data>
+  <data name="ModulePanel_NoSymptoms" xml:space="preserve"><value>Bu alan için belirti kısayolu yok. Bunun yerine tam modül taraması çalıştırın.</value></data>
+  <data name="ModulePanel_Hint" xml:space="preserve"><value>Daha derin denetim için tarayın veya bir belirti seçip risk uyarısından sonra ilgili onarımları uygulayın (cızırtı, kopma veya titreme görülebilir).</value></data>
   <data name="Action_ClosePanel" xml:space="preserve"><value>Kapat</value></data>
   <data name="Action_ViewFindings" xml:space="preserve"><value>Bulguları gör</value></data>
   <data name="Action_ForceRepairReal" xml:space="preserve"><value>Gerçek sorunları onar</value></data>
   <data name="Action_ForceRepairAll" xml:space="preserve"><value>Yaygın bulguları da dahil et</value></data>
   <data name="Operation_PhaseComplete" xml:space="preserve"><value>Tarama tamam</value></data>
+  <data name="Operation_EtaCalculating" xml:space="preserve"><value>Süre hesaplanıyor…</value></data>
+  <data name="Operation_EtaStarting" xml:space="preserve"><value>Bu adım genelde ~{0} dk sürer</value></data>
+  <data name="Operation_EtaMinutes" xml:space="preserve"><value>~{0} dk kaldı</value></data>
+  <data name="Operation_EtaSeconds" xml:space="preserve"><value>~{0} sn kaldı</value></data>
+  <data name="Operation_EtaHoursMinutes" xml:space="preserve"><value>~{0} sa {1} dk kaldı</value></data>
+  <data name="Operation_EtaAlmostDone" xml:space="preserve"><value>Neredeyse bitti…</value></data>
+  <data name="Operation_LongToolHint" xml:space="preserve"><value>uzun araç (~{0} dk)</value></data>
   <data name="Operation_LiveSummary" xml:space="preserve"><value>Sorunsuz denetim: {0} · Bulgu: {1}</value></data>
   <data name="Operation_StatPassed" xml:space="preserve"><value>Sorun yok</value></data>
   <data name="Operation_StatFindings" xml:space="preserve"><value>Bulgu</value></data>
@@ -552,6 +621,32 @@ Geri yükleme noktasını atlayıp Zorla Onarıma devam edilsin mi?</value></dat
   <data name="Finding_Disk_FileSystemDirty" xml:space="preserve"><value>Windows, sistem birimini dosya sistemi tutarlılık denetimi için işaretledi.</value></data>
   <data name="Settings_ExpertCatalog" xml:space="preserve"><value>Uzman onarım kataloğu</value></data>
   <data name="Settings_ExpertCatalogDescription" xml:space="preserve"><value>Tam onarım kataloğu. Tek bir onarımı Çalıştır ile uygulayabilirsiniz (yedek ve onay kapıları geçerli kalır). Hedef gerektiren onarımlar için önce o hedefi toplayan bir tarama gerekir.</value></data>
+  <data name="Settings_ManualTools" xml:space="preserve"><value>Manuel Windows onarım araçları</value></data>
+  <data name="Settings_ManualToolsDescription" xml:space="preserve"><value>Microsoft odaklı bir onarım aracını tarama bulgusu beklemeden seçip çalıştırın. Güvenli ve Orta araçlar her zaman kullanılabilir; Agresif araçlar önce Zorla Onarım risk onayı ister.</value></data>
+  <data name="Settings_ManualToolsRisk" xml:space="preserve"><value>Bu araçlar sistem durumunu değiştirir (ipconfig, DISM/SFC, WinRE/BCD, ağ yığını, GPU soft-reset vb.). Yedek ve onaylar yine geçerlidir. Boot yeniden oluşturma yeniden başlatma isteyebilir; bootrec gibi yalnızca çevrimdışı (WinRE) komutlar masaüstünden çalıştırılmaz.</value></data>
+  <data name="Settings_ManualToolsAggressiveHint" xml:space="preserve"><value>Bulgular’da Zorla Onarım riskini kabul edin, ardından Agresif aracı yeniden çalıştırın.</value></data>
+  <data name="Action_RunTool" xml:space="preserve"><value>Aracı çalıştır</value></data>
+  <data name="Module_Boot_Name" xml:space="preserve"><value>Önyükleme ve kurtarma</value></data>
+  <data name="Module_Boot_Description" xml:space="preserve"><value>WinRE, BCD sağlığı ve çevrimiçi önyükleme dosyası kurtarma (bcdedit / bcdboot / reagentc).</value></data>
+  <data name="Check_Boot_WinRe" xml:space="preserve"><value>Windows Kurtarma Ortamı (WinRE)</value></data>
+  <data name="Check_Boot_Bcd" xml:space="preserve"><value>Önyükleme yapılandırma verisi ({current})</value></data>
+  <data name="Check_Boot_BcdFirmware" xml:space="preserve"><value>Ürün yazılımı önyükleme yöneticisi kayıtları</value></data>
+  <data name="Finding_Boot_WinReDisabled" xml:space="preserve"><value>Windows Kurtarma Ortamı (WinRE) devre dışı.</value></data>
+  <data name="Finding_Boot_WinReUnreadable" xml:space="preserve"><value>WinRE durumu reagentc ile okunamadı.</value></data>
+  <data name="Finding_Boot_BcdUnreadable" xml:space="preserve"><value>Geçerli Boot Configuration Data kaydı okunamadı.</value></data>
+  <data name="Finding_Boot_FirmwareEnumFailed" xml:space="preserve"><value>Ürün yazılımı BCD numaralandırması başarısız ve OS yükleyici kaydı da sağlıksız.</value></data>
+  <data name="Fix_Boot_ExportBcd" xml:space="preserve"><value>BCD deposunu dışa aktar (yedek)</value></data>
+  <data name="Fix_Boot_RecoveryEnabled" xml:space="preserve"><value>Geçerli önyükleme kaydında kurtarmayı aç</value></data>
+  <data name="Fix_Boot_EnableWinRe" xml:space="preserve"><value>Windows Kurtarma Ortamı’nı etkinleştir</value></data>
+  <data name="Fix_Boot_RebuildBcdBoot" xml:space="preserve"><value>bcdboot ile önyükleme dosyalarını yeniden oluştur</value></data>
+  <data name="Symptom_Boot_RecoveryMissing" xml:space="preserve"><value>Kurtarma ortamı yok veya devre dışı</value></data>
+  <data name="Symptom_Boot_ConfigSuspect" xml:space="preserve"><value>Önyükleme yapılandırması bozulmuş olabilir</value></data>
+  <data name="Check_Disk_OnlineScan" xml:space="preserve"><value>Çevrimiçi chkdsk /scan</value></data>
+  <data name="Finding_Disk_OnlineScanIssues" xml:space="preserve"><value>Çevrimiçi dosya sistemi taraması sorun bildirdi veya temiz tamamlanmadı.</value></data>
+  <data name="Fix_Disk_OnlineScanFix" xml:space="preserve"><value>Çevrimiçi chkdsk /scan ve /spotfix</value></data>
+  <data name="Check_Integrity_AnalyzeStore" xml:space="preserve"><value>DISM AnalyzeComponentStore</value></data>
+  <data name="Finding_Integrity_CleanupRecommended" xml:space="preserve"><value>DISM bileşen deposu temizliği öneriyor (geri kazanılabilir paketler).</value></data>
+  <data name="GuidedRepair_Effects_Boot" xml:space="preserve"><value>Önyükleme/kurtarma araçları BCD dışa aktarabilir, WinRE’yi açabilir veya önyükleme dosyalarını yeniden yazabilir. Yeniden başlatma gerekebilir. Yalnızca çevrimdışı araçlar (bootrec) çalışan masaüstünden çalıştırılmaz.</value></data>
   <data name="Expert_FixFlags" xml:space="preserve"><value>{0} · {1}</value></data>
   <data name="Expert_TargetRequired" xml:space="preserve"><value>hedef gerekli</value></data>
   <data name="Expert_NoTargetRequired" xml:space="preserve"><value>cihaz hedefi yok</value></data>

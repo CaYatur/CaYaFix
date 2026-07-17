@@ -53,7 +53,9 @@ public sealed class AudioModule : IModuleDefinition
         new DelegateDiagnosticCheck("audio.privacy", "Check_Audio_MicrophonePrivacy", ModuleId, CheckMicrophonePrivacyAsync),
         new DelegateDiagnosticCheck("audio.bluetooth", "Check_Audio_Bluetooth", ModuleId, CheckBluetoothAsync, quick: false),
         new DelegateDiagnosticCheck("audio.hdmi", "Check_Audio_Hdmi", ModuleId, CheckHdmiAsync, quick: false),
-        new DelegateDiagnosticCheck("audio.ducking", "Check_Audio_Communications", ModuleId, CheckCommunicationsAsync)
+        new DelegateDiagnosticCheck("audio.ducking", "Check_Audio_Communications", ModuleId, CheckCommunicationsAsync),
+        new DelegateDiagnosticCheck("audio.eventlog", "Check_Audio_EventLog", ModuleId, CheckEventLogAsync, quick: false, supportsPostRepairVerification: false),
+        new DelegateDiagnosticCheck("audio.pnp-disabled", "Check_Audio_PnpDisabled", ModuleId, CheckPnpDisabledAsync)
     ];
 
     private static IReadOnlyList<FixAction> CreateFixes() =>
@@ -67,6 +69,8 @@ public sealed class AudioModule : IModuleDefinition
         CreateMixerResetFix(),
         CreateBluetoothRestartFix(),
         CreateEnableDeviceFix(),
+        CreateEnableAllDisabledFix(),
+        CreateRescanDevicesFix(),
         CreateDriverResetFix(),
         CreateMmDevicesResetFix()
     ];
@@ -81,23 +85,23 @@ public sealed class AudioModule : IModuleDefinition
     private static IReadOnlyList<Playbook> CreatePlaybooks() =>
     [
         new("audio.no-sound", ModuleId, "Symptom_Audio_NoSound",
-            ["audio.output.devices", "audio.defaults", "audio.services", "audio.levels", "audio.drivers"],
-            ["audio.restart-services", "audio.unmute", "audio.set-default", "audio.disable-enhancements"]),
+            ["audio.output.devices", "audio.defaults", "audio.services", "audio.levels", "audio.drivers", "audio.pnp-disabled", "audio.eventlog"],
+            ["audio.restart-services", "audio.enable-all-disabled", "audio.rescan-devices", "audio.unmute", "audio.set-default", "audio.disable-enhancements"]),
         new("audio.crackle", ModuleId, "Symptom_Audio_Crackling",
-            ["audio.formats", "audio.apo", "audio.drivers", "audio.bluetooth"],
-            ["audio.disable-enhancements", "audio.format-reset", "audio.restart-services"]),
+            ["audio.formats", "audio.apo", "audio.drivers", "audio.bluetooth", "audio.eventlog"],
+            ["audio.disable-enhancements", "audio.format-reset", "audio.restart-services", "audio.rescan-devices"]),
         new("audio.mic-none", ModuleId, "Symptom_Audio_MicNotWorking",
-            ["audio.input.devices", "audio.privacy", "audio.levels", "audio.services", "audio.drivers"],
-            ["audio.microphone-privacy", "audio.unmute", "audio.restart-services"]),
+            ["audio.input.devices", "audio.privacy", "audio.levels", "audio.services", "audio.drivers", "audio.pnp-disabled"],
+            ["audio.microphone-privacy", "audio.enable-all-disabled", "audio.unmute", "audio.restart-services"]),
         new("audio.mic-low", ModuleId, "Symptom_Audio_MicLow",
             ["audio.levels", "audio.formats", "audio.apo"],
             ["audio.unmute", "audio.disable-enhancements"]),
         new("audio.bluetooth-bad", ModuleId, "Symptom_Audio_BluetoothBad",
             ["audio.bluetooth", "audio.defaults", "audio.formats"],
-            ["audio.set-default", "audio.bluetooth-restart"]),
+            ["audio.set-default", "audio.bluetooth-restart", "audio.restart-services"]),
         new("audio.wrong-device", ModuleId, "Symptom_Audio_WrongDevice",
             ["audio.defaults", "audio.hdmi"],
-            ["audio.set-default"])
+            ["audio.set-default", "audio.restart-services"])
     ];
 
     private static Task<Finding?> CheckOutputDevicesAsync(DiagnosticContext context, CancellationToken ct)
@@ -451,6 +455,69 @@ public sealed class AudioModule : IModuleDefinition
             : null);
     }
 
+    private static async Task<Finding?> CheckEventLogAsync(DiagnosticContext context, CancellationToken ct)
+    {
+        const string script =
+            "$since=(Get-Date).AddDays(-3); " +
+            "$providers=@('Microsoft-Windows-Audio','Microsoft-Windows-Audio-EndpointBuilder','Audiosrv','AudioEndpointBuilder'); " +
+            "$events=@(); " +
+            "foreach($p in $providers){ " +
+            "  $events += @(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName=$p;StartTime=$since;Level=1,2,3} -MaxEvents 10 -ErrorAction SilentlyContinue); " +
+            "  $events += @(Get-WinEvent -FilterHashtable @{LogName='Application';ProviderName=$p;StartTime=$since;Level=1,2,3} -MaxEvents 10 -ErrorAction SilentlyContinue) " +
+            "}; " +
+            "$events | Sort-Object TimeCreated -Descending | Select-Object -First 12 TimeCreated,Id,ProviderName,LevelDisplayName,Message";
+        try
+        {
+            var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+            var rows = ModuleHelpers.Array(root).ToArray();
+            return rows.Length >= 2
+                ? ModuleHelpers.Finding(
+                    "audio.eventlog",
+                    ModuleId,
+                    Severity.Warning,
+                    "Finding_Audio_EventLogErrors",
+                    string.Join(Environment.NewLine, rows.Select(row => row.ToString())),
+                    "audio.restart-services",
+                    "audio.rescan-devices",
+                    "audio.enable-all-disabled")
+                : null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static async Task<Finding?> CheckPnpDisabledAsync(DiagnosticContext context, CancellationToken ct)
+    {
+        const string script =
+            "Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue | " +
+            "Where-Object { " +
+            "  ($_.Class -in @('MEDIA','AudioEndpoint','SoftwareDevice') -or $_.FriendlyName -match 'Audio|Sound|Speaker|Microphone|Realtek|NVIDIA High Definition|AMD High Definition') -and " +
+            "  ($_.Status -eq 'Error' -or $_.Problem -match 'CM_PROB_DISABLED|22|DISABLED' -or $_.Status -eq 'Unknown') " +
+            "} | Select-Object Status,Class,FriendlyName,InstanceId,Problem";
+        var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+        var rows = ModuleHelpers.Array(root).ToArray();
+        if (rows.Length == 0) return null;
+        var finding = ModuleHelpers.Finding(
+            "audio.pnp-disabled",
+            ModuleId,
+            Severity.Warning,
+            "Finding_Audio_PnpDisabled",
+            string.Join(Environment.NewLine, rows.Select(row => row.ToString())),
+            "audio.enable-all-disabled",
+            "audio.enable-device",
+            "audio.rescan-devices",
+            "audio.restart-services");
+        var target = ModuleHelpers.GetString(rows[0], "InstanceId");
+        if (!string.IsNullOrWhiteSpace(target))
+        {
+            finding.RepairParameters["audio.enable-device.target"] = target;
+        }
+
+        return finding;
+    }
+
     private static DelegateFixAction CreateRestartServicesFix() => new(
         "audio.restart-services", "Fix_Audio_RestartServices", ModuleId, RiskTier.Safe,
         (context, ct) => context.Backups.CaptureServicesAsync(AudioServices, ModuleHelpers.BackupDirectory(context), ct),
@@ -611,6 +678,62 @@ public sealed class AudioModule : IModuleDefinition
                    !result.StdOut.Contains("Disabled", StringComparison.OrdinalIgnoreCase);
         },
         requiresTarget: true);
+
+    private static DelegateFixAction CreateEnableAllDisabledFix() => new(
+        "audio.enable-all-disabled", "Fix_Audio_EnableAllDisabled", ModuleId, RiskTier.Safe,
+        (context, ct) => context.Backups.CaptureCommandStateAsync(
+            "audio-disabled-devices",
+            "powershell.exe",
+            [
+                "-NoProfile", "-NonInteractive", "-Command",
+                "Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue | " +
+                "Where-Object { $_.Class -in @('MEDIA','AudioEndpoint') -or $_.FriendlyName -match 'Audio|Sound|Speaker|Microphone' } | " +
+                "Select-Object InstanceId,Status,Problem | ConvertTo-Json -Compress"
+            ],
+            "powershell.exe",
+            [
+                "-NoProfile", "-NonInteractive", "-Command",
+                "$state=@(Get-Content -Raw -LiteralPath '{backup}'|ConvertFrom-Json); $tool=Join-Path $env:windir 'System32\\pnputil.exe'; " +
+                "@($state)|ForEach-Object{ if($_.InstanceId -and ($_.Status -eq 'Error' -or [string]$_.Problem -match '22|DISABLED')){ & $tool /disable-device $_.InstanceId | Out-Null } }"
+            ],
+            ModuleHelpers.BackupDirectory(context),
+            ct),
+        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep(
+                "powershell.exe",
+                [
+                    "-NoProfile", "-NonInteractive", "-Command",
+                    "$ErrorActionPreference='Continue'; $tool=Join-Path $env:windir 'System32\\pnputil.exe'; " +
+                    "Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue | Where-Object { " +
+                    "  ($_.Class -in @('MEDIA','AudioEndpoint') -or $_.FriendlyName -match 'Audio|Sound|Speaker|Microphone|Realtek') -and " +
+                    "  ($_.Status -eq 'Error' -or $_.Problem -match 'CM_PROB_DISABLED|22|DISABLED' -or $_.Status -eq 'Unknown') " +
+                    "} | ForEach-Object { & $tool /enable-device $_.InstanceId | Out-Null; Start-Sleep -Milliseconds 250 }; " +
+                    "try { Restart-Service AudioEndpointBuilder -Force -ErrorAction SilentlyContinue; Restart-Service Audiosrv -Force -ErrorAction SilentlyContinue } catch {}; exit 0"
+                ],
+                TimeSpan.FromMinutes(6))
+        ], ct),
+        async (context, ct) =>
+            (await context.Commands.RunAsync("sc.exe", ["query", "Audiosrv"], TimeSpan.FromMinutes(1), ct)
+                .ConfigureAwait(false)).Success);
+
+    private static DelegateFixAction CreateRescanDevicesFix() => new(
+        "audio.rescan-devices", "Fix_Audio_RescanDevices", ModuleId, RiskTier.Safe,
+        (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "audio-rescan-devices", ct),
+        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep("pnputil.exe", ["/scan-devices"], TimeSpan.FromMinutes(5)),
+            new CommandStep(
+                "powershell.exe",
+                [
+                    "-NoProfile", "-NonInteractive", "-Command",
+                    "try{ Restart-Service AudioEndpointBuilder -Force -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 400; Restart-Service Audiosrv -Force -ErrorAction SilentlyContinue }catch{}; exit 0"
+                ],
+                TimeSpan.FromMinutes(3))
+        ], ct),
+        async (context, ct) =>
+            (await context.Commands.RunAsync("sc.exe", ["query", "Audiosrv"], TimeSpan.FromMinutes(1), ct)
+                .ConfigureAwait(false)).Success);
 
     private static DelegateFixAction CreateDriverResetFix() => new(
         "audio.driver-reset", "Fix_Audio_DriverReset", ModuleId, RiskTier.Aggressive,

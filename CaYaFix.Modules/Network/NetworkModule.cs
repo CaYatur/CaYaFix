@@ -56,16 +56,21 @@ public sealed class NetworkModule : IModuleDefinition
         new DelegateDiagnosticCheck("net.power", "Check_Network_Power", ModuleId, CheckPowerAsync, quick: false),
         new DelegateDiagnosticCheck("net.services", "Check_Network_Services", ModuleId, CheckServicesAsync),
         new DelegateDiagnosticCheck("net.performance", "Check_Network_Performance", ModuleId, CheckPerformanceAsync),
-        new DelegateDiagnosticCheck("net.throughput", "Check_Network_Throughput", ModuleId, CheckThroughputAsync, quick: false)
+        new DelegateDiagnosticCheck("net.throughput", "Check_Network_Throughput", ModuleId, CheckThroughputAsync, quick: false),
+        new DelegateDiagnosticCheck("net.eventlog", "Check_Network_EventLog", ModuleId, CheckEventLogAsync, quick: false, supportsPostRepairVerification: false),
+        new DelegateDiagnosticCheck("net.bindings", "Check_Network_Bindings", ModuleId, CheckBindingsAsync)
     ];
 
     private static IReadOnlyList<FixAction> CreateFixes() =>
     [
         CreateFlushDnsFix(),
         CreateRenewDhcpFix(),
+        CreateIpconfigSuiteFix(),
         CreateCycleAdaptersFix(),
         CreateRestartServicesFix(),
         CreateClearArpFix(),
+        CreateSoftHealFix(),
+        CreateRescanDevicesFix(),
         CreateResetStackFix(),
         CreateNormalizeTcpFix(),
         CreateDisablePowerSavingFix(),
@@ -91,23 +96,23 @@ public sealed class NetworkModule : IModuleDefinition
     private static IReadOnlyList<Playbook> CreatePlaybooks() =>
     [
         new("network.no-internet", ModuleId, "Symptom_Network_NoInternet",
-            ["net.adapters", "net.ip", "net.gateway", "net.dns", "net.internet", "net.proxy", "net.routes", "net.services"],
-            ["net.flush-dns", "net.renew-dhcp", "net.restart-services", "net.reset-stack"]),
+            ["net.adapters", "net.ip", "net.gateway", "net.dns", "net.internet", "net.proxy", "net.routes", "net.services", "net.eventlog", "net.bindings"],
+            ["net.ipconfig-suite", "net.soft-heal", "net.flush-dns", "net.renew-dhcp", "net.restart-services", "net.reset-stack"]),
         new("network.limited", ModuleId, "Symptom_Network_Limited",
-            ["net.ip", "net.gateway", "net.dns", "net.firewall"],
-            ["net.renew-dhcp", "net.clear-arp", "net.reset-stack"]),
+            ["net.ip", "net.gateway", "net.dns", "net.firewall", "net.bindings"],
+            ["net.ipconfig-suite", "net.soft-heal", "net.renew-dhcp", "net.clear-arp", "net.reset-stack"]),
         new("network.slow", ModuleId, "Symptom_Network_Slow",
-            ["net.adapters", "net.performance", "net.mtu", "net.power", "net.throughput"],
-            ["net.normalize-tcp", "net.disable-power-saving"]),
+            ["net.adapters", "net.performance", "net.mtu", "net.power", "net.throughput", "net.eventlog"],
+            ["net.soft-heal", "net.normalize-tcp", "net.disable-power-saving"]),
         new("network.sites", ModuleId, "Symptom_Network_Sites",
             ["net.dns", "net.hosts", "net.mtu", "net.proxy"],
-            ["net.flush-dns", "net.restore-hosts", "net.clear-proxy", "net.public-dns"]),
+            ["net.flush-dns", "net.soft-heal", "net.restore-hosts", "net.clear-proxy", "net.public-dns"]),
         new("network.vpn", ModuleId, "Symptom_Network_Vpn",
-            ["net.vpn", "net.proxy", "net.dns", "net.ip", "net.routes"],
-            ["net.clear-proxy", "net.renew-dhcp", "net.reset-stack"]),
+            ["net.vpn", "net.proxy", "net.dns", "net.ip", "net.routes", "net.eventlog"],
+            ["net.clear-proxy", "net.soft-heal", "net.renew-dhcp", "net.reset-stack"]),
         new("network.wifi-drops", ModuleId, "Symptom_Network_WifiDrops",
-            ["net.adapters", "net.power", "net.performance", "net.services"],
-            ["net.disable-power-saving", "net.restart-services", "net.cycle-adapters"])
+            ["net.adapters", "net.power", "net.performance", "net.services", "net.eventlog"],
+            ["net.disable-power-saving", "net.soft-heal", "net.restart-services", "net.cycle-adapters", "net.rescan-devices"])
     ];
 
     private static async Task<Finding?> CheckAdaptersAsync(DiagnosticContext context, CancellationToken ct)
@@ -447,6 +452,61 @@ public sealed class NetworkModule : IModuleDefinition
             : null;
     }
 
+    private static async Task<Finding?> CheckEventLogAsync(DiagnosticContext context, CancellationToken ct)
+    {
+        // Correlate recent network adapter / TCPIP / NDIS failures from the System log.
+        const string script =
+            "$since=(Get-Date).AddDays(-3); " +
+            "$providers=@('Tcpip','Tcpip6','NDIS','Netwtw04','Netwtw06','Netwtw08','Netwtw10','e1dexpress','rt640x64','rtwlane','vwifimp','BTHUSB','RasMan','Dhcp-Client','DNS Client Events'); " +
+            "$events=@(); " +
+            "foreach($p in $providers){ " +
+            "  $events += @(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName=$p;StartTime=$since;Level=1,2,3} -MaxEvents 10 -ErrorAction SilentlyContinue) " +
+            "}; " +
+            "$events | Sort-Object TimeCreated -Descending | Select-Object -First 14 TimeCreated,Id,ProviderName,LevelDisplayName,Message";
+        try
+        {
+            var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+            var rows = ModuleHelpers.Array(root).ToArray();
+            return rows.Length >= 3
+                ? ModuleHelpers.Finding(
+                    "net.eventlog",
+                    ModuleId,
+                    Severity.Warning,
+                    "Finding_Network_EventLogErrors",
+                    DescribeRows(rows),
+                    "net.soft-heal",
+                    "net.restart-services",
+                    "net.rescan-devices",
+                    "net.reset-stack")
+                : null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static async Task<Finding?> CheckBindingsAsync(DiagnosticContext context, CancellationToken ct)
+    {
+        const string script =
+            "Get-NetAdapterBinding -ComponentID ms_tcpip,ms_tcpip6 -ErrorAction SilentlyContinue | " +
+            "Where-Object { $_.Enabled -eq $false -and $_.Name -notmatch 'Loopback|vEthernet|Virtual|Hyper-V|WSL|Docker|VMware|VirtualBox' } | " +
+            "Select-Object Name,DisplayName,ComponentID,Enabled";
+        var root = await context.Commands.RunPsJsonAsync<JsonElement>(script, ct).ConfigureAwait(false);
+        var rows = ModuleHelpers.Array(root).ToArray();
+        return rows.Length > 0
+            ? ModuleHelpers.Finding(
+                "net.bindings",
+                ModuleId,
+                Severity.Warning,
+                "Finding_Network_ProtocolDisabled",
+                DescribeRows(rows),
+                "net.soft-heal",
+                "net.reset-stack",
+                "net.full-reset")
+            : null;
+    }
+
     private static async Task<Finding?> CheckServicesAsync(DiagnosticContext context, CancellationToken ct)
     {
         const string script = "Get-CimInstance Win32_Service | Where-Object {$_.Name -in @('Dnscache','Dhcp','WlanSvc','NlaSvc','netprofm','WinHttpAutoProxySvc')} | Select-Object Name,State,StartMode";
@@ -577,6 +637,37 @@ public sealed class NetworkModule : IModuleDefinition
             [new CommandStep("ipconfig.exe", ["/flushdns"])], ct),
         async (context, ct) => (await context.Commands.RunAsync("ipconfig.exe", ["/displaydns"], TimeSpan.FromMinutes(1), ct).ConfigureAwait(false)).Success);
 
+    private static DelegateFixAction CreateIpconfigSuiteFix() => new(
+        "net.ipconfig-suite", "Fix_Network_IpconfigSuite", ModuleId, RiskTier.Safe,
+        (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "ipconfig-suite", ct),
+        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+        [
+            // Full local TCP/IP client refresh (manual ipconfig troubleshooting pack).
+            new CommandStep("ipconfig.exe", ["/flushdns"]),
+            new CommandStep("ipconfig.exe", ["/release"], TimeSpan.FromMinutes(3))
+            {
+                AcceptedExitCodes = new HashSet<int> { 0, 1 }
+            },
+            new CommandStep("ipconfig.exe", ["/renew"], TimeSpan.FromMinutes(5))
+            {
+                AcceptedExitCodes = new HashSet<int> { 0, 1 }
+            },
+            new CommandStep("ipconfig.exe", ["/registerdns"])
+            {
+                AcceptedExitCodes = new HashSet<int> { 0, 1 }
+            },
+            new CommandStep("ipconfig.exe", ["/flushdns"])
+        ], ct),
+        async (context, ct) =>
+        {
+            var result = await context.Commands.RunAsync(
+                "ipconfig.exe",
+                ["/all"],
+                TimeSpan.FromMinutes(1),
+                ct).ConfigureAwait(false);
+            return result.Success && !string.IsNullOrWhiteSpace(result.StdOut);
+        });
+
     private static DelegateFixAction CreateRenewDhcpFix() => new(
         "net.renew-dhcp", "Fix_Network_RenewDhcp", ModuleId, RiskTier.Safe,
         (context, ct) => context.Backups.CaptureCommandStateAsync(
@@ -607,6 +698,58 @@ public sealed class NetworkModule : IModuleDefinition
             var root = await context.Commands.RunPsJsonAsync<JsonElement>("Get-NetAdapter -Physical | Where-Object Status -eq 'Up' | Select-Object Name", ct).ConfigureAwait(false);
             return ModuleHelpers.Array(root).Any();
         });
+
+    private static DelegateFixAction CreateSoftHealFix() => new(
+        "net.soft-heal", "Fix_Network_SoftHeal", ModuleId, RiskTier.Safe,
+        async (context, ct) =>
+        {
+            var dir = ModuleHelpers.BackupDirectory(context);
+            var services = await context.Backups.CaptureServicesAsync(NetworkServices, dir, ct).ConfigureAwait(false);
+            var marker = await ModuleHelpers.TransientMarkerAsync(context, "network-soft-heal", ct).ConfigureAwait(false);
+            return services is not null && marker is not null
+                ? await context.Backups.CaptureBundleAsync("network-soft-heal", [services, marker], dir, ct).ConfigureAwait(false)
+                : services ?? marker;
+        },
+        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+        [
+            new CommandStep("ipconfig.exe", ["/flushdns"]),
+            new CommandStep("arp.exe", ["-d", "*"]) { AcceptedExitCodes = new HashSet<int> { 0, 1 } },
+            new CommandStep("netsh.exe", ["interface", "ip", "delete", "arpcache"]) { AcceptedExitCodes = new HashSet<int> { 0, 1 } },
+            new CommandStep(
+                "powershell.exe",
+                [
+                    "-NoProfile", "-NonInteractive", "-Command",
+                    "$names=@('Dnscache','Dhcp','NlaSvc','netprofm','WlanSvc'); " +
+                    "foreach($n in $names){ " +
+                    "  try{ $s=Get-CimInstance Win32_Service -Filter \"Name='$n'\" -ErrorAction Stop; " +
+                    "    if($s.StartMode -eq 'Disabled'){ Set-Service -Name $n -StartupType Manual -ErrorAction SilentlyContinue }; " +
+                    "    if((Get-Service -Name $n -ErrorAction SilentlyContinue).Status -ne 'Running'){ Start-Service -Name $n -ErrorAction SilentlyContinue } " +
+                    "  } catch {} " +
+                    "}; exit 0"
+                ],
+                TimeSpan.FromMinutes(3)),
+            new CommandStep("ipconfig.exe", ["/registerdns"]) { AcceptedExitCodes = new HashSet<int> { 0, 1 } }
+        ], ct),
+        async (context, ct) =>
+        {
+            var root = await context.Commands.RunPsJsonAsync<JsonElement>(
+                "Get-Service Dnscache,Dhcp,NlaSvc | Select-Object Name,Status",
+                ct).ConfigureAwait(false);
+            var rows = ModuleHelpers.Array(root).ToArray();
+            return rows.Length >= 2 && rows.All(row => IsStatus(row, "Running"));
+        });
+
+    private static DelegateFixAction CreateRescanDevicesFix() => new(
+        "net.rescan-devices", "Fix_Network_RescanDevices", ModuleId, RiskTier.Safe,
+        (context, ct) => ModuleHelpers.TransientMarkerAsync(context, "network-rescan-devices", ct),
+        (context, ct) => ModuleHelpers.RunSequenceAsync(context,
+            [new CommandStep("pnputil.exe", ["/scan-devices"], TimeSpan.FromMinutes(5))], ct),
+        async (context, ct) =>
+            (await context.Commands.RunAsync(
+                "pnputil.exe",
+                ["/enum-devices", "/class", "Net"],
+                TimeSpan.FromMinutes(2),
+                ct).ConfigureAwait(false)).Success);
 
     private static DelegateFixAction CreateRestartServicesFix() => new(
         "net.restart-services", "Fix_Network_RestartServices", ModuleId, RiskTier.Safe,

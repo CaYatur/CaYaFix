@@ -30,7 +30,16 @@ public static class Strings
     public static string Action_AutomaticScan => Get(nameof(Action_AutomaticScan));
     public static string Action_Cancel => Get(nameof(Action_Cancel));
     public static string Action_SkipRestorePoint => Get(nameof(Action_SkipRestorePoint));
+    public static string Action_StillHaveProblem => Get(nameof(Action_StillHaveProblem));
+    public static string Action_ApplySymptomRepairs => Get(nameof(Action_ApplySymptomRepairs));
     public static string Action_RepairSelected => Get(nameof(Action_RepairSelected));
+    public static string GuidedRepair_Intro => Get(nameof(GuidedRepair_Intro));
+    public static string GuidedRepair_IntroRisk => Get(nameof(GuidedRepair_IntroRisk));
+    public static string GuidedRepair_PickTitle => Get(nameof(GuidedRepair_PickTitle));
+    public static string GuidedRepair_ConfirmTitle => Get(nameof(GuidedRepair_ConfirmTitle));
+    public static string GuidedRepair_SideEffectsTitle => Get(nameof(GuidedRepair_SideEffectsTitle));
+    public static string GuidedRepair_FixesTitle => Get(nameof(GuidedRepair_FixesTitle));
+    public static string GuidedRepair_AcceptRisk => Get(nameof(GuidedRepair_AcceptRisk));
     public static string Action_TryModerate => Get(nameof(Action_TryModerate));
     public static string Action_ForceRepair => Get(nameof(Action_ForceRepair));
     public static string Action_CreateSupportPackage => Get(nameof(Action_CreateSupportPackage));
@@ -48,6 +57,8 @@ public static class Strings
     public static string Action_ScanModule => Get(nameof(Action_ScanModule));
     public static string ModulePanel_Details => Get(nameof(ModulePanel_Details));
     public static string ModulePanel_Symptoms => Get(nameof(ModulePanel_Symptoms));
+    public static string ModulePanel_NoSymptoms => Get(nameof(ModulePanel_NoSymptoms));
+    public static string ModulePanel_Hint => Get(nameof(ModulePanel_Hint));
     public static string Operation_StatPassed => Get(nameof(Operation_StatPassed));
     public static string Operation_StatFindings => Get(nameof(Operation_StatFindings));
     public static string Operation_StatCommon => Get(nameof(Operation_StatCommon));
@@ -87,6 +98,10 @@ public static class Strings
     public static string Settings_ExpertDescription => Get(nameof(Settings_ExpertDescription));
     public static string Settings_ExpertCatalog => Get(nameof(Settings_ExpertCatalog));
     public static string Settings_ExpertCatalogDescription => Get(nameof(Settings_ExpertCatalogDescription));
+    public static string Settings_ManualTools => Get(nameof(Settings_ManualTools));
+    public static string Settings_ManualToolsDescription => Get(nameof(Settings_ManualToolsDescription));
+    public static string Settings_ManualToolsRisk => Get(nameof(Settings_ManualToolsRisk));
+    public static string Action_RunTool => Get(nameof(Action_RunTool));
     public static string Expert_TierSelector => Get(nameof(Expert_TierSelector));
     public static string Settings_Offline => Get(nameof(Settings_Offline));
     public static string Settings_OfflineDescription => Get(nameof(Settings_OfflineDescription));

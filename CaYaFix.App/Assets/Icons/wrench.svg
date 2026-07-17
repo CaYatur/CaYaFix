@@ -1,4 +1,5 @@
 <!-- Copyright (c) 2026 CaYaDev (https://cayadev.com) | GitHub: CaYatur (https://github.com/CaYatur) | Licensed under the MIT License. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <path fill="none" stroke="#51DEC1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M14.2 6.2a4.2 4.2 0 0 0-5.7 5.7L4 16.4l3.6 3.6 4.5-4.5a4.2 4.2 0 0 0 5.7-5.7l-2.6 2.6-2.5-2.5 2.5-2.7Z"/>
+  <!-- Dual-tone: light for dark panels, dark accent path remains readable on teal Primary buttons when layered -->
+  <path fill="none" stroke="#E8F7F4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M14.2 6.2a4.2 4.2 0 0 0-5.7 5.7L4 16.4l3.6 3.6 4.5-4.5a4.2 4.2 0 0 0 5.7-5.7l-2.6 2.6-2.5-2.5 2.5-2.7Z"/>
 </svg>
