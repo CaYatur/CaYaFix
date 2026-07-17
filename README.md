@@ -24,13 +24,13 @@ This project is **tested on GitHub** via Actions on `master` (and `main`). Live 
 |---|---|
 | **CI** (`ci.yml`) | `validate-repository.ps1`, Release build (`-warnaserror`), unit/integration tests, self-contained `win-x64` publish + artifacts |
 | **CodeQL** (`codeql.yml`) | Static security analysis for C# |
-| **Screenshots** (`screenshots.yml`) | Real English WPF capture of `dashboard.png`, `findings.png`, `live-tests.png` |
+| **Screenshots** (`screenshots.yml`) | Real English WPF capture of `dashboard.png` and `findings.png` |
 | **Soak** (`soak.yml`) | Scheduled process-isolated soak with memory/handle ceilings |
 | **Release** (`release.yml`) | Tagged `v*` builds, zip + SHA-256 checksum upload |
 
 **Local + CI gates that must stay green:**
 
-- Catalog: **19 modules · 90 diagnostics · 163 repairs · 8 live tests**
+- Catalog: **19 modules · 90 diagnostics · 163 repairs**
 - xUnit suite (currently **91** tests) with hang detection
 - Localization parity (EN/TR), SVG/icon policy, MIT headers, trusted executable allowlist
 - Dependabot NuGet and GitHub Actions updates are validated on the same CI path
@@ -57,12 +57,12 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Highlights
 
-- **19 troubleshooting modules** with **90 diagnostic checks**, **163 repair actions** with transactional recovery, **8 interactive live tests**, and symptom-focused playbooks.
+- **19 troubleshooting modules** with **90 diagnostic checks**, **163 repair actions** with transactional recovery, and symptom-focused playbooks.
 - **Guided symptom repair** when a scan finds nothing: pick a problem area, read risk and side-effect warnings (audio glitches, network drops, display flicker, and similar), then apply related Safe/Moderate repairs.
 - **Manual Windows repair tools** (Settings): run Microsoft-oriented tools without waiting for a finding — ipconfig suite, network soft-heal, DISM/SFC steps, Win+Ctrl+Shift+B graphics soft-reset, BCD/WinRE helpers, and more. Aggressive tools still require Force risk acceptance.
 - **Live progress for long tools**: themed progress bar with **percent complete**, **estimated remaining minutes**, stage labels, and parsing of DISM/SFC-style console percentages when available.
-- Deep network diagnostics: adapter/IP/APIPA/gateway, DNS, captive portal, proxy, VPN residue, target-bound routes, firewall, hosts, Winsock, MTU, services, event-log correlation, IPv4/IPv6 bindings, Wi-Fi/TCP health, live ping/DNS/HTTP/MTU/speed tests, and repairs from soft-heal through stack/full reset.
-- Deep audio diagnostics: endpoints, services, levels, formats, enhancements, privacy, Bluetooth/HDMI, event log, disabled PnP devices, live speaker/mic/stability tests, plus enable-all-disabled and rescan repairs.
+- Deep network diagnostics: adapter/IP/APIPA/gateway, DNS, captive portal, proxy, VPN residue, target-bound routes, firewall, hosts, Winsock, MTU, services, event-log correlation, IPv4/IPv6 bindings, Wi-Fi/TCP health, and repairs from soft-heal through stack/full reset.
+- Deep audio diagnostics: endpoints, services, levels, formats, enhancements, privacy, Bluetooth/HDMI, event log, disabled PnP devices, plus enable-all-disabled and rescan repairs.
 - **Display/GPU**: adapter and driver health, **resolution/mode lock detection** (Basic Display Adapter, sparse modes, sub-native resolution, monitor errors), stuck-resolution repair pack, apply highest supported mode, Display/TDR events, rescan, restart adapters, and **Win+Ctrl+Shift+B** soft-reset.
 - **System integrity (Microsoft DISM/SFC path)**: CheckHealth, ScanHealth, AnalyzeComponentStore, SFC `/scannow`, DISM RestoreHealth, StartComponentCleanup, and full DISM→SFC chain.
 - **Boot & recovery (online-safe)**: WinRE status (`reagentc`), BCD health (`bcdedit`), BCD export backup, recovery flags, enable WinRE, and `bcdboot` rebuild. Offline-only tools such as `bootrec` stay in Windows Recovery Environment and are not automated from the desktop session.
@@ -80,28 +80,28 @@ These images are captured from the running English WPF application by `tools/cap
 
 ## Module catalog
 
-| Module | Diagnostics | Repairs | Live tests |
-|---|---:|---:|---:|
-| Network | 18 | 22 | 5 |
-| Audio | 14 | 16 | 3 |
-| Windows Update | 3 | 8 | 0 |
-| Printers | 4 | 9 | 0 |
-| Bluetooth | 2 | 7 | 0 |
-| Disk and storage | 5 | 9 | 0 |
-| System integrity | 3 | 9 | 0 |
-| Microsoft Store | 2 | 6 | 0 |
-| Time sync | 2 | 6 | 0 |
-| Startup performance | 3 | 9 | 0 |
-| Camera and privacy | 2 | 7 | 0 |
-| USB devices | 2 | 7 | 0 |
-| Windows Search | 2 | 5 | 0 |
-| Display and graphics | 6 | 6 | 0 |
-| Boot and recovery | 3 | 9 | 0 |
-| Windows Security | 5 | 7 | 0 |
-| Explorer and desktop | 5 | 8 | 0 |
-| System access and policy | 5 | 7 | 0 |
-| System core (WMI and Event Log) | 4 | 6 | 0 |
-| **Total** | **90** | **163** | **8** |
+| Module | Diagnostics | Repairs |
+|---|---:|---:|
+| Network | 18 | 22 |
+| Audio | 14 | 16 |
+| Windows Update | 3 | 8 |
+| Printers | 4 | 9 |
+| Bluetooth | 2 | 7 |
+| Disk and storage | 5 | 9 |
+| System integrity | 3 | 9 |
+| Microsoft Store | 2 | 6 |
+| Time sync | 2 | 6 |
+| Startup performance | 3 | 9 |
+| Camera and privacy | 2 | 7 |
+| USB devices | 2 | 7 |
+| Windows Search | 2 | 5 |
+| Display and graphics | 6 | 6 |
+| Boot and recovery | 3 | 9 |
+| Windows Security | 5 | 7 |
+| Explorer and desktop | 5 | 8 |
+| System access and policy | 5 | 7 |
+| System core (WMI and Event Log) | 4 | 6 |
+| **Total** | **90** | **163** |
 
 ### Representative Microsoft-oriented tools (selection)
 
@@ -208,7 +208,7 @@ Machine-wide runtime data is stored under `%ProgramData%\CaYaFix`:
 
 The current-user DPAPI-protected manifest integrity key is stored separately at `%LocalAppData%\CaYaFix\Security\integrity.key`. Recovery paths reject reparse points and content outside the trusted session root. Both CaYaFix roots use protected, non-inherited Windows ACLs; startup stops if an unexpected principal or inherited access rule is detected.
 
-CaYaFix does not send telemetry. Network live tests contact only the explicitly displayed test endpoints and cap every response. Microphone tests capture and play back a five-second sample in bounded memory, clear the buffers afterward, and never save audio. A support archive is created locally only after confirmation. User/computer and device names, profile paths, device identifiers, GUIDs, Windows SIDs, email addresses, serial values, SSIDs, MAC addresses, IP addresses, Wi-Fi key content, passwords, passphrases, secrets, and tokens are redacted by default; review every file before sharing the archive.
+CaYaFix does not send telemetry. A support archive is created locally only after confirmation. User/computer and device names, profile paths, device identifiers, GUIDs, Windows SIDs, email addresses, serial values, SSIDs, MAC addresses, IP addresses, Wi-Fi key content, passwords, passphrases, secrets, and tokens are redacted by default; review every file before sharing the archive.
 
 ## Architecture
 
